@@ -1,0 +1,163 @@
+---
+output: 
+  html_document: 
+    theme: readable
+---
+
+# COMP 110 Data Computing
+
+Macalester College, Fall 2016
+
+## Syllabus
+
+* Instructor: Daniel Kaplan, OLRI 231, <kaplan@macalester.edu>
+    - Office Hours: 
+        - Tues and Thurs: 3:00pm-4:30pm and 
+        - Wed: 2:00pm-3:30pm
+        - Anytime by appointment. And if my office door is open, just drop in.
+* Preceptor: Ayoub Belemlih <abelemli@macalester.edu>
+* Text: *Data Computing* ISBN 978-0-9839658-4-8 A student discount has been arranged with the publisher, [Project MOSAIC Books](http://project-mosaic-books.com/?page_id=36). Enter "Macalester College" as the discount code. You will receive, via PayPal refund, a $10 discount and postage will be waived.
+* [Course policies](policies.html): Work, grades, etc.
+
+### Resources
+
+* [Macalester's RStudio Server](rstudio.macalester.edu)
+* Alternative: Install RStudio on your own computer. [Use the "preview" edition](https://www.rstudio.com/products/rstudio/download/preview/). You'll also need to [install `git`](https://desktop.github.com/) 
+* The GitHub for the class: [clone address](https://github.com/dtkaplan/Comp-110-Assignments.git) 
+* In-class Group spreadsheets: [Group-1](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHNpejZtd3dQTXlPM245R0ZQbG0yYkE&usp=sharing); [Group-2](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHk1enZoVnhrV09ad2x4dXR1MlpWNFE&usp=sharing); [Group-3](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dElIQkh0SWtyaW9aRkdMZVBERHdJNXc#gid=0); [Group-4](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dEYxdEhWZUI1S3NxN2ZaaThXSEtMVWc&usp=sharing); [Group-5](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dDVsLWJaUHV5emFVQlVfSjFrdmFkYXc&usp=sharing); [Group-6](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dFdvNGpFZkNuUHZqd2g2UEVDc0VEZEE&usp=sharing)
+
+-----------
+
+## Week 1: Getting Organized (Aug 31)
+
+You already have an account on the Macalester RStudio server <rstudio.macalester.edu>. Login with your Macalester email credentials.
+
+In this brief session, we will:
+
+1. Get everyone started with using the software for the course. 
+2. Install many of the R packages that will be needed for the course.
+3. Create GitHub and RStudio accounts.
+4. Set up an RStudio "project"" to hold your work in the course.
+5. Hand in a practice assignment so that we can confirm that everything is working. File: `Week-1-project.Rmd`.
+
+
+Relevant links:
+
+- [Origins of American shipping](http://sappingattention.blogspot.com/2012/10/data-narratives-and-structural.html)
+
+--------------
+
+## Week 2: Data Infrastructure (Sept 7)
+
+* Readings: Data Computing Chapters 1 through 4
+* Short-answer questions from book: file `Week-2-short-answer.Rmd`
+    - 1.1, 1.2, 1.4, 1.5
+    - 2.2, 2.3, 2.4, 2.6, 2.7, 2.8, 2.8, 2.9, 2.10
+    - 3.1, 3.2, 3.3, 3.4, 3.5, 3.6
+    - 4.1, 4.2, 4.3, 4.4, 4.5
+* In-class activity: Markdown and data graphics
+    - file: `Week-2-project.Rmd`
+* In-class links:
+    - Group spreadsheets: [Group-1](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHNpejZtd3dQTXlPM245R0ZQbG0yYkE&usp=sharing); [Group-2](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHk1enZoVnhrV09ad2x4dXR1MlpWNFE&usp=sharing); [Group-3](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dElIQkh0SWtyaW9aRkdMZVBERHdJNXc#gid=0); [Group-4](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dEYxdEhWZUI1S3NxN2ZaaThXSEtMVWc&usp=sharing); [Group-5](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dDVsLWJaUHV5emFVQlVfSjFrdmFkYXc&usp=sharing); [Group-6](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dFdvNGpFZkNuUHZqd2g2UEVDc0VEZEE&usp=sharing)
+    - [Table about marital status in the US armed forces](https://docs.google.com/spreadsheets/d/1Ow6Cm4z-Z1Yybk3i352msulYCEDOUaOghmo9ALajyHo/edit#gid=1811988794)
+    - Taxicab example:  [news story](http://www.nytimes.com/2014/09/02/science/sharing-taxis-nyc-mathematics.html) & an [interactive site with the data]( http://www.hubcab.org/).
+
+----------
+
+> Note. We will not be meeting on Sept. 14
+
+----------
+
+## Week 3: Data summaries and graphics (Sept 21)
+
+* Readings: Data Computing chapters 5, 6, & 7
+* Short-answer questions from book: File `Week-3-short-answer.Rmd`
+    - 5.1, 5.2
+    - 6.5, 6.6, 6.7, 6.8
+    - 7.1, 7.4, 7.5, 7.7, 7.11, 7.12
+* In-class activity
+    - File `Week-3-project.Rmd`
+* In-class links: 
+
+----------
+
+## Week 4: Data Verbs (Sept 28)
+
+* Readings: *Data Computing* chapters 8 & 9
+* Short-answer questions: from book. File `Week-4-short-answer.Rmd`
+    - 8.1, 8.2, 8.3
+    - 9.1, 9.3
+* In-class activity:
+    - File `Week-4-project.Rmd`
+* Week 3 links:
+
+------------
+
+## Week 5: Combining data (Oct 5)
+
+* Readings: Data Computing chapters 10 & 11
+* Short-answer questions from book: File `Week-5-short-answer.Rmd`
+    - 10.1, 10.2, 10.3
+    - 11.1, 11.3, 11.4, 11.5
+* In-class activity:
+    - File `Week-5-project.Rmd`
+* Week 4 links:
+    - Bird species [variant spellings](https://docs.google.com/spreadsheets/d/1GDKeulVSRXL7Q_5Q0a7Offc_IPX2T4sZ80VN5VLASew/edit#gid=0).  We'll use these to clean the OrdwayBirds data.
+    - State-by-state population estimates from the US Census. [Link to CSV file](http://www.census.gov/popest/data/state/asrh/2015/files/SCPRC-EST2015-18+POP-RES.csv)
+    - `PostalAbbreviations <- read.csv("http://tiny.cc/dcf/PostalAbbreviations.csv")`
+    - College Scorecard data:
+        ```{r eval = FALSE}
+download.file("http://tiny.cc/dcf/Colleges-excerpt.rda", destfile = "Colleges-excerpt.rda")
+load("Colleges-excerpt.rda")
+```
+
+--------------
+
+## Week 6: Collective properties of data: Stats (Oct. 12)
+
+* Readings: from Data Computing Chapters 12, 13 and 14
+* Short-answer questions from the book: File `Week-6-short-answer.Rmd`
+    - 12.1, 12.2, 12.3
+    - 13.1, 13.2, 13.3, 13.4
+    - 14.1, 14.3, 14.7, 14.10
+* In-class activity:
+    - File: `Week-6-project.Rmd`
+    
+---------
+    
+> Note: we will *not* be having a session on Oct 19. That's too close to fall break.
+
+------------
+
+## Week 7: Scraping and cleaning data (Oct 26)
+
+* Readings: Data Computing chapters 15 & 16
+* Short-answer questions from the book: File `Week-7-short-answer.Rmd`
+    - 15.1, 15.2
+    - 16.1, 16.2, 16.3
+* In-class activity:
+    - File `Week-7-Project.Rmd`
+* Additional Resources:
+    - A regex ["cheat sheet"](http://krijnhoetmer.nl/stuff/regex/cheat-sheet/)
+    - [Johns Hopkins data-cleaning course](https://www.coursera.org/course/getdata)
+    - The New York Times on [data janitors](http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html?_r=0)
+* In-class links:
+    - [Walmart store-closure data](http://news.walmart.com/news-archive/2016/01/15/walmart-continues-sharpened-focus-on-portfolio-management)
+    - [Google doc](https://docs.google.com/spreadsheets/d/1Ow6Cm4z-Z1Yybk3i352msulYCEDOUaOghmo9ALajyHo/edit#gid=1811988794) for posting your link to an online source.
+    
+-------------
+
+## Week 8: Machine learning (Nov 2)
+
+
+* Readings: Data Computing chapter 17
+* Short-answer questions from the book: File `Week-7-short-answer.Rmd`
+    - 17.2
+* In-class activity:
+    - File `Week-8-Project.Rmd`
+
+--------------
+
+## Final Exam
+
+This is a short course, so the exam is similarly short. Do it in the 10 days following the last class session.
