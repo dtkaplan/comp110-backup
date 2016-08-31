@@ -1,0 +1,62 @@
+---
+title: "What's a Bark?"
+author: "Danny Kaplan"
+date: "Faculty Data Practicum"
+output: rmarkdown::tufte_handout
+---
+
+```{r include = FALSE}
+require(DataComputing)
+```
+
+Bring in the `Voyages` data:
+
+```{r}
+load("Voyages.rda")
+```
+
+What are the kinds of vessels?
+```{r}
+Voyages %>%
+  group_by(ship_type) %>%
+  tally() %>% 
+  arrange(desc(n))
+```
+
+Summarise each of the voyages based on the log books:
+```{r}
+load("Ship_logs.rda")
+```
+
+Need to fix this up to make speed units clearer.
+
+```{r cache = TRUE}
+Voyage_summary <- 
+  Ship_logs %>%
+  group_by(voyage) %>% 
+  summarise(ndays = n(), 
+            north_south = n_distinct(NS) > 1,
+            max_speed = 
+              max(tidyr::extract_numeric(speednum), na.rm = TRUE))
+```
+
+Add the ship types to the voyage summary:
+
+```{r}
+Joined <- 
+  Voyages %>%
+  select(voyage, ship_type) %>%
+  group_by(ship_type) %>%
+  filter(n() > 200) %>%
+  left_join(Voyage_summary, by = c("voyage" = "voyage"))
+```
+
+Contrast position "fill" with "stack".
+Contrast faceting vs stacking/filling
+```{r}
+Joined %>%
+  ggplot(aes(x = ndays, fill = ship_type)) + 
+  geom_density(position = "stack", color = NA) +
+  scale_x_log10() +
+  facet_wrap(~ north_south)
+```

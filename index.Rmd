@@ -40,10 +40,10 @@ In this brief session, we will:
 4. Set up an RStudio "project"" to hold your work in the course.
 5. Hand in a practice assignment so that we can confirm that everything is working. File: `Week-1-project.Rmd`.
 
-
 Relevant links:
 
-- [Origins of American shipping](http://sappingattention.blogspot.com/2012/10/data-narratives-and-structural.html)
+- [Week 1 outline](Outlines/Week-1-outline.html)
+
 
 --------------
 
