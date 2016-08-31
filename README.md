@@ -1,2 +1,2 @@
 # comp110
-The home site for COMP 110 at Macalester College.
+The home site for COMP 110 at Macalester College. 
