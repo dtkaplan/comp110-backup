@@ -42,7 +42,7 @@ In this brief session, we will:
 
 Relevant links:
 
-- [Week 1 outline](Outlines/Week-1-outline.html)
+- [Week 1 outline](Notes/Week-1-outline.html)
 
 
 --------------
