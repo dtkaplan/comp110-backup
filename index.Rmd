@@ -63,6 +63,8 @@ Relevant links:
     - [Table about marital status in the US armed forces](https://docs.google.com/spreadsheets/d/1Ow6Cm4z-Z1Yybk3i352msulYCEDOUaOghmo9ALajyHo/edit#gid=1811988794)
     - Taxicab example:  [news story](http://www.nytimes.com/2014/09/02/science/sharing-taxis-nyc-mathematics.html) & an [interactive site with the data]( http://www.hubcab.org/).
 
+- [Week 2 outline](Notes/Week-2-outline.html)
+
 ----------
 
 > Note. We will not be meeting on Sept. 14
@@ -79,6 +81,8 @@ Relevant links:
 * In-class activity
     - File `Week-3-project.Rmd`
 * In-class links: 
+
+- [Week 3 outline](Notes/Week-3-outline.html)
 
 ----------
 
