@@ -1,0 +1,16 @@
+# Untidy data: Family structure of military personnel
+
+[This spreadsheet](https://docs.google.com/spreadsheets/d/1Ow6Cm4z-Z1Yybk3i352msulYCEDOUaOghmo9ALajyHo/edit#gid=1811988794) contains is a presentation of data about family structure in the US Armed Forces.
+
+1. How many military personnel (not their children) are represented in this data table?
+#. What is a case in this data table?
+#. These data are "untidy" in a technical sense. Identify the ways that they are untidy.
+#. Some rows contain information that could be calculated from other rows. Identify these.
+#. Some "tabs" contain information that could be calculated from the other tabs. Identify these.
+#. Some columns contain information that can be calculated from other columns. Figure out the minimal set of columns from which the others could be calculated.
+#. Imagine that this table was created from a much bigger table in which each case is an individual person.
+    - How many cases would there be in that table?
+    - What variables would you need so that you could calculate any entry in the table linked to above.
+Divide into groups and fill in a few rows of the table you created. 
+Here are a few that have already been made:[Group-1](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHNpejZtd3dQTXlPM245R0ZQbG0yYkE&usp=sharing), [Group-2](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHk1enZoVnhrV09ad2x4dXR1MlpWNFE&usp=sharing), [Group-3](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dElIQkh0SWtyaW9aRkdMZVBERHdJNXc#gid=0), [Group-4](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dEYxdEhWZUI1S3NxN2ZaaThXSEtMVWc&usp=sharing), [Group-5](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dDVsLWJaUHV5emFVQlVfSjFrdmFkYXc&usp=sharing), [Group-6](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dFdvNGpFZkNuUHZqd2g2UEVDc0VEZEE&usp=sharing)
+

@@ -1,0 +1,12 @@
+# (PART) Data Infrastructure {#datainfrastructure}
+
+
+## Topics {-}
+
+1) The structure of tabular data
+    - cases and variables
+    - numerical and categorical variables
+    - tidy data
+2) R Commands 
+3) Files and documents
+    

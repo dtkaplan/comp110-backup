@@ -1,0 +1,19 @@
+--- 
+title: "Notes and Materials for Data Computing"
+author: "Daniel Kaplan"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: dtkaplan/comp110
+description: "Notes and other materials for the Data Computing course at Macalester College: COMP 110"
+---
+
+This book contains class notes, activities, and projects used in the Data Computing class. Often, there are more activities and projects than we actually used.
+
+The [*Data Computing*](Data-Computing.org) textbook has 18 chapters. These notes are divided into 8 parts, each of which corresponds to multiple chapters the textbook. This reflects the division of the course itself into eight components.
+
+This is very much a work in progress. It's not yet complete and what's here may have many errors. Please do point out the problems so that these notes evolve in a positive way.
