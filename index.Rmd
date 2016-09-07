@@ -19,7 +19,7 @@ Macalester College, Fall 2016
     - Tuesday 8:00-10:00pm, MSCS Reading Room
 * Text: *Data Computing* ISBN 978-0-9839658-4-8 A student discount has been arranged with the publisher, [Project MOSAIC Books](http://project-mosaic-books.com/?page_id=36). Enter "Macalester College" as the discount code. You will receive, via PayPal refund, a $10 discount and postage will be waived.
 * [Course policies](policies.html): Work, grades, etc.
-* [Class notes](DCF-materials-book/_book/index.html) in development
+* [Class notes](./DCF-materials-book/_book/index.html) in development
 
 ### Resources
 

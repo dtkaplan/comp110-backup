@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes and Materials for Data Computing</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110">
+  <meta name="generator" content="bookdown 0.1.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes and Materials for Data Computing" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110" />
+  <meta name="github-repo" content="dtkaplan/comp110" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes and Materials for Data Computing" />
+  
+  <meta name="twitter:description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110" />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+<meta name="date" content="2016-09-07">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="datainfrastructure.html">
+<link rel="next" href="untidy-data-school-enrollments.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notes and materials for Data Computing</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="gettingorganized.html"><a href="gettingorganized.html"><i class="fa fa-check"></i><b>1</b> (PART) Getting Organized</a></li>
+<li class="chapter" data-level="2" data-path="datainfrastructure.html"><a href="datainfrastructure.html"><i class="fa fa-check"></i><b>2</b> (PART) Data Infrastructure</a><ul>
+<li class="chapter" data-level="" data-path="datainfrastructure.html"><a href="datainfrastructure.html#topics"><i class="fa fa-check"></i>Topics</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="case-study-highway-fatalities.html"><a href="case-study-highway-fatalities.html"><i class="fa fa-check"></i><b>3</b> Case Study: Highway Fatalities</a><ul>
+<li class="chapter" data-level="3.1" data-path="case-study-highway-fatalities.html"><a href="case-study-highway-fatalities.html#the-data"><i class="fa fa-check"></i><b>3.1</b> The data</a></li>
+<li class="chapter" data-level="3.2" data-path="case-study-highway-fatalities.html"><a href="case-study-highway-fatalities.html#other-tables"><i class="fa fa-check"></i><b>3.2</b> Other tables</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="untidy-data-school-enrollments.html"><a href="untidy-data-school-enrollments.html"><i class="fa fa-check"></i><b>4</b> Untidy data: School enrollments</a></li>
+<li class="chapter" data-level="5" data-path="untidy-data-galtons-measurements-of-height.html"><a href="untidy-data-galtons-measurements-of-height.html"><i class="fa fa-check"></i><b>5</b> Untidy data: Galton’s measurements of height</a></li>
+<li class="chapter" data-level="6" data-path="untidy-data-family-structure-of-military-personnel.html"><a href="untidy-data-family-structure-of-military-personnel.html"><i class="fa fa-check"></i><b>6</b> Untidy data: Family structure of military personnel</a></li>
+<li class="chapter" data-level="7" data-path="part-data-summaries-and-graphics.html"><a href="part-data-summaries-and-graphics.html"><i class="fa fa-check"></i><b>7</b> (PART) Data Summaries and Graphics</a></li>
+<li class="chapter" data-level="8" data-path="part-data-verbs.html"><a href="part-data-verbs.html"><i class="fa fa-check"></i><b>8</b> (PART) Data Verbs</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes and Materials for Data Computing</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="case-study-highway-fatalities" class="section level1">
+<h1><span class="header-section-number">§ 3</span> Case Study: Highway Fatalities</h1>
+<p>On August 29, 2016, the White House issued a <a href="https://www.whitehouse.gov/blog/2016/08/29/2015-traffic-fatalities-data-has-just-been-released-call-action-download-and-analyze">data-science “call to action.”</a><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>(<a href="https://www.transportation.gov/fastlane/2015-traffic-fatalities-data-has-just-been-released-call-action-download-and-analyze" class="uri">https://www.transportation.gov/fastlane/2015-traffic-fatalities-data-has-just-been-released-call-action-download-and-analyze</a>).</p>
+<blockquote>
+<p>Today, the U.S. Department of Transportation is releasing an open data set that contains detailed, anonymized information about each of these tragic incidents. As the new data being released show, and as DOT reported earlier this summer, 2015 showed a marked increase in traffic fatalities nationwide.</p>
+</blockquote>
+<blockquote>
+<p>To be precise, 7.2% more people died in traffic-related accidents in 2015 than in 2014. This unfortunate data point breaks a recent historical trend of fewer deaths occurring per year.</p>
+</blockquote>
+<blockquote>
+<p>Under the leadership of Transportation Secretary Anthony Foxx, we’re doing two things differently this year.</p>
+</blockquote>
+<blockquote>
+<p>One: We’re publishing the data through NHTSA’s Fatality Analysis Reporting System (FARS) three months earlier than last year.</p>
+</blockquote>
+<blockquote>
+<p>Two: We’re directly soliciting your help to better understand what these data are telling us. Whether you’re a non-profit, a tech company, or just a curious citizen wanting to contribute to the conversation in your local community, we want you to jump in and help us understand what the data are telling us.</p>
+</blockquote>
+<blockquote>
+<p>Some key questions worth exploring:</p>
+</blockquote>
+<blockquote>
+<p>How might improving economic conditions around the country change how Americans are getting around? What models can we develop to identify communities that might be at a higher risk for fatal crashes? How might climate change increase the risk of fatal crashes in a community? How might we use studies of attitudes toward speeding, distracted driving, and seat belt use to better target marketing and behavioral change campaigns? How might we monitor public health indicators and behavior risk indicators to target communities that might have a high prevalence of behaviors linked with fatal crashes (drinking, drug use/addiction, etc.)?</p>
+</blockquote>
+<blockquote>
+<p>DOT is aggressively seeking ways to improve safety on the roads. From our work with the auto industry to improve vehicle safety, to new solutions to behavioral challenges like drunk, drugged, distracted and drowsy driving, we know we need to find novel solutions to old challenges.</p>
+</blockquote>
+<blockquote>
+<p>We’re also looking to accelerate technologies that may make driving safer, including connected and highly automated vehicles.</p>
+</blockquote>
+<blockquote>
+<p>But we need your help, too! Data Science is a team sport.</p>
+</blockquote>
+<blockquote>
+<p>We are calling on data scientists, public health experts, students and researchers—even if you have never thought about road safety before—to dive in to these data and help answer these important questions, especially on tough issues like pedestrian and bicyclist fatalities.</p>
+</blockquote>
+<blockquote>
+<p>Start by downloading and playing with the data. Then share your insights and let us know what you find by sending us a note at <a href="mailto:opendata@dot.gov">opendata@dot.gov</a>.</p>
+</blockquote>
+<div id="the-data" class="section level2">
+<h2><span class="header-section-number">3.1</span> The data</h2>
+<p>The link to the data in the call to action is <a href="ftp://ftp.nhtsa.dot.gov/fars/2015/" class="uri">ftp://ftp.nhtsa.dot.gov/fars/2015/</a>.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
+<ol style="list-style-type: decimal">
+<li>Go to that site. Is it immediately clear what’s going on?</li>
+<li>What can you figure out by browsing the site.
+<ul>
+<li>look in “parent” directories</li>
+<li>try substituting 2015 for other similar sorts of values in the URL.</li>
+</ul></li>
+</ol>
+<p>A <a href="http://lucaspuente.github.io/notes/2016/09/01/Mapping_Traffic_Fatalities">blog by Lucas Puente</a> conveniently gives simple instructions for downloading the data. He writes:</p>
+<blockquote>
+<p>Simply visit <a href="ftp://ftp.nhtsa.dot.gov/fars/2015/National/" class="uri">ftp://ftp.nhtsa.dot.gov/fars/2015/National/</a> and download the <code>FARS2015NationalDBF.zip</code> file, unzip it, and load into R.</p>
+</blockquote>
+<p>After unzipping, there is a directory <code>FARS2015NationalDBF</code> taking up 874.9 MB of disk for 27 items. I put it in my <code>Downloads</code> directory.</p>
+<p>Lucas provides commands to read the data into R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(foreign)
+accidents &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;FARS2015NationalDBF/accident.dbf&quot;</span>)</code></pre></div>
+<p>To make sense of these instructions, it helps to know some things:</p>
+<ul>
+<li>What is <code>library(foreign)</code> doing?
+<ul>
+<li>What does the <code>library()</code> part of the command tell you?</li>
+<li>What is <code>foreign</code>. How would get get some instructions or documentation for <code>foreign</code> to help you understand why this is appropriate.</li>
+</ul></li>
+<li>What is <code>read.dbf()</code>?</li>
+<li>What does <code>&quot;FARS2015NationalDBF/accident.dbf&quot;</code> tell you about the data file and where it’s located.</li>
+</ul>
+<hr />
+<p>Aside: I would rather you wrote:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">filename &lt;-<span class="st"> &quot;~/Downloads/FARS2015NationalDBF/accident.dbf&quot;</span>
+Accidents &lt;-<span class="st"> </span>foreign::<span class="kw">read.dbf</span>(filename)</code></pre></div>
+<p>What’s different about the file name I’m using? Why?</p>
+<hr />
+<p>Lucas’s blog leads you through the steps of making a map of accident locations:</p>
+<div class="figure">
+<img src="images/Traffic_Fatalities_in_2015.png" alt="Lucas’s map" />
+<p class="caption">Lucas’s map</p>
+</div>
+<p>What does this map tell you?</p>
+<p>With the <code>Accidents</code> data table read into R, it’s easy to look at it and perhaps construct summaries.</p>
+<pre><code>##   STATE ST_CASE VE_TOTAL VE_FORMS PVH_INVL PEDS PERNOTMVIT PERMVIT
+## 1     1   10001        1        1        0    0          0       1
+## 2     1   10002        1        1        0    0          0       1
+## 3     1   10003        1        1        0    0          0       2
+## 4     1   10004        1        1        0    0          0       1</code></pre>
+<p>Some simple things:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(Accidents)</code></pre></div>
+<pre><code>## [1] 32166</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Accidents)</code></pre></div>
+<pre><code>##  [1] &quot;STATE&quot;      &quot;ST_CASE&quot;    &quot;VE_TOTAL&quot;   &quot;VE_FORMS&quot;   &quot;PVH_INVL&quot;  
+##  [6] &quot;PEDS&quot;       &quot;PERNOTMVIT&quot; &quot;PERMVIT&quot;    &quot;PERSONS&quot;    &quot;COUNTY&quot;    
+## [11] &quot;CITY&quot;       &quot;DAY&quot;        &quot;MONTH&quot;      &quot;YEAR&quot;       &quot;DAY_WEEK&quot;  
+## [16] &quot;HOUR&quot;       &quot;MINUTE&quot;     &quot;NHS&quot;        &quot;RUR_URB&quot;    &quot;FUNC_SYS&quot;  
+## [21] &quot;RD_OWNER&quot;   &quot;ROUTE&quot;      &quot;TWAY_ID&quot;    &quot;TWAY_ID2&quot;   &quot;MILEPT&quot;    
+## [26] &quot;LATITUDE&quot;   &quot;LONGITUD&quot;   &quot;SP_JUR&quot;     &quot;HARM_EV&quot;    &quot;MAN_COLL&quot;  
+## [31] &quot;RELJCT1&quot;    &quot;RELJCT2&quot;    &quot;TYP_INT&quot;    &quot;WRK_ZONE&quot;   &quot;REL_ROAD&quot;  
+## [36] &quot;LGT_COND&quot;   &quot;WEATHER1&quot;   &quot;WEATHER2&quot;   &quot;WEATHER&quot;    &quot;SCH_BUS&quot;   
+## [41] &quot;RAIL&quot;       &quot;NOT_HOUR&quot;   &quot;NOT_MIN&quot;    &quot;ARR_HOUR&quot;   &quot;ARR_MIN&quot;   
+## [46] &quot;HOSP_HR&quot;    &quot;HOSP_MN&quot;    &quot;CF1&quot;        &quot;CF2&quot;        &quot;CF3&quot;       
+## [51] &quot;FATALS&quot;     &quot;DRUNK_DR&quot;</code></pre>
+<p>How to figure out what each variable means? Browse around the FARS server to see if you can find something that might help.</p>
+<p>I found a codebook <a href="ftp://ftp.nhtsa.dot.gov/fars/FARS-DOC/Coding%20and%20Validation%20Manual/2015%20FARS%20NASS%20GES%20C&amp;V%20Manual.pdf">here</a>. (Just in case the FARS website changes, <a href="Data/2015-FARS-NASS-GES-C-V-Manual.pdf">here’s a copy</a> downloaded on 9/7/2016.)</p>
+<p>Let’s figure out what <code>CF1</code> means. How about <code>WEATHER2</code> and <code>REL_LOAD</code>?</p>
+</div>
+<div id="other-tables" class="section level2">
+<h2><span class="header-section-number">3.2</span> Other tables</h2>
+<p>But there are other data files in the database.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dir</span>(<span class="st">&quot;~/Downloads/FARS2015NationalDBF/&quot;</span>)</code></pre></div>
+<pre><code>##  [1] &quot;ACC_AUX.dbf&quot;   &quot;accident.dbf&quot;  &quot;cevent.dbf&quot;    &quot;Damage.dbf&quot;   
+##  [5] &quot;Distract.dbf&quot;  &quot;DrImpair.dbf&quot;  &quot;Factor.dbf&quot;    &quot;Maneuver.dbf&quot; 
+##  [9] &quot;MIACC.dbf&quot;     &quot;MIDRVACC.dbf&quot;  &quot;MIPER.dbf&quot;     &quot;nmcrash.dbf&quot;  
+## [13] &quot;NMImpair.dbf&quot;  &quot;NMPrior.dbf&quot;   &quot;parkwork.dbf&quot;  &quot;PBType.dbf&quot;   
+## [17] &quot;PER_AUX.dbf&quot;   &quot;person.dbf&quot;    &quot;SafetyEq.dbf&quot;  &quot;VEH_AUX.dbf&quot;  
+## [21] &quot;vehicle.dbf&quot;   &quot;VEvent.dbf&quot;    &quot;VINDecode.dbf&quot; &quot;Violatn.dbf&quot;  
+## [25] &quot;Vision.dbf&quot;    &quot;VSOE.dbf&quot;</code></pre>
+<p>Let’s look at some of them:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(Vision)</code></pre></div>
+<pre><code>##   STATE ST_CASE VEH_NO MVISOBSC
+## 1     1   10001      1        0
+## 2     1   10002      1        0
+## 3     1   10003      1        0
+## 4     1   10004      1        0
+## 5     1   10005      1        2
+## 6     1   10005      2        0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(Distract)</code></pre></div>
+<pre><code>##   STATE ST_CASE VEH_NO MDRDSTRD
+## 1     1   10001      1       99
+## 2     1   10002      1        0
+## 3     1   10003      1        0
+## 4     1   10004      1       99
+## 5     1   10005      1       99
+## 6     1   10005      2        0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(DrImpair)</code></pre></div>
+<pre><code>##   STATE ST_CASE VEH_NO DRIMPAIR
+## 1     1   10001      1        0
+## 2     1   10002      1        0
+## 3     1   10003      1        9
+## 4     1   10004      1        9
+## 5     1   10005      1       98
+## 6     1   10005      2        0</code></pre>
+<p>What’s the connection between these tables and the <code>Accidents</code> table? Say, how would we be able to see which weather conditions distracted driving accidents tend to occur in?</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>The call was cross-posted by the US Department of Transportation here<a href="case-study-highway-fatalities.html#fnref1">↩</a></p></li>
+<li id="fn2"><p>Such an address is called a URL.<a href="case-study-highway-fatalities.html#fnref2">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="datainfrastructure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="untidy-data-school-enrollments.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": "link:https://github.com/dtkaplan/comp110/DCF-materials-book/edit/master/%s",
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
