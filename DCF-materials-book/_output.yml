@@ -2,6 +2,7 @@ bookdown::gitbook:
   css: style.css
   config:
     toc:
+      collapse: section
       before: |
         <li><a href="./">Notes and materials for Data Computing</a></li>
       after: |
