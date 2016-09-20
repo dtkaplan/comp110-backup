@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="case-study-medicare-spending.html">
-<link rel="next" href="untidy-data-galtons-measurements-of-height.html">
+<link rel="prev" href="part-data-summaries-and-graphics.html">
+<link rel="next" href="part-data-verbs.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -157,7 +157,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.11" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html#discussion-problem"><i class="fa fa-check"></i><b>11.11</b> Discussion Problem</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="part-data-summaries-and-graphics.html"><a href="part-data-summaries-and-graphics.html"><i class="fa fa-check"></i><b>12</b> (PART) Data Summaries and Graphics</a></li>
-<li class="chapter" data-level="13" data-path="activity-mapping-the-stars.html"><a href="activity-mapping-the-stars.html"><i class="fa fa-check"></i><b>13</b> Activity: Mapping the stars</a></li>
+<li class="chapter" data-level="13" data-path="mapping-the-stars.html"><a href="mapping-the-stars.html"><i class="fa fa-check"></i><b>13</b> Mapping the stars</a></li>
 <li class="chapter" data-level="14" data-path="part-data-verbs.html"><a href="part-data-verbs.html"><i class="fa fa-check"></i><b>14</b> (PART) Data Verbs</a></li>
 <li class="chapter" data-level="15" data-path="some-resources.html"><a href="some-resources.html"><i class="fa fa-check"></i><b>15</b> Some resources</a></li>
 <li class="divider"></li>
@@ -180,25 +180,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="untidy-data-school-enrollments" class="section level1">
-<h1><span class="header-section-number">§ 6</span> Untidy data: School enrollments</h1>
-<p>The US Census Bureau collects data on many aspects of the population. Data on school enrollments is available <a href="http://www.census.gov/hhes/school/">here</a>. We’re going to look at one of the data tables they make available:</p>
-<blockquote>
-<p>Table 2: Single Grade of Enrollment and High School Graduation Status for People 3 Years Old and Over, by Sex, Age (Single Years for 3 to 24 Years), Race, and Hispanic Origin: October 2014 <a href="http://www.census.gov/hhes/school/data/cps/2014/Tab02-01.xls">XLS</a> or <a href="http://www.census.gov/hhes/school/data/cps/2014/Tab02-01.csv">CSV</a> format.</p>
-</blockquote>
-<p>Download one of these files and open it in appropriate software. Or you can view the data on Google Drive <a href="https://docs.google.com/spreadsheets/d/1kuHylpUiQ7TMbNr1AuApciSra3VnvP9E4V83hCQ3Yho/edit?usp=sharing">here</a>.</p>
-<ol style="list-style-type: decimal">
-<li>How many people are represented in this data table?</li>
-<li>The table is in some ways a graphical visualization of features of school enrollment and age. (Unfocus your eyes and you will see a visual pattern.) What patterns do you see?</li>
-<li>The table indicates that 74.4% of the people in the table are “not enrolled” in school. Figure out how to calculate this from the numbers in the table. (Hint: You need only look at line 9.)</li>
-<li>These data are “untidy” in a technical sense. Identify the ways that they are untidy.</li>
-<li>Some columns contain information that can be calculated from other columns. Look at the data for 4-year olds and identify those that are calculated from other columns. Figure out the minimal set of columns from which the others could be calculated.</li>
-<li>Imagine that this table was created from a much bigger table in which each case is an individual person in the US.
-<ul>
-<li>How many cases would there be in that table?</li>
-<li>What variables would you need so that you could calculate any entry in the “Table 2” provided by the Census Bureau?</li>
-</ul></li>
-</ol>
+<div id="mapping-the-stars" class="section level1">
+<h1><span class="header-section-number">§ 13</span> Mapping the stars</h1>
+<p>This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a> Notebook. When you execute code within the notebook, the results appear beneath the code.</p>
+<p>Try executing this chunk by clicking the <em>Run</em> button within the chunk or by placing your cursor inside it and pressing <em>Cmd+Shift+Enter</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(cars)</code></pre></div>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the toolbar or by pressing <em>Cmd+Option+I</em>.</p>
+<p>When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the <em>Preview</em> button or press <em>Cmd+Shift+K</em> to preview the HTML file).</p>
 
 </div>
             </section>
@@ -206,8 +195,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="case-study-medicare-spending.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="untidy-data-galtons-measurements-of-height.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="part-data-summaries-and-graphics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="part-data-verbs.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
