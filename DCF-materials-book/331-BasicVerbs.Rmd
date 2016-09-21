@@ -1,0 +1,60 @@
+---
+output: html_notebook
+---
+
+# Basic Data Verbs {#basicdataverbs}
+
+```{r include=FALSE}
+require(mosaic)
+require(knitr)
+knitr::opts_chunk$set(echo = FALSE, message=FALSE)
+```
+
+## Three kinds of verbs for data wrangling
+
+1. Data verbs
+2. Reduction verbs
+3. Transformation verbs
+
+### Non-wrangling verbs
+
+There will also be verbs for graphics, loading data, etc., but for wrangling we'll need mainly these three types. Examples:
+
+* `library()` -- attaches the software distributed in a package to your session of R
+* `read.csv()` and other file-reading functions. Creates a data table given the location of a file containing those data.
+* `scatterGraphHelper()` -- takes a data table as input, but produces graphics as output.
+* `data()` -- accesses data from a package. `data()` is not a data verb!
+
+
+## Data Verbs
+
+What distinquishes a data verb from a reduction or transformation verb?
+
+* Data verbs create a new data table, from an input data table.
+
+### Some commonly used data verbs.
+
+1. `summarise()`
+2. `group_by()`
+3. `filter()`
+4. `mutate()`
+5. `select()`
+6. `arrange()`
+7. join (there's a family of joins -- more on this later)
+
+
+
+## Reduction verbs
+
+Characteristics?
+
+Variable in, a single number out.
+
+Examples?
+
+## Transformation verbs
+
+Variable in, variable out.
+
+Examples?
+

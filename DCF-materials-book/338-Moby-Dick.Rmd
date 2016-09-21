@@ -1,0 +1,138 @@
+---
+output: html_notebook
+---
+
+# Case study in basic data verbs: Moby Dick
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(dplyr)
+require(ggplot2)
+```
+
+## Prolog: Scraping and arranging the data
+
+A text file of the book is available at <http://www.gutenberg.org/ebooks/2701>. At that page is a link to a UTF-8 encoded text document named `"pg2701.txt"`.  I downloaded the file and stored it on my machine as `Data/pg2701.txt`. I can read that using `readLines()`.
+
+```{r cache = TRUE}
+Moby <- readLines("Data/pg2701.txt")
+```
+You could also read the file directly from Project Gutenberg
+```{r eval=FALSE}
+con <- file("http://www.gutenberg.org/ebooks/2701.txt.utf-8")
+Moby <- readLines(con)
+close(con)
+```
+
+The result, stored in the `Moby` object, is a character vector of `r length(Moby)` strings.  Some of these are prefatory matter, some postscript.
+
+The text itself begins after a line
+```{r}
+start_text <- "START OF THIS PROJECT GUTENBERG"
+```
+and ends before a line 
+```{r}
+end_text <- "END OF THIS PROJECT GUTENBERG"
+```
+Using these as delimiters includes some transcriber's notes, etc.  For simplicity, I'll take as the start the line
+```{r}
+start_text <- "CHAPTER 1\\."
+```
+The last line is simply "orphan." ending line
+```{r}
+end_text <- "^orphan\\.$"
+```
+
+Why the funny spelling? The `start_text` and `end_text` are being specified as a "regex" (sometimes called *regular expression*) indicating that the word "orphan" is at the very beginning of the line, followed by a period and the end of the line.
+
+Regexes are a way of describing patterns.  For our purposes, we'll use them to identify the first and last line of Melville's work in the Project Gutenberg text. As it happens, there are two instances of "CHAPTER 1." in *Moby Dick*.  The second is a book within the book.  We want to start with the early instance.
+```{r}
+first_line <- min(grep(start_text, Moby))
+last_line <- grep(end_text, Moby)
+Moby <- Moby[first_line : last_line]
+```
+
+We want to break the strings up into individual words. We'll do this "by hand" because I want to render the text as a simple set of words and punctuation. Steps:
+
+1. Change punctuation so that it is an isolated character.
+2. Split up each line by spaces into words.
+3. Convert to lower case (because I'm not interested in capitalization).
+```{r}
+tmp <- Moby
+characters <- unlist(strsplit(tolower(Moby), split = NULL))
+
+# Step 1
+punctuation <- c(".", ",", ";", ":", "?", "!", '"', 
+                "'", "&", "-", "(", ")", "[", "]")
+for (symbol in punctuation) {
+  result <- paste0(" ", symbol, " ")
+  tmp <- gsub(symbol, result, tmp, fixed=TRUE )
+}
+# Step 2
+Words <- unlist(strsplit(tmp, split = " "))
+# Step 3
+Words <- data.frame(word = tolower(Words),
+                    stringsAsFactors = FALSE)
+# Get rid of empty strings
+# Words <- 
+#  Words %>%
+#  filter(word != "")
+```
+
+What are the character frequencies in the book?
+
+```{r}
+table(characters) %>% 
+  data.frame(stringsAsFactors = FALSE) %>%
+  arrange(desc(Freq))
+```
+
+## Most common words
+
+```{r common_words}
+Popular <-
+  Words %>%
+  group_by(word) %>%
+  tally() %>%
+  arrange(desc(n)) %>%
+  head(50)
+```
+
+## Most common sequences
+
+```{r sequences}
+Sequences <-
+  Words %>% 
+  filter(grepl("[a-zA-Z]", word)) %>%
+  mutate(two = lead(word, 1), three = lead(two, 1),
+         four = lead(three, 1))
+
+CommonPairs <-
+  Sequences %>%
+  group_by(word, two) %>%
+  tally() %>% 
+  ungroup() %>%
+  arrange(desc(n))
+```
+
+Popular triplets
+```{r}
+Triplets <-
+  Sequences %>%
+  group_by(word, two, three) %>%
+  tally() %>%
+  ungroup() %>%
+  arrange(desc(n))
+```
+
+<!--
+
+## For working across files
+```{r echo = FALSE, eval = FALSE}
+library(tm)
+foo <- VCorpus(DirSource(".", pattern="-cleaned.txt",
+                         encoding = "UTF-8"),
+               readerControl = list(language = "eng"))
+```
+
+-->

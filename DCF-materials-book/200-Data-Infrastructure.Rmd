@@ -1,6 +1,5 @@
 # (PART) Data Infrastructure {#datainfrastructure}
 
-
 ## Topics {-}
 
 1) The structure of tabular data
