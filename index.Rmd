@@ -23,7 +23,7 @@ Macalester College, Fall 2016
 
 ### Resources
 
-* [Macalester's RStudio Server](rstudio.macalester.edu)
+* [Macalester's RStudio Server](https://rstudio.macalester.edu)
 * Alternative: Install RStudio on your own computer. [Use the "preview" edition](https://www.rstudio.com/products/rstudio/download/preview/). You'll also need to [install `git`](https://desktop.github.com/) 
 * The GitHub for the class: [clone address](https://github.com/dtkaplan/Comp-110-Assignments.git) 
 * In-class Group spreadsheets: [Group-1](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHNpejZtd3dQTXlPM245R0ZQbG0yYkE&usp=sharing); [Group-2](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHk1enZoVnhrV09ad2x4dXR1MlpWNFE&usp=sharing); [Group-3](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dElIQkh0SWtyaW9aRkdMZVBERHdJNXc#gid=0); [Group-4](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dEYxdEhWZUI1S3NxN2ZaaThXSEtMVWc&usp=sharing); [Group-5](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dDVsLWJaUHV5emFVQlVfSjFrdmFkYXc&usp=sharing); [Group-6](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dFdvNGpFZkNuUHZqd2g2UEVDc0VEZEE&usp=sharing)
