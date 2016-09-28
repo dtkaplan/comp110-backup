@@ -1,0 +1,18 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+# Outline of Class Session: Week 5
+
+Together: Join-Urban-Pop.pdf activity
+
+Together: Bible-related names from last year's Week-3-handout.pdf. Reconfigure this to emphasize joins. Or file Week-3-babynames.Rnw
+
+Together: Bird species variant spellings. See Week-3-handout-2.pdf. or Week-4-Birds.pdf
+
+Together: ModelsOfRegistration.Rmd
+
+-------------------
+
+Danny Kaplan. Compiled at `r date()`.

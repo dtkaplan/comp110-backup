@@ -1,0 +1,26 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+# Outline of Class Session: Week 4
+
+Today is a chance to practice more with the basic data verbs, and some new transformation verbs. Remember that there is still on very important data-verb family that we haven't yet looked at: the join family which combines two data tables.
+
+hand out EnoughDCF.pdf
+
+311-Calls
+
+
+Together: Review of last week's material. World cities
+
+
+Ranks: Week-3-notes.pdf
+
+Activity: Stock prices
+
+ 
+
+-------------------
+
+Danny Kaplan. Compiled at `r date()`.

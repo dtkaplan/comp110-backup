@@ -3,6 +3,7 @@ bookdown::gitbook:
   config:
     toc:
       collapse: section
+      unnumbered: yes
       before: |
         <li><a href="./">Notes and materials for Data Computing</a></li>
       after: |
