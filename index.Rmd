@@ -81,7 +81,7 @@ Relevant links:
 * In-class activity
     - [Handout: Diamonds and votes](DCF-materials-book/Handouts/Intro-Graphics-Wrangling.pdf). 
     - Use file `Week-3-project.Rmd`
-* Notes from class: [data vs information](DCF-materials-book/_book/data-vs-information.html) : [glyphs, frames, and scale](DCF-materials-book/_book/glyphs-frames-and-scales.html) : [basic verbs](DCF-materials-book/_book/basicdataverbs.html) : [a map of the stars](DCF-materials-book/_book/mapping-the-stars.html) : [Words in Moby Dick](DCF-materials-book/_book/case-study-in-basic-data-verbs-moby-dick.html)
+* Notes from class: [data vs information](DCF-materials-book/_book/data-vs-information.html) : [glyphs, frames, and scale](DCF-materials-book/_book/glyphs-frames-and-scales.html) : [basic verbs](DCF-materials-book/_book/basicdataverbs.html) : [a map of the stars](DCF-materials-book/_book/mapping-the-stars.html) : [words in Moby Dick](DCF-materials-book/_book/case-study-in-basic-data-verbs-moby-dick.html)
 
 
 
@@ -110,7 +110,7 @@ NB. We will be scoring papers toward the end of Sept. So feel free to update you
     - 11.1, 11.3, 11.4, 11.5
 * In-class activity:
     - File `Week-5-project.Rmd`
-* Week 4 links:
+* Week 5 links:
     - Bird species [variant spellings](https://docs.google.com/spreadsheets/d/1GDKeulVSRXL7Q_5Q0a7Offc_IPX2T4sZ80VN5VLASew/edit#gid=0).  We'll use these to clean the OrdwayBirds data.
     - State-by-state population estimates from the US Census. [Link to CSV file](http://www.census.gov/popest/data/state/asrh/2015/files/SCPRC-EST2015-18+POP-RES.csv)
     - `PostalAbbreviations <- read.csv("http://tiny.cc/dcf/PostalAbbreviations.csv")`
