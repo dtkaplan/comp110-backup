@@ -38,8 +38,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="tidy-data.html">
-<link rel="next" href="part-data-summaries-and-graphics.html">
+<link rel="prev" href="bicycle-use-patterns.html">
+<link rel="next" href="part-joins.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -267,148 +267,72 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="r-programming-parts-of-speech" class="section level1">
-<h1><span class="header-section-number">§ 11</span> R Programming: Parts of Speech</h1>
-<div id="command-chains" class="section level2">
-<h2><span class="header-section-number">11.1</span> Command chains</h2>
-<p>Your commands will be written as chains.</p>
-<ul>
-<li>Each link in the chain will be a data verb and its arguments.
-<ul>
-<li>The very first link is usually a data frame.</li>
-</ul></li>
-<li><p>Links are connected by the chaining symbol <code>%&gt;%</code></p></li>
-<li>Often, but not always, you will save the output of the chain in a named object.
-<ul>
-<li><p>This is done with the <em>assignment operator</em>, <code>&lt;-</code></p>
-<pre><code>Name_of_result &lt;-     
-  Starting_data_frame  %&gt;%    
-  first verb (arguments for details) %&gt;%   
-  next verb (and its arguments) %&gt;%    
-   ... and so on, up through ...   
-  last verb (and its arguments)  </code></pre></li>
-</ul></li>
-</ul>
-</div>
-<div id="an-example-command-chain" class="section level2">
-<h2><span class="header-section-number">11.2</span> An example command chain</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Princes &lt;-<span class="st"> </span>
-<span class="st">  </span>BabyNames %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(<span class="kw">grepl</span>(<span class="st">&quot;Prince&quot;</span>, name)) %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(year) %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total =</span> <span class="kw">sum</span>(count))</code></pre></div>
-<ul>
-<li>A good idea to put each link on its own line</li>
-<li>Note that <code>%&gt;%</code> is at the end of each line.
-<ul>
-<li>Except … <code>Princes &lt;-</code> is assignment</li>
-<li>Except … The last line has no <code>%&gt;%</code>.</li>
-</ul></li>
-</ul>
-</div>
-<div id="syntax-and-semantics" class="section level2">
-<h2><span class="header-section-number">11.3</span> Syntax and semantics</h2>
-<p>There are two distinct aspects involved in reading or writing a command chain.</p>
+<div id="births-and-holidays" class="section level1">
+<h1><span class="header-section-number">§ 26</span> Births and Holidays</h1>
+<p><a href="Handouts/453-Births-and-holidays.pdf">PDF handout</a></p>
+<p>The number of daily births in the US varies over the year and from day to day. What’s surprising to many people is that the variation from one day to the next can be huge: some days have only about 80% as many births as others. Why?</p>
+<p>The data table <code>Birthdays</code> in the <code>mosaicData</code> package gives the number of births recorded on each day of the year in each state from 1969 to 1988. (It would be nice to have more recent data, but I don’t have them at hand.) For this activity, we’ll work with data aggregated across the states.</p>
 <ol style="list-style-type: decimal">
-<li>Syntax: the grammar of the command</li>
-<li>Semantics: the meaning of the command</li>
+<li>Create a new data table, <code>DailyBirths</code>, that adds up all the births for each day across all the states. Plot out daily births vs date.</li>
 </ol>
-<p>The focus today is on syntax.</p>
-</div>
-<div id="part-of-speech" class="section level2">
-<h2><span class="header-section-number">11.4</span> Part of Speech</h2>
-<p>From the dictionarty</p>
-<blockquote>
-<p>part of speech noun</p>
-</blockquote>
-<blockquote>
-<p>parts of speech a category to which a word is assigned in accordance with its syntactic functions. In English the main parts of speech are noun, pronoun, adjective, determiner, verb, adverb, preposition, conjunction, and interjection.</p>
-</blockquote>
-</div>
-<div id="parts-of-speech-in-r" class="section level2">
-<h2><span class="header-section-number">11.5</span> Parts of Speech in R</h2>
-<ol>
-<li>Data frames</li>
-<li>Functions</li>
-<li>Arguments</li>
-<li>Variables</li>
-<li>Constants</li>
-<li>Assignment</li>
-<li>Formulas (we won’t use these until the end)</li>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<p></p>
+<p>The <code>date</code> variable in <code>Birthdays</code> prints out in the conventional, human-readable way. But it is actually in a format (called <code>POSIX</code> date format) that automatically respects the order of time. The <code>lubridate</code> package contains helpful functions that will extract various information about any date. Here are some you might find useful:</p>
+<ul>
+<li><code>year()</code></li>
+<li><code>month()</code></li>
+<li><code>week()</code></li>
+<li><code>yday()</code> — gives the day of the year as a number 1-366. This is often called the “Julian day.”</li>
+<li><code>mday()</code> — gives the day of the month as a number 1-31</li>
+<li><code>wday()</code> — gives the weekday (e.g. Monday, Tuesday, …). Use the optional argument <code>label=TRUE</code> to have the weekday spelled out rather than given as a number 1-7.</li>
+</ul>
+<p>Using these <code>lubridate</code> functions, you can easily look at the data in more detail.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>To examine <em>seasonality</em> in birth rates, look at the number of births aggregated over all the years by
+<ol style="list-style-type: lower-alpha">
+<li>each week</li>
+<li>each month</li>
+<li>each Julian day</li>
+</ol></li>
+<li><p>To examine patterns within the week, look at the number of births by day of the week.</p></li>
+<li><p>Pick a two-year span of the <code>Birthdays</code> that falls in the 1980s, say, 1980/1981. Extract out the data just in this interval, calling it <code>MyTwoYears</code>. (Hint: <code>filter()</code>, <code>year()</code>). Plot out the births in this two-year span day by day. Color each date according to its day of the week. Explain the pattern that you see.</p></li>
 </ol>
-</div>
-<div id="data-frames" class="section level2">
-<h2><span class="header-section-number">11.6</span> Data frames</h2>
-<ul>
-<li>A data frame comprises one or more variables.</li>
-<li>Naming convention: data frames are given names that start with a CAPITAL LETTER, e.g., <code>RegisteredVoters</code>.</li>
-<li>A data frame will always be the input at the start of a command chain.</li>
-<li>If assignment is used to save the result, the object created is usually a data frame.</li>
-</ul>
-</div>
-<div id="functions" class="section level2">
-<h2><span class="header-section-number">11.7</span> Functions</h2>
-<ul>
-<li>Functions are objects that transform an input into an output.</li>
-<li>Functions are always followed by parentheses, that is, an opening <code>(</code> and, eventually, a closing <code>)</code>.</li>
-<li>Each link in a command chain starts with a function.
-<ul>
-<li>More specifically, the function is a <em>data verb</em> that takes a data frame as input and produces another data frame as output.</li>
-<li>There are other kinds of functions, e.g. summary (or reduction) functions and transformation functions.</li>
-</ul></li>
-</ul>
-</div>
-<div id="arguments" class="section level2">
-<h2><span class="header-section-number">11.8</span> Arguments</h2>
-<p>The things that go <em>inside</em> a function’s parentheses are called <em>arguments</em>.</p>
-<ul>
-<li>Arguments describe the details of what a function is to do.</li>
-<li>If there are multiple arguments, they are always separated by commas.</li>
-<li><p>Many functions take <em>named arguments</em> which look like a name followed by an <code>=</code> sign, e.g.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarise</span>(<span class="dt">total =</span> <span class="kw">sum</span>(count))</code></pre></div></li>
-</ul>
-<p>You can also consider the data frame passed along by <code>%&gt;%</code> as an argument to the following function.</p>
-</div>
-<div id="variables" class="section level2">
-<h2><span class="header-section-number">11.9</span> Variables</h2>
-<p>Variables are the components of data frames.</p>
-<ul>
-<li>When they are used, they <em>always</em> appear in function arguments, that is, between the function’s parentheses.</li>
-<li>A good convention is for variables to have names that start with a lower-case letter. The convention is <em>not</em> universally followed.</li>
-<li>Variables will <em>never</em> be followed by <code>(</code>.</li>
-</ul>
-</div>
-<div id="constants" class="section level2">
-<h2><span class="header-section-number">11.10</span> Constants</h2>
-<p>Constants are single values, most commonly a number or a character string.</p>
-<ul>
-<li>Character strings will always be in quotation marks,<br />
-<code>&quot;like this.&quot;</code><br />
+<div id="births-and-holidays-1" class="section level2">
+<h2><span class="header-section-number">26.1</span> Births and holidays</h2>
+<ol start="5" style="list-style-type: decimal">
+<li><p>A few days each year don’t follow the pattern in (4). We’re going to examine the hypothesis that these are holidays. You can find a data set listing US federal holidays at <code>http://tiny.cc/dcf/US-Holidays.csv</code>. Read it in as follows:<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a></p></li>
+<li>Add a couple of layers to your plot from (4).
+<ol style="list-style-type: decimal">
+<li>Draw a vertical bar at each date which is a holiday. You’ll use the <code>geom_vline()</code> glyph. You can give a <code>data =</code> argument to <code>geom_vline()</code> to tell it to plot out the information from <code>Holidays</code> rather than <code>MyTwoYears</code>.<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a><br />
 </li>
-<li>Numerals are the written form of numbers, for instance.<br />
-<code>-42</code> <code>1984</code> <code>3.14159</code></li>
-</ul>
-</div>
-<div id="discussion-problem" class="section level2">
-<h2><span class="header-section-number">11.11</span> Discussion Problem</h2>
-<p>Consider this command chain:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Princes &lt;-<span class="st"> </span>
-<span class="st">  </span>BabyNames %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(<span class="kw">grepl</span>(<span class="st">&quot;Prince&quot;</span>, name)) %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(year) %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total =</span> <span class="kw">sum</span>(count))</code></pre></div>
-<p>Just from the syntax, you should be able to tell which of the five different kinds of object each of these things is: <code>Princes</code>, <code>BabyNames</code>, <code>filter</code>, <code>grepl</code>, <code>&quot;Prince&quot;</code>, <code>name</code>, <code>group_by</code>, <code>year</code>, <code>summarise</code>, <code>total</code>, <code>sum</code>, <code>count</code>.</p>
-<p>Explain your reasoning.</p>
+<li>Add a text label to each of the vertical bars to identify which holiday it is. Use the <code>geom_text()</code> glyph.<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a></li>
+</ol></li>
+</ol>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-112-1.png" width="960" /></p>
+<ol start="7" style="list-style-type: decimal">
+<li>The plot in (6) is too busy. Let’s explore some other ways to display the data to make it clearer to the view that holidays tend to be low-birth days.</li>
+</ol>
+<p>Add a variable to <code>MyTwoYears</code> called <code>is_holiday</code>. It should be <code>TRUE</code> when the day is a holiday, and <code>FALSE</code> otherwise. One way to do this is with the transformation verb <code>%in%</code>, for instance,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_holiday =<span class="st"> </span>date %in%<span class="st"> </span>Holidays$date</code></pre></div>
+<p>Make a new plot where you map <code>is_holiday</code> to the shape or the size aesthetics, or perhaps for faceting. Or perhaps change the way color is used in the graph to show weekends and holidays separately from non-holiday weekdays. Make the graph as simple as you can until you get one that clearly tells the story. You may want to simplify by eliminating any components of the graph (e.g. holiday labels? dots? lines? vertical lines?) that aren’t essential to telling the story.</p>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="6">
+<li id="fn6"><p>The point of the <code>lubridate::dmy()</code> function is to convert the character-string date stored in the CSV to a POSIX date-number.<a href="births-and-holidays.html#fnref6">↩</a></p></li>
+<li id="fn7"><p>Unfortunately, due to what I believe is a bug in <code>geom_vline()</code>, you will have to set the x position of the bars by <code>as.numeric(date)</code> rather than just <code>date()</code>.<a href="births-and-holidays.html#fnref7">↩</a></p></li>
+<li id="fn8"><p>Hints: You’ll have to make up a y-coordinate for each label. You can set the orientation of each label with the <code>angle</code> aesthetic.<a href="births-and-holidays.html#fnref8">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="tidy-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="part-data-summaries-and-graphics.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="bicycle-use-patterns.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="part-joins.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

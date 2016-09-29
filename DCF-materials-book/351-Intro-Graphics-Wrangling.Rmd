@@ -1,0 +1,6 @@
+# Introduction to Graphics and Wrangling
+
+[PDF handout](Handouts/graphs-and-wrangling-intro.pdf)
+
+```{r child = "Handouts/graphs-and-wrangling-intro.Rmd"}
+```
