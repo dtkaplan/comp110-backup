@@ -17,7 +17,7 @@ Macalester College, Fall 2016
         - Anytime by appointment. And if my office door is open, just drop in.
 * Preceptor: Ayoub Belemlih <abelemli@macalester.edu>
     - Tuesday 8:00-10:00pm, MSCS Reading Room
-* Text: *Data Computing* ISBN 978-0-9839658-4-8 A student discount has been arranged with the publisher, [Project MOSAIC Books](http://project-mosaic-books.com/?page_id=36). Enter "Macalester College" as the discount code. You will receive, via PayPal refund, a $10 discount and postage will be waived.
+* Text: *Data Computing* ISBN 978-0-9839658-4-8 
 * [Course policies](policies.html): Work, grades, etc.
 * [Class notes](./DCF-materials-book/_book/datainfrastructure.html) in development
 
@@ -59,12 +59,11 @@ Relevant links:
     - 4.1, 4.2, 4.3, 4.4, 4.5
 * In-class activity: Markdown and data graphics
     - file: `Week-2-project.Rmd`
+* Notes from class: [tidy data](DCF-materials-book/_book/tidy-data.html) : [R parts of speech](DCF-materials-book/_book/r-programming-parts-of-speech.html) : [highway fatality data](DCF-materials-book/_book/case-study-highway-fatalities.html)
 * In-class links:
     - Group spreadsheets: [Group-1](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHNpejZtd3dQTXlPM245R0ZQbG0yYkE&usp=sharing); [Group-2](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHk1enZoVnhrV09ad2x4dXR1MlpWNFE&usp=sharing); [Group-3](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dElIQkh0SWtyaW9aRkdMZVBERHdJNXc#gid=0); [Group-4](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dEYxdEhWZUI1S3NxN2ZaaThXSEtMVWc&usp=sharing); [Group-5](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dDVsLWJaUHV5emFVQlVfSjFrdmFkYXc&usp=sharing); [Group-6](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dFdvNGpFZkNuUHZqd2g2UEVDc0VEZEE&usp=sharing)
     - [Table about marital status in the US armed forces](https://docs.google.com/spreadsheets/d/1Ow6Cm4z-Z1Yybk3i352msulYCEDOUaOghmo9ALajyHo/edit#gid=1811988794)
     - Taxicab example:  [news story](http://www.nytimes.com/2014/09/02/science/sharing-taxis-nyc-mathematics.html) & an [interactive site with the data]( http://www.hubcab.org/).
-
-- [Week 2 outline](Notes/Week-2-outline.html)
 
 ----------
 
@@ -80,10 +79,11 @@ Relevant links:
     - 6.5, 6.6, 6.7, 6.8
     - 7.1, 7.4, 7.5, 7.7, 7.11, 7.12
 * In-class activity
-    - File `Week-3-project.Rmd`
-* In-class links: 
+    - [Handout: Diamonds and votes](DCF-materials-book/Handouts/Intro-Graphics-Wrangling.pdf). 
+    - Use file `Week-3-project.Rmd`
+* Notes from class: [data vs information](DCF-materials-book/_book/data-vs-information.html) : [glyphs, frames, and scale](DCF-materials-book/_book/glyphs-frames-and-scales.html) : [basic verbs](DCF-materials-book/_book/basicdataverbs.html) : [a map of the stars](DCF-materials-book/_book/mapping-the-stars.html) : [Words in Moby Dick](DCF-materials-book/_book/case-study-in-basic-data-verbs-moby-dick.html)
 
-- [Week 3 outline](Notes/Week-3-outline.html)
+
 
 ----------
 
@@ -93,9 +93,10 @@ Relevant links:
 * Short-answer questions: from book. File `Week-4-short-answer.Rmd`
     - 8.1, 8.2, 8.3
     - 9.1, 9.3
-* In-class activity:
-    - File `Week-4-project.Rmd`
-* Week 4 links:
+* In-class activity
+    - [Handout: Bicycle rentals](DCF-materials-book/Handouts/452-Bicycle-Rentals.pdf) or [Handout: Births and holidays](DCF-materials-book/Handouts/453-Births-and-holidays.pdf)
+    - Use file `Week-4-project.Rmd`
+* Notes from class: [More transformation verbs](DCF-materials-book/_book/more-transformation-verbs.html) : [world cities](DCF-materials-book/_book/cities-of-the-world.html) 
 
 NB. We will be scoring papers toward the end of Sept. So feel free to update your earlier work if you wish. (But remember the time budget!)
 
@@ -115,7 +116,8 @@ NB. We will be scoring papers toward the end of Sept. So feel free to update you
     - `PostalAbbreviations <- read.csv("http://tiny.cc/dcf/PostalAbbreviations.csv")`
     - College Scorecard data:
         ```{r eval = FALSE}
-download.file("http://tiny.cc/dcf/Colleges-excerpt.rda", destfile = "Colleges-excerpt.rda")
+download.file("http://tiny.cc/dcf/Colleges-excerpt.rda", 
+              destfile = "Colleges-excerpt.rda")
 load("Colleges-excerpt.rda")
 ```
 
