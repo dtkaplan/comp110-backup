@@ -8,3 +8,4 @@ The materials from Week 1 will go here.
 3. RMarkdown
     - Writing a simple RMarkdown document
     
+[One-page cheat sheet](Handouts/EnoughDCF.pdf).

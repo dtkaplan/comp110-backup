@@ -7,27 +7,19 @@ output:
     keep_tex: true
 ---
 
+
 # Stocks and Dividends
----
-title: "Week 4 Activity: Joining the Stock Market"
-author: "Data & Computing Fundamentals"
-output:
-  rmarkdown::tufte_handout:
-    includes:
-      in_header: header.tex
-    keep_tex: true
----
 
 ```{r include=FALSE}
 library(DataComputing)
 ```
 
-Many companies are publicly traded. \index{stocks}\index{dividends} This means that the company issues stock certificates which can be bought and sold on an exchange. Investors buy stock certificates mainly because they can sell them in the future, perhaps making a profit, and because companies pay dividends, a share of the company's profit, to each shareholder.
+Many companies are publicly traded. This means that the company issues stock certificates which can be bought and sold on an exchange. Investors buy stock certificates mainly because they can sell them in the future, perhaps making a profit, and because companies pay dividends, a share of the company's profit, to each shareholder.
 
 
 
 
-```{r echo=FALSE, cache=TRUE, fig.margin=TRUE, fig.cap="\\label{fig:auto-stock-prices} Stock prices for Ford, Honda, and Toyota"}
+```{r echo=FALSE, cache=TRUE, fig.cap="Stock prices for Ford, Honda, and Toyota"}
 companies <- c("F", "TM", "HMC")
 Prices <- 
   read_stock_prices(companies, what = "daily",
@@ -38,7 +30,7 @@ Prices %>%
   xlab("Date") + ylab("Daily Closing Share Price in Dollars") 
 ```
 
-```{r echo=FALSE, cache=TRUE, fig.margin=TRUE, fig.cap="\\label{fig:auto-stock-dividends} Accumulated dividends (per share) paid by Ford, Honda, and Toyota"}
+```{r echo=FALSE, cache=TRUE, fig.cap="Accumulated dividends (per share) paid by Ford, Honda, and Toyota"}
 companies <- c("F", "TM", "HMC")
 Dividends <- 
   read_stock_prices(companies, what = "dividends",
@@ -107,7 +99,7 @@ Actions <-
     date = ymd(c("2006-01-03", "2014-12-30")))
 ```
 
-```{r echo=FALSE, in_margin=TRUE, title="\\texttt{Actions}", caption="\\captionof{table}{\\label{tab:stock-actions} A suggested table format for the buy and sell dates.}"}
+```{r echo=FALSE, title="Actions", caption="A suggested table format for the buy and sell dates."}
 Actions
 ```
 
@@ -119,7 +111,7 @@ SalesDifference
 > *Hints*: (1) What kind of join should you use so that you get only those cases that match one of the dates in the `Actions` table? (2) The wide-vs-long techniques in Chapter \ref{chap:wide-long} will be useful.
 
 From the data table with buy and sell prices, calculate the dollar amount of profit (or loss) and the percentage change, as in Table \ref{tab:profit-calc}.
-```{r echo=FALSE, in_margin=TRUE, move_in_margin="2cm", caption="\\captionof{table}{\\label{tab:profit-calc} Profit from each of the stocks.}"}
+```{r echo=FALSE, caption = "Profit from each of the stocks."}
 SalesDifference %>%
   mutate(profit = sell - buy, 
          percent = 100*signif((sell - buy)/buy, 3)) %>%
@@ -154,7 +146,7 @@ Prices2 <-
 ```
 
 
-```{r echo=FALSE,fig.margin=TRUE, fig.cap="\\label{fig:auto-stock-index} Indexed stock prices for Ford, Honda, and Toyota"}
+```{r echo=FALSE, fig.cap=" Indexed stock prices for Ford, Honda, and Toyota"}
 ggplot(data=Prices2, aes(x=date, y=index)) + 
   geom_line(aes(group=company, color=company))
 ```
@@ -179,7 +171,7 @@ Once you have the dividend data, extract out the dividends for all dates between
 
 * Find the total amount of dividends for each company during the period of interest.  Compare this amount to the profit (or loss) from buying and selling the stock certificates.  For the car companies, the result for the period 2005-01-01 though 2014-12-31 is shown in Table \ref{tab:dollar-dividends}.
 
-```{r echo=FALSE, in_margin=TRUE, move_in_margin="-2cm", caption="\\captionof{table}{\\label{tab:dollar-dividends} Dividends (in dollars per share) paid out by each company over the interval 2005 through 2014.}"}
+```{r echo=FALSE, caption="Dividends (in dollars per share) paid out by each company over the interval 2005 through 2014."}
 PeriodOfInterest <-
   Dividends %>%
   filter( date > ymd("2005-01-01"), 

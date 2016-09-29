@@ -1,0 +1,17 @@
+---
+output: html_notebook
+---
+
+# Biblical Names
+
+A list of Bible-related names is available this way:
+
+```{r}
+BibleNames <- read.csv("http://tiny.cc/dcf/BibleNames.csv" )
+```
+
+Using this data table and `BabyNames`: 
+
+* Make a data table showing the most popular biblenames over all the years.
+* Make an informative plot showing the trends over the years of Bible-related names as a proportion of all names.
+

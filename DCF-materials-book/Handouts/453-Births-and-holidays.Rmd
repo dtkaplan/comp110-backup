@@ -1,0 +1,121 @@
+---
+title: "Births and Holidays"
+author: "Data Computing"
+date: "Computing project"
+output: rmarkdown::tufte_handout
+params:
+  show_answers: FALSE
+---
+
+```{r include=FALSE}
+library(DataComputing)
+library(mosaicData)
+knitr::opts_chunk$set(tidy=FALSE, message=FALSE)
+```
+
+
+The number of daily births in the US varies over the year and from day to day. What's surprising to many people is that the variation from one day to the next can be huge: some days have only about 80% as many births as others. Why?
+
+The data table `Birthdays` in the `mosaicData` package gives the number of births recorded on each day of the year in each state from 1969 to 1988.  (It would be nice to have more recent data, but I don't have them at hand.)  For this activity, we'll work with data aggregated across the states.
+
+1. Create a new data table, `DailyBirths`, that adds up all the births for each day across all the states.  Plot out daily births vs date.
+
+```{r fig.margin=TRUE, echo=params$show_answers}
+DailyBirths <-
+  Birthdays %>%
+  group_by(date) %>%
+  summarise(total = sum(births))
+DailyBirths %>%
+  ggplot(aes(x = date, y = total)) + geom_point(size = 1)
+```
+
+
+\enlargethispage{1in}
+
+The `date` variable in `Birthdays` prints out in the conventional, human-readable way.  But it is actually in a format (called `POSIX` date format) that automatically respects the order of time. The `lubridate` package contains helpful functions that will extract various information about any date. Here are some you might find useful:
+
+* `year()`
+* `month()`
+* `week()`
+* `yday()` --- gives the day of the year as a number 1-366.  This is often called the "Julian day."
+* `mday()` --- gives the day of the month as a number 1-31
+* `wday()` --- gives the weekday (e.g. Monday, Tuesday, ...).  Use the optional argument `label=TRUE` to have the weekday spelled out rather than given as a number 1-7.
+
+Using these `lubridate` functions, you can easily look at the data in more detail.
+
+2. To examine *seasonality* in birth rates, look at the number of births aggregated over all the years by
+    a. each week
+    a. each month
+    b. each Julian day
+    
+```{r fig.margin = TRUE, echo=params$show_answers, eval=params$show_answers}
+DailyBirths %>%
+  mutate(week = lubridate::week(date)) %>%
+  ggplot(aes(x=week, y=total)) + 
+  geom_point() + 
+  geom_smooth() 
+# you could also find the mean for each week and plot that.  The smoother
+# accomplishes much the same thing in a more structured way.
+```
+    
+3. To examine patterns within the week, look at the number of births by day of the week.
+
+```{r fig.margin = TRUE, echo=params$show_answers, eval=params$show_answers}
+DailyBirths %>%
+  mutate(weekday = lubridate::wday(date)) %>%
+  ggplot(aes(x=as.character(weekday), y=total)) + 
+  geom_point(alpha=0.1) + 
+  geom_boxplot(alpha=0.5, knotch=TRUE) 
+```
+
+4. Pick a two-year span of the `Birthdays` that falls in the 1980s, say, 1980/1981.  Extract out the data just in this interval, calling it `MyTwoYears`.  (Hint: `filter()`, `year()`).  Plot out the births in this two-year span day by day. Color each date according to its day of the week.  Explain the pattern that you see.
+
+```{r echo=params$show_answers, fig.margin=TRUE, fig.keep="none"}
+my_years <- 1985:1986
+MyTwoYears <- 
+  DailyBirths %>%
+  filter(year(date) %in% my_years) 
+plot4 <- 
+  MyTwoYears %>%
+  mutate(wday = lubridate::wday(date, label=TRUE)) %>%
+  ggplot(aes(x=date, y=total,color=wday)) + 
+#    geom_point() + 
+    geom_line()
+plot4
+```
+
+## Births and holidays
+
+5. A few days each year don't follow the pattern in (4).  We're going to examine the hypothesis that these are holidays.  You can find a data set listing US federal holidays at `http://tiny.cc/dcf/US-Holidays.csv`.  Read it in as follows:^[The point of the `lubridate::dmy()` function is to convert the character-string date stored in the CSV to a POSIX date-number.]
+
+```{r}
+Holidays <- read.csv("http://tiny.cc/dcf/US-Holidays.csv") %>%
+  mutate(date = as.POSIXct(lubridate::dmy(date)))
+```
+
+6. Add a couple of layers to your plot from (4).
+    1. Draw a vertical bar at each date which is a holiday.  You'll use the `geom_vline()` glyph.  You can give a `data = ` argument to `geom_vline()` to tell it to plot out the information from `Holidays` rather than `MyTwoYears`.^[Unfortunately, due to what I believe is a bug in `geom_vline()`, you will have to set the x position of the bars by `as.numeric(date)` rather than just `date()`.]  
+    2. Add a text label to each of the vertical bars to identify which holiday it is.  Use the `geom_text()` glyph.^[Hints: You'll have to make up a y-coordinate for each label.  You can set the orientation of each label with the `angle` aesthetic.]    
+
+
+```{r echo = params$show_answers, fig.width=10, fig.height=5}
+TheseHolidays <- Holidays %>% 
+  filter(lubridate::year(date) %in% my_years) %>%
+  mutate(y = 9500)
+plot4 + 
+  geom_vline(data = TheseHolidays, 
+             aes(xintercept = as.numeric(date),
+                 color = lubridate::wday(date, label=TRUE))) +
+  geom_text(data = TheseHolidays, angle = 65, color = "black",
+            aes(x = date, y = y, label = holiday))
+```
+
+7. The plot in (6) is too busy. Let's explore some other ways to display the data to make it clearer to the view that holidays tend to be low-birth days.
+
+Add a variable to `MyTwoYears` called `is_holiday`. It should be `TRUE` when the day is a holiday, and `FALSE` otherwise. One way to do this is with the transformation verb `%in%`, for instance, 
+```r
+is_holiday = date %in% Holidays$date
+``` 
+
+Make a new plot where you map `is_holiday` to the shape or the size aesthetics, or perhaps for faceting. Or perhaps change the way color is used in the graph to show weekends and holidays separately from non-holiday weekdays. Make the graph as simple as you can until you get one that clearly tells the story. You may want to simplify by eliminating any components of the graph (e.g. holiday labels? dots? lines? vertical lines?) that aren't essential to telling the story.
+
