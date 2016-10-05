@@ -10,7 +10,7 @@ params:
 ```{r include=FALSE}
 library(DataComputing)
 knitr::opts_chunk$set(tidy=FALSE)
-# params <- list(show_answers = FALSE)
+params <- list(show_answers = FALSE)
 ```
 
 In today's activity, you are going to deconstruct some graphics and carry out some data wrangling operations.^[Remember to load the `DataComputing` package: `library(DataComputing)`]
@@ -92,7 +92,7 @@ diamonds %>%
 
 **Voting**
 
-Using the `Minneapolis2013` data table, answer these questions:\marginnote{\texttt{summarise()}, \texttt{group\_by()}, and \texttt{tally()} will be useful in answering the questions.}
+Using the `Minneapolis2013` data table, answer these questions. `summarise()`, `group_by()`, and `tally()` will be useful in answering the questions.
 
 1. How many cases are there?
     ```{r echo=params$show_answers, results="hide"}
@@ -127,7 +127,7 @@ Minneapolis2013 %>%
   arrange(desc(n)) %>%
   head(3)
 ```
-#. Which `Precinct` had the highest fraction of `First` vote selections marked as "undervote"? \marginnote[-4mm]{To calculate the fraction, use \texttt{mean(First == "undervote")} in the argument to \texttt{summarise()}.}
+#. Which `Precinct` had the highest fraction of `First` vote selections marked as "undervote"? (To calculate the fraction, use `mean(First == "undervote")` in the argument to `summarise()`.)
     ```{r echo=params$show_answers, results="hide"}
 Minneapolis2013 %>%
   group_by(Precinct) %>%
