@@ -17,10 +17,11 @@ Some familiar transformation verbs from primary and secondary school:
 
 There are additional transformations which will be unfamiliar, simply because they did not fit into the algebra- and trigonometry-based high-school curriculum
 
-1. Rank transforms.
-2. Lead and lag transforms.
+1. Rank transforms
+2. Lead and lag transforms
 3. Date transforms
-4. Character transforms.
+4. Conditional transforms
+5. Character transforms
 
 ## Rank transforms 
 
@@ -188,13 +189,51 @@ Holidays %>%
 Sys.time()
 ```
 
+## Conditional transforms
+
+For all transform verbs, the output depends on some way on the input. In *conditional transforms*, you use the input to choose one or more possible outputs. 
+
+One such transform verb is `ifelse()`. This takes three arguments: 
+1. a test, written in the form of a "logical"" such as `x > 3`
+2. the output if the test is `TRUE`
+3. the output if the test is `FALSE`
+
+For example, the table below shows measurements made on patients, including the date of the measurement and the date of treatment. A transformation is to be done to say whether the measurement was *before* or *after* the treatment.
+
+```{r echo = 3}
+load("Data/MeasTreatTables.Rda")
+Measurements %>%
+  left_join(Treatments) -> Treatments
+head(Treatments)
+```
+
+The calculation of *before* or *after* is simple: `date < treatment_date`." To render the result as the values `"before"` and `"after"`, use `ifelse()`:
+
+```{r}
+Treatments %>%
+  mutate(when = ifelse(date < treatment_date, "before", "after")) %>%
+  head()
+```
+
 ## Text
 
 Simple operators:
 
-* `tolower()`
-* `toupper()`
-* `nchar()
+* `tolower()` - convert to lower case
+* `toupper()` - convert to upper case
+* `nchar()` - the number of characters in a string
+* `substr()` - extract a substring at a particular location.
+
+Example: `r set.seed(101)`
+
+```{r}
+BabyNames %>%
+  sample_n(size = 5) %>%
+  mutate(small = tolower(name),
+         large = toupper(name),
+         length = nchar(name),
+         middle = substr(name, 2, 3))
+```
 
 For later:
 
