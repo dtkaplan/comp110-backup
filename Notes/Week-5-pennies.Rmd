@@ -1,0 +1,100 @@
+---
+title: "Pennies"
+output: html_notebook
+---
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+Read in the data ...
+```{r}
+file <- "http://tiny.cc/dcf/my_pennies_format_1.csv"
+Format_1 <- read.csv(file, stringsAsFactors = FALSE)
+head(Format_1, 3)
+```
+Turn Format 1 into Format 2
+
+```{r}
+Format_1 %>% 
+  gather(key = stamp, value = count,  - year) %>%
+  arrange(year) %>%
+  spread(key = stamp, value = count)
+```
+
+
+* How many pennies were in the jar?
+```{r}
+Format_1 %>%
+  summarise(count = sum(D, na.rm = TRUE) +
+             sum(S, na.rm = TRUE) +  
+             sum(none, na.rm = TRUE))
+```
+
+* What's the average `year` for the coins. 
+```{r}
+Format_1 %>%
+  summarise(mean_D = (sum(year * D, na.rm = TRUE) + 
+              sum(year*S, na.rm=TRUE) + 
+              sum(year * none, na.rm = TRUE)),
+            count = sum(D, na.rm = TRUE) +
+             sum(S, na.rm = TRUE) +  
+             sum(none, na.rm = TRUE)) %>%
+  mutate(mean_D / count)
+```
+
+
+```{r}
+file <- "http://tiny.cc/dcf/my_pennies_format_2.csv"
+Format_2 <- read.csv(file, stringsAsFactors = FALSE)
+head(Format_2)
+Format_2 %>%
+  summarise(total = sum(count, na.rm = TRUE))
+Format_2 %>%
+  summarise(mean_year = sum(year * count) / sum(count))
+```
+
+```{r}
+file <- "http://tiny.cc/dcf/my_pennies_format_3.csv"
+Format_3 <- read.csv(file, stringsAsFactors = FALSE)
+Format_3
+Format_3 %>%
+  tally()
+Format_3 %>%
+  summarise(mean_year = mean(year, na.rm=TRUE))
+```
+
+
+```{r}
+Grades <- read.csv("http://tiny.cc/mosaic/grades.csv")
+Grades %>%
+  group_by(grade) %>%
+  tally() %>%
+  arrange(grade)
+Result <- 
+  Grades %>%
+  left_join(GP, by = c(grade = "grade"))
+```
+
+```{r}
+GP <- read.csv("http://tiny.cc/mosaic/grade-to-number.csv")
+GP
+```
+
+```{r}
+Courses <- read.csv("http://tiny.cc/mosaic/courses.csv")
+Courses 
+Everything <-
+  Result %>%
+  left_join(Courses)
+Everything %>%
+  group_by(dept) %>%
+  summarise(dept_gpa = mean(gradepoint, na.rm = TRUE),
+            count = n()) %>%
+  arrange(desc(dept_gpa))
+```
+
+```{r}
+mod <- lm(gradepoint ~ sid + dept - 1, data = Everything)
+coef(mod)
+```

@@ -1,0 +1,57 @@
+```{r include = FALSE}
+library(DataComputing)
+show_answers = TRUE
+```
+
+This wrangling sequence on `BabyNames` will produce a short table as output. Using paper and pencil, draw a small example of what the output will be at each of the stages, marked "show table A", "show table B", etc. Your small example should have correct variable names and one or two cases with plausible values for the variables. (You are not expected to do the actual counts and ranks! Just give values that would be plausible as output.)
+
+```{r, eval=FALSE}
+BabyNames %>%
+  group_by(name) %>%
+  summarise(tot = sum(count)) %>%     # show table A
+  mutate(rank = rank(desc(tot))) %>%  # show table B
+  filter(name == "Fernando")          # show table C
+```
+
+**Table A**
+
+Construct your table here. Just one or two cases will do.
+
+
+**Table B**
+
+Construct your table here.
+
+**Table C**
+
+Construct your table here.
+
+
+
+```{block echo = show_answers}
+**Solution**
+
+The first two statements compute the total count of each name across both sexes and all the years. The case is a name.
+```
+    
+```{r echo = show_answers, eval = show_answers}
+BabyNames %>%
+  group_by(name) %>%
+  summarise(tot = sum(count)) -> Step_1
+Step_1 %>% sample_n(size = 2)
+```
+  
+```{block echo = show_answers}
+The third statement adds a variable rank which contains the ranked place among the names from most popular to least popular. 
+```
+    
+```{r echo = show_answers, eval = show_answers}
+Step_1 %>% mutate(rank = rank(desc(tot))) -> Step_2
+```
+```{block echo = show_answers}
+In the last line, with `filter()`, the single case for "Fernando"" is extracted. In effect, the command finds the total count and popularity rank for the name "Fernando".
+```
+
+```{r echo = show_answers, eval = show_answers}
+Step_2 %>% filter(name == "Fernando")        
+```

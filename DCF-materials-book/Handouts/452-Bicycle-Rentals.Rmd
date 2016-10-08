@@ -1,6 +1,7 @@
 ---
 title: Bicycle Rentals
 author: "Data Computing"
+date: "Computing project"
 output: rmarkdown::tufte_handout
 ---
 

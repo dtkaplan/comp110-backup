@@ -1,0 +1,38 @@
+```{r include = FALSE}
+library(DataComputing)
+show_answers <- FALSE
+```
+
+
+```{r include = FALSE}
+# Data frame for questions
+Table_A <- data.frame(
+  V1 = rep(c("a","b","c"), each = 2),
+  V2 = rep(c(1:2), times = 3),
+  V3 = rep(c("alpha", "beta", "gamma")),
+  V4 = seq(10, 60, by = 10))
+```
+
+
+Suppose you have this data frame, `Table_A`, as given below:
+```{r echo = FALSE}
+print.data.frame(Table_A)
+```
+
+Assuming that the relevant libraries are already loaded, write down what the output for the following code.  The final result is enough for full credit, but partial credit will be given for writing out and labelling intermediate steps.
+```{r SQ1, results = 'hide'}
+Table_A %>%
+  filter(V1 == "a") %>%         # Step 1
+  select(V2, V4) %>%            # Step 2
+  gather(key = Apple, value = Banana, V2, V4) %>% # Step 3
+  mutate(Apple = Banana)        # Final result
+```
+
+```{block echo = show_answers}
+**Solution**
+```
+```{r ref.label = 'SQ1', echo = FALSE, eval = show_answers}
+```
+
+
+Credit: Adam Lucas

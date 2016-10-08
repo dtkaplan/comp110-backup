@@ -1,0 +1,76 @@
+# Regex examples.
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+Here are some examples of patterns in names and the use of a regular expression to detect them. We'll work with the baby names data, summarised to give the total count of each name for each sex.
+
+```{r}
+NameList <-
+  BabyNames %>%
+  mutate(name = tolower(name)) %>%
+  group_by(name, sex) %>%
+  summarise(total=sum(count)) %>%
+  arrange(desc(total))
+```
+
+
+
+The regular expression is the string in quotes.  `grepl()` is a function that compares a regular expression to a string, returning TRUE if there's a match, FALSE otherwise.
+
+1. The name contains "shine", as in "sunshine" or "moonshine"
+    ```{r}
+NameList %>%
+  filter(grepl("shine", name)) %>%
+  head()
+```
+2. The name contains three or more vowels in a row.
+```{r}
+NameList %>%
+  filter(grepl("[aeiou]{3,}", name)) %>%
+  head()
+```
+3. The name contains three or more consonants in a row.
+```{r}
+NameList %>%
+  filter(grepl("[^aeiou]{3,}", name)) %>%
+  head()
+```
+4. The name contains "mn"
+```{r}
+NameList %>%
+  filter(grepl( "mn", name)) %>%
+  head()
+```
+
+5. The first, third, and fifth letters are consonants.
+```{r}
+NameList %>%
+  filter(grepl("^[^aeiou].[^aeiou].[^aeiou]", name)) %>%
+  head()
+```
+6. How often do boys' and girls' names end in vowels?
+
+```{r}
+NameList %>%
+  filter( grepl( "[aeiou]$", name ) ) %>%
+  group_by( sex ) %>%
+  summarise( total=sum(total) )
+```
+
+Girls' names are almost five times as likely to end in vowels as boys' names.
+
+7. What are the most common end vowels for names?
+
+To answer this question, you have to extract the last vowel from the name.  The `extractMatches()` transformation function can do this.
+
+```{r}
+NameList %>%
+  extractMatches( "([aeiou])$", name, vowel=1 ) %>%
+  group_by( sex, vowel ) %>%
+  summarise( total=sum(total) ) %>%
+  arrange( sex, desc(total) )
+```
+
+Credit: Adam Lucas

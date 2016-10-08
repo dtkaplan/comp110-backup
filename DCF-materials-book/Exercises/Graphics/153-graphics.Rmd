@@ -1,0 +1,58 @@
+```{r include = FALSE}
+library(DataComputing)
+show_answers <- TRUE
+```
+
+The plot shows some relationships in a the `diamonds` data.
+
+```{r include = FALSE}
+set.seed(101)
+diamonds <- 
+  diamonds %>% 
+  group_by(cut) %>%
+  sample_n(size = 135)
+```
+
+```{r 153-diamonds, echo = FALSE}
+diamonds %>% 
+  ggplot(aes(x = carat, y = price, color = cut)) + 
+  geom_point() +
+  stat_smooth(color = "blue") + 
+  facet_wrap( ~ cut)
+
+```
+
+The glyph-ready data are in this format:
+
+```{r echo = FALSE}
+diamonds %>% head()
+```
+
+1. What layers are on the graph? For each layer, say whether the glyph reflects a single case or the collective properties of cases (a statistic).
+```{block echo = show_answers}
+    Two layers:
+    1. Glyphs are dots. Each dot represents a single case.
+    2. A smoother through the dots. This is a statistic and shows collective properties of the cases.
+```
+2. What variables are being used in the graphic?
+```{block echo = show_answers}
+    `caret`, `price`, and `cut`
+```
+3. Which variables define the frame?
+```{block echo = show_answers}
+    `price` vs `carat`
+```
+4. Which variable or variables are being used to define facets?
+```{block echo = show_answers}
+`cut` defines the facets.
+```
+5. What are the aesthetics used? For each aesthetic, say which variable is being mapped to it or what constant it is being set to.
+```{block echo = show_answers}
+    - x: `carat`
+    - y: `price`
+    - color (of points): `cut`
+    - color of smoother: set to blue
+```
+6. Assuming that the relevant packages are already loaded, write down a `ggplot()` command that will generate the graphic.
+```{r echo = show_answers, ref.label="153-diamonds", fig.keep = "none"}
+```

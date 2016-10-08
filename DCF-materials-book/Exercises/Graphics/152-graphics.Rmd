@@ -1,0 +1,59 @@
+```{r include = FALSE}
+library(DataComputing)
+show_answers <- TRUE
+```
+
+Consider the following (pretty horrible) graphic. 
+
+```{r q6plot, echo = FALSE, warning = FALSE}
+CPS85 %>%
+  ggplot(aes(x = educ, y = wage)) +
+  geom_boxplot(aes(group=educ)) +
+  geom_point(aes(color=sex)) +
+  geom_smooth(method="lm", aes(color=sex)) +
+  ylim(0,15) +
+  labs(title = "Wage vs. Education in CPS85")
+```
+
+a. What are the glyphs/geoms in this graph? For each, say whether it reflects individual cases or reflects the collective properties of cases (a statistic).
+```{block echo = show_answers}
+    - `geom_point()` - individual
+    - `geom_smooth()`- statistic
+    - `geom_boxplot()` - statistic
+```
+b. What are the aesthetics of each glyph?
+```{block echo = show_answers}
+    - Points - x, y, color
+    - Lines - x, y, color
+    - boxplot -x, group,
+```
+c. Which variables are being mapped to each aesthetic?
+```{block echo = show_answers}
+    - x - Education
+    - y - Wage
+    - color - Sex
+    - group - Education
+```
+#. Are the variables qualitative or quantitative?
+```{block echo = show_answers}
+    1. Education - quantitative
+    1. Wage - quantitative
+    1. Sex - qualitative
+```
+#. What are the guides on this graph?
+```{block echo = show_answers}
+    * labels/tickmarks on x and y axis showing the scale for education and wage
+    * key on the side saying which color belongs to which gender
+```
+#. Reconstruct this graphic using `ggplot` and the `CPS85` data table.
+```{r, echo = show_answers, eval = FALSE}
+CPS85 %>%
+  ggplot(aes(x = educ, y = wage)) +
+  geom_boxplot(aes(group=educ)) +
+  geom_point(aes(color=sex)) +
+  geom_smooth(method="lm", aes(color=sex)) +
+  ylim(0,15) +
+  labs(title = "Wage vs. Education in CPS85")
+```
+
+Credit: Adam Lucas
