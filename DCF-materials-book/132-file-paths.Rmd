@@ -1,0 +1,40 @@
+# Files and Documents
+
+## The "file path"
+
+The "file path"" is the set of successive folders that bring you to the file.
+
+There is a standard format for file paths. An example: `/Users/kaplan/Downloads/0021_001.pdf`. Here the filename is `0021_001.pdf`, the filename extension is `.pdf`, and the file itself is in the Downloads folder contained in the kaplan folder, which is in turn contained in the Users folder. The starting / means "on this computer".
+
+## Using a file browser to find the path
+
+Many people are used to finding files interactively with the mouse and may not be aware of the path to the directory holding the file.
+
+The R `file.choose()` — which should be used only in the console, not in an Rmd file — brings up an interactive file browser. You can select a file with the browser. The returned value will be a quoted character string with the path and file name.
+
+`file.choose()` then select a file. The output is:
+`[1] "/Users/kaplan/Downloads/0021_001.pdf"`
+
+For example I have a `.csv` file on my Desktop called `names.csv`. If I want to load it into R I might first find the path:
+
+```{r eval = FALSE}
+file.choose()
+```
+```{r echo = FALSE}
+"/Users/Adam/Desktop/names.csv"
+```
+
+Then to load it I type:
+```{r eval = FALSE}
+my_names <- read.file("/Users/Adam/Desktop/names.csv")
+```
+
+Some common filename extensions for the sort of web resources you will be using:
+
+* `.png` for pictures
+* `.jpg` or `.jpeg` for photographs
+* `.csv` or `.Rdata` for data files
+* `.Rmd` for the human editable text of a document (called R Markdown)
+* `.html` for web pages themselves
+
+Credit: Adam Lucas

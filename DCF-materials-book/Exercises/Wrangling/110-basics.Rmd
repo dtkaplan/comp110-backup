@@ -1,0 +1,65 @@
+```{r include = FALSE}
+library(DataComputing)
+show_answers <- TRUE
+```
+
+The following tasks can be performed using a single data verb. For each task, pick out the appropriate verb from this set: `summarise()`, `mutate()`, `arrange()`, `filter()`, `select()`, `group_by()`.
+
+
+a. Find the average of one of the variables.
+b. Add a new column that is the ratio between two variables.
+c. Sort the cases in descending order of a variable.
+d. Create a new data table that includes only those cases that meet a criterion.
+e. From a data table with several variables produce an output that has the same cases but only the first two variables.
+f. From a data table with a categorical variables and a quantitative variable produce a count for the number of cases for each level of the categorical variable.
+
+
+```{block echo = show_answers}
+**Solution:**
+
+We'll use the `mtcars` data table to show the answers, although of course any data table will do. Here are a few cases from `mtcars`.
+```
+```{r echo = FALSE, eval = show_answers}
+set.seed(101)
+mtcars %>% sample_n(3) %>% knitr::kable()
+```
+
+
+
+```{r  echo = show_answers, eval = show_answers, results = "hide"}
+# a.
+mtcars %>%
+  summarise(m_cyl=mean(cyl))
+```
+
+```{r echo = show_answers, eval = show_answers, results = "hide"}
+# b.
+mtcars %>%
+  mutate(ratio=mpg/cyl) 
+```
+
+```{r  echo = show_answers, eval = show_answers, results = "hide"}
+# c.
+mtcars %>%
+  arrange(desc(mpg)) 
+```
+
+```{r echo = show_answers, eval = show_answers, results = "hide"}
+# d.
+mtcars %>%
+  filter(mpg >30)
+```
+
+```{r echo = show_answers, eval = show_answers, results = "hide"}
+# e. 
+mtcars %>%
+  select(mpg, cyl)
+```
+
+```{r echo = show_answers, eval = show_answers, results = "hide"}
+# f.
+mtcars <- mtcars %>%
+  select(mpg, cyl, disp)
+```
+
+Credit: Adam Lucas
