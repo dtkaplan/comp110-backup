@@ -151,7 +151,7 @@ Prices2 <-
 ```
 
 
-```{r echo=FALSE, fig.margin = TRUE, fig.cap=" Indexed stock prices for Ford, Honda, and Toyota"}
+```{r echo=FALSE, fig.margin = TRUE, fig.cap="\\label{fig:auto-stock-index} Indexed stock prices for Ford, Honda, and Toyota"}
 ggplot(data=Prices2, aes(x=date, y=index)) + 
   geom_line(aes(group=company, color=company))
 ```
