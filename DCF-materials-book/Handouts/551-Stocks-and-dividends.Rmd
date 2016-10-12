@@ -17,9 +17,7 @@ require(DataComputing, quietly = TRUE)
 Many companies are publicly traded. This means that the company issues stock certificates which can be bought and sold on an exchange. Investors buy stock certificates mainly because they can sell them in the future, perhaps making a profit, and because companies pay dividends, a share of the company's profit, to each shareholder.
 
 
-
-
-```{r echo=FALSE, cache=TRUE, fig.cap="Stock prices for Ford, Honda, and Toyota", message=FALSE, warning=FALSE}
+```{r echo=FALSE, cache=TRUE, fig.cap="\\label{fig:auto-stock-prices}Stock prices for Ford, Honda, and Toyota", message=FALSE, warning=FALSE, fig.margin = TRUE}
 companies <- c("F", "TM", "HMC")
 Prices <- 
   read_stock_prices(companies, what = "daily",
@@ -28,9 +26,11 @@ Prices %>%
   ggplot(aes(x = date, y = close)) + 
   geom_line(aes(group = company, color = company)) +
   xlab("Date") + ylab("Daily Closing Share Price (USD)") 
+companies <- c("F", "TM", "HMC")
+
 ```
 
-```{r echo=FALSE, cache=TRUE, fig.cap="Accumulated dividends (per share) paid by Ford, Honda, and Toyota"}
+```{r echo=FALSE, cache=TRUE, fig.cap="\\label{fig:auto-stock-dividends}Accumulated dividends (per share) paid by Ford, Honda, and Toyota", fig.margin = TRUE}
 companies <- c("F", "TM", "HMC")
 Dividends <- 
   read_stock_prices(companies, what = "dividends",
@@ -76,7 +76,7 @@ Prices <-
 
 ## Buy/Sell Profit
 
-```{r echo=FALSE}
+```{r echo=FALSE, message = FALSE}
 Actions <- 
   data.frame(
     action = c("buy", "sell"),
@@ -90,32 +90,37 @@ SalesDifference <-
 ```
 
 
-
-Pick a buy date and a sell date. You can use a command like this to create a Table like that shown in Table \ref{tab:stock-actions}. 
-```{r}
+```{r actiontable,echo = FALSE, results = "hide"}
 Actions <- 
   data.frame(
     action = c("buy", "sell"),
     date = ymd(c("2006-01-03", "2014-12-30")))
 ```
 
-```{r echo=FALSE, title="Actions", caption="A suggested table format for the buy and sell dates."}
-Actions
+Pick a buy date and a sell date. You can use a command like this to create your data table:
+
+
+```{r eval = FALSE, ref.label="actiontable"}
 ```
 
-Combine `Prices` and `Actions` to produce a table like `SalesDifference` in Table \ref{tab:buy-sell}:
-```{r echo=FALSE,in_margin=TRUE, move_in_margin="1cm", caption="\\captionof{table}{\\label{tab:buy-sell} Profits from buying at the start of 2006 and selling at the end of 2014. The dollar amount is profit per share.}", title="\\texttt{SalesDifference}"}
-SalesDifference
+```{r echo=FALSE}
+Actions %>% knitr::kable()
+```
+
+Combine `Prices` and `Actions` to produce a table like this which shows the profits from buying at the start of 2006 and selling at the end of 2014.^[The dollar amount is profit per share.]
+```{r echo=FALSE}
+SalesDifference %>% knitr::kable()
 ```
 
 > *Hints*: (1) What kind of join should you use so that you get only those cases that match one of the dates in the `Actions` table? (2) The wide-vs-long techniques in Chapter \ref{chap:wide-long} will be useful.
 
-From the data table with buy and sell prices, calculate the dollar amount of profit (or loss) and the percentage change, as in Table \ref{tab:profit-calc}.
-```{r echo=FALSE, caption = "Profit from each of the stocks."}
+From the data table with buy and sell prices, calculate the dollar amount of profit (or loss) and the percentage change, as here: 
+```{r echo=FALSE}
 SalesDifference %>%
   mutate(profit = sell - buy, 
          percent = 100*signif((sell - buy)/buy, 3)) %>%
-  select(-buy, -sell)
+  select(-buy, -sell) %>%
+  knitr::kable()
 ```
 
 
@@ -133,7 +138,7 @@ Reference <-
   select(company, standard=close)
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE, message = FALSE}
 Prices2 <- 
   Prices %>%
   inner_join(Reference)
@@ -146,7 +151,7 @@ Prices2 <-
 ```
 
 
-```{r echo=FALSE, fig.cap=" Indexed stock prices for Ford, Honda, and Toyota"}
+```{r echo=FALSE, fig.margin = TRUE, fig.cap=" Indexed stock prices for Ford, Honda, and Toyota"}
 ggplot(data=Prices2, aes(x=date, y=index)) + 
   geom_line(aes(group=company, color=company))
 ```
@@ -171,7 +176,7 @@ Once you have the dividend data, extract out the dividends for all dates between
 
 * Find the total amount of dividends for each company during the period of interest.  Compare this amount to the profit (or loss) from buying and selling the stock certificates.  For the car companies, the result for the period 2005-01-01 though 2014-12-31 is shown in Table \ref{tab:dollar-dividends}.
 
-```{r echo=FALSE, caption="Dividends (in dollars per share) paid out by each company over the interval 2005 through 2014."}
+```{r echo=FALSE, message=FALSE, fig.margin = TRUE}
 PeriodOfInterest <-
   Dividends %>%
   filter( date > ymd("2005-01-01"), 
@@ -180,7 +185,8 @@ PeriodOfInterest %>%
   inner_join(Prices) %>%
   mutate(dividend_per_share = dividends) %>%
   group_by(company) %>%
-  summarise(total_dividend=sum(dividend_per_share)) 
+  summarise(total_dividend=sum(dividend_per_share)) %>%
+  knitr::kable(caption = "\\label{tab:dollar-dividends}Dividends (in dollars per share) paid out by each company over the interval 2005 through 2014.")
 ```
 
 

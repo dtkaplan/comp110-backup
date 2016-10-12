@@ -94,7 +94,7 @@ Relevant links:
     - 8.1, 8.2, 8.3
     - 9.1, 9.3
 * In-class activity
-    - [Handout: Bicycle rentals](DCF-materials-book/Handouts/452-Bicycle-Rentals.pdf) or [Handout: Births and holidays](DCF-materials-book/Handouts/453-Births-and-holidays.pdf)
+    - [Handout: Births and holidays](DCF-materials-book/Handouts/453-Births-and-holidays.pdf)
     - Use file `Week-4-project.Rmd`
 * Notes from class: [More transformation verbs](DCF-materials-book/_book/more-transformation-verbs.html) : [world cities](DCF-materials-book/_book/cities-of-the-world.html) 
 
@@ -131,7 +131,7 @@ load("Colleges-excerpt.rda")
     - 13.1, 13.2, 13.3, 13.4
     - 14.1, 14.3, 14.7, 14.10
 * In-class activity:
-    - File: `Week-6-project.Rmd`
+    - [Handout: Bicycle rentals](DCF-materials-book/Handouts/452-Bicycle-Rentals.pdf)
     
 ---------
     
