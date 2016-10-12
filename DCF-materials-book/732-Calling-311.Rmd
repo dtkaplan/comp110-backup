@@ -1,0 +1,152 @@
+---
+output: html_notebook
+---
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+# Calling 311
+
+In New York City, dialing 311 connects you to a complaint/request service.^[In the US, 911 is the phone number for emergency services.  311 is for non-emergency services.]  New York provides information about individual calls to 311 on a [web site](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9?).
+
+I want to see how the number of 311 calls for different reasons varies over time of day and day of the week.  I'm also interested in finding out whether there are hot spots for 311 calls, and how this depends on factors such as income.
+
+![311 data web site](Images/311-Calls.png)
+
+That site provides an "Export" feature.  You can download the data in several formats: CSV is appropriate. Using a web browser, I downloaded it to my `Downloads` directory.
+
+As of October 12, 2016, the data file is more than 9GB in size and encompasses almost 14 million complaints. It has 53 variables, but most of these are not relevant to most of the complaints or requests. For example, `"Bridge Highway Segment"` is relevant only to 311 calls that have to do with bridges, and `"Park Facility Name"` only to calls involving parks.
+
+Whenever the size of a data set is larger than the amount of random-access memory in your computer, it's likely that you will need special techniques to analyze it. This applies also to data that is about the same size as the random-access memory. On the computer on which this is being written, a 2013 MacBook Pro, I've got 16GB of random-access memory. So, rather than just reading in the data file to R, all in one go, I'm going to be a little careful and try to figure out what will be easy and what won't.
+
+Many file-reading functions in R will let you read just a few rows from a data set. Here, I'll read just the first two thousand rows, to get an idea of which variables are important.
+
+```{r message = FALSE, warning=FALSE}
+CallsFile <- "~/Downloads/311_Service_Requests_from_2010_to_Present.csv"
+JustAPeek <- 
+  CallsFile %>% 
+  data.table::fread( nrows=2000 ) 
+
+names( JustAPeek )
+```
+
+To illustrate, `"Taxi Pick Up Location"` is blank in the vast majority of the first two thousand cases, so presumably this is relevent to just a small fraction of complaints.
+```{r}
+JustAPeek %>%
+  group_by(`Taxi Pick Up Location`) %>%
+  tally()
+```
+
+To get started, `CreatedDate`, and `Complaint Type`, seem like good variables to explore. These are columns 2 and 6. I can tell `fread()` just to read those columns.
+
+I'll read in a few rows just to make sure things are working:
+```{r}
+SmallData <- 
+   CallsFile %>%
+   data.table::fread( nrows=5, select=c(2,6))
+SmallData
+```
+
+Can I use this method to read in a large number of cases? Rather than just trying to read the whole data set, I'll try it for different numbers of rows and measure how long it takes. I built up slowly, first testing 10 rows, then 100, then 1000. I found I could get to one-million rows while still just taking a few seconds. So it seem plausible that I can read in the whole thing with just the regular kinds of commands.
+```{r}
+system.time(SmallData <- 
+              CallsFile %>% 
+              data.table::fread(nrows = 1000000, select = c(2,6)))
+```
+
+Now I'll check whether I can convert the `"Created Date"` variable to a time object. Rather than use all 13 million cases, I'll start small again and work up with the number of rows to read.
+
+```{r}
+system.time(SmallData <- 
+              CallsFile %>% 
+              data.table::fread(nrows = 1000000, select = c(2,6)) %>% 
+              mutate(time = lubridate::mdy_hms(`Created Date`)) %>%
+              select(time, complaint = `Complaint Type`)
+)
+```
+Again, no problem reading in a million rows.
+
+It's also helpful to see how large is the object being created.
+```{r}
+object.size(SmallData)
+```
+
+Sixteen million bytes is only about 0.1% of the fast memory on my computer. The whole data set, with 13 million cases will take up only about 1-2% of the memory. No problem!
+
+Having established this, the question is whether the analysis of all 13 million cases can be done in a reasonable amount of time.  Let's try tabulating the complaint types in the 1-million case data table:
+
+```{r}
+system.time(Results <- 
+              SmallData %>% 
+              group_by(complaint) %>% 
+              tally() %>%
+              arrange(desc(n)))
+Results
+```
+
+Or, to see when the complaints occur:
+```{r}
+system.time(Complaints_by_time <- 
+              SmallData %>% 
+              mutate(hour_of_day = lubridate::hour(time),
+                     minute_of_hour = lubridate::minute(time),
+                     day_of_week = lubridate::wday(time),
+                     day_time = (day_of_week) + hour_of_day / 24 + minute_of_hour / (24*60))
+            )
+
+object.size(Complaints_by_time)
+
+system.time(Results <- 
+              Complaints_by_time %>%
+              group_by(hour_of_day) %>%
+              tally()
+)
+Results
+```
+
+Or, graphing out when the events occur:
+```{r}
+Complaints_by_time %>%
+  ggplot(aes(x = day_time)) +
+  geom_density() + xlab("Day")
+```
+
+There's a peak near the start of each day.  Let's filter out the events that are recorded just at midnight:
+
+```{r}
+Complaints_by_time %>%
+  mutate(at_midnight = hour_of_day == 0 & minute_of_hour == 0,
+         year = lubridate::year(time)) %>%
+  group_by(at_midnight, year) %>%
+  tally()
+```
+
+```{r}
+Time_stamped_complaints <-
+  Complaints_by_time %>%
+  mutate(at_midnight = hour_of_day == 0 & minute_of_hour == 0) %>%
+  filter( ! at_midnight)
+nrow(Time_stamped_complaints)
+```
+
+About 60% of the complaints have time stamps other than midnight.
+
+```{r}
+Time_stamped_complaints %>%
+  ggplot(aes(x = day_time)) +
+  geom_density() + xlab("Day")
+```
+
+Let's look at the categories with the largest number of complaints. What's a useful way of displaying how the patterns vary with time.
+
+```{r}
+Time_stamped_complaints %>%
+  group_by(complaint) %>%
+  filter(20000< n()) %>%
+  ggplot(aes(x = day_time)) +
+  geom_density(position = "dodge", fill = "gray", alpha = 0.2, bw = 1/24) + xlab("Day") + 
+  facet_wrap(~ complaint)
+```
+
+
