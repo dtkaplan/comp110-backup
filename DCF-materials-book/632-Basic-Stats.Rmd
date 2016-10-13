@@ -14,7 +14,8 @@ The three data tables in the `MovieLens.rda` file comprise a set of 100,000 rati
 
 
 ```{r eval = FALSE}
-download.file("http://tiny.cc/dcf/MovieLens.rda", destfile = "MovieLens.rda")
+download.file("http://tiny.cc/dcf/MovieLens.rda", 
+              destfile = "MovieLens.rda")
 ```
 Once the data are downloaded, you can use `load()` to bring the data tables into your R session.
     

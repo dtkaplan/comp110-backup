@@ -34,7 +34,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="conformity-and-names.html">
+<link rel="prev" href="stocks-and-dividends.html">
 <link rel="next" href="some-resources.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -52,6 +52,43 @@
 
 
 
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -98,7 +135,11 @@
 <li class="chapter" data-level="28" data-path="biblical-names.html"><a href="biblical-names.html"><i class="fa fa-check"></i><b>28</b> Biblical Names</a></li>
 <li class="chapter" data-level="29" data-path="conformity-and-names.html"><a href="conformity-and-names.html"><i class="fa fa-check"></i><b>29</b> Conformity and Names</a></li>
 <li class="chapter" data-level="30" data-path="stocks-and-dividends.html"><a href="stocks-and-dividends.html"><i class="fa fa-check"></i><b>30</b> Stocks and dividends</a></li>
-<li class="chapter" data-level="31" data-path="some-resources.html"><a href="some-resources.html"><i class="fa fa-check"></i><b>31</b> Some resources</a></li>
+<li class="chapter" data-level="31" data-path="a-graph-for-the-economist.html"><a href="a-graph-for-the-economist.html"><i class="fa fa-check"></i><b>31</b> A Graph for the Economist</a><ul>
+<li class="chapter" data-level="31.1" data-path="a-graph-for-the-economist.html"><a href="a-graph-for-the-economist.html#the-data"><i class="fa fa-check"></i><b>31.1</b> The data</a></li>
+<li class="chapter" data-level="31.2" data-path="a-graph-for-the-economist.html"><a href="a-graph-for-the-economist.html#whats-the-case"><i class="fa fa-check"></i><b>31.2</b> What’s the case?</a></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="some-resources.html"><a href="some-resources.html"><i class="fa fa-check"></i><b>32</b> Some resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -119,18 +160,54 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="stocks-and-dividends" class="section level1">
-<h1><span class="header-section-number">§ 30</span> Stocks and dividends</h1>
-<p><a href="Handouts/551-Stocks-and-dividends.pdf">PDF handout</a></p>
-<p>Only the PDF handout is available, not the HTML format document.</p>
+<div id="a-graph-for-the-economist" class="section level1">
+<h1><span class="header-section-number">§ 31</span> A Graph for the Economist</h1>
+<p><a href="Handouts/552-Economist-graph.pdf">PDF handout</a></p>
+<p>The <em>Economist</em> is a well-regarded weekly news magazine. The following graphic accompanied their article about the release of the “College Scorecard” data in Sept. 2015.</p>
+<p></p>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="Images/20160919_woc701.png" alt="Yearly cost of attending college versus college selectivity.  Each dot is one college or university." width="100%" />
+<p class="caption">
+Figure 31.1: Yearly cost of attending college versus college selectivity. Each dot is one college or university.
+</p>
+</div>
+<p>Your task is to reproduce this graph from the College Scorecard data, and perhaps enhance it.</p>
+<div id="the-data" class="section level2">
+<h2><span class="header-section-number">31.1</span> The data</h2>
+<p>The Scorecard data is too voluminous to work with conveniently in class; it takes too long to download. You’ll be working with a subset available at <code>tiny.cc/dcf/ScorecardSmall.Rda</code> which contains a single object, the data table <code>ScorecardSmall</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;http://tiny.cc/dcf/ScorecardSmall.Rda&quot;</span>, <span class="dt">destfile =</span> <span class="st">&quot;ScorecardSmall.Rda&quot;</span>)
+<span class="kw">load</span>(<span class="st">&quot;ScorecardSmall.Rda&quot;</span>)</code></pre></div>
+<p>The subset includes all 7804 institutions in the original 2013 Scorecard file, but just 54 variables. Some that you may be interested in are:</p>
+<ol style="list-style-type: decimal">
+<li><code>CONTROL</code>: public (1) or private (2) institution. (You can discard cases with <code>CONTROL == 3</code>. They are not in the Economist’s graphic.)</li>
+<li><code>INSTNM</code>: name of the institution</li>
+<li><code>ADM_RATE</code>: admissions rate in percent</li>
+<li><code>CCSIZSET</code>: Carnegie size classification of the institution. Values 1, 6, 7, 8 correspond to schools with fewer than 1000 students.</li>
+<li><code>AVGFACSAL</code>: Average faculty salary per month</li>
+<li><code>TUITFTE</code>: Tuition revenue received by the institution per student full-time-equivalent.</li>
+<li><code>NPT4_PUB</code>: average net cost for students in public institutions</li>
+<li><code>NPT4_PRIV</code>: average net cost for students in private institutions</li>
+<li><code>NPT41_PUB</code> : average net cost for students at public institutions whose families are in the lowest of five income groups. Similarly, <code>NPT42_PUB</code> is for students whose family income is in the 2nd group, and so on up to the 5th group. The groups are defined as $0 to $30K per year, $30-48K, $48-75K, $75-110K, $110K or more. There is also <code>NPT41_PRIV</code>, and so on, for private institutions.</li>
+</ol>
+<p>All of the <code>NPT4</code> variables are for students receiving aid from the federal government under Title IV.</p>
+</div>
+<div id="whats-the-case" class="section level2">
+<h2><span class="header-section-number">31.2</span> What’s the case?</h2>
+<p>The case in the Scorecard data is an institution. In the <em>Economist</em> graphic, however, the case is a level of family income (as in <code>NPT4</code>) at an institution. That is, from the perspective of the graphic, the Scorecard data is in wide form. You’ll have to convert it to narrow form to make the graph.</p>
+<ol style="list-style-type: decimal">
+<li>Select just the variables you need from the Scorecard data.</li>
+<li>Use <code>gather()</code> to convert from wide to narrow format.</li>
+<li>After (2) you will have a variable with levels like <code>NPT43_PUB</code>, <code>NPT45_PRIV</code>, etc. You will want to translate these to <code>Q3</code>, <code>Q5</code>, etc. For your convenience, the file <code>http://tiny.cc/dcf/NPT4-names.csv</code> contains a table with the appropriate translations. You can use a join of the narrow-format Scorecard data with this table to perform the translations.</li>
+</ol>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="conformity-and-names.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="stocks-and-dividends.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="some-resources.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

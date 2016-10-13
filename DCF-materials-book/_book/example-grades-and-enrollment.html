@@ -34,8 +34,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="conformity-and-names.html">
-<link rel="next" href="some-resources.html">
+<link rel="prev" href="joins.html">
+<link rel="next" href="joins-1.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,6 +52,43 @@
 
 
 
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -95,10 +132,26 @@
 <li class="chapter" data-level="25" data-path="bicycle-use-patterns.html"><a href="bicycle-use-patterns.html"><i class="fa fa-check"></i><b>25</b> Bicycle use patterns</a></li>
 <li class="chapter" data-level="26" data-path="births-and-holidays.html"><a href="births-and-holidays.html"><i class="fa fa-check"></i><b>26</b> Births and Holidays</a></li>
 <li class="chapter" data-level="27" data-path="part-joins.html"><a href="part-joins.html"><i class="fa fa-check"></i><b>27</b> (PART) Joins</a></li>
-<li class="chapter" data-level="28" data-path="biblical-names.html"><a href="biblical-names.html"><i class="fa fa-check"></i><b>28</b> Biblical Names</a></li>
-<li class="chapter" data-level="29" data-path="conformity-and-names.html"><a href="conformity-and-names.html"><i class="fa fa-check"></i><b>29</b> Conformity and Names</a></li>
-<li class="chapter" data-level="30" data-path="stocks-and-dividends.html"><a href="stocks-and-dividends.html"><i class="fa fa-check"></i><b>30</b> Stocks and dividends</a></li>
-<li class="chapter" data-level="31" data-path="some-resources.html"><a href="some-resources.html"><i class="fa fa-check"></i><b>31</b> Some resources</a></li>
+<li class="chapter" data-level="28" data-path="joins.html"><a href="joins.html"><i class="fa fa-check"></i><b>28</b> Joins</a><ul>
+<li class="chapter" data-level="28.1" data-path="joins.html"><a href="joins.html#combining-data-from-different-sources"><i class="fa fa-check"></i><b>28.1</b> Combining data from different sources</a></li>
+<li class="chapter" data-level="28.2" data-path="joins.html"><a href="joins.html#relational-databases"><i class="fa fa-check"></i><b>28.2</b> Relational databases</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="example-grades-and-enrollment.html"><a href="example-grades-and-enrollment.html"><i class="fa fa-check"></i><b>29</b> Example: Grades and Enrollment</a></li>
+<li class="chapter" data-level="30" data-path="joins-1.html"><a href="joins-1.html"><i class="fa fa-check"></i><b>30</b> Joins</a><ul>
+<li class="chapter" data-level="30.1" data-path="joins-1.html"><a href="joins-1.html#example-average-class-size"><i class="fa fa-check"></i><b>30.1</b> Example: Average class size</a></li>
+<li class="chapter" data-level="30.2" data-path="joins-1.html"><a href="joins-1.html#average"><i class="fa fa-check"></i><b>30.2</b> average</a></li>
+<li class="chapter" data-level="30.3" data-path="joins-1.html"><a href="joins-1.html#average-1"><i class="fa fa-check"></i><b>30.3</b> average</a></li>
+<li class="chapter" data-level="30.4" data-path="joins-1.html"><a href="joins-1.html#establishing-a-match-between-cases"><i class="fa fa-check"></i><b>30.4</b> Establishing a match between cases</a></li>
+<li class="chapter" data-level="30.5" data-path="joins-1.html"><a href="joins-1.html#kinds-of-join"><i class="fa fa-check"></i><b>30.5</b> Kinds of join</a></li>
+<li class="chapter" data-level="30.6" data-path="joins-1.html"><a href="joins-1.html#example-grade-point-averages"><i class="fa fa-check"></i><b>30.6</b> Example: Grade-point averages</a></li>
+<li class="chapter" data-level="30.7" data-path="joins-1.html"><a href="joins-1.html#activity-which-to-join"><i class="fa fa-check"></i><b>30.7</b> Activity: Which to Join?</a></li>
+<li class="chapter" data-level="30.8" data-path="joins-1.html"><a href="joins-1.html#example-joining-for-cleaning"><i class="fa fa-check"></i><b>30.8</b> Example: Joining for cleaning</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="biblical-names.html"><a href="biblical-names.html"><i class="fa fa-check"></i><b>31</b> Biblical Names</a></li>
+<li class="chapter" data-level="32" data-path="conformity-and-names.html"><a href="conformity-and-names.html"><i class="fa fa-check"></i><b>32</b> Conformity and Names</a></li>
+<li class="chapter" data-level="33" data-path="stocks-and-dividends.html"><a href="stocks-and-dividends.html"><i class="fa fa-check"></i><b>33</b> Stocks and dividends</a></li>
+<li class="chapter" data-level="34" data-path="a-graph-for-the-economist.html"><a href="a-graph-for-the-economist.html"><i class="fa fa-check"></i><b>34</b> A Graph for the Economist</a></li>
+<li class="chapter" data-level="35" data-path="some-resources.html"><a href="some-resources.html"><i class="fa fa-check"></i><b>35</b> Some resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -119,19 +172,96 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="stocks-and-dividends" class="section level1">
-<h1><span class="header-section-number">§ 30</span> Stocks and dividends</h1>
-<p><a href="Handouts/551-Stocks-and-dividends.pdf">PDF handout</a></p>
-<p>Only the PDF handout is available, not the HTML format document.</p>
-
+<div id="example-grades-and-enrollment" class="section level1">
+<h1><span class="header-section-number">§ 29</span> Example: Grades and Enrollment</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Grades &lt;-<span class="st"> </span><span class="kw">read.file</span>(<span class="st">&quot;http://tiny.cc/mosaic/grades.csv&quot;</span>)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">sid</th>
+<th align="left">grade</th>
+<th align="left">sessionID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2197</td>
+<td align="left">S31680</td>
+<td align="left">B</td>
+<td align="left">session3518</td>
+</tr>
+<tr class="even">
+<td>259</td>
+<td align="left">S31242</td>
+<td align="left">B</td>
+<td align="left">session2897</td>
+</tr>
+<tr class="odd">
+<td>4188</td>
+<td align="left">S32127</td>
+<td align="left">A</td>
+<td align="left">session2002</td>
+</tr>
+<tr class="even">
+<td>3880</td>
+<td align="left">S32058</td>
+<td align="left">A-</td>
+<td align="left">session2952</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Courses &lt;-<span class="st"> </span><span class="kw">read.file</span>(<span class="st">&quot;http://tiny.cc/mosaic/courses.csv&quot;</span>)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">sessionID</th>
+<th align="left">dept</th>
+<th align="right">level</th>
+<th align="left">sem</th>
+<th align="right">enroll</th>
+<th align="left">iid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>640</td>
+<td align="left">session2568</td>
+<td align="left">J</td>
+<td align="right">100</td>
+<td align="left">FA2002</td>
+<td align="right">15</td>
+<td align="left">inst223</td>
+</tr>
+<tr class="even">
+<td>76</td>
+<td align="left">session1940</td>
+<td align="left">d</td>
+<td align="right">100</td>
+<td align="left">FA2000</td>
+<td align="right">16</td>
+<td align="left">inst409</td>
+</tr>
+<tr class="odd">
+<td>1218</td>
+<td align="left">session3242</td>
+<td align="left">m</td>
+<td align="right">200</td>
+<td align="left">SP2004</td>
+<td align="right">30</td>
+<td align="left">inst476</td>
+</tr>
+</tbody>
+</table>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="conformity-and-names.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="some-resources.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="joins.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="joins-1.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

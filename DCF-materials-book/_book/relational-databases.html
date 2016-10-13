@@ -34,8 +34,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="conformity-and-names.html">
-<link rel="next" href="some-resources.html">
+<link rel="prev" href="joins.html">
+<link rel="next" href="example-grades-and-enrollment.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,6 +52,43 @@
 
 
 
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -95,10 +132,26 @@
 <li class="chapter" data-level="25" data-path="bicycle-use-patterns.html"><a href="bicycle-use-patterns.html"><i class="fa fa-check"></i><b>25</b> Bicycle use patterns</a></li>
 <li class="chapter" data-level="26" data-path="births-and-holidays.html"><a href="births-and-holidays.html"><i class="fa fa-check"></i><b>26</b> Births and Holidays</a></li>
 <li class="chapter" data-level="27" data-path="part-joins.html"><a href="part-joins.html"><i class="fa fa-check"></i><b>27</b> (PART) Joins</a></li>
-<li class="chapter" data-level="28" data-path="biblical-names.html"><a href="biblical-names.html"><i class="fa fa-check"></i><b>28</b> Biblical Names</a></li>
-<li class="chapter" data-level="29" data-path="conformity-and-names.html"><a href="conformity-and-names.html"><i class="fa fa-check"></i><b>29</b> Conformity and Names</a></li>
-<li class="chapter" data-level="30" data-path="stocks-and-dividends.html"><a href="stocks-and-dividends.html"><i class="fa fa-check"></i><b>30</b> Stocks and dividends</a></li>
-<li class="chapter" data-level="31" data-path="some-resources.html"><a href="some-resources.html"><i class="fa fa-check"></i><b>31</b> Some resources</a></li>
+<li class="chapter" data-level="28" data-path="joins.html"><a href="joins.html"><i class="fa fa-check"></i><b>28</b> Joins</a><ul>
+<li class="chapter" data-level="28.1" data-path="joins.html"><a href="joins.html#combining-data-from-different-sources"><i class="fa fa-check"></i><b>28.1</b> Combining data from different sources</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="relational-databases.html"><a href="relational-databases.html"><i class="fa fa-check"></i><b>29</b> Relational databases</a></li>
+<li class="chapter" data-level="30" data-path="example-grades-and-enrollment.html"><a href="example-grades-and-enrollment.html"><i class="fa fa-check"></i><b>30</b> Example: Grades and Enrollment</a></li>
+<li class="chapter" data-level="31" data-path="joins-1.html"><a href="joins-1.html"><i class="fa fa-check"></i><b>31</b> Joins</a><ul>
+<li class="chapter" data-level="31.1" data-path="joins-1.html"><a href="joins-1.html#example-average-class-size"><i class="fa fa-check"></i><b>31.1</b> Example: Average class size</a></li>
+<li class="chapter" data-level="31.2" data-path="joins-1.html"><a href="joins-1.html#average"><i class="fa fa-check"></i><b>31.2</b> average</a></li>
+<li class="chapter" data-level="31.3" data-path="joins-1.html"><a href="joins-1.html#average-1"><i class="fa fa-check"></i><b>31.3</b> average</a></li>
+<li class="chapter" data-level="31.4" data-path="joins-1.html"><a href="joins-1.html#establishing-a-match-between-cases"><i class="fa fa-check"></i><b>31.4</b> Establishing a match between cases</a></li>
+<li class="chapter" data-level="31.5" data-path="joins-1.html"><a href="joins-1.html#kinds-of-join"><i class="fa fa-check"></i><b>31.5</b> Kinds of join</a></li>
+<li class="chapter" data-level="31.6" data-path="joins-1.html"><a href="joins-1.html#example-grade-point-averages"><i class="fa fa-check"></i><b>31.6</b> Example: Grade-point averages</a></li>
+<li class="chapter" data-level="31.7" data-path="joins-1.html"><a href="joins-1.html#activity-which-to-join"><i class="fa fa-check"></i><b>31.7</b> Activity: Which to Join?</a></li>
+<li class="chapter" data-level="31.8" data-path="joins-1.html"><a href="joins-1.html#example-joining-for-cleaning"><i class="fa fa-check"></i><b>31.8</b> Example: Joining for cleaning</a></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="biblical-names.html"><a href="biblical-names.html"><i class="fa fa-check"></i><b>32</b> Biblical Names</a></li>
+<li class="chapter" data-level="33" data-path="conformity-and-names.html"><a href="conformity-and-names.html"><i class="fa fa-check"></i><b>33</b> Conformity and Names</a></li>
+<li class="chapter" data-level="34" data-path="stocks-and-dividends.html"><a href="stocks-and-dividends.html"><i class="fa fa-check"></i><b>34</b> Stocks and dividends</a></li>
+<li class="chapter" data-level="35" data-path="a-graph-for-the-economist.html"><a href="a-graph-for-the-economist.html"><i class="fa fa-check"></i><b>35</b> A Graph for the Economist</a></li>
+<li class="chapter" data-level="36" data-path="some-resources.html"><a href="some-resources.html"><i class="fa fa-check"></i><b>36</b> Some resources</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -119,19 +172,22 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="stocks-and-dividends" class="section level1">
-<h1><span class="header-section-number">§ 30</span> Stocks and dividends</h1>
-<p><a href="Handouts/551-Stocks-and-dividends.pdf">PDF handout</a></p>
-<p>Only the PDF handout is available, not the HTML format document.</p>
-
+<div id="relational-databases" class="section level1">
+<h1><span class="header-section-number">§ 29</span> Relational databases</h1>
+<p>Storing data in separate tables can be beneficial even when the data are coming from the same source:</p>
+<ul>
+<li>There is no “one size fits all” glyph-ready format. Often the kinds of analysis that will be done are not specifically anticipated when data are collected.</li>
+<li>Glyph-ready data often contains <strong>redundancies</strong>. This makes it hard to update or correct data.</li>
+</ul>
+<p><strong>Strategy</strong>: Don’t even try to smash all data into one big table. Instead, join related tables as needed.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="conformity-and-names.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="some-resources.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="joins.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="example-grades-and-enrollment.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

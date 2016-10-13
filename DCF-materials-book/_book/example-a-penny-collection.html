@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes and Materials for Data Computing</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110">
+  <meta name="generator" content="bookdown 0.1.15 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes and Materials for Data Computing" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110" />
+  <meta name="github-repo" content="dtkaplan/comp110" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes and Materials for Data Computing" />
+  
+  <meta name="twitter:description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110" />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+  
+<meta name="date" content="2016-10-05">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="example-gender-neutral-names-when-wide-is-easier.html">
+<link rel="next" href="stocks-and-dividends.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notes and materials for Data Computing</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Placeholder</a></li>
+<li class="chapter" data-level="2" data-path="gettingorganized.html"><a href="gettingorganized.html"><i class="fa fa-check"></i><b>2</b> (PART) Getting Organized</a></li>
+<li class="chapter" data-level="3" data-path="datainfrastructure.html"><a href="datainfrastructure.html"><i class="fa fa-check"></i><b>3</b> (PART) Data Infrastructure</a></li>
+<li class="chapter" data-level="4" data-path="case-study-highway-fatalities.html"><a href="case-study-highway-fatalities.html"><i class="fa fa-check"></i><b>4</b> Case Study: Highway Fatalities</a></li>
+<li class="chapter" data-level="5" data-path="case-study-taxicabs-and-the-sharing-economy.html"><a href="case-study-taxicabs-and-the-sharing-economy.html"><i class="fa fa-check"></i><b>5</b> Case Study: Taxicabs and the sharing economy</a></li>
+<li class="chapter" data-level="6" data-path="case-study-medicare-spending.html"><a href="case-study-medicare-spending.html"><i class="fa fa-check"></i><b>6</b> Case Study: Medicare spending</a></li>
+<li class="chapter" data-level="7" data-path="untidy-data-school-enrollments.html"><a href="untidy-data-school-enrollments.html"><i class="fa fa-check"></i><b>7</b> Untidy data: School enrollments</a></li>
+<li class="chapter" data-level="8" data-path="untidy-data-galtons-measurements-of-height.html"><a href="untidy-data-galtons-measurements-of-height.html"><i class="fa fa-check"></i><b>8</b> Untidy data: Galton’s measurements of height</a></li>
+<li class="chapter" data-level="9" data-path="untidy-data-family-structure-of-military-personnel.html"><a href="untidy-data-family-structure-of-military-personnel.html"><i class="fa fa-check"></i><b>9</b> Untidy data: Family structure of military personnel</a></li>
+<li class="chapter" data-level="10" data-path="untidy-data-minneapolis-voting.html"><a href="untidy-data-minneapolis-voting.html"><i class="fa fa-check"></i><b>10</b> Untidy data: Minneapolis Voting</a></li>
+<li class="chapter" data-level="11" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>11</b> Tidy Data</a></li>
+<li class="chapter" data-level="12" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html"><i class="fa fa-check"></i><b>12</b> R Programming: Parts of Speech</a></li>
+<li class="chapter" data-level="13" data-path="part-data-summaries-and-graphics.html"><a href="part-data-summaries-and-graphics.html"><i class="fa fa-check"></i><b>13</b> (PART) Data Summaries and Graphics</a></li>
+<li class="chapter" data-level="14" data-path="data-vs-information.html"><a href="data-vs-information.html"><i class="fa fa-check"></i><b>14</b> Data vs Information</a></li>
+<li class="chapter" data-level="15" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html"><i class="fa fa-check"></i><b>15</b> Glyphs, Frames, and Scales</a></li>
+<li class="chapter" data-level="16" data-path="activity-mapping-the-stars.html"><a href="activity-mapping-the-stars.html"><i class="fa fa-check"></i><b>16</b> Activity: Mapping the stars</a></li>
+<li class="chapter" data-level="17" data-path="introduction-to-graphics-and-wrangling.html"><a href="introduction-to-graphics-and-wrangling.html"><i class="fa fa-check"></i><b>17</b> Introduction to Graphics and Wrangling</a></li>
+<li class="chapter" data-level="18" data-path="part-data-verbs.html"><a href="part-data-verbs.html"><i class="fa fa-check"></i><b>18</b> (PART) Data Verbs</a></li>
+<li class="chapter" data-level="19" data-path="basicdataverbs.html"><a href="basicdataverbs.html"><i class="fa fa-check"></i><b>19</b> Basic Data Verbs</a></li>
+<li class="chapter" data-level="20" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html"><i class="fa fa-check"></i><b>20</b> More transformation verbs</a></li>
+<li class="chapter" data-level="21" data-path="trends-in-popularity-of-names.html"><a href="trends-in-popularity-of-names.html"><i class="fa fa-check"></i><b>21</b> Trends in Popularity of Names</a></li>
+<li class="chapter" data-level="22" data-path="case-study-in-basic-data-verbs-moby-dick.html"><a href="case-study-in-basic-data-verbs-moby-dick.html"><i class="fa fa-check"></i><b>22</b> Case study in basic data verbs: Moby Dick</a></li>
+<li class="chapter" data-level="23" data-path="cities-of-the-world.html"><a href="cities-of-the-world.html"><i class="fa fa-check"></i><b>23</b> Cities of the World</a></li>
+<li class="chapter" data-level="24" data-path="additional-exercises-on-data-verbs.html"><a href="additional-exercises-on-data-verbs.html"><i class="fa fa-check"></i><b>24</b> Additional Exercises on Data Verbs</a></li>
+<li class="chapter" data-level="25" data-path="bicycle-use-patterns.html"><a href="bicycle-use-patterns.html"><i class="fa fa-check"></i><b>25</b> Bicycle use patterns</a></li>
+<li class="chapter" data-level="26" data-path="births-and-holidays.html"><a href="births-and-holidays.html"><i class="fa fa-check"></i><b>26</b> Births and Holidays</a></li>
+<li class="chapter" data-level="27" data-path="part-joins-and-reshaping.html"><a href="part-joins-and-reshaping.html"><i class="fa fa-check"></i><b>27</b> (PART) Joins and Reshaping</a></li>
+<li class="chapter" data-level="28" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html"><i class="fa fa-check"></i><b>28</b> Combining data from different sources</a></li>
+<li class="chapter" data-level="29" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html"><i class="fa fa-check"></i><b>29</b> Wide vs Narrow Data Tables</a></li>
+<li class="chapter" data-level="30" data-path="biblical-names.html"><a href="biblical-names.html"><i class="fa fa-check"></i><b>30</b> Biblical Names</a></li>
+<li class="chapter" data-level="31" data-path="conformity-and-names.html"><a href="conformity-and-names.html"><i class="fa fa-check"></i><b>31</b> Conformity and Names</a></li>
+<li class="chapter" data-level="32" data-path="example-gender-neutral-names-when-wide-is-easier.html"><a href="example-gender-neutral-names-when-wide-is-easier.html"><i class="fa fa-check"></i><b>32</b> Example: Gender-neutral names: when wide is easier</a></li>
+<li class="chapter" data-level="33" data-path="example-a-penny-collection.html"><a href="example-a-penny-collection.html"><i class="fa fa-check"></i><b>33</b> Example: A Penny Collection</a><ul>
+<li class="chapter" data-level="33.1" data-path="example-a-penny-collection.html"><a href="example-a-penny-collection.html#three-formats-for-the-penny-data-table"><i class="fa fa-check"></i><b>33.1</b> Three formats for the penny data table</a></li>
+<li class="chapter" data-level="33.2" data-path="example-a-penny-collection.html"><a href="example-a-penny-collection.html#more-tasks"><i class="fa fa-check"></i><b>33.2</b> More tasks</a></li>
+<li class="chapter" data-level="33.3" data-path="example-a-penny-collection.html"><a href="example-a-penny-collection.html#extending-the-data"><i class="fa fa-check"></i><b>33.3</b> Extending the data</a></li>
+</ul></li>
+<li class="chapter" data-level="34" data-path="stocks-and-dividends.html"><a href="stocks-and-dividends.html"><i class="fa fa-check"></i><b>34</b> Stocks and dividends</a></li>
+<li class="chapter" data-level="35" data-path="a-graph-for-the-economist.html"><a href="a-graph-for-the-economist.html"><i class="fa fa-check"></i><b>35</b> A Graph for the Economist</a></li>
+<li class="chapter" data-level="36" data-path="some-resources.html"><a href="some-resources.html"><i class="fa fa-check"></i><b>36</b> Some resources</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes and Materials for Data Computing</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="example-a-penny-collection" class="section level1">
+<h1><span class="header-section-number">§ 33</span> Example: A Penny Collection</h1>
+<p>The same data can be represented in different ways. One or another way may be easiest, depending on the sort of calculation you are performing.</p>
+<p>A friend, when cleaning out a closet in 2016, came across a small, glass bottle with coins in it. The coins were US 1-cent pieces, called “pennies”. All of the coins were from before 1959. As with current pennies, the pennies had a picture of Lincoln on one side — the “obverse”. On the reverse side, the old-style pennies have a “wheat” design:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="Images/penny.jpg" alt="The &quot;wheat&quot; design on pennies before 1959." width="96" />
+<p class="caption">
+Figure 33.1: The “wheat” design on pennies before 1959.
+</p>
+</div>
+<p>The friend was interested to know if these coins were rare. First step in finding out, make a catalog of what he had. She noticed that some of the coins were stamped with an “S” and some with a “D,” but many had no stamp at all. So she sorted out the coins by year and stamp, and counted.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="Images/pennies_stacked.jpg" alt="Pennies in the collection from years 1950, 1951, and 1952. The front row has no stamp, the middle row has stamp &quot;D&quot;, and the back row has stamp &quot;S&quot;." width="50%" />
+<p class="caption">
+Figure 33.2: Pennies in the collection from years 1950, 1951, and 1952. The front row has no stamp, the middle row has stamp “D”, and the back row has stamp “S”.
+</p>
+</div>
+<div id="three-formats-for-the-penny-data-table" class="section level2">
+<h2><span class="header-section-number">33.1</span> Three formats for the penny data table</h2>
+<p><strong>Format 1</strong></p>
+<p>After counting the pennies in each stack, she compiled the data table available at <code>&quot;http://tiny.cc/dcf/my_pennies_format_1.csv&quot;</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Format_1 &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="st">&quot;http://tiny.cc/dcf/my_pennies_format_1.csv&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   year = col_integer(),
+##   none = col_integer(),
+##   D = col_integer(),
+##   S = col_integer()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(Format_1, <span class="dv">10</span>)</code></pre></div>
+<pre><code>## # A tibble: 10 × 4
+##     year  none     D     S
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1   1958     4     6    NA
+## 2   1957    11     9    NA
+## 3   1956    10     6    NA
+## 4   1955     4     4    NA
+## 5   1954    NA     2    NA
+## 6   1953    NA     8    NA
+## 7   1952     2     9    NA
+## 8   1951     3     5    NA
+## 9   1950     6     2     1
+## 10  1949     3    NA    NA</code></pre>
+<p>Questions:</p>
+<ol style="list-style-type: decimal">
+<li>What is the case in the <code>Format_1</code> data table?</li>
+<li><p>How would you wrangle the table to produce a count of all the pennies, together?</p></li>
+<li><p>How would you calculate the mean age of the pennies? (Hint: not so easy. Multiply the year by the penny counts, add up, and divide by the total number of pennies.)</p></li>
+</ol>
+<p><strong>Format 2</strong></p>
+<p>Seeing that these calculations are hard to read and understand, the collector decided to reformat the data to look like this:</p>
+<table>
+<thead>
+<tr class="header">
+<th>year</th>
+<th>count</th>
+<th>stamp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1958</td>
+<td>4</td>
+<td>none</td>
+</tr>
+<tr class="even">
+<td>1958</td>
+<td>6</td>
+<td>D</td>
+</tr>
+<tr class="odd">
+<td>1957</td>
+<td>11</td>
+<td>none</td>
+</tr>
+<tr class="even">
+<td>1957</td>
+<td>9</td>
+<td>D</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The complete data set in this format is available at <code>&quot;http://tiny.cc/dcf/my_pennies_format_2.csv&quot;</code>.</p>
+<pre><code>## Parsed with column specification:
+## cols(
+##   year = col_integer(),
+##   stamp = col_character(),
+##   count = col_integer()
+## )</code></pre>
+<ol style="list-style-type: decimal">
+<li><p>What is the case in the <code>Format_1</code> data table?</p></li>
+<li><p>How would you wrangle the table to produce a count of all the pennies, together?</p></li>
+</ol>
+<pre><code>## # A tibble: 1 × 1
+##   total
+##   &lt;int&gt;
+## 1   163</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>How would you calculate the mean age of the pennies? (Hint: This is much easier than for <code>Format_1</code>.)</li>
+</ol>
+<pre><code>## # A tibble: 1 × 1
+##   mean_age
+##      &lt;dbl&gt;
+## 1 1949.466</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><p>How do you wrangle the <code>Format_1</code> data table into the form of <code>Format_2</code>.</p></li>
+<li><p>The two formats differ: one is in narrow form, the other in wide form. Which is which?</p></li>
+</ol>
+<p>Question:</p>
+<ol style="list-style-type: decimal">
+<li><p>Suppose that some additional pennies were added to the collection with new stamps, say “W” and “Z”. Which of the formats, wide or narrow, would be better suited so that your wrangling statements to find the number of coins and the mean age would continue to work?</p></li>
+<li>Counts, wide: year, Phila., Denver, SF
+<ul>
+<li>What’s the case?</li>
+</ul></li>
+<li>Counts, narrow: year, origin, count
+<ul>
+<li>Converting between (1) and (2)</li>
+</ul></li>
+<li>Pennies, narrow: year, origin</li>
+<li>Pennies, wide
+<ul>
+<li>Converting between (3) and (4)</li>
+<li>Producing (1) and (2) from (4)</li>
+</ul></li>
+</ol>
+<p><strong>Format 3</strong></p>
+<p>Another friend suggested that it might be better to store the data with one row for each penny, like this:</p>
+<pre><code>## # A tibble: 12 × 2
+##     year stamp
+##    &lt;int&gt; &lt;chr&gt;
+## 1   1958  none
+## 2   1958  none
+## 3   1958  none
+## 4   1958  none
+## 5   1958     D
+## 6   1958     D
+## 7   1958     D
+## 8   1958     D
+## 9   1958     D
+## 10  1958     D
+## 11  1957  none
+## 12  1957  none</code></pre>
+<p>The complete data set in this format is available at <code>&quot;http://tiny.cc/dcf/my_pennies_format_3.csv&quot;</code>.</p>
+<p>Questions</p>
+<ol style="list-style-type: decimal">
+<li><p>How can you tell the case in <code>Format_3</code> is a single penny?</p></li>
+<li><p>How would you count the number of pennies in the collection?</p></li>
+</ol>
+<pre><code>## # A tibble: 1 × 1
+##       n
+##   &lt;int&gt;
+## 1   163</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>How would you find the mean year for the coins in the collection?</li>
+</ol>
+<pre><code>## # A tibble: 1 × 1
+##   mean_year
+##       &lt;dbl&gt;
+## 1  1949.466</code></pre>
+</div>
+<div id="more-tasks" class="section level2">
+<h2><span class="header-section-number">33.2</span> More tasks</h2>
+<p>Use at least one of the formats to do the following. Even better if you try to do it with more than one format, but this might be hard</p>
+<ol style="list-style-type: decimal">
+<li>Identify the years for which D and S stamps together outnumber P stamps.</li>
+<li>Calculate the mean year for each stamp.</li>
+</ol>
+</div>
+<div id="extending-the-data" class="section level2">
+<h2><span class="header-section-number">33.3</span> Extending the data</h2>
+<ul>
+<li>Suppose you want a “condition” for each coin?</li>
+<li>Suppose you want to include coins other than pennies?</li>
+<li>Suppose you want to have prices that depend on year, origin, denomination, condition?</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="example-gender-neutral-names-when-wide-is-easier.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="stocks-and-dividends.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": "link:https://github.com/dtkaplan/comp110/DCF-materials-book/edit/master/%s",
+"download": null,
+"toc": {
+"collapse": "section",
+"unnumbered": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
