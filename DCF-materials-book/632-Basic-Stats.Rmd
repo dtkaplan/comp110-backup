@@ -2,6 +2,10 @@
 output: html_notebook
 ---
 
+```{r include = FALSE}
+library(DataComputing)
+```
+
 # Statistics: Collective properties of data
 
 Whenever you use `summarise()` you are reducing a set of cases into a single case. That single case reflects the *collective properties* of the cases. For instance, you might calculate the mean of some quantity. That mean takes in the values for *all* of the cases. Even when you are finding the value for a single case, say the one with the maximum value, that case is the maximum only with respect to the other cases. If those cases had been different, the max might change.
@@ -172,7 +176,9 @@ Tmp %>%
   left_join(Tmp2) %>%
   mutate(genre = reorder(genre, desc(abs(diff)))) %>%
   ggplot(aes(x = genre, y = mean, color = sex)) + 
-    geom_errorbar(aes(ymin = mean - 2*sd, ymax = mean + 2 * sd), position = position_dodge(width = 0.2)) + 
+    geom_errorbar(aes(ymin = mean - 2 * uncertainty, 
+                      ymax = mean + 2 * uncertainty), 
+                  position = position_dodge(width = 0.2)) + 
     geom_point(position = position_dodge(width = 0.2)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```

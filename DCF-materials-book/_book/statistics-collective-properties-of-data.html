@@ -39,8 +39,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="biblical-names.html">
-<link rel="next" href="example-gender-neutral-names-when-wide-is-easier.html">
+<link rel="prev" href="a-graph-for-the-economist.html">
+<link rel="next" href="calling-311.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -315,20 +315,93 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="conformity-and-names" class="section level1">
-<h1><span class="header-section-number">§ 32</span> Conformity and Names</h1>
-<p>Calculate the total number of babies given the 10 most popular names each year as a fraction of the total number of babies born that year.</p>
-<p>Question: What would have happened if <code>group_by()</code> came after <code>filter()</code>?</p>
-<p>We’ll need an operation to combine two tables to find the proportion each year. Here’s a teaser: <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<div id="statistics-collective-properties-of-data" class="section level1">
+<h1><span class="header-section-number">§ 37</span> Statistics: Collective properties of data</h1>
+<p>Whenever you use <code>summarise()</code> you are reducing a set of cases into a single case. That single case reflects the <em>collective properties</em> of the cases. For instance, you might calculate the mean of some quantity. That mean takes in the values for <em>all</em> of the cases. Even when you are finding the value for a single case, say the one with the maximum value, that case is the maximum only with respect to the other cases. If those cases had been different, the max might change.</p>
+<p>Of course, we intend the summary to be <em>representative</em> of the cases being summarized, particularly when the quantity being calculated is meant to describe a “typical” value for all of the cases. That being the case, it’s fair to ask <em>how representative</em> that summary is of the set of cases, or <em>how well</em> that summary represents the cases. This is a central issue in basic statistics. Statistics provides a framework for approaching that question of <em>how representative</em> a summary is.</p>
+<p>To illustrate, let’s look at how people rate movies.</p>
+<p>The three data tables in the <code>MovieLens.rda</code> file comprise a set of 100,000 ratings of movies by individuals. These data were collected in the late 1990s by the <em>grouplens</em> research team at the University of Minnesota. Grouplens provides the data directly at <a href="http://grouplens.org/datasets/movielens/100k/" class="uri">http://grouplens.org/datasets/movielens/100k/</a>. <code>MovieLens.rda</code> is a reformatting of the data that makes the file substantially smaller. You can access the file in this way.</p>
+<p>Once the data are downloaded, you can use <code>load()</code> to bring the data tables into your R session.</p>
+<p><code>MovieLens.rda</code> contains three data tables:</p>
+<ul>
+<li><p><code>Ratings</code> has the individual movie ratings and the time at which they were entered. It also includes an ID variable for both the user and the movie.</p></li>
+<li><code>Movies</code> provides the name of the movie and information about genres.</li>
+<li><p><code>Users</code> gives basic information about the person who made the rating.</p></li>
+</ul>
+<div id="the-mean-as-a-summary" class="section level2">
+<h2><span class="header-section-number">37.1</span> The mean as a summary</h2>
+<p>Calculating the mean rating is easy:</p>
+<p>So how representative is the mean rating? One way to assess this is to display the distribution of ratings: <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
+<p>The mean value, 3.52986, falls right in the middle of this distribution.</p>
+<p>One way to assess the representativeness of the mean is to calculate an auxiliary statistic that summarizes how far from the mean a typical case is. The standard way to measure this typical deviation from the mean is called the <em>standard deviation</em> and is computed with the <code>sd()</code> reduction function.</p>
+<p>The typical rating is within about 1.1 points of the mean.</p>
+<p>Statisticians compute another statistic to indicate how <em>uncertain</em> the mean is. The uncertainty doesn’t arise from the calculation itself — computer calculations such as <code>mean()</code> are very reliable. The uncertainty refers to a kind of thought experiment.</p>
+<p>Suppose that a much larger set of ratings had been collected, from a much larger group of people. Imagine that the particular cases we are working with in <code>Ratings</code> were a random choice from this much larger set. And then imagine that many other, similar datasets were created, each of which is a random selection from the much larger dataset. The means calculated from these many different datasets would presumably differ from the one we get from our particular set in <code>Ratings</code>. The uncertainty refers to how much the means would differ among the hypothetical, thought-experiment data sets.</p>
+<p>The most common statistical measure of this uncertainty of the mean is called the “standard error of the mean.” Perhaps surprisingly, there is a simple method to calculate the standard error of the mean even without having to generate a new data set.</p>
+<p>The value of the standard error of the mean is very small compared to the mean. Statisticians display the uncertainty with an interval of <span class="math inline">\(\pm 2\)</span> times the reliability around the mean, in other words, <span class="math inline">\(3.530 \pm 0.007\)</span>. Note that the values have been somewhat rounded. As a rule, there’s very little meaning to the second (non-zero) digit of the standard error. And there’s no point in reporting the mean itself to a precision that goes beyond that of the standard error.</p>
+<p>We could reasonably call this interval the “uncertainty interval.” But the standard term for it in statistics is the “confidence interval”</p>
+<p>Why should we care about the uncertainty of the mean? The typical situation where this is an issue is when we are comparing two means to see whether they are different. For instance, let’s see if women and men have different mean movie ratings. To start, we need to identify each rating with the sex of the rater.</p>
+<p>Now we’re in a position to compute the mean for each sex, together with the uncertainty in those means.</p>
+<p>The means for men and women are a bit different — women give higher ratings by 0.0023. But look at the reliabilities. They are larger than the difference in means. This suggests that although the precise numerical value of the means is different, the difference is itself not reliable. It might as well be zero!</p>
+<p><strong>Plotting out the means along with their uncertainties.</strong></p>
+<p>There is a standard format for graphing the means and their uncertainties that involve a glyph called an “error bar.” <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
+<p>As always when reading a graph, note the scales.</p>
+<p>Many people mistakenly interpret a plot like this as indicating the range of ratings themselves, rather than the uncertainty in the mean rating. So it can be helpful to display the distribution of the ratings themselves on the same graph.</p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-152-1.png" width="672" /></p>
+<p>Again, note the scales. You can see that the uncertainty in the mean is much, much smaller than the distribution of ratings.</p>
+<p><em>Activity</em></p>
+<p>Find the means broken down by sex and movie genre. Do the sexes rate individual genres differently?</p>
+<p>Think carefully about how you are going to combine the genre information with the ratings. Movies often fall into more than one genre. In calculating the means, you might want to create a new case of the values in <code>Ratings</code> for each of the genres of a movie.</p>
+<p>Read each of the following chunks and say what it is doing.</p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
+</div>
+<div id="continuous-explanatory-variables" class="section level2">
+<h2><span class="header-section-number">37.2</span> Continuous explanatory variables</h2>
+<p>In the previous, we broke down the ratings by sex and genre. But maybe age is an important determinant of opinion.</p>
+<p>In these chunks, we simply add age as another grouping variable when computing the mean and the uncertainty in the mean.</p>
+<p>In plotting this, what roles would you assign to each of the variables?</p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
+<p>How could you simplify this plot?</p>
+<p>Let’s focus on just a few genres, the ones that showed large differences between the sexes.</p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+<p>One of the problems with this plot is that the error bars are much larger than they were in some of the previous plots. This makes it hard to see differences between the sexes. Why this growth in the error bars? Because we’ve divided the data up into about 50 different ages. Roughly, this means that each error bar is based on about 1/50th as much data. Since the uncertainty goes as <span class="math inline">\(1/\sqrt(n)\)</span>, this means that the error bars will be about <span class="math inline">\(\sqrt{50} \approx 7\)</span> times bigger than before. You could fix this by, say, dividing up into just a few age groups.</p>
+<p>A statistical method called “regression” enables the mean rating to be assessed by age without having to break up age into any groups at all. In the next plot, we’ll use a regression method called “smoothing” to do this, transforming the error bars into error bands.</p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
+<p>Look at the film-noir genre. Men’s mean ratings are high and go up over the years. For women, the pattern is different. They don’t like film-noir as much as men, except around age 40. (Note: These data are not tracing individual people as they age. Instead, these are different people who were born at different years.)</p>
+<p><strong>Project idea</strong>: How do ratings compare by month or time of day? Is it possible to tell whether the times of day are keyed to the local clock time, or the time at which the database server received the information.</p>
+</div>
+<div id="correlations" class="section level2">
+<h2><span class="header-section-number">37.3</span> Correlations</h2>
+<p>Another very important technique in introductory statistics involves “correlation.”</p>
+<p>Consider three situations about how two different variables might relate to one another:</p>
+<ol style="list-style-type: decimal">
+<li>When one variable is up, the other one tends to be up as well. This is called a “positive correlation.”</li>
+<li>When one variable is up, the other could equally well be up or down. This is called “uncorrelated.”</li>
+<li>When one variable is up, the other one tends to be down. This is called a “negative correlation.”</li>
+</ol>
+<p>Now “tends to” can be a matter of degree. The <em>correlation coefficient</em> indicates how strong the tendency is on a scale of zero to 1. Zero means uncorrelated. One means “exactly in line with one another.” The sign on the correlation coefficient indicates whether the correlation is positive or negative. If the variables are uncorrelated, the correlation coefficient is near zero.</p>
+<p>To illustrate, let’s look at the correlation between musical and war genres, and also the correlation between crime and film-noir genres. We’ll base the correlation on whether the genres are aligned from movie to movie.</p>
+<p>It looks like being a war movie tells you nothing about whether it is a musical, while being a crime movie tells a bit about whether it is also a film-noir.</p>
+<p>It’s also possible to calculate an uncertainty in the correlation coefficients. This can help in deciding whether to treat the correlation as different from zero.</p>
+<p>There’s no reason in these data to believe that the correlation between war and musical genres is anything but zero. In contrast, crime and film-noir have a positive correlation, but nowhere near perfect correlation.</p>
+</div>
+<div id="a-primitive-display-of-genre-correlations" class="section level2">
+<h2><span class="header-section-number">37.4</span> A primitive display of genre correlations</h2>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
+</div>
+<div id="a-network-display" class="section level2">
+<h2><span class="header-section-number">37.5</span> A network display</h2>
+<p>As a network <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="biblical-names.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="example-gender-neutral-names-when-wide-is-easier.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="a-graph-for-the-economist.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="calling-311.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

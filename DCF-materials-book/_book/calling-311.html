@@ -39,8 +39,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="biblical-names.html">
-<link rel="next" href="example-gender-neutral-names-when-wide-is-easier.html">
+<link rel="prev" href="statistics-collective-properties-of-data.html">
+<link rel="next" href="regex-examples-.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -315,20 +315,49 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="conformity-and-names" class="section level1">
-<h1><span class="header-section-number">§ 32</span> Conformity and Names</h1>
-<p>Calculate the total number of babies given the 10 most popular names each year as a fraction of the total number of babies born that year.</p>
-<p>Question: What would have happened if <code>group_by()</code> came after <code>filter()</code>?</p>
-<p>We’ll need an operation to combine two tables to find the proportion each year. Here’s a teaser: <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<div id="calling-311" class="section level1">
+<h1><span class="header-section-number">§ 38</span> Calling 311</h1>
+<p>In New York City, dialing 311 connects you to a complaint/request service.<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a> New York provides information about individual calls to 311 on a <a href="https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9?">web site</a>.</p>
+<p>I want to see how the number of 311 calls for different reasons varies over time of day and day of the week. I’m also interested in finding out whether there are hot spots for 311 calls, and how this depends on factors such as income.</p>
+<div class="figure">
+<img src="Images/311-Calls.png" alt="311 data web site" />
+<p class="caption">311 data web site</p>
+</div>
+<p>That site provides an “Export” feature. You can download the data in several formats: CSV is appropriate. Using a web browser, I downloaded it to my <code>Downloads</code> directory.</p>
+<p>As of October 12, 2016, the data file is more than 9GB in size and encompasses almost 14 million complaints. It has 53 variables, but most of these are not relevant to most of the complaints or requests. For example, <code>&quot;Bridge Highway Segment&quot;</code> is relevant only to 311 calls that have to do with bridges, and <code>&quot;Park Facility Name&quot;</code> only to calls involving parks.</p>
+<p>Whenever the size of a data set is larger than the amount of random-access memory in your computer, it’s likely that you will need special techniques to analyze it. This applies also to data that is about the same size as the random-access memory. On the computer on which this is being written, a 2013 MacBook Pro, I’ve got 16GB of random-access memory. So, rather than just reading in the data file to R, all in one go, I’m going to be a little careful and try to figure out what will be easy and what won’t.</p>
+<p>Many file-reading functions in R will let you read just a few rows from a data set. Here, I’ll read just the first two thousand rows, to get an idea of which variables are important.</p>
+<p>To illustrate, <code>&quot;Taxi Pick Up Location&quot;</code> is blank in the vast majority of the first two thousand cases, so presumably this is relevent to just a small fraction of complaints.</p>
+<p>To get started, <code>CreatedDate</code>, and <code>Complaint Type</code>, seem like good variables to explore. These are columns 2 and 6. I can tell <code>fread()</code> just to read those columns.</p>
+<p>I’ll read in a few rows just to make sure things are working:</p>
+<p>Can I use this method to read in a large number of cases? Rather than just trying to read the whole data set, I’ll try it for different numbers of rows and measure how long it takes. I built up slowly, first testing 10 rows, then 100, then 1000. I found I could get to one-million rows while still just taking a few seconds. So it seem plausible that I can read in the whole thing with just the regular kinds of commands.</p>
+<p>Now I’ll check whether I can convert the <code>&quot;Created Date&quot;</code> variable to a time object. Rather than use all 13 million cases, I’ll start small again and work up with the number of rows to read.</p>
+<p>Again, no problem reading in a million rows.</p>
+<p>It’s also helpful to see how large is the object being created.</p>
+<p>Sixteen million bytes is only about 0.1% of the fast memory on my computer. The whole data set, with 13 million cases will take up only about 1-2% of the memory. No problem!</p>
+<p>Having established this, the question is whether the analysis of all 13 million cases can be done in a reasonable amount of time. Let’s try tabulating the complaint types in the 1-million case data table:</p>
+<p>Or, to see when the complaints occur:</p>
+<p>Or, graphing out when the events occur: <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-175-1.png" width="672" /></p>
+<p>There’s a peak near the start of each day. Let’s filter out the events that are recorded just at midnight:</p>
+<p>About 60% of the complaints have time stamps other than midnight.</p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-178-1.png" width="672" /></p>
+<p>Let’s look at the categories with the largest number of complaints. What’s a useful way of displaying how the patterns vary with time.</p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-179-1.png" width="672" /></p>
 
+</div>
+<div class="footnotes">
+<hr />
+<ol start="10">
+<li id="fn10"><p>In the US, 911 is the phone number for emergency services. 311 is for non-emergency services.<a href="calling-311.html#fnref10">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="biblical-names.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="example-gender-neutral-names-when-wide-is-easier.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="statistics-collective-properties-of-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regex-examples-.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
