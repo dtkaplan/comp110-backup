@@ -1,0 +1,53 @@
+# Scraping the weather
+
+```{r include = FALSE}
+library(DataComputing)
+library(rvest)
+```
+
+
+We're interested in scraping the climate data for all cities in the US. <www.bestplaces.net> has this information
+
+
+```{r}
+states <- read_html("http://www.bestplaces.net/find/")
+state_links <- character(51)
+for (i in 0:5) {
+  this_state <- html_nodes(states, css = paste0("#mainContent_hlk", i))
+  state_links[i + 1] <- html_attr(this_state, name = "href")
+}
+```
+
+Get the towns within a state:
+```{r}
+scrape_the_town_links <- function(state_url = "http://www.bestplaces.net/find/state.aspx?state=ut") {
+
+contents <- read_html(state_url)
+cities <- html_nodes(contents, "a")
+cities1 <- cities[grepl("\\.\\./city/", cities)]
+data_frame(
+  name = html_text(cities1),
+  url = html_attr(cities1, "href")
+) %>%
+  mutate(url = gsub("\\.\\./", "http://www.bestplaces.net/", url))
+}
+```
+
+```{r}
+city_url <- "http://www.bestplaces.net/city/utah/alta"
+contents <- read_html(city_url)
+climate_contents <- read_html(gsub("/city/", "/climate/city/", city_url))
+tab <- html_nodes(climate_contents, "table")
+# Get rid of the third column
+# fix commas in numbers
+# Translate the content labels into something shorter
+# Add in columns to give the city and state. 
+
+# turn this into a function
+```
+
+
+Get the data for all cities in Utah.
+
+
+Credit: Garrett Grolemund

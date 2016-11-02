@@ -1,0 +1,68 @@
+# Example: Finding the PO number in an address
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+Suppose you wanted to extract the PO Box number from an address.
+
+Read the street address data and pull out a sample of a few dozen cases.
+```{r cache=TRUE}
+Addresses <- read.file("http://tiny.cc/dcf/street-addresses.csv")
+Sample <- Addresses %>%
+  sample_n(size = 50)
+```
+
+Following each of the steps listed above:
+
+1. The PO Box cases tend to have a substring "PO".
+2. The regular expression for "PO" is simply `"PO"`.^[Perhaps you want to insist that PO be preceeded and followed by a space or the start of the address, so that the regex doesn't match, say, `"49 EDGAR ALLEN POE TERRACE"` or `"POPCORN DRIVE"`. This regex would look like `"^|\\s+PO\\s+"`. But in the example, we'll keep it simple.]
+3. Find some cases that match:
+    ```{r}
+    Matches <-
+      Sample %>%
+      filter(grepl("PO ", address))
+    ```
+    ```{r}
+    Matches
+    ```
+4. Find cases that don't match:
+    ```{r}
+    Dont <-
+      Sample %>%
+      filter( ! grepl("PO ", address))
+    ```
+    ```{r}
+    Dont 
+    ```
+5. Find any cases in the `Matches` that shouldn't be there.  They all look good here.
+6. Find any cases in `Dont` that should have matched. (The `NCSU BOX` addresses should have matched our intension.)
+7. It looks like `"BOX"` would have been a better pattern. We expect `"BOX"` to be followed by a space and a number, so `"\\s+BOX\\s+\\d+"` 
+    ```{r}
+    pattern <- "\\s+BOX\\s+\\d+"
+    Matches <-
+      Sample %>%
+      filter(grepl(pattern, address))
+    Dont <-
+      Sample %>%
+      filter( ! grepl(pattern, address))
+    ```
+    ```{r echo=FALSE, in_margin=TRUE}
+    Dont
+    ```
+The result seems satisfactory.
+
+Now we want to extract the box number. First, mark the part of the pattern that you want to extract by surrounding it with parentheses. Then, you'll be in a position to use `tidyr::extract()` to pull out the part of the pattern identified by extraction parentheses.
+
+```{r}
+pattern <- "\\s+BOX\\s+(\\d+)"
+BoxNumbers <-
+  Sample %>%
+  filter(grepl(pattern, address)) %>%
+  tidyr::extract(address, into="boxnum", regex=pattern)
+```
+```{r in_margin=TRUE}
+BoxNumbers %>% head()
+```
+
+Note that `tidyr::extract()` should be given only those cases that match the regular expression, so `filter()` is applied before `tidyr::extract()`

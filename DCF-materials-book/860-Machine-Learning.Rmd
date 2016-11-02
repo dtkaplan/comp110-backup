@@ -1,0 +1,191 @@
+# Machine Learning
+
+```{r include=FALSE}
+require(mosaic)
+require(DataComputing)
+require(statisticalModeling)
+require(rpart)
+require(rpart.plot)
+require(randomForest)
+require(rvest)
+require(knitr)
+require(NHANES)
+knitr::opts_chunk$set(message=FALSE)
+```
+
+We have spent most of our time on two subjects:
+
+1. Data visualization
+2. Data wrangling: getting from the data you are given to the "glyph-ready" data that you need to make a graphic or some other mode to guide interpretation of the data.
+
+Visualization works well with 1-3 variables, and in some situations can work with more variables.
+
+## A multivariable graphic
+
+![](minard_lg.gif)Glyph: `geom_ribbon()` or "Sankey", Annotations: rivers and towns
+
+
+What variables are being graphed here? Which variable is mapped to which aesthetic?
+
+```{r}
+data(Minard.troops)
+data(Minard.cities)
+
+plot_troops <- ggplot(Minard.troops, aes(long, lat)) +
+  geom_path(aes(size = survivors, colour = direction, group = group),
+            linejoin = "bevel", linemitre = 20, lineend = "round")
+   
+plot_both <- plot_troops + 
+  geom_text(aes(label = city), size = 4, data = Minard.cities)
+
+plot_both + coord_fixed(ratio = 1.5)
+```
+ 
+ 
+ 
+```{r}
+library(ggmap)
+background <- get_map(location = "Minsk", zoom = 5) #c(20, 45, 40, 65))
+ggmap(background) +   
+  geom_path(data = Minard.troops, alpha = 0.5, 
+            aes(x = long, y = lat -.8, size = survivors, colour = direction, group = group),
+            linejoin = "bevel", linemitre = 20, lineend = "round") +
+  xlim(24, 38) + ylim(53,57) + coord_fixed(ratio = 2) +
+  geom_text(aes(x = long, y = lat-.8, label = city), size = 3, data = Minard.cities)
+```
+```{r}
+map <- get_map("Vilnius", zoom = 14, source = "osm", color = "bw")
+mapPoints <- ggmap(map)
+```
+ 
+```{r}
+ plot_polished <- plot_both + 
+   scale_size(to = c(1, 12), 
+     breaks = c(1, 2, 3) * 10^5, labels = comma(c(1, 2, 3) * 10^5)) + 
+   scale_colour_manual(values = c("grey50","red")) +
+   xlab(NULL) + 
+   ylab(NULL)
+
+```
+
+Aesthetics: `(x,y)` latitude and longitude; `size` size of army; `color` advance or retreat. 
+
+[source](http://www.edwardtufte.com/tufte/graphics/minard_lg.gif)
+
+## With more variables?
+
+If we need to relate more variables, a visualization may not suffice.
+
+## Various goals for machine learning
+
+1. Make predictions
+2. Anticipate the effect of an intervention
+3. Explore masses of data
+
+## Supervised vs unsupervised learning
+
+* Supervised: There is an outcome that you have recorded in your data.
+* Unsupervised: No outcome variable.
+    - in-class activity on gene expresion
+    - example about Scottish Parliament in book 
+    
+## Supervised learning
+
+We construct a mathematical model of the situation.
+
+- Configure the model with adjustment knobs. These are called "parameters." 
+- Twiddle with the knobs until the model makes a good match to the data.  
+
+```{r cache = TRUE}
+knitr::include_graphics("https://seamlessblog.files.wordpress.com/2013/06/mannequin-collage1.jpg")
+```
+
+In the dressmaker's dummy, adjustment knobs for matching the model to measurements of waist, hips, height, etc.
+
+In machine learning, we adopt a mathematical form with parameters.
+
+* Example 1: Straight-line models
+    $f(x) = m x + b$. The input is $x$, the parameters are $m$ and $b$.
+    ```{r}
+    ggplot(SaratogaHouses, 
+           aes(y = price, x = livingArea)) + 
+      geom_point(alpha = 0.3) +
+      stat_smooth(method = "lm", se = FALSE)
+    coef(lm(price ~ livingArea, data = SaratogaHouses))
+    ```
+* Example 2: Trees with branches
+    At each branch point, the level of the variable to split on.
+    ```{r}
+    model <- rpart(time ~ year, data = SwimRecords)
+    prp(model)
+    ```
+
+These simple functions with just one input variable can be made more elaborate, e.g.
+
+* Trees
+    - Can choose which variable to split on at each break
+    - Can randomize choice, make lots of trees, and average
+    ```{r}
+    swim_model <- randomForest(time ~ year + sex, data = SwimRecords)
+    fmodel(swim_model)
+    ```
+
+* Straight-lines become low-order polynomials: $f(w, x, y, z) = a + bw + cx + dy + ez$
+    ```{r}
+    house_price_model <- 
+      lm(log(price) ~ log(livingArea) * bathrooms * newConstruction + pctCollege, 
+         data = SaratogaHouses)
+    fmodel(house_price_model, post_transform = c(price = exp) )
+    ```
+    - Statistical question: Should we take these detected patterns seriously?
+    ```{r}
+    fmodel(house_price_model, post_transform = c(price = exp), intervals = "confidence")
+    ```
+    - So why are the results so uncertain for new construction?
+        - not much data
+        - new houses are not built with one bathroom
+    ```{r}
+    SaratogaHouses %>% 
+      ggplot(aes(x = bathrooms, fill = newConstruction)) + geom_bar(position = "dodge")
+    ```
+
+## Application Examples
+
+### Home electricity use
+
+How to visualize the relationship between `thermsPerDay`, `temp` and `kwh`
+
+```{r cache = TRUE, message = FALSE}
+Utilities <- read.csv("http://tiny.cc/dcf/utilities-up-to-date.csv", 
+                      stringsAsFactors = FALSE)
+
+library(splines)
+model <- lm(thermsPerDay ~ ns(temp, 5) + ns(temp,3) : kwh, data = Utilities)
+fmodel(model, intervals = "confidence")
+```
+
+Interpreting this model: In colder temperatures, higher electricity use leads to lower natural gas usage.
+
+### Wages and education
+
+How does wage depend on sex? Take into account education and age and sector
+
+```{r}
+forest_mod <- randomForest(wage ~ educ + sex + age, data = CPS85)
+fmodel(forest_mod, age = c(25, 40))
+```
+
+
+## Statistical learning
+
+* honest assessment of differences
+* honest comparison of models
+    - measure "complexity" or "flexibility" of models
+* bias/variance trade-off
+* covariates and causal reasoning
+
+
+
+
+
+
