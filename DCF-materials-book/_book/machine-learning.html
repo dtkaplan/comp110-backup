@@ -39,8 +39,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="glyphs-frames-and-scales.html">
-<link rel="next" href="introduction-to-graphics-and-wrangling.html">
+<link rel="prev" href="scraping-the-weather.html">
+<link rel="next" href="some-resources.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -385,53 +385,160 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="activity-mapping-the-stars" class="section level1">
-<h1><span class="header-section-number">§ 17</span> Activity: Mapping the stars</h1>
-<div class="figure"><span id="fig:unnamed-chunk-27"></span>
-<img src="Images/gaia-star-map.png" alt="Stars plotted on the celestial sphere by the Gaia space telescope. (Sept. 2016)" width="330" />
-<p class="caption">
-Figure 17.1: Stars plotted on the celestial sphere by the Gaia space telescope. (Sept. 2016)
-</p>
-</div>
-<p>The image above is a map of the stars constructed by the European Space Agency’s Gaia space telescope. It reportedly shows 1,000,000,000 stars.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+<div id="machine-learning" class="section level1">
+<h1><span class="header-section-number">§ 52</span> Machine Learning</h1>
+<p>We have spent most of our time on two subjects:</p>
 <ol style="list-style-type: decimal">
-<li>Although the map represents one billion stars, the image itself is only 660 by 398 pixels: a total of 262,680 pixels altogether. How can a billion stars be displayed in only one-quarter of a million pixels?</li>
-<li>Why is the image oval?</li>
-<li>Why are there broad, curving bands of shading? How might these reflect layers of the graphic that display different quantities? (See the <a href="http://gaiaportal.asdc.asi.it/">codebook</a> for some ideas about variables that might reflect the available data rather than the stars themselves.)</li>
+<li>Data visualization</li>
+<li>Data wrangling: getting from the data you are given to the “glyph-ready” data that you need to make a graphic or some other mode to guide interpretation of the data.</li>
 </ol>
-<p>Gaia data are available in CSV form at <a href="http://1016243957.rsc.cdn77.org/Gaia/gaia_source/csv/">this site</a>. A codebook is <a href="http://gaiaportal.asdc.asi.it/">here</a></p>
-<p>Download one of the CSV files and see what you can make of it. For instance, …</p>
-<ol start="4" style="list-style-type: decimal">
-<li>You can see the <code>.csv</code> in the name. What does the <code>.gz</code> mean at the end of the file name?</li>
-<li>How many stars are there in this one file? From the number of such <code>.csv.gz</code> files available, estimate how many stars there are in the complete catalog.</li>
-<li>Make a map of the stars in your one file. (Suggestion: in developing your plot, just use several thousand stars from the file. Otherwise things will be slow. Select the stars at random.)
+<p>Visualization works well with 1-3 variables, and in some situations can work with more variables.</p>
+<div id="a-multivariable-graphic" class="section level2">
+<h2><span class="header-section-number">52.1</span> A multivariable graphic</h2>
+<p><img src="Images/minard_lg.gif" />Glyph: <code>geom_path()</code> or “Sankey”, Annotations: rivers and towns</p>
+<p><a href="http://www.edwardtufte.com/tufte/graphics/minard_lg.gif">source</a></p>
+<p>What variables are being graphed here? Which variable is mapped to which aesthetic?</p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-242-1.png" width="672" /></p>
+</div>
+<div id="with-more-variables" class="section level2">
+<h2><span class="header-section-number">52.2</span> With more variables?</h2>
+<p>If we need to relate more variables, a visualization may not suffice.</p>
+</div>
+<div id="various-goals-for-machine-learning" class="section level2">
+<h2><span class="header-section-number">52.3</span> Various goals for machine learning</h2>
+<ol style="list-style-type: decimal">
+<li>Make predictions</li>
+<li>Anticipate the effect of an intervention</li>
+<li>Explore masses of data</li>
+</ol>
+</div>
+<div id="supervised-vs-unsupervised-learning" class="section level2">
+<h2><span class="header-section-number">52.4</span> Supervised vs unsupervised learning</h2>
 <ul>
-<li>Use <code>phot_g_mean_flux</code> as the intensity and <code>ecl_lon</code> and <code>ecl_lat</code> as the position variables.</li>
-<li>Explore a bit and decide what are good aesthetics for representing the intensity. (Hints: color? size?)</li>
-<li>Does faceting make sense?</li>
+<li>Supervised: There is an outcome that you have recorded in your data.</li>
+<li>Unsupervised: No outcome variable.
+<ul>
+<li>in-class activity on gene expresion</li>
+<li>example about Scottish Parliament in book</li>
 </ul></li>
+</ul>
+</div>
+<div id="supervised-learning" class="section level2">
+<h2><span class="header-section-number">52.5</span> Supervised learning</h2>
+<p>We construct a mathematical model of the situation.</p>
+<ul>
+<li>Configure the model with adjustment knobs. These are called “parameters.”</li>
+<li>Twiddle with the knobs until the model makes a good match to the data.</li>
+</ul>
+<p>In the dressmaker’s dummy, adjustment knobs for matching the model to measurements of waist, hips, height, etc.</p>
+<p>In machine learning, we adopt a mathematical form with parameters.</p>
+<ul>
+<li>Example 1: Straight-line models <span class="math inline">\(f(x) = m x + b\)</span>. The input is <span class="math inline">\(x\)</span>, the parameters are <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span>. <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-244-1.png" width="672" /></li>
+<li>Example 2: Trees with branches At each branch point, the level of the variable to split on. <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-245-1.png" width="672" /></li>
+</ul>
+<p>These simple functions with just one input variable can be made more elaborate, e.g.</p>
+<ul>
+<li>Trees
+<ul>
+<li>Can choose which variable to split on at each break</li>
+<li>Can randomize choice, make lots of trees, and average <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-246-1.png" width="672" /></li>
+</ul></li>
+<li>Straight-lines become low-order polynomials: <span class="math inline">\(f(w, x, y, z) = a + bw + cx + dy + ez\)</span> <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-247-1.png" width="672" />
+<ul>
+<li>Statistical question: Should we take these detected patterns seriously? <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-248-1.png" width="672" /></li>
+<li>So why are the results so uncertain for new construction?
+<ul>
+<li>not much data</li>
+<li>new houses are not built with one bathroom <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-249-1.png" width="672" /></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="application-examples" class="section level2">
+<h2><span class="header-section-number">52.6</span> Application Examples</h2>
+<div id="home-electricity-use" class="section level3">
+<h3><span class="header-section-number">52.6.1</span> Home electricity use</h3>
+<p>How to visualize the relationship between <code>thermsPerDay</code>, <code>temp</code> and <code>kwh</code></p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-250-1.png" width="672" /></p>
+<p>Interpreting this model: In colder temperatures, higher electricity use leads to lower natural gas usage.</p>
+</div>
+<div id="wages-and-education" class="section level3">
+<h3><span class="header-section-number">52.6.2</span> Wages and education</h3>
+<p>How does wage depend on sex? Take into account education and age and sector</p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-251-1.png" width="672" /></p>
+</div>
+</div>
+<div id="statistical-learning" class="section level2">
+<h2><span class="header-section-number">52.7</span> Statistical learning</h2>
+<ul>
+<li>honest assessment of differences</li>
+<li>honest comparison of models
+<ul>
+<li>measure “complexity” or “flexibility” of models</li>
+</ul></li>
+<li>bias/variance trade-off</li>
+<li>covariates and causal reasoning</li>
+</ul>
+</div>
+<div id="example-child-carseat-sales" class="section level2">
+<h2><span class="header-section-number">52.8</span> Example: Child carseat sales</h2>
+<p>Purpose: Figure out how to raise sales of a brand of carseats.</p>
+</div>
+<div id="hypothesis-generated-model" class="section level2">
+<h2><span class="header-section-number">52.9</span> Hypothesis generated model</h2>
+<ol style="list-style-type: decimal">
+<li>Price relative to competitor’s price is relevant.</li>
+<li>Larger population gives larger sales</li>
+<li>Education level?</li>
+<li>Advertising?</li>
 </ol>
-<p>A simple plot: <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
-<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-30-1.png" width="672" /> 7. Is there a relationship between the <code>ra</code> and <code>dec</code> variables and the <code>ecl_lon</code> and <code>ecl_lat</code> variables? Try different ways assigning the variables to aesthetics until you find one that tells the story.</p>
-<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
-<ol start="8" style="list-style-type: decimal">
-<li>Optional: Requires some mathematical sophistication. Make a conformal-map style presentation of the relationship between the <code>ra</code>/<code>dec</code> coordinate system and the <code>ecl_lat</code>/<code>ecl_lon</code> system. Suggestion: Pull out only those stars that fall within a narrow band of the edges of a square in one of the coordinate systems. Then make separate plots of those stars in the two systems, perhaps using color to encode which stars in one plot correspond to stars in the other plot.</li>
-</ol>
+</div>
+<div id="interpreting-the-model" class="section level2">
+<h2><span class="header-section-number">52.10</span> Interpreting the model?</h2>
+</div>
+<div id="another-formalism-regression-trees" class="section level2">
+<h2><span class="header-section-number">52.11</span> Another formalism: Regression trees</h2>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-255-1.png" width="672" /></p>
+</div>
+<div id="no-prior-model-at-all" class="section level2">
+<h2><span class="header-section-number">52.12</span> No prior model at all?</h2>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-256-1.png" width="672" /></p>
+</div>
+<div id="shelf-location" class="section level2">
+<h2><span class="header-section-number">52.13</span> Shelf location?</h2>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-257-1.png" width="672" /></p>
+</div>
+<div id="building-a-classifier" class="section level2">
+<h2><span class="header-section-number">52.14</span> Building a classifier</h2>
+<blockquote>
+<p>62 variables are derived from a confocal laser scanning image of the optic nerve head, describing its morphology. Observations are from normal and glaucomatous eyes, respectively.</p>
+</blockquote>
+<div id="with-glaucoma" class="section level3">
+<h3><span class="header-section-number">52.14.1</span> With glaucoma</h3>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-260-1.png" width="672" /></p>
+</div>
+<div id="normal-eyes" class="section level3">
+<h3><span class="header-section-number">52.14.2</span> Normal eyes</h3>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-261-1.png" width="672" /></p>
+</div>
+</div>
+<div id="build-a-classifier" class="section level2">
+<h2><span class="header-section-number">52.15</span> Build a classifier …</h2>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-262-1.png" width="672" /></p>
+</div>
+<div id="unsupervised-learning" class="section level2">
+<h2><span class="header-section-number">52.16</span> Unsupervised learning</h2>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-263-1.png" width="672" /></p>
 
 </div>
-<div class="footnotes">
-<hr />
-<ol start="3">
-<li id="fn3"><p>See <a href="http://www.bbc.com/news/science-environment-37355154">this story</a> on the BBC web site.<a href="activity-mapping-the-stars.html#fnref3">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="glyphs-frames-and-scales.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-to-graphics-and-wrangling.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="scraping-the-weather.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="some-resources.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

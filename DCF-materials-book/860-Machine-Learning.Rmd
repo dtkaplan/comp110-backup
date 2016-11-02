@@ -5,6 +5,7 @@ require(mosaic)
 require(DataComputing)
 require(statisticalModeling)
 require(rpart)
+require(ggdendro)
 require(rpart.plot)
 require(randomForest)
 require(rvest)
@@ -22,26 +23,17 @@ Visualization works well with 1-3 variables, and in some situations can work wit
 
 ## A multivariable graphic
 
-![](minard_lg.gif)Glyph: `geom_ribbon()` or "Sankey", Annotations: rivers and towns
+![](Images/minard_lg.gif)Glyph: `geom_path()` or "Sankey", Annotations: rivers and towns
 
+[source](http://www.edwardtufte.com/tufte/graphics/minard_lg.gif)
 
 What variables are being graphed here? Which variable is mapped to which aesthetic?
 
 ```{r}
+library(HistData)
 data(Minard.troops)
 data(Minard.cities)
-
-plot_troops <- ggplot(Minard.troops, aes(long, lat)) +
-  geom_path(aes(size = survivors, colour = direction, group = group),
-            linejoin = "bevel", linemitre = 20, lineend = "round")
-   
-plot_both <- plot_troops + 
-  geom_text(aes(label = city), size = 4, data = Minard.cities)
-
-plot_both + coord_fixed(ratio = 1.5)
 ```
- 
- 
  
 ```{r}
 library(ggmap)
@@ -53,24 +45,9 @@ ggmap(background) +
   xlim(24, 38) + ylim(53,57) + coord_fixed(ratio = 2) +
   geom_text(aes(x = long, y = lat-.8, label = city), size = 3, data = Minard.cities)
 ```
-```{r}
-map <- get_map("Vilnius", zoom = 14, source = "osm", color = "bw")
-mapPoints <- ggmap(map)
-```
- 
-```{r}
- plot_polished <- plot_both + 
-   scale_size(to = c(1, 12), 
-     breaks = c(1, 2, 3) * 10^5, labels = comma(c(1, 2, 3) * 10^5)) + 
-   scale_colour_manual(values = c("grey50","red")) +
-   xlab(NULL) + 
-   ylab(NULL)
 
-```
 
-Aesthetics: `(x,y)` latitude and longitude; `size` size of army; `color` advance or retreat. 
 
-[source](http://www.edwardtufte.com/tufte/graphics/minard_lg.gif)
 
 ## With more variables?
 
@@ -185,7 +162,104 @@ fmodel(forest_mod, age = c(25, 40))
 * covariates and causal reasoning
 
 
+## Example: Child carseat sales
 
+Purpose: Figure out how to raise sales of a brand of carseats.
+
+```{r}
+head(ISLR::Carseats %>% rename(CompP=CompPrice,Ads=Advertising, Pop=Population, Shelf=ShelveLoc, Edu=Education))
+```
+
+## Hypothesis generated model
+
+1. Price relative to competitor's price is relevant.
+2. Larger population gives larger sales
+3. Education level?
+4. Advertising?
+
+```{r}
+Carseats <-
+  ISLR::Carseats %>%
+  mutate(rel_price = Price / CompPrice)
+mod1 <- 
+  Carseats %>% 
+  lm(Sales ~ rel_price + Population + Education + Advertising,
+     data = .)
+coef(mod1)
+```
+
+## Interpreting the model?
+
+```{r}
+summary(mod1)
+```
+
+## Another formalism: Regression trees
+
+```{r}
+library(rpart)
+mod2 <- 
+  Carseats %>%
+  rpart(Sales ~ rel_price + Price + CompPrice + Advertising + Population + Education + Income, data=.)
+prp(mod2)
+```
+
+
+## No prior model at all?
+
+```{r}
+mod3 <- Carseats %>% rpart(Sales ~ ., data=.)
+prp(mod3)
+```
+
+## Shelf location?
+
+```{r}
+mod4 <- Carseats %>%
+  rpart(Sales ~ rel_price + Advertising + ShelveLoc + Population, data=.)
+prp(mod4)
+```
+
+## Building a classifier
+
+> 62 variables are derived from a confocal laser scanning image of the optic nerve head, describing its morphology. Observations are from normal and glaucomatous eyes, respectively.
+
+```{r}
+data("GlaucomaM", package = "TH.data")
+```
+```{r echo=FALSE}
+GlaucomaM %>% 
+  arrange(Class) %>% 
+  select(-Class) %>% as.matrix() -> foo
+```
+
+### With glaucoma
+
+```{r echo=FALSE}
+image(foo[1:98,], ylab="Variable", xlab="Person",xaxt='n',yaxt="n'")
+```
+
+### Normal eyes
+
+```{r echo=FALSE}
+image(foo[99:196,], ylab="Variable", xlab="Person",xaxt='n',yaxt="n'")
+```
+
+## Build a classifier ...
+
+```{r}
+glaucoma_rpart <- rpart(Class ~ ., data = GlaucomaM, 
+                        control = rpart.control(xval = 100))
+prp(glaucoma_rpart, type=4, extra=2)
+```
+
+## Unsupervised learning
+
+```{r}
+Dists <- dist(mtcars)
+Dendrogram <- hclust(Dists)
+ggdendrogram(Dendrogram)
+```
 
 
 

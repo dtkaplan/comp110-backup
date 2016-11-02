@@ -39,8 +39,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="glyphs-frames-and-scales.html">
-<link rel="next" href="introduction-to-graphics-and-wrangling.html">
+<link rel="prev" href="a-graph-for-the-economist.html">
+<link rel="next" href="statistics-collective-properties-of-data.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -385,53 +385,143 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="activity-mapping-the-stars" class="section level1">
-<h1><span class="header-section-number">§ 17</span> Activity: Mapping the stars</h1>
-<div class="figure"><span id="fig:unnamed-chunk-27"></span>
-<img src="Images/gaia-star-map.png" alt="Stars plotted on the celestial sphere by the Gaia space telescope. (Sept. 2016)" width="330" />
-<p class="caption">
-Figure 17.1: Stars plotted on the celestial sphere by the Gaia space telescope. (Sept. 2016)
-</p>
+<div id="distributions" class="section level1">
+<h1><span class="header-section-number">§ 37</span> Distributions</h1>
+<p>Often there is information to be found in the way cases differ one from the other.</p>
+<p>A <strong>distribution</strong> is a representation of the patterns of spread of the cases.</p>
+<div id="one-variable" class="section level2">
+<h2><span class="header-section-number">37.1</span> One variable</h2>
+<div id="categorical-how-many-cases-at-each-level" class="section level3">
+<h3><span class="header-section-number">37.1.1</span> Categorical: how many cases at each level?</h3>
+<p>Order: help the eye</p>
 </div>
-<p>The image above is a map of the stars constructed by the European Space Agency’s Gaia space telescope. It reportedly shows 1,000,000,000 stars.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
-<ol style="list-style-type: decimal">
-<li>Although the map represents one billion stars, the image itself is only 660 by 398 pixels: a total of 262,680 pixels altogether. How can a billion stars be displayed in only one-quarter of a million pixels?</li>
-<li>Why is the image oval?</li>
-<li>Why are there broad, curving bands of shading? How might these reflect layers of the graphic that display different quantities? (See the <a href="http://gaiaportal.asdc.asi.it/">codebook</a> for some ideas about variables that might reflect the available data rather than the stars themselves.)</li>
-</ol>
-<p>Gaia data are available in CSV form at <a href="http://1016243957.rsc.cdn77.org/Gaia/gaia_source/csv/">this site</a>. A codebook is <a href="http://gaiaportal.asdc.asi.it/">here</a></p>
-<p>Download one of the CSV files and see what you can make of it. For instance, …</p>
-<ol start="4" style="list-style-type: decimal">
-<li>You can see the <code>.csv</code> in the name. What does the <code>.gz</code> mean at the end of the file name?</li>
-<li>How many stars are there in this one file? From the number of such <code>.csv.gz</code> files available, estimate how many stars there are in the complete catalog.</li>
-<li>Make a map of the stars in your one file. (Suggestion: in developing your plot, just use several thousand stars from the file. Otherwise things will be slow. Select the stars at random.)
+<div id="quantitative" class="section level3">
+<h3><span class="header-section-number">37.1.2</span> Quantitative</h3>
+<p>No discrete levels. The fundamental display is <strong>density</strong></p>
+<p>Show some densities.</p>
+</div>
+</div>
+<div id="two-or-more-variables-displaying-relationships" class="section level2">
+<h2><span class="header-section-number">37.2</span> Two or more variables: Displaying relationships</h2>
+</div>
+<div id="a-distribution-template" class="section level2">
+<h2><span class="header-section-number">37.3</span> A distribution template</h2>
+<div id="aesthetics-1-2-or-three-variables" class="section level3">
+<h3><span class="header-section-number">37.3.1</span> Aesthetics: 1, 2, or three variables</h3>
 <ul>
-<li>Use <code>phot_g_mean_flux</code> as the intensity and <code>ecl_lon</code> and <code>ecl_lat</code> as the position variables.</li>
-<li>Explore a bit and decide what are good aesthetics for representing the intensity. (Hints: color? size?)</li>
-<li>Does faceting make sense?</li>
-</ul></li>
+<li><code>x =</code> The first variable: <em>always!</em></li>
+<li><code>y =</code> The <em>count</em> or <em>density</em> or another variable</li>
+<li><code>group =</code> or <code>fill =</code> or <code>color =</code> Still another variable</li>
+</ul>
+</div>
+<div id="positions" class="section level3">
+<h3><span class="header-section-number">37.3.2</span> Positions</h3>
+<ul>
+<li>Dodged (the default)</li>
+<li>Stacked</li>
+<li>Proportion</li>
+</ul>
+</div>
+<div id="facets" class="section level3">
+<h3><span class="header-section-number">37.3.3</span> Facets</h3>
+<p>One or two more categorical variables</p>
+<ul>
+<li><code>facet_wrap( ~ var)</code></li>
+<li><code>facet_grid(var1 ~ var2)</code></li>
+</ul>
+</div>
+</div>
+<div id="variable-types" class="section level2">
+<h2><span class="header-section-number">37.4</span> Variable types</h2>
+<p>interval —- ordered —– categorical</p>
+<ol style="list-style-type: decimal">
+<li>Quantitative: a natural order and interval</li>
+<li>Ordinal: a natural order but not an interval</li>
+<li>Categorical: no natural order</li>
 </ol>
-<p>A simple plot: <img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
-<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-30-1.png" width="672" /> 7. Is there a relationship between the <code>ra</code> and <code>dec</code> variables and the <code>ecl_lon</code> and <code>ecl_lat</code> variables? Try different ways assigning the variables to aesthetics until you find one that tells the story.</p>
-<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
-<ol start="8" style="list-style-type: decimal">
-<li>Optional: Requires some mathematical sophistication. Make a conformal-map style presentation of the relationship between the <code>ra</code>/<code>dec</code> coordinate system and the <code>ecl_lat</code>/<code>ecl_lon</code> system. Suggestion: Pull out only those stars that fall within a narrow band of the edges of a square in one of the coordinate systems. Then make separate plots of those stars in the two systems, perhaps using color to encode which stars in one plot correspond to stars in the other plot.</li>
+</div>
+<div id="order" class="section level2">
+<h2><span class="header-section-number">37.5</span> Order</h2>
+<p>The different levels of the variable have a natural order; it’s natural to say that one level is higher than another or that a level is in-between two other levels.</p>
+<ul>
+<li>Temperature</li>
+<li>Age</li>
+<li>Likert scale (strongly disagree, disagree, neutral, …)</li>
+<li>Income bracket, e.g. 0-25K, 25K-40K, 40K-75K, 75K-150K</li>
+<li>Numerical scale, e.g. pain level of 1 to 10</li>
+<li>but not, e.g. Language, Nationality, …</li>
+</ul>
+</div>
+<div id="interval" class="section level2">
+<h2><span class="header-section-number">37.6</span> Interval</h2>
+<p>For variables with a natural order, does the interval between levels have a specific meaning?</p>
+<ul>
+<li>Temperature: Yes</li>
+<li>Age: Yes</li>
+<li>Likert scale: not really, but sometimes assumed</li>
+<li>Income bracket: No</li>
+<li>Language: No! (It’s not even ordered!)</li>
+</ul>
+</div>
+<div id="nhanes" class="section level2">
+<h2><span class="header-section-number">37.7</span> NHANES</h2>
+<p><code>NHANES</code> package has the <code>NHANES</code> data table</p>
+<div id="categorical-variables" class="section level3">
+<h3><span class="header-section-number">37.7.1</span> Categorical variables:</h3>
+<ul>
+<li><code>Gender</code>: no order (therefore not interval)</li>
+<li><code>Education</code>: ordered but not interval</li>
+<li><code>SexOrientation</code>: not really ordered (therefore not interval)</li>
+<li><code>Work</code>: not really ordered (therefore not interval)</li>
+<li><code>MaritalStatus</code>: no order (therefore not interval)</li>
+<li><code>HHIncome</code>: ordered but not interval</li>
+</ul>
+</div>
+<div id="quantitative-variables" class="section level3">
+<h3><span class="header-section-number">37.7.2</span> Quantitative variables</h3>
+<ul>
+<li><code>UrineVol1</code> ordered and interval</li>
+<li><code>Age</code>: ordered and interval</li>
+</ul>
+</div>
+</div>
+<div id="single-variables" class="section level2">
+<h2><span class="header-section-number">37.8</span> Single variables</h2>
+<div id="interval-hence-ordered-use-density" class="section level3">
+<h3><span class="header-section-number">37.8.1</span> Interval (hence ordered) — use density</h3>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
+</div>
+<div id="not-interval-use-counts" class="section level3">
+<h3><span class="header-section-number">37.8.2</span> Not interval — use counts</h3>
+<p>But respect the order if there is one.</p>
+<ol style="list-style-type: decimal">
+<li>Quantitative: a natural order and interval</li>
+<li>Ordinal: a natural order but not an interval</li>
+<li>Categorical: no natural order</li>
 </ol>
+</div>
+<div id="two-variables" class="section level3">
+<h3><span class="header-section-number">37.8.3</span> Two variables</h3>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-141-1.png" width="672" /></p>
+<p>How could you make this better?</p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-145-1.png" width="672" /></p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
 
 </div>
-<div class="footnotes">
-<hr />
-<ol start="3">
-<li id="fn3"><p>See <a href="http://www.bbc.com/news/science-environment-37355154">this story</a> on the BBC web site.<a href="activity-mapping-the-stars.html#fnref3">↩</a></p></li>
-</ol>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="glyphs-frames-and-scales.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-to-graphics-and-wrangling.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="a-graph-for-the-economist.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistics-collective-properties-of-data.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
