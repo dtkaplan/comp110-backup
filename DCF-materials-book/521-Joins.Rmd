@@ -36,7 +36,7 @@ Glyph-ready data often combines data from different sources.
 
 We can use the `date` variable to look up each case in a list of holidays, e.g. 
 
-```{r echo=1}
+```{r echo=1, cache = TRUE}
 Holidays <- read.file("http://tiny.cc/dcf/US-Holidays.csv")
 set.seed(101)
 Holidays %>%

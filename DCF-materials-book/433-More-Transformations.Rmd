@@ -176,7 +176,7 @@ With the `lubridate` package:
     - `month()` 
     - `year()`
     
-```{r}
+```{r cache = TRUE}
 Holidays <- read.csv("http://tiny.cc/dcf/US-Holidays.csv",
                      stringsAsFactors = FALSE)
 with(Holidays, class(date))
