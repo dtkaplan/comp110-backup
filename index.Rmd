@@ -10,6 +10,8 @@ Macalester College, Fall 2016
 
 [**Notes for the course**](./DCF-materials-book/_book/datainfrastructure.html). The material introduced in class discussions and lectures, as well as some supplemental material.
 
+* Genetics in-class activity [PDF](DCF-materials-book/Handouts/863-UnsupervisedGenetics.pdf)
+
 
 ## Syllabus
 
