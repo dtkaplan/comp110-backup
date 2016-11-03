@@ -23,7 +23,7 @@ Visualization works well with 1-3 variables, and in some situations can work wit
 
 ## A multivariable graphic
 
-![](Images/minard_lg.gif)Glyph: `geom_path()` or "Sankey", Annotations: rivers and towns
+![](Images/minard_lg.png)Glyph: `geom_path()` or "Sankey", Annotations: rivers and towns
 
 [source](http://www.edwardtufte.com/tufte/graphics/minard_lg.gif)
 
