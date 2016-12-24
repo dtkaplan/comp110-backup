@@ -1,7 +1,3 @@
----
-output: html_notebook
----
-
 ```{r include = FALSE}
 library(DataComputing)
 ```

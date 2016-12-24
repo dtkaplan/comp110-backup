@@ -1,7 +1,3 @@
----
-output: html_notebook
----
-
 ```{r include = FALSE}
 library(ggplot2)
 library(dplyr)
@@ -26,7 +22,7 @@ Gaia data are available in CSV form at [this site](http://1016243957.rsc.cdn77.o
 Download one of the CSV files and see what you can make of it. For instance, ...
 
 ```{r}
-Stars_042 <- readr::read_csv("~/Downloads/GaiaSource_000-000-042.csv.gz") 
+Stars_042 <- readr::read_csv("Data/GaiaSource_000-000-042.csv.gz") 
 ```
 
 4. You can see the `.csv` in the name. What does the `.gz` mean at the end of the file name?

@@ -88,8 +88,12 @@ plot4
 
 5. A few days each year don't follow the pattern in (4).  We're going to examine the hypothesis that these are holidays.  You can find a data set listing US federal holidays at `http://tiny.cc/dcf/US-Holidays.csv`.  Read it in as follows:^[The point of the `lubridate::dmy()` function is to convert the character-string date stored in the CSV to a POSIX date-number.]
 
-```{r cache = TRUE}
+```{r eval = FALSE, cache = TRUE}
 Holidays <- read.csv("http://tiny.cc/dcf/US-Holidays.csv") %>%
+  mutate(date = as.POSIXct(lubridate::dmy(date)))
+```
+```{r echo = FALSE}
+Holidays <- read.csv("../Data/US-Holidays.csv") %>%
   mutate(date = as.POSIXct(lubridate::dmy(date)))
 ```
 

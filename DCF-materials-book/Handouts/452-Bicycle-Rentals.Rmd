@@ -18,11 +18,14 @@ In this activity, you'll examine some factors that may influence the use of bicy
 We will use the "Trips-history" data file
 You can access the data like this. 
 
-```{r cache=TRUE}
+```{r cache=TRUE, eval = FALSE}
 data_site <- "http://tiny.cc/dcf/2014-Q4-Trips-History-Data-Small.rds" 
 Trips <- readRDS(gzcon(url(data_site)))
 ```
 
+```{r echo = FALSE}
+Trips <- readRDS("../Data/2014-Q4-Trips-History-Data-Small.rds")
+```
 **Important**: To avoid repeatedly re-reading the files, start the above chunk with \texttt{\{r cache = TRUE\}} rather than the usual \texttt{\{r\}}.
 
 

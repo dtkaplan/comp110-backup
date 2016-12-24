@@ -1,0 +1,3933 @@
+--- 
+title: "Notes and Materials for Data Computing"
+author: "Daniel Kaplan"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: dtkaplan/comp110
+description: "Notes and other materials for the Data Computing course at Macalester College: COMP 110"
+---
+
+This book contains class notes, activities, and projects used in the Data Computing class. Often, there are more activities and projects than we actually used.
+
+The [*Data Computing*](Data-Computing.org) textbook has 18 chapters. These notes are divided into 8 parts, each of which corresponds to multiple chapters the textbook. This reflects the division of the course itself into eight components.
+
+This is very much a work in progress. It's not yet complete and what's here may have many errors. Please do point out the problems so that these notes evolve in a positive way.
+
+<!--chapter:end:index.Rmd-->
+
+# (PART) Getting Organized {#gettingorganized}
+
+
+The materials from Week 1 will go here.
+
+1. Getting to RStudio
+2. Connecting to GitHub
+3. RMarkdown
+    - Writing a simple RMarkdown document
+    
+[One-page cheat sheet](Handouts/EnoughDCF.pdf).
+
+<!--chapter:end:100-Infrastructure.Rmd-->
+
+# Files and Documents
+
+## The "file path"
+
+The "file path"" is the set of successive folders that bring you to the file.
+
+There is a standard format for file paths. An example: `/Users/kaplan/Downloads/0021_001.pdf`. Here the filename is `0021_001.pdf`, the filename extension is `.pdf`, and the file itself is in the Downloads folder contained in the kaplan folder, which is in turn contained in the Users folder. The starting / means "on this computer".
+
+## Using a file browser to find the path
+
+Many people are used to finding files interactively with the mouse and may not be aware of the path to the directory holding the file.
+
+The R `file.choose()` — which should be used only in the console, not in an Rmd file — brings up an interactive file browser. You can select a file with the browser. The returned value will be a quoted character string with the path and file name.
+
+`file.choose()` then select a file. The output is:
+`[1] "/Users/kaplan/Downloads/0021_001.pdf"`
+
+For example I have a `.csv` file on my Desktop called `names.csv`. If I want to load it into R I might first find the path:
+
+```{r eval = FALSE}
+file.choose()
+```
+```{r echo = FALSE}
+"/Users/Adam/Desktop/names.csv"
+```
+
+Then to load it I type:
+```{r eval = FALSE}
+my_names <- read.file("/Users/Adam/Desktop/names.csv")
+```
+
+Some common filename extensions for the sort of web resources you will be using:
+
+* `.png` for pictures
+* `.jpg` or `.jpeg` for photographs
+* `.csv` or `.Rdata` for data files
+* `.Rmd` for the human editable text of a document (called R Markdown)
+* `.html` for web pages themselves
+
+Credit: Adam Lucas
+
+<!--chapter:end:132-file-paths.Rmd-->
+
+# Embeding Files within Rmd -> HTML files
+
+When you produce an HTML document with R/Markdown, the commands can only be run by cutting-and-pasting them from the HTML into R. Often, you'd prefer to provide your reader with a copy of the original Rmd file itself. 
+
+The `DataComputing` package provides a way to do this easily. Include the following chunk in your document:
+
+
+     `r ''````{r results = "asis"}
+     DataComputing::includeSourceDocuments()
+     ```
+
+
+```{r results = "asis", echo = FALSE}
+DataComputing::includeSourceDocuments()
+```
+
+This will produce a link to the Rmd document itself, like this.
+
+
+
+Clicking on the link will (in most browsers) extract the Rmd file and install it in your Downloads directory.
+
+You can embed multiple files in a document, which you may find convenient for CSV files, etc. When embedding a file other than the source Rmd file, give as an argument to `includeSourceDocuments()` the quoted character string containing the path and filename for your Rmd file. You can construct this easily by using `file.choose()` in the console, and copying the result as the argument of `includeSourceDocuments()` function. This will embed the named file into your HTML, so that the file will be available directly through the HTML file. You need to view the HTML in your browser to be able to download the included file.
+
+<!--chapter:end:135-embedding-files.Rmd-->
+
+# (PART) Data Infrastructure {#datainfrastructure}
+
+## Topics {-}
+
+1) The structure of tabular data
+    - cases and variables
+    - numerical and categorical variables
+    - tidy data
+2) R Commands 
+3) Files and documents
+    
+
+<!--chapter:end:200-Data-Infrastructure.Rmd-->
+
+# Case Study: Highway Fatalities
+
+On August 29, 2016, the White House issued a [data-science "call to action."](https://www.whitehouse.gov/blog/2016/08/29/2015-traffic-fatalities-data-has-just-been-released-call-action-download-and-analyze)^[The call was cross-posted by the US Department of Transportation here](https://www.transportation.gov/fastlane/2015-traffic-fatalities-data-has-just-been-released-call-action-download-and-analyze).
+
+> Today, the U.S. Department of Transportation is releasing an open data set that contains detailed, anonymized information about each of these tragic incidents. As the new data being released show, and as DOT reported earlier this summer, 2015 showed a marked increase in traffic fatalities nationwide.
+
+> To be precise, 7.2% more people died in traffic-related accidents in 2015 than in 2014. This unfortunate data point breaks a recent historical trend of fewer deaths occurring per year.
+
+> Under the leadership of Transportation Secretary Anthony Foxx, we’re doing two things differently this year.
+
+> One: We’re publishing the data through NHTSA’s Fatality Analysis Reporting System (FARS) three months earlier than last year.
+
+> Two: We’re directly soliciting your help to better understand what these data are telling us. Whether you’re a non-profit, a tech company, or just a curious citizen wanting to contribute to the conversation in your local community, we want you to jump in and help us understand what the data are telling us.
+
+> Some key questions worth exploring:
+
+> How might improving economic conditions around the country change how Americans are getting around? What models can we develop to identify communities that might be at a higher risk for fatal crashes?
+How might climate change increase the risk of fatal crashes in a community?
+How might we use studies of attitudes toward speeding, distracted driving, and seat belt use to better target marketing and behavioral change campaigns?
+How might we monitor public health indicators and behavior risk indicators to target communities that might have a high prevalence of behaviors linked with fatal crashes (drinking, drug use/addiction, etc.)? 
+
+> DOT is aggressively seeking ways to improve safety on the roads. From our work with the auto industry to improve vehicle safety, to new solutions to behavioral challenges like drunk, drugged, distracted and drowsy driving, we know we need to find novel solutions to old challenges.
+
+> We’re also looking to accelerate technologies that may make driving safer, including connected and highly automated vehicles.
+
+> But we need your help, too! Data Science is a team sport.
+
+> We are calling on data scientists, public health experts, students and researchers—even if you have never thought about road safety before—to dive in to these data and help answer these important questions, especially on tough issues like pedestrian and bicyclist fatalities.
+
+> Start by downloading and playing with the data. Then share your insights and let us know what you find by sending us a note at opendata@dot.gov.
+
+## The accident data
+
+The link to the data in the call to action is <ftp://ftp.nhtsa.dot.gov/fars/2015/>.^[Such an address is called a URL.]
+
+1. Go to that site. Is it immediately clear what's going on? 
+2. What can you figure out by browsing the site.
+    - look in "parent" directories
+    - try substituting 2015 for other similar sorts of values in the URL.
+
+A [blog by Lucas Puente](http://lucaspuente.github.io/notes/2016/09/01/Mapping_Traffic_Fatalities) conveniently gives simple instructions for downloading the data. He writes:
+
+> Simply visit <ftp://ftp.nhtsa.dot.gov/fars/2015/National/> and download the `FARS2015NationalDBF.zip` file, unzip it, and load into R.
+
+After unzipping, there is a directory `FARS2015NationalDBF` taking up 874.9 MB of disk for 27 items. I put it in my `Downloads` directory.
+
+Lucas provides commands to read the data into R.
+```{r eval = FALSE}
+library(foreign)
+accidents <- read.dbf("FARS2015NationalDBF/accident.dbf")
+```
+
+To make sense of these instructions, it helps to know some things:
+
+* What is `library(foreign)` doing?
+    - What does the `library()` part of the command tell you?
+    - What is `foreign`. How would get get some instructions or documentation for `foreign` to help you understand why this is appropriate.
+* What is `read.dbf()`?
+* What does `"FARS2015NationalDBF/accident.dbf"` tell you about the data file and where it's located.
+
+-------
+
+Aside: I would rather you wrote:
+```{r eval = FALSE}
+filename <- "~/Downloads/FARS2015NationalDBF/accident.dbf"
+Accidents <- foreign::read.dbf(filename)
+```
+
+What's different about the file name I'm using? Why?
+
+-------
+
+Lucas's blog leads you through the steps of making a map of accident locations:
+
+![Lucas's map](images/Traffic_Fatalities_in_2015.png)
+
+What does this map tell you?
+
+
+With the `Accidents` data table read into R, it's easy to look at it and perhaps construct summaries.
+```{r echo = FALSE}
+load("Data/FARS2015-snippet.Rda")
+Accidents[1:4, 1:8]
+# View(Accidents)
+```
+
+Some simple things:
+```{r}
+nrow(Accidents)
+names(Accidents)
+```
+
+How to figure out what each variable means?  Browse around the FARS server to see if you can find something that might help.
+
+I found a codebook [here](ftp://ftp.nhtsa.dot.gov/fars/FARS-DOC/Coding%20and%20Validation%20Manual/2015%20FARS%20NASS%20GES%20C&V%20Manual.pdf). (Just in case the FARS website changes, [here's a copy](Data/2015-FARS-NASS-GES-C-V-Manual.pdf) downloaded on 9/7/2016.)
+
+Let's figure out what `CF1` means.  How about `WEATHER2` and `REL_LOAD`?  
+
+
+## Other tables
+
+But there are other data files in the database.
+
+```{r cache = TRUE}
+dir("~/Downloads/FARS2015NationalDBF/")
+```
+
+```{r echo = FALSE, echo = FALSE}
+Vision <- foreign::read.dbf("~/Downloads/FARS2015NationalDBF/Vision.dbf")
+Distract <- foreign::read.dbf("~/Downloads/FARS2015NationalDBF/Distract.dbf")
+DrImpair <- foreign::read.dbf("~/Downloads/FARS2015NationalDBF/DrImpair.dbf")
+save(Vision, Accidents, Distract, DrImpair, file = "data/FARS2015-snippet.Rda")
+```
+
+Let's look at some of them:
+
+```{r}
+head(Vision)
+head(Distract)
+head(DrImpair)
+```
+
+What's the connection between these tables and the `Accidents` table? Say, how would we be able to see which weather conditions distracted driving accidents tend to occur in?
+
+<!--chapter:end:210-highway-fatalities.Rmd-->
+
+# Case Study: Taxicabs and the sharing economy
+
+A team of mathematicians and engineers has calculated that if taxi riders were willing to share a cab, New York City could reduce the current fleet of 13,500 taxis up to 40 percent. [Link to news story](http://www.nytimes.com/2014/09/02/science/sharing-taxis-nyc-mathematics.html) and an [interactive site](http://www.hubcab.org/) with the data.
+
+
+<!--chapter:end:211-Taxicab-efficiency.Rmd-->
+
+# Case Study: Medicare spending
+
+Newspaper article [here](http://www.nytimes.com/2013/05/08/business/hospital-billing-varies-wildly-us-data-shows.html)
+
+Data available [here](http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/index.html).
+
+[DTK notes](file:///Users/kaplan/KaplanFiles/MOSAIC/CVC/Summer2014/Notes/MedicareSpending/PriceOfHealth.html)
+
+<!--chapter:end:212-Medicare-spending.Rmd-->
+
+# Untidy data: School enrollments
+
+The US Census Bureau collects data on many aspects of the population. Data on school enrollments is available [here](http://www.census.gov/hhes/school/). We're going to look at one of the data tables they make available: 
+
+> Table 2: Single Grade of Enrollment and High School Graduation Status for People 3 Years Old and Over, by Sex, Age (Single Years for 3 to 24 Years), Race, and Hispanic Origin: October 2014   [XLS](http://www.census.gov/hhes/school/data/cps/2014/Tab02-01.xls) or [CSV](http://www.census.gov/hhes/school/data/cps/2014/Tab02-01.csv) format.
+
+Download one of these files and open it in appropriate software. Or you can view the data on Google Drive [here](https://docs.google.com/spreadsheets/d/1kuHylpUiQ7TMbNr1AuApciSra3VnvP9E4V83hCQ3Yho/edit?usp=sharing).
+
+1. How many people are represented in this data table?
+#. The table is in some ways a graphical visualization of features of school enrollment and age. (Unfocus your eyes and you will see a visual pattern.) What patterns do you see?
+#. The table indicates that 74.4% of the people in the table are "not enrolled" in school. Figure out how to calculate this from the numbers in the table. (Hint: You need only look at line 9.)
+#. These data are "untidy" in a technical sense. Identify the ways that they are untidy.
+#. Some columns contain information that can be calculated from other columns.  Look at the data for 4-year olds and identify those that are calculated from other columns. Figure out the minimal set of columns from which the others could be calculated.
+#. Imagine that this table was created from a much bigger table in which each case is an individual person in the US. 
+    - How many cases would there be in that table?
+    - What variables would you need so that you could calculate any entry in the "Table 2" provided by the Census Bureau?
+
+
+
+<!--chapter:end:220-tidy-education-data.Rmd-->
+
+# Untidy data: Galton's measurements of height
+
+In the 1880s, Francis Galton started to make a mathematical theory of evolution. But the basic biology of heritability was not known: nothing about "genes" or DNA, etc. 
+
+In order to create a theory, Galton needed a way to measure how traits are inherited from parents. To this end, he visited families in London and measured the heights of the parents and their (adult) children.
+
+Here's part of a page from his lab notebook.
+
+![A page from Francis Galton's notebook.](images/galton-notebook.jpg)
+
+Divide into groups of 2 or 3 and translate the notebook data into a tidy form.
+
+- Think about what would be an appropriate "case" for storing this data.
+- What variables should there be?
+- Open a spreadsheet and fill in a couple of rows of the tidy table that you envision.
+
+Here are a few that have already been made:[Group-1](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHNpejZtd3dQTXlPM245R0ZQbG0yYkE&usp=sharing), [Group-2](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHk1enZoVnhrV09ad2x4dXR1MlpWNFE&usp=sharing), [Group-3](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dElIQkh0SWtyaW9aRkdMZVBERHdJNXc#gid=0), [Group-4](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dEYxdEhWZUI1S3NxN2ZaaThXSEtMVWc&usp=sharing), [Group-5](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dDVsLWJaUHV5emFVQlVfSjFrdmFkYXc&usp=sharing), [Group-6](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dFdvNGpFZkNuUHZqd2g2UEVDc0VEZEE&usp=sharing)
+
+
+<!--chapter:end:221-tidy-galton.Rmd-->
+
+# Untidy data: Family structure of military personnel
+
+[This spreadsheet](https://docs.google.com/spreadsheets/d/1Ow6Cm4z-Z1Yybk3i352msulYCEDOUaOghmo9ALajyHo/edit#gid=1811988794) contains is a presentation of data about family structure in the US Armed Forces.
+
+1. How many military personnel (not their children) are represented in this data table?
+#. What is a case in this data table?
+#. These data are "untidy" in a technical sense. Identify the ways that they are untidy.
+#. Some rows contain information that could be calculated from other rows. Identify these.
+#. Some "tabs" contain information that could be calculated from the other tabs. Identify these.
+#. Some columns contain information that can be calculated from other columns. Figure out the minimal set of columns from which the others could be calculated.
+#. Imagine that this table was created from a much bigger table in which each case is an individual person.
+    - How many cases would there be in that table?
+    - What variables would you need so that you could calculate any entry in the table linked to above.
+Divide into groups and fill in a few rows of the table you created. 
+Here are a few that have already been made:[Group-1](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHNpejZtd3dQTXlPM245R0ZQbG0yYkE&usp=sharing), [Group-2](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHk1enZoVnhrV09ad2x4dXR1MlpWNFE&usp=sharing), [Group-3](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dElIQkh0SWtyaW9aRkdMZVBERHdJNXc#gid=0), [Group-4](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dEYxdEhWZUI1S3NxN2ZaaThXSEtMVWc&usp=sharing), [Group-5](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dDVsLWJaUHV5emFVQlVfSjFrdmFkYXc&usp=sharing), [Group-6](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dFdvNGpFZkNuUHZqd2g2UEVDc0VEZEE&usp=sharing)
+
+
+<!--chapter:end:222-tidy-mil-personnel.Rmd-->
+
+# Untidy data: Minneapolis Voting
+
+The spreadsheet [here](http://vote.minneapolismn.gov/www/groups/public/@clerk/documents/webcontent/wcms1p-126724.xlsx) contains data on the Minneapolis 2013 election by ward and precinct. 
+
+1. What is the case here?
+2. How are the data not tidy?
+3. What might these data look like in tidy form?
+4. The data table `DataComputing::Minneapolis2013` lists the choices on individual ballots.  What is the case?
+5. The cases in `DataComputing::Minneapolis2013` can be aggregated to produce *some* of the variables in the spreadsheet.  
+    a. Which variables in the spreadsheet *cannot* be recreated from an aggregation of the ballot data? (Background on the voting law: to vote, a person must be registered in advance or do so at the polling place.  Votes can be made at the polling place or, for a voter who is away, by mail as an absentee.  Some ballots are not legible or otherwise violate voting rules; these are called "spoiled." )
+    b. Imagine a data table like `DataComputing::Minneapolis2013` that could be aggregated to produce the variables in the spreadsheet.  What would the cases be in that table?
+    
+    
+<!-- ANSWER to 5. The variables relating to registration and absentee voting have information not in the ballot data table. The disaggregated table would have "registered voters" as cases
+
+<!--chapter:end:223-Minneapolis-votes.Rmd-->
+
+# Tidy Data
+
+```{r include=FALSE}
+require(DataComputing)
+require(dplyr)
+require(printr)
+```
+
+
+## Data has all sorts of forms
+
+### Signals
+
+![](images/JunctionalEscapeRhythm.jpg)
+
+
+<!-- source: http://ecg.utah.edu/img_index -->
+
+### Photographs
+
+![](images/595211.jpg)
+
+<!-- Source: http://aerotechnologies.org/aeroarc-remote-sensing.html -->
+
+### Video
+
+[Follow this link!](https://www.youtube.com/watch?v=MDMRcyJKzdU&feature=youtu.be)
+
+### Text, e.g. What am I doing? on OKCupid
+
+> currently working as an international agent for a freight forwarding company. import, export, domestic you know the works
+
+> online classes and trying to better myself in my free time. perhaps a hours worth of a good book or a video game on a lazy sunday."
+
+> dedicating everyday to being an unbelievable badass.
+
+> i make nerdy software for musicians, artists, and experimenters to indulge in their own weirdness, but i like to spend time away from the computer when working on my artwork (which is typically more concerned with group dynamics and communication, than with visual form, objects, or technology). i also record and deejay dance, noise, pop, and experimental music (most of which electronic or at least studio based). besides these relatively ego driven activities, i've been enjoying things like meditation and tai chi to try and gently flirt with ego death."
+
+> reading things written by old dead people
+
+> work work work work + play
+
+> building awesome stuff. figuring out what's important. having
+adventures. looking for treasure. digging up buried treasure
+
+### Sequences
+
+![](images/AMY1gene.png)
+
+<!-- <a href="https://commons.wikimedia.org/wiki/File:AMY1gene.png#/media/File:AMY1gene.png">AMY1gene</a>" by Original uploader was <a href="//en.wikipedia.org/wiki/User:TransControl" class="extiw" title="en:User:TransControl">TransControl</a> at <a class="external text" href="http://en.wikipedia.org">en.wikipedia</a> - Transferred from <a class="external text" href="http://en.wikipedia.org">en.wikipedia</a>; transfer was stated to be made by <a href="//en.wikipedia.org/wiki/User:Brandon5485" class="extiw" title="en:User:Brandon5485">en:User:Brandon5485</a>.. Licensed under Public Domain via <a href="https://commons.wikimedia.org/wiki/">Wikimedia Commons</a>. -->
+
+
+
+
+
+## Data Tables
+
+We're going to use just one very simple format: the *data table*.
+
+```{r echo=FALSE}
+set.seed(101)
+Tmp <- BabyNames %>% sample_n(size = 5) %>% arrange(year)
+row.names(Tmp) <- NULL
+Tmp
+```
+
+
+
+## Conversion from images, videos, etc. to data table
+
+### OK Cupid
+
+Sentiment extraction
+
+### Tipi rings in Montana
+
+Assessment on family size based on tipi ring diameter
+
+Population size by adding up the rings
+
+### Animal tracking
+
+## Cases and Variables
+
+### Anatomy of a data table
+
+
+![](Images/02_ColumnRow.png)
+
+<!-- Source: <http://www.gcflearnfree.org/access2010/2.2> -->
+
+* A row is always a **case**
+* A column is always a **variable**
+
+## What's a variable?
+
+
+
+![](Images/02_ColumnRow.png)
+
+A quantity or category that may vary from case to case.
+
+Two main types:
+
+1. Quantitative: a number
+2. Categorical: one of a set of discrete possibilities
+
+
+## Not in Tidy Data
+
+* No units
+* No footnotes
+
+Instead, this information should go into a codebook.
+
+Values and Cases need to be commensurate
+
+* Same kind of thing for each case, e.g. don't mix miles and km.
+* Within a variable, only the same kind of value for each case.
+
+## Cases
+
+The **object** from which the variables were measured.
+
+Examples: 
+
+* A person, a country, an earthquake, a bike rental
+* A person on a date
+* A country in a year
+* An earthquake and its aftershocks
+
+## Basic Knowledge
+
+1. What is each variable about.
+2. What is the kind of object that defines a case
+
+## Tidy Data
+
+Every value for each variable is the same kind of thing as all the other values for that variable.
+
+Every case is the same kind of thing as all the other cases.
+
+
+
+## Workflow: Creating a chain of evidence
+
+It's important to be able to state definitely where your data came from.
+
+Part of this is not to edit your data.  Once you have a table, don't change anything in it.
+
+Instead, do your data-transformations in R so that you have a complete statement of how the data you collected are related to your analysis.
+
+## Summary
+
+* Data Table: Rectangular format: cases (rows) and variables (columns)
+* Separate analysis from data storage.
+* Use a codebook to describe your cases and variables in detail
+* Keep your data **tidy**
+
+
+
+<!--chapter:end:231-Tidy-data.Rmd-->
+
+# R Programming: Parts of Speech
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(tidy=FALSE)
+require(DataComputing)
+```
+
+## Command chains
+
+Your commands will be written as chains.  
+
+* Each link in the chain will be a data verb and its arguments.
+    - The very first link is usually a data frame.
+    
+* Links are connected by the chaining symbol `%>%`
+
+* Often, but not always, you will save the output of the chain in a named object.
+    - This is done with the *assignment operator*, `<-`
+```
+    Name_of_result <-     
+      Starting_data_frame  %>%    
+      first verb (arguments for details) %>%   
+      next verb (and its arguments) %>%    
+           ... and so on, up through ...   
+      last verb (and its arguments)  
+```
+
+## An example command chain
+
+```{r}
+Princes <- 
+  BabyNames %>%
+  filter(grepl("Prince", name)) %>%
+  group_by(year) %>%
+  summarise(total = sum(count))
+```
+
+* A good idea to put each link on its own line
+* Note that `%>%` is at the end of each line.
+    - Except ... `Princes <-` is assignment
+    - Except ... The last line has no `%>%`.
+    
+## Syntax and semantics
+
+There are two distinct aspects involved in reading or writing a command chain.
+
+1. Syntax: the grammar of the command
+2. Semantics: the meaning of the command
+
+The focus today is on syntax.
+
+## Part of Speech
+
+From the dictionarty 
+
+> part of speech noun
+
+> parts of speech a category to which a word is assigned in accordance with its syntactic functions. In English the main parts of speech are noun, pronoun, adjective, determiner, verb, adverb, preposition, conjunction, and interjection.
+
+## Parts of Speech in R
+
+#. Data frames
+#. Functions
+#. Arguments
+#. Variables
+#. Constants
+#. Assignment
+#. Formulas (we won't use these until the end)
+
+## Data frames
+
+* A data frame comprises one or more variables. 
+* Naming convention: data frames are given names that start with a CAPITAL LETTER, e.g., `RegisteredVoters`.
+* A data frame will always be the input at the start of a command chain.
+* If assignment is used to save the result, the object created is usually a data frame.
+
+## Functions
+
+* Functions are objects that transform an input into an output.
+* Functions are always followed by parentheses, that is, an opening  `(` and, eventually, a closing `)`.
+* Each link in a command chain starts with a function.
+    - More specifically, the function is a *data verb* that takes a data frame as input and produces another data frame as output.
+    - There are other kinds of functions, e.g. summary (or reduction) functions and transformation functions.
+
+## Arguments
+
+The things that go *inside* a function's parentheses are called *arguments*.  
+
+* Arguments describe the details of what a function is to do. 
+* If there are multiple arguments, they are always separated by commas.
+* Many functions take *named arguments* which look like a name followed by an `=` sign, e.g. 
+```r
+summarise(total = sum(count))
+```
+
+You can also consider the data frame passed along by `%>%` as an argument to the following function.
+
+## Variables
+
+Variables are the components of data frames.
+
+* When they are used, they *always* appear in function arguments, that is, between the function's parentheses.
+* A good convention is for variables to have names that start with a lower-case letter.  The convention is *not* universally followed.
+* Variables will *never* be followed by `(`.
+
+## Constants
+
+Constants are single values, most commonly a number or a character string. 
+
+* Character strings will always be in quotation marks,     
+   `"like this."`  
+* Numerals are the written form of numbers, for instance.    
+    `-42` 
+    `1984` 
+    `3.14159` 
+
+## Discussion Problem
+
+Consider this command chain:
+```{r eval=FALSE}
+Princes <- 
+  BabyNames %>%
+  filter(grepl("Prince", name)) %>%
+  group_by(year) %>%
+  summarise(total = sum(count))
+```
+
+Just from the syntax, you should be able to tell which of the five different kinds of object each of these things is: `Princes`, `BabyNames`, `filter`, `grepl`, `"Prince"`, `name`, `group_by`, `year`, `summarise`, `total`, `sum`, `count`.
+
+Explain your reasoning.
+
+
+<!--chapter:end:233-R-parts-of-speech.Rmd-->
+
+# (PART) Data Summaries and Graphics
+
+
+
+<!--chapter:end:300-data-summaries-and-graphics.Rmd-->
+
+# Data vs Information
+
+
+What's the difference. Although they are often used synonomously, in this course ...
+
+> Data is given; information is taken.
+
+## The word "data":
+
+**Dictionary etymology**: 1640s, plural of datum, from Latin *datum* "(thing) given," neuter past participle of *dare* "to give".  
+
+**Historically**: Data (Greek: Δεδομένα, Dedomena) is a work by Euclid. It deals with the nature and implications of "given" information in geometrical problems. The subject matter is closely related to the first four books of Euclid's Elements. [source](https://en.wikipedia.org/wiki/Data_(Euclid))
+
+## 
+
+[1838 English edition of Euclid](https://books.google.com/books?id=5lN1sy51SwYC&pg=PA294#v=onepage&q&f=false)
+
+```{r echo = FALSE}
+knitr::include_graphics("Images/Euclid-data-titlepage-English.png")
+```
+
+## The word "information"
+
+The English word was apparently derived from the Latin stem (information-) of the nominative (informatio): this noun is derived from the verb informare (to inform) in the sense of "to give form to the mind", "to discipline", "instruct", "teach". [Source:](https://en.wikipedia.org/wiki/Information)
+
+**A Dictionary Definition**: knowledge acquired through experience or study [source](http://dictionary.reference.com/browse/information)
+
+## In this course
+
+**Data** are measurements, observations, records, etc. of the sort that appear in a data table.
+
+**Information** is the knowledge or belief that guides decisions or provides explanations.
+
+### Our Task
+
+Turn data into information.
+
+## Data Reports
+
+Knowledge and belief are attributes of the human mind.  
+
+* Knowledge is belief that there is consensus about.
+
+We derive knowledge and belief from our experiences including the statements of those we deem to have authority.
+
+A **data report** is a presentation of data from which we are inclined to draw conclusions.  Some forms:
+
+* A data table itself.  It must be small to be assimilated by us.
+* A data graphic. Good data graphics are those that display patterns (or the lack thereof) in a form that is readily assimulated and faithful to the data being reported.
+* A data model, such as a statistical model written in a mathematical formalism.
+
+Data graphics can be interpreted without (much) specialized training.  Models typically require some specialized skills interpretation.
+
+## Glyph-ready Data
+
+Making data graphics can be straightforward so long as the data underlying the graphic are in the appropriate form.
+
+* We'll call such a form **glyph-ready**.
+
+**Data Wrangling** is the process of transforming or reshaping the data tables that arrive at our door into a glyph-ready form.
+
+* The glyph-ready form depends on the kind of graphic you wish to make.
+* Data reports in general also use data in glyph-ready form, so wrangling techniques useful for graphics are also useful for data modeling or the construction of short, human-interpretable tables.
+
+<!--chapter:end:330-Data-vs-Information.Rmd-->
+
+# Glyphs, Frames, and Scales
+
+```{r include=FALSE}
+require(mosaic)
+require(knitr)
+knitr::opts_chunk$set(echo = FALSE, message=FALSE)
+```
+
+## Glyphs and Data
+
+In its original sense, in archeology, a glyph is a carved symbol.
+
+Heiro**glyph** | Mayan **glyph**
+---------------|----------------:
+![Heiroglyph](Images/hand.jpg) | ![Mayan glyph](Images/mayan-glyph.png) 
+
+## Data Glyph
+
+### A data glyph is also a mark, e.g. 
+
+![](Images/geom_rect.png) ![](Images/geom_segment.png) ![](Images/geom_text.png) ![](Images/geom_crossbar.png) ![](Images/geom_path.png) ![](Images/geom_line.png) ![](Images/geom_pointrange.png) ![](Images/geom_ribbon.png) ![](Images/geom_point.png) ![](Images/geom_polygon.png) ![](Images/geom_histogram.png) ![](Images/geom_dotplot.png) ![](Images/geom_freqpoly.png) ![](Images/geom_density.png) ![](Images/geom_violin.png) 
+
+The features of a data glyph encodes the value of variables. 
+
+* Some are very simple, e.g. a dot: ![](Images/geom_point.png)
+* Some combine different elements, e.g. a pointrange: ![](Images/geom_pointrange.png)
+* Some are complicated, e.g. a dotplot: ![](Images/geom_dotplot.png)
+
+See: *<http://docs.ggplot2.org/current/>*
+
+## Data Glyph Properties: Aesthetics
+
+Aesthetics are **visual properties** of a glyph.
+
+  * Aesthetics for points: location (x and y), shape, color, size, transparency
+
+```{r echo=FALSE, fig.keep='all', out.width="50%", include=FALSE}
+set.seed(102)
+n <- 30
+Tmp <- data.frame(
+  sbp =  round(runif(n, min=80, max=180)),
+  dbp = round(runif(n, min=40, max=110)),
+  group = sample(c("Tr","Ctl"), size=n, replace=TRUE),
+  react = sample( c("Low", "Sev", "Mod"), size=n, replace=TRUE)
+)
+Tmp <- Tmp %>% mutate(dbp = pmin(sbp, dbp)) 
+p <- ggplot(Tmp, aes(x = sbp, y = dbp)) + xlab("Systolic BP") + ylab("Diastolic BP")
+p + geom_point(aes(color = group, size=react)) 
+p + geom_point(size=5, aes(shape=group, color=react))
+```
+
+```{r echo=FALSE, fig.keep='all', out.width="50%"}
+set.seed(102)
+require(NHANES)
+n <- 75
+Tmp <- 
+  NHANES %>%
+  mutate(
+    smoker = derivedFactor(
+      never = Smoke100 == "No",
+      former = SmokeNow == "No",
+      current = SmokeNow == "Yes",
+      .ordered = TRUE
+    ),
+    sbp = BPSysAve,
+    dbp = BPDiaAve,
+    sex = Gender
+  ) %>%
+  select( sbp, dbp, sex, smoker ) %>%
+  sample_n(n) %>%
+  filter(complete.cases(.)) %>% 
+  data.frame()
+
+
+p <- ggplot(Tmp, aes(x = sbp, y = dbp)) + 
+  xlab("Systolic BP") + ylab("Diastolic BP")
+p + geom_point(aes(color = sex, size=smoker), alpha=.8) 
+p + geom_point(size=5, aes(shape=sex, color=smoker), alpha=.8)
+```
+
+  * Each glyph has its own set of aesthetics.
+
+## Why "Aesthetic"?
+
+![](Images/aesthetic1.png)![](Images/aesthetic2.png)
+
+
+## Some Graphics Components
+
+**glyph**
+: The basic graphical unit that represents one case.
+Other terms used include *mark* and *symbol*. 
+
+**aesthetic**
+: a visual property of a glyph such as position, size, shape, color, etc.  
+
+  * may be **mapped** based on data values: `sex -> color` 
+  * may be **set** to particular non-data related values: `color is black`
+
+**scale**
+: A mapping that translates data values into aesthetics.
+
+  * example:  male -> <font color="blue">blue</font>; female -> <font color="pink">pink</font>
+
+**frame**
+: The position scale describing how data are mapped to x and y
+
+**guide**
+: An indication for the human viewer of the scale.  This allows the viewer
+to translate aesthetics back into data values.
+
+  * Examples:  x- and y-axes, various sorts of legends
+
+## Scales
+
+The relationship between the variable value and the value of the aesthetic the variable is mapped to.
+
+* Systolic Blood Pressure (SBP) has units of mmHg (millimeters of mercury)
+* Position on the x-axis measured in distance, e.g. inches.
+
+The conversion from SBP to position is a *scale*.
+
+* Smoker is "never", "former", "current"
+* Color is red, green, blue, ...
+
+The conversion from Smoker to color is a *scale*.
+
+## Guides
+
+Guide: an indication to a human viewer of what the scale is. Example:
+
+* Axis ticks and numbers
+
+![](Images/x-axis-scale.png)
+
+* Legends
+
+.                           | .
+----------------------------|---------------------------
+![](Images/color-scale.png) | ![](Images/shape-scale.png)
+
+* Labels on faceted graphics
+
+![](Images/facet-scale.png)
+
+## Facets -- using x and y twice
+
+```{r fig.height=3}
+ggplot(data=Tmp, aes(x = sbp, y=dbp, color=smoker)) +
+  geom_point() +
+  facet_grid( ~ sex)
+```
+
+ * x is determined by `sbp` and `sex`
+ * basically a separate frame for each `sex`
+ 
+
+## Designing Graphics
+
+Graphics are designed by the human expert (you!) in order to reveal information that's latent in the data.
+
+#### Design choices
+
+
+* What kind of glyph, e.g. scatter, density, bar, ... many others
+* What variables constitute the frame. And some details:
+    - axis limits
+    - logarithmic axes, etc.
+* What variables should be mapped to other aesthetics of the glyph.
+* Whether to facet and with what variable.
+
+More details, ..., e.g. setting of aesthetics to constants
+
+## Good and Bad Graphics
+
+Remember ... 
+
+> Graphics are designed by the human expert (you!) in order to reveal information that's latent in the data.
+
+Your choices depend on what information you want to reveal and convey.
+
+Learn by reading graphics and determining which ways of arranging thing are better or worse.
+
+A basic principle is that a graphic is about *comparison*.  Good graphics make it easy for people to perceive things that are similar and things that are different.  Good graphics put the things to be compared "side-by-side", that is, in perceptual proximity to one another. 
+
+## Perception and Comparison
+
+In roughly descending order of human ability to compare nearby objects:
+
+1. Position
+2. Length
+3. Area
+4. Angle
+5. Shape (but only a very few different shapes)
+6. Color
+
+Color is the most difficult, because it is a 3-dimensional quantity.    
+    - color gradients --- we're good at
+    - discrete colors --- must be carefully selected.
+
+## Count the ways this graphic is bad
+
+```{r fig.height=3}
+p + geom_point(aes(color = sex, size=smoker), alpha=.8) 
+```
+
+## Glyph-Ready Data
+
+Glyph-ready data has this form:
+
+  * There is one row for each glyph to be drawn. 
+  * The variables in that row are mapped to aesthetics of the glyph (including position)
+
+
+<div class="columns-2">
+**Glyph-ready data**
+```{r echo=FALSE}
+head(Tmp,6)
+```
+
+**Mapping of data to aesthetics**
+```
+   sbp -> x      
+   dbp -> y     
+smoker -> color
+   sex -> shape
+```
+
+Scales determine details of  
+`data -> aesthetic` translation
+
+```{r include=FALSE}
+Tmp2 <- Tmp %>%
+  rename(x=sbp, y=dbp, color=smoker, shape=sex )
+head(Tmp2)
+```
+</div>
+
+<!--
+It's as if the variables were given the name of the aesthetic.
+-->
+
+
+
+## Layers -- building up complex plots 
+
+Each layer may have its own data, glyphs, aesthetic mapping, etc.
+
+```{r fig.height=3}
+ggplot(data=Tmp, aes(x = sbp, y=dbp, colour = sex)) +
+  geom_point() +
+  geom_smooth(se = FALSE) 
+```
+
+ * one layer has points
+ * another layer has the curves
+
+## Stats: Data Transformations
+
+```{r, fig.height=2}
+ggplot(data=Tmp, aes(x=sbp)) +
+  geom_histogram(binwidth = 10)
+```
+
+  * What are the glyphs, aesthetics, etc. for this plot?
+  * How is the data for this plot related to the "raw" data?
+  
+```{r}
+head(Tmp,4)
+```
+
+## What's Next
+
+ 1. **Eye-training** 
+ 
+    * recognize and describe glyphs, aesthetics, scales, etc.
+    * identify data required for a plot
+    
+ 2. **Data wrangling** 
+ 
+    * get data into glyph-ready format (`dplyr`, `tidyr`)
+    
+ 3. **Graphics construction** 
+    
+    * start with: map variables to aesthetics interactively with `scatterGraphHelper()`, `barGraphHelper()`, `densityGraphHelper()`
+    * move on to: describe data, glyphs, aesthetics, etc. to R using `ggplot2`
+
+
+<!--chapter:end:332-GlyphsFramesScales.Rmd-->
+
+```{r include = FALSE}
+library(ggplot2)
+library(dplyr)
+```
+
+# Activity: Mapping the stars
+
+
+```{r fig.cap="Stars plotted on the celestial sphere by the Gaia space telescope. (Sept. 2016)"}
+knitr::include_graphics("images/gaia-star-map.png")
+```
+
+
+The image above is a map of the stars constructed by the European Space Agency's Gaia space telescope. It reportedly shows 1,000,000,000 stars.^[See [this story](http://www.bbc.com/news/science-environment-37355154) on the BBC web site.]
+
+1. Although the map represents one billion stars, the image itself is only 660 by 398 pixels: a total of 262,680 pixels altogether. How can a billion stars be displayed in only one-quarter of a million pixels?
+2. Why is the image oval?
+3. Why are there broad, curving bands of shading? How might these reflect layers of the graphic that display different quantities? (See the [codebook](http://gaiaportal.asdc.asi.it/) for some ideas about variables that might reflect the available data rather than the stars themselves.)
+
+Gaia data are available in CSV form at [this site](http://1016243957.rsc.cdn77.org/Gaia/gaia_source/csv/). A codebook is [here](http://gaiaportal.asdc.asi.it/)
+
+Download one of the CSV files and see what you can make of it. For instance, ...
+
+```{r}
+Stars_042 <- readr::read_csv("Data/GaiaSource_000-000-042.csv.gz") 
+```
+
+4. You can see the `.csv` in the name. What does the `.gz` mean at the end of the file name?
+5. How many stars are there in this one file? From the number of such `.csv.gz` files available, estimate how many stars there are in the complete catalog.
+6. Make a map of the stars in your one file. (Suggestion: in developing your plot, just use several thousand stars from the file. Otherwise things will be slow. Select the stars at random.)
+    - Use `phot_g_mean_flux` as the intensity and `ecl_lon` and `ecl_lat` as the position variables.
+    - Explore a bit and decide what are good aesthetics for representing the intensity. (Hints: color? size?)
+    - Does faceting make sense?
+    
+A simple plot:
+```{r}
+Stars_042 %>%
+  sample_n(size = 10000) %>%
+  ggplot(aes(x = ecl_lon, y = ecl_lat)) +
+  geom_point(aes(size = phot_g_mean_flux, color = phot_g_mean_flux, alpha = phot_g_mean_flux))
+```
+
+```{r}
+Stars_042 <-
+  Stars_042 %>%
+  mutate(facet = round(log10(phot_g_mean_flux)),
+         color = log10(phot_g_mean_flux),
+         size = log10(phot_g_mean_flux)/20)
+Stars_042 %>%
+  sample_n(size = 1000) %>%
+  ggplot(aes(x = ecl_lon, y = ecl_lat)) +
+  geom_point(size = 0.5, aes(color = color, alpha = size)) +
+  facet_wrap( ~ facet)
+```
+7. Is there a relationship between the `ra` and `dec` variables and the `ecl_lon` and `ecl_lat` variables? Try different ways assigning the variables to aesthetics until you find one that tells the story.
+
+```{r}
+Stars_042 %>%
+  sample_n(size = 1000) %>%
+  ggplot(aes(x = ecl_lat, y = dec)) +
+  geom_point(size = 0, aes(color = ecl_lon))
+```
+
+
+8. Optional: Requires some mathematical sophistication. Make a conformal-map style presentation of the relationship between the `ra`/`dec` coordinate system and the `ecl_lat`/`ecl_lon` system.
+    Suggestion: Pull out only those stars that fall within a narrow band of the edges of a square in one of the coordinate systems. Then make separate plots of those stars in the two systems, perhaps using color to encode which stars in one plot correspond to stars in the other plot.
+
+<!--chapter:end:337-star-map.Rmd-->
+
+# Introduction to Graphics and Wrangling
+
+[PDF handout](Handouts/351-Intro-Graphics-Wrangling.pdf)
+
+  ```{r child = "Handouts/351-Intro-Graphics-Wrangling.Rmd"}
+  ```
+
+<!--chapter:end:351-Intro-Graphics-Wrangling.Rmd-->
+
+# (PART) Data Verbs
+
+
+
+<!--chapter:end:400-data-verbs.Rmd-->
+
+# Basic Data Verbs {#basicdataverbs}
+
+```{r include=FALSE}
+require(mosaic)
+require(knitr)
+knitr::opts_chunk$set(echo = FALSE, message=FALSE)
+```
+
+## Three kinds of verbs for data wrangling
+
+1. Data verbs
+2. Reduction verbs
+3. Transformation verbs
+
+### Non-wrangling verbs
+
+There will also be verbs for graphics, loading data, etc., but for wrangling we'll need mainly these three types. Examples:
+
+* `library()` -- attaches the software distributed in a package to your session of R
+* `read.csv()` and other file-reading functions. Creates a data table given the location of a file containing those data.
+* `scatterGraphHelper()` -- takes a data table as input, but produces graphics as output.
+* `data()` -- accesses data from a package. `data()` is not a data verb!
+
+
+## Data Verbs
+
+What distinquishes a data verb from a reduction or transformation verb?
+
+* Data verbs create a new data table, from an input data table.
+
+### Some commonly used data verbs.
+
+1. `summarise()`
+2. `group_by()`
+3. `filter()`
+4. `mutate()`
+5. `select()`
+6. `arrange()`
+7. join (there's a family of joins -- more on this later)
+
+
+
+## Reduction verbs
+
+Characteristics?
+
+Variable in, a single number out.
+
+Examples?
+
+## Transformation verbs
+
+Variable in, variable out.
+
+Examples?
+
+
+<!--chapter:end:431-BasicVerbs.Rmd-->
+
+# More transformation verbs
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+Recall that a *transformation verb* takes a variable as an input and produces a variable of the same length as the output. 
+
+Some familiar transformation verbs from primary and secondary school:
+
+- arithmetic operations (`+`, `-`, `/`, `*`) 
+- mathematical functions such as logs and exponentiation
+
+There are additional transformations which will be unfamiliar, simply because they did not fit into the algebra- and trigonometry-based high-school curriculum
+
+1. Rank transforms
+2. Lead and lag transforms
+3. Date transforms
+4. Conditional transforms
+5. Character transforms
+
+## Rank transforms 
+
+Many questions take forms such as these:
+
+* "Find the largest ..."
+* "Find the three largest ..."
+* "Find the smallest within each group ..."
+
+The functions `min()` and `max()` are **reduction** verbs. They tell you the single lowest or highest value in a set. Because they are reduction verbs, they are often used in `summarise()`, which reduces a set of cases to a single case.
+
+```{r}
+BabyNames %>% 
+  group_by(sex) %>%
+  summarise(most_popular = max(count))
+```
+
+Notice that `name` was not carried along. When you `summarise()`, the only variables that appear in the output are the grouping variables, and the variables you create through the arguments to `summarise()`.
+
+If you wanted to know the *names* that are most popular, you will need to rely on `filter()`. Get rid of the cases that are not the most popular.
+
+```{r}
+BabyNames %>% 
+  group_by(sex) %>%
+  filter(count == max(count))
+```
+
+
+`Filter()` needs a criterion.  The criterion `count == max( count )` (with the double equals sign `==`) passes through the case where the value of `count`  matches the largest value of `count`.  That will be the biggest case.
+
+```{r}
+BabyNames %>% 
+  group_by(sex) %>%
+  filter(count > 0.90 * max(count))
+```
+
+Note: Almost all of these are from the late 1940s and early 1950s. In part, this reflects the baby boom. Perhaps it also reflects the conformity that people associate with that era.
+
+QUESTION: How would you estimate "conformity" for each year?
+
+Possibility: Take the 10 most popular names each year. Find out what fraction of the total number of births that was.
+
+The `rank()` operation is helpful here.
+
+The `rank()` function does something simple but powerful: it replaces each number in a set with where that number stands with respect to the others.  For instance, look at the tiny data table `Set` shown in Table \ref{tab:set-of-numbers}. What's the rank of the number 5 in the `numbers` variable.
+```{r}
+Set <- data.frame(numbers = as.integer(c(2, 5, 4, 7, 2, 9, 9, 8)))
+Set %>%
+  mutate(the_rank = rank(numbers))
+```
+Or, seen another way
+```{r}
+Set %>%
+  mutate(the_rank = rank(numbers)) %>%
+  arrange(numbers)
+```
+
+Notice how ties are broken. Also note that the biggest numbers have the *highest* ranks. This is different than the convention in everyday language, where the "Number 1 ranked team" is the best team.  To follow this convention, use `rank(desc(numbers))`.
+
+```{r}
+Set %>%
+  mutate(the_rank = rank(desc(numbers))) %>%
+  arrange(numbers)
+```
+
+Suppose you want to find the 3rd most popular name of all time. Use `rank()`. 
+```{r}
+BabyNames %>% 
+  group_by(name) %>%
+  summarise(total = sum(count)) %>%
+  filter(rank(desc(total)) == 3) 
+```
+
+Or, to find the top three most popular names, replace `==` in the above by `<=`.
+
+```{r}
+BabyNames %>% 
+  group_by(name) %>%
+  summarise(total=sum(count)) %>%
+  filter( rank( desc(total) ) <= 3) 
+```
+
+When applied to grouped data, `rank()` will be calculated separately within each group.  That is, the rank of a value will be with respect to the other cases in that group.  For instance, here's the third most popular name for each sex. 
+
+```{r}
+BabyNames %>% 
+  group_by(sex) %>% 
+  filter(rank(desc(count)) <= 3) 
+```
+
+### Tied ranks
+
+Sometimes, two or more numbers are tied in rank. The `rank()` function deals with these by assigning all the tied values the same rank, which is the mean of the ranks those values would have had if they were even slightly different. There are other rank-like transformation verbs that handle ties differently. For instance, `row_number()` breaks ties in favor of the first case encountered.
+
+```{r}
+Set %>% 
+  mutate(the_rank = rank(numbers), 
+         ties_broken = row_number(numbers)) %>%
+  arrange(numbers)
+```
+
+
+
+## Leads and lags
+
+```{r}
+Set %>%
+  mutate(next_one = lag(numbers, 1))
+```
+Find the names that increase the most from one year to the next. Let's take "increase the most" to mean "the biggest proportional increase", but consider only names that have more than 100 kids in the earlier year.
+
+Find proportional increase for each name for each year, but push this to zero if the base year had less than 100 kids.
+
+```{r}
+Sharp_increases <-
+  BabyNames %>% 
+  group_by(name, year) %>%
+  summarise(births = sum(count)) %>%
+  arrange(year) %>%
+  mutate(change = (births > 100) * lead(births, 1) / births) %>%
+  ungroup() %>%
+  filter(rank(desc(change)) <= 100) %>%
+  arrange(desc(change)) 
+```
+
+```{r}
+BabyNames %>%
+  filter(name == "Hillary", sex == "F") %>%
+  arrange(year)
+```
+
+Notice "Woodrow" and "Wilson" in 1911 to 1912. Why?
+
+Notice "Samantha" and "Darin" in 1964. Why? (Hint: "Bewitched")
+
+
+FLAW: There might be years left out for some names. We'll have to wait until we study joins to see how to fix this.
+
+## Times and Dates
+
+With the `lubridate` package:
+
+* Transform text dates into an R type with numerical properties.
+    - `ymd()`, `dmy()`, and so on.
+* Extract parts of the date:
+    - `day()`
+    - `jday()`
+    - `week()`
+    - `hour()` 
+    - `wday()` 
+    - `minute()` 
+    - `month()` 
+    - `year()`
+    
+```{r eval = FALSE}
+Holidays <- read.csv("http://tiny.cc/dcf/US-Holidays.csv",
+                     stringsAsFactors = FALSE)
+```
+
+```{r echo = FALSE}
+Holidays <- read.csv("Data/US-Holidays.csv",
+                     stringsAsFactors = FALSE)
+```
+
+```{r}
+with(Holidays, class(date))
+Holidays <- 
+  Holidays %>%
+  mutate(date = lubridate::dmy(date))
+with(Holidays, class(date))
+Holidays %>%
+  summarise(middle = mean(date))
+Sys.time()
+```
+
+## Conditional transforms
+
+For all transform verbs, the output depends on some way on the input. In *conditional transforms*, you use the input to choose one or more possible outputs. 
+
+One such transform verb is `ifelse()`. This takes three arguments: 
+1. a test, written in the form of a "logical"" such as `x > 3`
+2. the output if the test is `TRUE`
+3. the output if the test is `FALSE`
+
+For example, the table below shows measurements made on patients, including the date of the measurement and the date of treatment. A transformation is to be done to say whether the measurement was *before* or *after* the treatment.
+
+```{r echo = 3}
+load("Data/MeasTreatTables.Rda")
+Measurements %>%
+  left_join(Treatments) -> Treatments
+head(Treatments)
+```
+
+The calculation of *before* or *after* is simple: `date < treatment_date`." To render the result as the values `"before"` and `"after"`, use `ifelse()`:
+
+```{r}
+Treatments %>%
+  mutate(when = ifelse(date < treatment_date, "before", "after")) %>%
+  head()
+```
+
+## Text
+
+Simple operators:
+
+* `tolower()` - convert to lower case
+* `toupper()` - convert to upper case
+* `nchar()` - the number of characters in a string
+* `substr()` - extract a substring at a particular location.
+
+Example: `r set.seed(101)`
+
+```{r}
+BabyNames %>%
+  sample_n(size = 5) %>%
+  mutate(small = tolower(name),
+         large = toupper(name),
+         length = nchar(name),
+         middle = substr(name, 2, 3))
+```
+
+For later:
+
+* `gsub()`
+* `grepl()`
+* `DataComputing::extractMatches()`
+
+
+
+
+
+
+
+
+<!--chapter:end:433-More-Transformations.Rmd-->
+
+# Trends in Popularity of Names
+
+The relative popularity of different names for babies varies over the years and decades.  Let's construct a visualization of how the popularity of names varies in time.  
+
+
+## Objective
+
+Create a graph like the following using name of interest to you. 
+
+```{r echo=FALSE,message=FALSE}
+myNames <- data.frame( name=c("Abraham","Franklin",
+                              "Jefferson","Washington", 
+                              "Winston", "Adolf"), 
+                       stringsAsFactors = FALSE )
+Results <- 
+  BabyNames %>%
+  inner_join( myNames ) %>%
+  group_by( name, year ) %>%
+  summarise( total=sum(count) ) %>%
+  mutate( total=100*total/sum(total))
+```
+```{r echo=FALSE,message=FALSE}  
+Results %>% ggplot(aes(x=year,y=total,group=name)) +
+  geom_line( size=1, alpha=.5, aes(color=name)) +
+  ylab("Popularity") + xlab("Year")
+```
+
+The raw material you have is the `BabyNames` data set in the `DataComputing` package.
+
+Point out which variables are categorical.  These can potentially be used for defining groups of cases.
+
+### First, Individually ...
+
+#### Step 1.
+
+Analyze the graphic to figure out what a glyph-ready data table should look like. Mostly, this involves figuring out what variables are represented in the graph.  Write down a small example of a glyph-ready data frame that you think could be used to make something in the form of the graphic.
+
+* What variable(s) from the raw data table do not appear at all in the graph?
+* What variable(s) in the graph are similar to corresponding variables in the raw data table, but might have been transformed in some way.
+
+#### Step 2
+
+Consider how the cases differ between the raw input and the glyph-ready table.
+
+* Have cases been **filtered** out? 
+* Have cases been grouped and **aggregated/summarized** within groups in any way?
+* Have any new variables been introduced? 
+    
+#### Step 3
+
+Using English, write down a sequence of steps that will accomplish the transfiguration from the raw data table to your hypothesized glyph-ready data table.
+
+#### Step 4: Confer with your colleagues
+
+As a group, compare your different analyses in Steps 1 through 3.  Your goal is to develop a consensus for the design in Step 3.
+
+
+
+#### Step 5: Implementation
+
+Now you can start writing the commands themselves.  Do so, try to identify and solve any problems that arise, and make your glyph-ready data.
+
+For graphing, you can use this template:
+```{r eval=FALSE}
+Results %>% ggplot(aes(x=year,y=total,group=name)) +
+   geom_line( size=2, alpha=.5, aes(color=name)) +
+   ylab("Popularity") + xlab("Year")
+```
+
+
+<!--chapter:end:437-Name-popularity.Rmd-->
+
+# Case study in basic data verbs: Moby Dick
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(dplyr)
+require(ggplot2)
+```
+
+## Prolog: Scraping and arranging the data
+
+A text file of the book is available at <http://www.gutenberg.org/ebooks/2701>. At that page is a link to a UTF-8 encoded text document named `"pg2701.txt"`.  I downloaded the file and stored it on my machine as `Data/pg2701.txt`. I can read that using `readLines()`.
+
+```{r cache = TRUE}
+Moby <- readLines("Data/pg2701.txt")
+```
+You could also read the file directly from Project Gutenberg
+```{r eval=FALSE}
+con <- file("http://www.gutenberg.org/ebooks/2701.txt.utf-8")
+Moby <- readLines(con)
+close(con)
+```
+
+The result, stored in the `Moby` object, is a character vector of `r length(Moby)` strings.  Some of these are prefatory matter, some postscript.
+
+The text itself begins after a line
+```{r}
+start_text <- "START OF THIS PROJECT GUTENBERG"
+```
+and ends before a line 
+```{r}
+end_text <- "END OF THIS PROJECT GUTENBERG"
+```
+Using these as delimiters includes some transcriber's notes, etc.  For simplicity, I'll take as the start the line
+```{r}
+start_text <- "CHAPTER 1\\."
+```
+The last line is simply "orphan." ending line
+```{r}
+end_text <- "^orphan\\.$"
+```
+
+Why the funny spelling? The `start_text` and `end_text` are being specified as a "regex" (sometimes called *regular expression*) indicating that the word "orphan" is at the very beginning of the line, followed by a period and the end of the line.
+
+Regexes are a way of describing patterns.  For our purposes, we'll use them to identify the first and last line of Melville's work in the Project Gutenberg text. As it happens, there are two instances of "CHAPTER 1." in *Moby Dick*.  The second is a book within the book.  We want to start with the early instance.
+```{r}
+first_line <- min(grep(start_text, Moby))
+last_line <- grep(end_text, Moby)
+Moby <- Moby[first_line : last_line]
+```
+
+We want to break the strings up into individual words. We'll do this "by hand" because I want to render the text as a simple set of words and punctuation. Steps:
+
+1. Change punctuation so that it is an isolated character.
+2. Split up each line by spaces into words.
+3. Convert to lower case (because I'm not interested in capitalization).
+```{r}
+tmp <- Moby
+characters <- unlist(strsplit(tolower(Moby), split = NULL))
+
+# Step 1
+punctuation <- c(".", ",", ";", ":", "?", "!", '"', 
+                "'", "&", "-", "(", ")", "[", "]")
+for (symbol in punctuation) {
+  result <- paste0(" ", symbol, " ")
+  tmp <- gsub(symbol, result, tmp, fixed=TRUE )
+}
+# Step 2
+Words <- unlist(strsplit(tmp, split = " "))
+# Step 3
+Words <- data.frame(word = tolower(Words),
+                    stringsAsFactors = FALSE)
+# Get rid of empty strings
+# Words <- 
+#  Words %>%
+#  filter(word != "")
+```
+
+What are the character frequencies in the book?
+
+```{r}
+table(characters) %>% 
+  data.frame(stringsAsFactors = FALSE) %>%
+  arrange(desc(Freq))
+```
+
+## Most common words
+
+```{r common_words}
+Popular <-
+  Words %>%
+  group_by(word) %>%
+  tally() %>%
+  arrange(desc(n)) %>%
+  head(50)
+```
+
+## Most common sequences
+
+```{r sequences}
+Sequences <-
+  Words %>% 
+  filter(grepl("[a-zA-Z]", word)) %>%
+  mutate(two = lead(word, 1), three = lead(two, 1),
+         four = lead(three, 1))
+
+CommonPairs <-
+  Sequences %>%
+  group_by(word, two) %>%
+  tally() %>% 
+  ungroup() %>%
+  arrange(desc(n))
+```
+
+Popular triplets
+```{r}
+Triplets <-
+  Sequences %>%
+  group_by(word, two, three) %>%
+  tally() %>%
+  ungroup() %>%
+  arrange(desc(n))
+```
+
+<!--
+
+## For working across files
+```{r echo = FALSE, eval = FALSE}
+library(tm)
+foo <- VCorpus(DirSource(".", pattern="-cleaned.txt",
+                         encoding = "UTF-8"),
+               readerControl = list(language = "eng"))
+```
+
+-->
+
+<!--chapter:end:438-Moby-Dick.Rmd-->
+
+
+```{r include=FALSE}
+library(DataComputing)
+knitr::opts_chunk$set( echo=FALSE, results="hide")
+show_answers = FALSE
+```
+
+
+# Cities of the World
+
+The data table `WorldCities` (in the `DCF` package) identifies cities around the world that have large populations or are large for their region.
+
+* Check the table for plausibility: is it possibly what it is claimed to be?.  For instance ... What's the total number of people represented?  Explain why or why not the data pass this plausibility test.  Create another plausibility test and describe it.  It can be very simple.  If you can, implement it and state whether the data table passes the test.
+
+```{r echo = show_answers}
+WorldCities %>% 
+  summarise(total = sum(population))
+```
+
+* How many cities larger than 100,000? Larger than 1,000,000?
+
+* Make a scatterplot of the latitude and longitude of cities larger than 100K.
+    * Decide what variables to map to the $x$ and $y$ aesthetics.^[Remember, "aesthetic" is being used in its original sense: how things are perceived.]
+    * Use the size of the dot to show the city's population.  In other words, map the variable population to the `size` aesthetic.
+    * Use transparency, called `alpha`, to handle overplotting.  Alpha can run from zero to one: zero is completely transparent (a.k.a. invisible); one is completely opaque.  You will be *setting* `alpha` the same for every city.
+        Recall that in `ggplot` graphics, variables are *mapped* to aesthetics using the `aes()` function.  In contrast, aesthetic properties that are the same for every case are *set* outside the `aes()` function.  In a typical use, the `ggplot()` command will look like 
+        ```
+        ggplot( data=???, aes( x=???, y=??? ))
+```  
+    The layers of the plot will be used like this: 
+    ```
+geom_point( alpha=???, aes( size=??? ) )
+``` 
+    where, of course, you will replace the `???` with appropriate variables or constants or data tables.
+```{r echo = show_answers}
+p <-  
+  WorldCities %>%
+  filter( population > 1e5 ) %>%
+  ggplot( aes(x=longitude, y=latitude )) +
+    geom_point(alpha=.1, aes(size=population)) +
+    scale_size_area()
+```
+    
+* When you have your plotting commands complete, use those commands to make another graphic, but add this expression to govern the `size` attribute: `+ scale_size_area()`.  This will make the *area* of the dot proportional to the value of the variable mapped to it.  Without `scale_size_area()`, the *diameter* of the dot is proportional to the variable.  Explain which scale, area or diameter, you think is most informative.  (Include both graphics in your Rmd file along with your explanation.)
+
+* Create a data table `BiggestByCountry` that has the one biggest city in each country.
+```{r echo = show_answers}
+BiggestByCountry <- 
+  WorldCities %>% 
+  group_by( country ) %>%
+  filter( rank(desc(population)) == 1 )
+```
+
+
+* Plot the locations of `BiggestByCountry` as another layer in your graphic.  Make them red. 
+    ```{r eval=FALSE, echo = show_answers}
+p + 
+  geom_point( data=BiggestByCountry, color='red', alpha=.5, aes(size=population)) +
+  geom_text( data=BiggestByCountry, size=2, aes( label=name ))
+```
+
+* Add to the graphic the names of the cities from `BiggestByCountry`.  Hint: use `geom_text()`.  Set the `size=2`. Remember, *setting* is different from *mapping* a variable. You'll use the `label=` aesthetic to represent the city names.
+
+* Find the countries where the biggest city is more than 5M people
+```{r echo = show_answers}
+BiggestByCountry %>%
+  filter( population > 5000000)
+```
+    The resulting table will have a couple of dozen cases. Display as output in your report all the cases but just these variables: city name, country, and population.
+
+
+<!--chapter:end:439-Cities.Rmd-->
+
+# Additional Exercises on Data Verbs
+
+
+## How many births
+
+You might think that you can find the number of babies born each year in the US by using the Social Security `BabyNames` data. Just group by year and add up the counts:
+
+```{r}
+BabyNames %>%
+  group_by(year) %>%
+  summarise(total = sum(count)) %>%
+  arrange(desc(year)) %>%
+  head()
+```
+
+But some babies are missing from this tally. In particular, the `BabyNames` data only reports names, years, and sex for which there were five or more births. Presumably there were some babies whose names were so unusual that they are unique, or shared by only two, three, or four babies. 
+
+Your job, make an estimate of how many such babies there are. For simplicity, make that estimate for a single year, say 2010.
+
+Here's an approach. Count the total number of -names with 5, 6, ... 19, 20 births. That is, consider all the names of each sex with only 5 babies reported and find the total number of babies that fall into that class. The same for names-and-sex with 6 births, and so on. See if you can spot a pattern with how the number of babies changes depends on each count.Then extrapolate out to 1, 2, 3, 4 and use that to estimate the total population.
+
+
+```{r}
+BabyNames %>%
+  filter(count <= 20, year == 2010) %>%
+  group_by(count) %>%
+  tally() %>%
+  mutate(births = count * n) %>%
+  mutate(log10(births))
+```
+
+The pattern is very consistent across the different levels of "numbers of names". It looks like we're missing about 100,000 babies in 2010.
+
+<!--chapter:end:441-exercises.Rmd-->
+
+# Bicycle use patterns
+
+[PDF handout](Handouts/452-Bicycle-Rentals.pdf)
+
+  ```{r child = "Handouts/452-Bicycle-Rentals.Rmd"}
+```
+
+<!--chapter:end:452-Bicycle-Rentals.Rmd-->
+
+# Births and Holidays
+
+[PDF handout](Handouts/453-Births-and-holidays.pdf)
+
+   ```{r child = "Handouts/453-Births-and-holidays.Rmd"}
+```
+
+<!--chapter:end:453-Births-and-Holidays.Rmd-->
+
+# (PART) Joins and Reshaping
+
+
+
+<!--chapter:end:500-Joins.Rmd-->
+
+```{r include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(printr)
+library(mosaic)
+knitr::opts_chunk$set(tidy=FALSE, message=FALSE)
+options(width = 80)
+```
+
+
+# Combining data from different sources
+
+Glyph-ready data often combines data from different sources.
+
+* Perhaps they come from different experiments or institutions.
+* Often, they were collected with different objectives than yours.
+* Perhaps they are completely different types of data, 
+
+
+
+*Example: Medicare data*
+
+* `MedicareProviders`: Name and location
+* `DirectRecoveryGroups`: Descriptions of standardized medical procedures
+* `MedicareCharges`: Charges and payments for different DRGs by different providers
+* `ZipDemographics`: Population and age structure in each ZIP code.
+
+ 
+
+**Example: Holiday births**
+
+**Goal**: Compare the number of births on holidays to those on non-holiday weekdays.
+
+* The `mosaicData::Birthdays` table gives the daily number of births in US states from 1969 to 1988.
+* `Birthdays` doesn't *directly* tell us which days are holidays, but ...
+
+We can use the `date` variable to look up each case in a list of holidays, e.g. 
+
+```{r echo=1, cache = TRUE}
+Holidays <- read.file("http://tiny.cc/dcf/US-Holidays.csv")
+set.seed(101)
+Holidays %>%
+  sample_n(size=4) %>%
+  arrange(year)
+```
+
+
+## Relational databases
+
+Storing data in separate tables can be beneficial even when the data are coming from the same source: 
+
+* There is no "one size fits all" glyph-ready format.  Often the kinds of analysis that will be done are not specifically anticipated when data are collected. 
+* Glyph-ready data often contains **redundancies**.  This makes it hard to update or correct data.
+
+**Strategy**: Don't even try to smash all data into one big table.  Instead, join related tables as needed.
+
+ 
+
+**Example: Grades and Enrollment**
+
+```{r}
+Grades <- read.file("http://tiny.cc/mosaic/grades.csv")
+```
+```{r echo=FALSE}
+set.seed(101)
+Grades %>% sample_n(size=4)
+```
+
+```{r}
+Courses <- read.file("http://tiny.cc/mosaic/courses.csv")
+```
+```{r echo=FALSE}
+set.seed(101)
+Courses %>% sample_n(size=3)
+```
+
+ 
+
+## Joins
+
+A *join* is a data verb that combines two tables. 
+
+- These care called the *left* and the *right* tables.
+
+There are several kinds of join.
+
+* All involve establishing a correspondance --- a match --- between each case in the left table and zero or more cases in the right table.
+* The various joins differ in how they handle multiple matches or missing matches.
+
+    
+
+## Example: Average class size
+
+**Goal**: Figure out the average class size seen by each student.
+
+* `enroll` comes from `Courses` table.
+* Student (`sid`) comes from `Grades`.
+* `sessionID` is in both tables.
+
+```{r}
+Grades %>%
+  left_join(Courses) %>% sample_n(size=4)
+```
+
+
+Once `Courses` and `Grades` are joined, it's straightforward to find the average enrollment seen by each student.
+
+```{r}
+AveClassEachStudent <- Grades %>% 
+  left_join(Courses) %>%
+  group_by(sid) %>%
+  summarise(ave_enroll = mean(enroll, na.rm=TRUE))
+```
+```{r echo=FALSE}
+AveClassEachStudent %>% sample_n(3) # look at just a few
+```
+
+   -
+
+**Statistical Digression**
+
+Why are these numbers different?
+
+```{r}
+AveClassEachStudent %>% summarise(average = mean(ave_enroll))
+Courses %>% summarise(average = mean(enroll))
+```
+ 
+  
+
+## Establishing a match between cases
+
+A match between a case in the *left* table and a case in the *right* table is made based on the values in pairs of corresponding variables.
+
+* **You** specify which pairs to use.
+* A pair is a variable from the left table and a variable from the right table.
+* Cases must have *exactly equal* values in the left variable and right variable for a match to be made.
+
+**Example**:
+```{r echo=1:2}
+Grades %>% 
+  left_join(Courses, by = c(sessionID = "sessionID")) %>%
+  head(4)
+```
+
+The default value of `by=` is all variables with the same names in both tables.     
+- This is **not reliable** unless you've checked.
+
+ 
+
+## Kinds of join
+
+Different kinds of join have different answers to these questions.
+
+* What to do when there is **no match** between a left case and any right case?
+* What to do when there are **multiple matching cases** in the right table for a case in the left table?
+
+Most popular joins: `left_join()` and `inner_join()`
+
+
+1. No match of a left case to a right case
+    * `left_join()` Keep the left case and fill in the new variables with NA
+    * `inner_join()` Discard the left case.
+    Less popular joins:
+    * `full_join()` Keep left case as well as unmatched right cases.
+    * `semi_join()` Discard the left case.
+    * `anti_join()` Keep the left case but discard any left case with a match in the right table
+2. Multiple matches of right cases to a left case
+    * `left_join()` and `inner_join()` do the same thing: Keep **all combinations**.
+    Less popular joins:
+    * `full_join()` Keep all combinations.
+    * `semi_join()` Keep just one copy of the left case.
+    * `anti_join()` Discard the left case.
+
+## Example: Grade-point averages
+
+Here are three data tables relating student grades in courses at Macalester in 2005
+
+```{r echo=c(1,3,5)}
+Grades <- read.file("http://tiny.cc/mosaic/grades.csv")
+Grades %>% head(1)
+Courses <- read.file("http://tiny.cc/mosaic/courses.csv")
+Courses %>% head(1)
+GradePoint <- read.file("http://tiny.cc/mosaic/grade-to-number.csv")
+GradePoint %>% head(1)
+```
+
+ 
+
+## Activity: Which to Join?
+
+For each of these, say what tables you would need to join and what the corresponding variables will be.
+
+1. How many students in each department?
+#. What fraction of grades are below B+ in each department?
+#. What's the grade-point average (GPA) for each student?
+#. Grade-point average for each department or instructor
+#. What's the 95% confidence interval on the GPA for each student?
+#. (Statistically more sophisticated) To what extent does the grade reflect the student or the department or instructor?
+
+ 
+
+## Example: Joining for cleaning
+
+Birds at the Ordway Nature Preserve
+
+```{r eval=FALSE}
+devtools::install_github("DataComputing/DataComputing")
+require(DataComputing)
+View(OrdwayBirds)
+help(OrdwayBirds)
+```
+
+As a group, let's correct the species names using [this data table](https://docs.google.com/spreadsheets/d/1GDKeulVSRXL7Q_5Q0a7Offc_IPX2T4sZ80VN5VLASew/edit#gid=0).
+
+* Count how many birds there are of each species in `OrdwayBirds` using the corrected species names.
+
+
+
+<!--chapter:end:521-Joins.Rmd-->
+
+```{r include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(printr)
+library(mosaic)
+library(tidyr)
+knitr::opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE)
+options(width = 80)
+```
+
+# Wide vs Narrow Data Tables
+
+A data table is comprises *cases* and *variables*.
+
+Each *variable* comprises *values* (or levels).
+
+There is no hard distinction between a variable and a value.  What's a variable in one situation may be a value in another, and vice versa.
+
+```{r echo=FALSE}
+Students <-
+  data.frame(who = c("Alice", "Lesley", "Yu"),
+             x = c(7, 19, 23), 
+             y = c("English", "Mandarin", "French"),
+             dorm = c("Doty", "Doty", "Kirk"))
+```
+
+A data table
+
+```{r}
+Students
+```
+
+## Cases, Variables, and Values
+
+* Variables: Who, X, and Y
+    - Values: 
+        - Who is a person's name
+        - X is numeric
+        - Y is a language name
+        - dorm is a building name
+* Cases: Alice, Lesley, Yu
+
+```{r echo=FALSE}
+Students
+```
+
+## Two formats
+
+* Narrow
+
+```{r echo=FALSE, warning=FALSE}
+Students %>% 
+  gather(key, value, x, y)
+```
+
+* Wide
+
+```{r echo=FALSE, warning=FALSE}
+Students
+```
+
+## Narrow and Wide
+
+Data in Key/Value format are **narrow**
+
+The corresponding **wide** format has 
+
+* separate variables for each level in Key
+* sets the values for those variables from the info in Value
+
+Narrow:
+```{r echo=FALSE, warning=FALSE}
+head(Students,2)
+```
+
+Wide:
+```{r echo=FALSE, warning=FALSE}
+Students %>% 
+  gather(key, value, x, y) %>% filter(who %in% c("Alice", "Lesley"))
+```
+
+## Narrow is relative
+
+```{r echo=FALSE, warning=FALSE}
+Students %>% 
+  gather(key, value, x, y, dorm)
+```
+
+## Too narrow
+
+
+```{r echo=FALSE, warning=FALSE}
+Students %>% 
+  gather(key, value, x, y, dorm, who)
+```
+
+There's nothing to identify a case!
+
+## Gather --- from Wide to Narrow
+
+Syntax:
+```
+WideInput %>% 
+  gather(key_name, value_name, ...)
+```
+The `...` are the variables to be gathered together, e.g.
+```{r warning=FALSE, echo=1}
+StudentsNarrow <- Students %>% gather(key, value, x, y)
+StudentsNarrow
+```
+
+## Cases in Narrow data
+
+Aside from Key and Value, all the other variables identify the case.
+
+The gathering makes multiple rows for each row in the wide form.  The variables **not** used for narrowing are copied into the new multiple cases.
+
+
+## Spread --- from Narrow to Wide
+
+Syntax:
+```r
+NarrowInput %>% spread(key, value)
+```
+
+Process:    
+
+1. Group by **all** variables other than Key and Value
+    These groups become the cases
+2. Create new variables for each level in Key
+3. Within each group, spread out the Values into the new variables.
+
+```{r}
+StudentsNarrow %>% spread(key, value)
+```
+
+
+
+<!--chapter:end:525-Wide-vs-narrow.Rmd-->
+
+# Biblical Names
+
+A list of Bible-related names is available this way:
+
+```{r}
+BibleNames <- read.csv("http://tiny.cc/dcf/BibleNames.csv" )
+```
+
+Using this data table and `BabyNames`: 
+
+* Make a data table showing the most popular biblenames over all the years.
+* Make an informative plot showing the trends over the years of Bible-related names as a proportion of all names.
+
+
+<!--chapter:end:535-Bible-Names.Rmd-->
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+# Conformity and Names
+
+Calculate the total number of babies given the 10 most popular names each year as a fraction of the total number of babies born that year.
+
+```{r}
+Popular <- 
+  BabyNames %>%
+  group_by(year) %>%
+  filter(row_number(desc(count)) <= 10) %>%
+  summarise(total_popular = sum(count)) 
+AllNames <-
+  BabyNames %>% 
+  group_by(year) %>%
+  summarise(total = sum(count))
+```
+ 
+```{r}
+head(Popular)
+head(AllNames)
+```
+
+Question: What would have happened if `group_by()` came after `filter()`?
+
+We'll need an operation to combine two tables to find the proportion each year. Here's a teaser:
+```{r}
+AllNames %>%
+  left_join(Popular) %>%
+  mutate(pop_prop = total_popular / total) %>%
+  ggplot(aes(x = year, y = pop_prop)) + 
+  geom_line() + 
+  ylab("Conformity Index")
+```
+
+<!--chapter:end:535-Conformity-in-names.Rmd-->
+
+# Example: Gender-neutral names: when wide is easier
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+Some operations are easy in wide format, but hard in narrow and *vice versa*
+
+## Excerpt from `BabyNames`
+
+```{r echo=FALSE}
+data(BabyNames, package="DataComputing")
+ShortBabyNames <- BabyNames %>%
+  filter( name %in% c("Alice", "Lesley", "Yu"),
+          year %in% 1998:1999 ) %>%
+  arrange(name, year)
+```
+
+```{r echo=FALSE}
+ShortBabyNames
+```
+
+Questions:
+
+1. How many babies of each name and sex?
+2. For each name, is it primarily given to girls or boys?  Which names are gender neutral?
+
+
+## In narrow format
+
+```{r echo=FALSE}
+data(BabyNames, package="DataComputing")
+BabyNames <- BabyNames %>%
+  filter( name %in% c("Alice", "Lesley", "Yu"))
+```
+
+1. How many babies of each name and sex?
+
+```{r}
+BabyTotals <-
+  BabyNames %>%
+  group_by(name, sex) %>%
+  summarise(total = sum(count))
+```
+```{r echo=FALSE}
+BabyTotals
+```
+
+Easy!
+
+## In Wide format
+
+2. For each name, is it primarily given to girls or boys?  Which names are gender neutral?
+
+- `sex` is the key variable
+- `total` is the value variable
+
+
+```{r echo=1:2}
+BabyTotalsWide <- BabyTotals %>%
+  spread(sex, total)
+BabyTotalsWide
+```
+
+## With sexes side by side ...
+
+
+```{r}
+BabyTotalsWide %>%
+  mutate(gender_specificity = pmax(F/(M+F), M/(M+F)))
+```
+
+<!--chapter:end:536-Gender-neutral-names.Rmd-->
+
+# Example: A Penny Collection
+
+```{r include = FALSE}
+require(DataComputing)
+show_answers <- FALSE
+```
+
+The same data can be represented in different ways. One or another way may be easiest, depending on the sort of calculation you are performing.
+
+A friend, when cleaning out a closet in 2016, came across a small, glass bottle with coins in it.  The coins were US 1-cent pieces, called "pennies". All of the coins were from before 1959. As with current pennies, the pennies had a picture of Lincoln on one side --- the "obverse". On the reverse side, the old-style pennies have a "wheat" design:
+
+```{r echo = FALSE, fig.cap = 'The "wheat" design on pennies before 1959.', fig.align = "center"}
+knitr::include_graphics("Images/penny.jpg")
+```
+
+The friend was interested to know if these coins were rare. First step in finding out, make a catalog of what he had. She noticed that some of the coins were stamped with an "S" and some with a "D," but many had no stamp at all. So she sorted out the coins by year and stamp, and counted.
+
+```{r echo = FALSE, fig.cap = 'Pennies in the collection from years 1950, 1951, and 1952. The front row has no stamp, the middle row has stamp "D", and the back row has stamp "S".', fig.align = "center", out.width = "50%"}
+knitr::include_graphics("Images/pennies_stacked.jpg")
+```
+
+## Three formats for the penny data table
+
+**Format 1**
+
+After counting the pennies in each stack, she compiled the data table available at `"http://tiny.cc/dcf/my_pennies_format_1.csv"`.
+
+
+```{r cache = TRUE}
+Format_1 <- readr::read_csv("http://tiny.cc/dcf/my_pennies_format_1.csv")
+head(Format_1, 10)
+```
+
+Questions:
+
+1. What is the case in the `Format_1` data table?
+2. How would you wrangle the table to produce a count of all the pennies, together?
+```{r echo = show_answers, results="hide"}
+Format_1 %>%
+  summarise(total = 
+              sum(none, na.rm = TRUE) +
+              sum(D, na.rm = TRUE) + 
+              sum(S, na.rm = TRUE)
+              )
+```
+3. How would you calculate the mean age of the pennies? (Hint: not so easy. Multiply the year by the penny counts, add up, and divide by the total number of pennies.)
+```{r echo = show_answers, results="hide"}
+Format_1 %>% 
+  summarise(total = 
+              sum(none, na.rm = TRUE) +
+              sum(D, na.rm = TRUE) + 
+              sum(S, na.rm = TRUE),
+            product = 
+              sum(year * none, na.rm = TRUE) +
+              sum(year * D,    na.rm = TRUE) +
+              sum(year * S,    na.rm = TRUE)
+              ) %>%
+  summarise(mean_age = product / total)
+```
+
+**Format 2**
+
+Seeing that these calculations are hard to read and understand, the collector decided to reformat the data to look like this:
+
+year | count | stamp
+-----|-------|------
+1958 | 4     | none
+1958 | 6     | D
+1957 | 11    | none
+1957 | 9     | D
+$\vdots$ | $\vdots$ | $\vdots$
+
+```{r echo = FALSE}
+Format_2 <-
+  Format_1 %>%
+  gather(key = stamp, value = count, -year) %>%
+  arrange(desc(year)) %>% 
+  na.omit()
+```
+
+```{r echo = FALSE, eval = FALSE}
+# just for one time
+write.csv(Format_2, file = "Data/my_pennies_format_2.csv", row.names = FALSE)
+```
+
+The complete data set in this format is available at `"http://tiny.cc/dcf/my_pennies_format_2.csv"`.
+
+```{r echo = FALSE, results='hide'}
+Format_2 <- readr::read_csv("Data/my_pennies_format_2.csv")
+head(Format_2, 10)
+```
+1. What is the case in the `Format_1` data table?
+```{block echo = show_answers}
+A year-stamp combination.
+```
+
+2. How would you wrangle the table to produce a count of all the pennies, together?
+```{r echo = show_answers, result = "hide"}
+Format_2 %>%
+  summarise(total = sum(count, na.rm = TRUE))
+```
+3. How would you calculate the mean age of the pennies? (Hint: This is much easier than for `Format_1`.)
+```{r echo = show_answers, result = "hide"}
+Format_2 %>% 
+  summarise(mean_age = 
+              sum(year * count, na.rm = TRUE) / 
+              sum(count, na.rm = TRUE))
+```
+4. How do you wrangle the `Format_1` data table into the form of `Format_2`.
+```{r echo = show_answers}
+Format_2 <-
+  Format_1 %>%
+  gather(key = stamp, value = count, -year) %>%
+  arrange(desc(year)) %>% 
+  na.omit()
+```
+5. The two formats differ: one is in narrow form, the other in wide form. Which is which?
+```{block echo = show_answers}
+`Format_1` is in wide format, `Format_2` is narrow. In the narrow format, one of the variables (`stamp`) serves as a key. The different values of that key are broken into separate variables in the wide format.
+```
+
+Question:
+
+1. Suppose that some additional pennies were added to the collection with new stamps, say "W" and "Z". Which of the formats, wide or narrow, would be better suited so that your wrangling statements to find the number of coins and the mean age would continue to work?
+```{block echo = show_answers}
+The statements for `Format_2` would continue to work. For the `Format_1` wrangling statements, you would have to add new components for each of the different values of `stamp`.
+```
+
+1. Counts, wide: year, Phila., Denver, SF
+    - What's the case?
+2. Counts, narrow: year, origin, count
+    - Converting between (1) and (2)
+3. Pennies, narrow: year, origin
+4. Pennies, wide
+    - Converting between (3) and (4)
+    - Producing (1) and (2) from (4)
+
+**Format 3**
+
+Another friend suggested that it might be better to store the data with one row for each penny, like this:
+
+```{r echo = FALSE}
+Format_3 <- 
+  Format_2[rep(1:nrow(Format_2), Format_2$count), 1:2]
+```
+
+```{r echo=FALSE, eval = FALSE}
+# Just to create the data file
+write.csv(Format_3, file="Data/my_pennies_format_3.csv", row.names = FALSE)
+```
+
+```{r echo = FALSE}
+head(Format_3, 12)
+```
+
+The complete data set in this format is available at `"http://tiny.cc/dcf/my_pennies_format_3.csv"`.
+
+Questions
+
+1. How can you tell the case in `Format_3` is a single penny?
+```{block echo = show_answers}
+You might infer this from the absence of a `count` variable. But it's really to codebook you would need to look at to figure out the case unit.
+```
+2. How would you count the number of pennies in the collection?
+```{r echo = show_answers}
+Format_3 %>%
+  tally()   # or, equivalently summarise(total = n())
+```
+3. How would you find the mean year for the coins in the collection?
+```{r echo = show_answers}
+Format_3 %>%
+  summarise(mean_year = mean(year, na.rm = TRUE))
+```
+
+## More tasks
+
+Use at least one of the formats to do the following. Even better if you try to do it with more than one format, but this might be hard
+
+1. Identify the years for which D and S stamps together outnumber P stamps.
+2. Calculate the mean year for each stamp.
+
+
+## Extending the data
+
+* Suppose you want a "condition" for each coin?
+* Suppose you want to include coins other than pennies?
+* Suppose you want to have prices that depend on year, origin, denomination, condition?
+
+<!--chapter:end:536-Penny-collection.Rmd-->
+
+# Stocks and dividends
+
+[PDF handout](Handouts/551-Stocks-and-dividends.pdf)
+
+Only the PDF handout is available, not the HTML format document.
+
+```{r eval = FALSE, child = "Handouts/453-Births-and-holidays.Rmd"}
+```
+
+<!--chapter:end:551-Stocks-and-dividends.Rmd-->
+
+# A Graph for the Economist
+
+[PDF handout](Handouts/552-Economist-graph.pdf)
+
+   ```{r child = "Handouts/552-Economist-graph.Rmd"}
+```
+
+<!--chapter:end:552-Economist-graph.Rmd-->
+
+```{r include=FALSE}
+require(mosaic)
+require(knitr)
+require(NHANES)
+knitr::opts_chunk$set(echo = FALSE, message=FALSE)
+```
+
+# Distributions
+
+Often there is information to be found in the way cases differ one from the other.
+
+A **distribution** is a representation of the patterns of spread of the cases.
+
+## One variable
+
+### Categorical: how many cases at each level?
+
+Order: help the eye
+
+### Quantitative
+
+No discrete levels.  The fundamental display is **density**
+
+Show some densities.
+
+## Two or more variables: Displaying relationships
+
+## A distribution template
+
+### Aesthetics: 1, 2, or three variables
+
+* `x = `  The first variable: *always!*
+* `y = `  The *count* or *density* or another variable
+* `group = ` or `fill = ` or `color = ` Still another variable
+
+### Positions
+
+* Dodged (the default)
+* Stacked
+* Proportion
+
+### Facets 
+
+One or two more categorical variables    
+
+- `facet_wrap( ~ var)` 
+- `facet_grid(var1 ~ var2)`
+
+## Variable types
+
+interval  ---- ordered  ----- categorical
+
+1. Quantitative: a natural order and interval
+2. Ordinal: a natural order but not an interval
+3. Categorical: no natural order
+
+## Order
+
+The different levels of the variable have a natural order; it's natural to say that one level is higher than another or that a level is in-between two other levels.    
+
+* Temperature
+* Age
+* Likert scale (strongly disagree, disagree, neutral, ...)
+* Income bracket, e.g. 0-25K, 25K-40K, 40K-75K, 75K-150K
+* Numerical scale, e.g. pain level of 1 to 10
+* but not, e.g. Language, Nationality, ...
+
+## Interval
+
+For variables with a natural order, does the interval between levels have a specific meaning?   
+
+* Temperature: Yes
+* Age: Yes
+* Likert scale: not really, but sometimes assumed
+* Income bracket: No
+* Language: No! (It's not even ordered!)
+
+## NHANES
+
+`NHANES` package has the `NHANES` data table
+
+
+### Categorical variables:
+
+* `Gender`: no order (therefore not interval)
+* `Education`: ordered but not interval
+* `SexOrientation`: not really ordered (therefore not interval)
+* `Work`: not really ordered (therefore not interval)
+* `MaritalStatus`: no order (therefore not interval)
+* `HHIncome`: ordered but not interval
+
+### Quantitative variables
+
+* `UrineVol1` ordered and interval
+* `Age`: ordered and interval
+
+## Single variables
+
+### Interval (hence ordered) --- use density
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = UrineVol1)) + 
+  geom_density()
+```
+
+### Not interval --- use counts
+
+But respect the order if there is one.
+
+1. Quantitative: a natural order and interval
+2. Ordinal: a natural order but not an interval
+3. Categorical: no natural order
+
+### Two variables
+
+```{r}
+NHANES %>% 
+  ggplot(aes(x = Age)) +
+  geom_density(aes(fill = MaritalStatus))
+```
+
+How could you make this better?
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = UrineVol1)) +
+  geom_density(aes(group = MaritalStatus), 
+               position = position_stack())
+```
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = Age)) +
+  geom_density(aes(fill = MaritalStatus), 
+               position = position_stack())
+```
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = Age)) +
+  geom_density(aes(fill = MaritalStatus), 
+               position = position_fill())
+```
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = UrineVol1)) +
+  geom_density(aes(fill = MaritalStatus, color = Gender), 
+               position = position_stack())
+```
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = UrineVol1)) +
+  geom_density(aes(fill = MaritalStatus), 
+               position = position_dodge())
+```
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = Age, y = UrineVol1)) +
+  geom_density2d()
+```
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = Age, y = UrineVol1)) +
+  geom_hex() +
+  geom_smooth()
+
+```
+
+<!--chapter:end:621-Distributions.Rmd-->
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+# Statistics: Collective properties of data
+
+Whenever you use `summarise()` you are reducing a set of cases into a single case. That single case reflects the *collective properties* of the cases. For instance, you might calculate the mean of some quantity. That mean takes in the values for *all* of the cases. Even when you are finding the value for a single case, say the one with the maximum value, that case is the maximum only with respect to the other cases. If those cases had been different, the max might change.
+
+Of course, we intend the summary to be *representative* of the cases being summarized, particularly when the quantity being calculated is meant to describe a "typical" value for all of the cases. That being the case, it's fair to ask *how representative* that summary is of the set of cases, or *how well* that summary represents the cases. This is a central issue in basic statistics. Statistics provides a framework for approaching that question of *how representative* a summary is.
+
+To illustrate, let's look at how people rate movies. 
+
+The three data tables in the `MovieLens.rda` file comprise a set of 100,000 ratings of movies by individuals. These data were collected in the late 1990s by the *grouplens* research team at the University of Minnesota. Grouplens provides the data directly at <http://grouplens.org/datasets/movielens/100k/>. `MovieLens.rda` is a reformatting of the data that makes the file substantially smaller. You can access the file in this way.
+
+
+```{r eval = FALSE}
+download.file("http://tiny.cc/dcf/MovieLens.rda", 
+              destfile = "MovieLens.rda")
+```
+Once the data are downloaded, you can use `load()` to bring the data tables into your R session.
+    
+```{r eval = FALSE, echo = FALSE}
+load("MovieLens.rda")
+```
+
+```{r echo = FALSE}
+# a cached version in the Data directory, to avoid
+# repeatedly downloading the file as this document is being written
+load("Data/MovieLens.rda")
+```
+
+`MovieLens.rda` contains three data tables:
+
+* `Ratings` has the individual movie ratings and the time at which they were entered. It also includes an ID variable for both the user and the movie.
+```{r echo = FALSE}
+head(Ratings) #%>% knitr::kable(caption = "A few cases from `Ratings`.")
+```
+* `Movies` provides the name of the movie and information about genres.
+* `Users` gives basic information about the person who made the rating.
+```{r echo = FALSE}
+head(Users) #%>% knitr::kable(caption = "A few cases from `Users`")
+```
+
+## The mean as a summary
+
+Calculating the mean rating is easy:
+```{r}
+Ratings %>% 
+  summarise(mean_rating = mean(rating))
+```
+
+So how representative is the mean rating? One way to assess this is to display the distribution of ratings:
+```{r}
+Ratings %>%
+  ggplot(aes(x = rating)) + geom_bar()
+```
+
+The mean value, `r mean(Ratings$rating)`, falls right in the middle of this distribution.
+
+One way to assess the representativeness of the mean is to calculate an auxiliary statistic that summarizes how far from the mean a typical case is. The standard way to measure this typical deviation from the mean is called the *standard deviation* and is computed with the `sd()` reduction function.
+```{r}
+Ratings %>% 
+  summarise(mean_rating = mean(rating), typical_dist = sd(rating))
+```
+The typical rating is within about 1.1 points of the mean.
+
+Statisticians compute another statistic to indicate how *uncertain* the mean is. The uncertainty doesn't arise from the calculation itself --- computer calculations such as `mean()` are very reliable. The uncertainty refers to a kind of thought experiment. 
+
+Suppose that a much larger set of ratings had been collected, from a much larger group of people. Imagine that the particular cases we are working with in `Ratings` were a random choice from this much larger set. And then imagine that many other, similar datasets were created, each of which is a random selection from the much larger dataset. The means calculated from these many different datasets would presumably differ from the one we get from our particular set in `Ratings`. The uncertainty refers to how much the means would differ among the hypothetical, thought-experiment data sets.
+
+The most common statistical measure of this uncertainty of the mean is called the "standard error of the mean." Perhaps surprisingly, there is a simple method to calculate the standard error of the mean even without having to generate a new data set.
+
+```{r}
+Ratings %>% 
+  summarise(mean_rating = mean(rating), 
+            typical_dist = sd(rating),
+            uncertainty = sd(rating) / sqrt(n()))
+```
+The value of the standard error of the mean is very small compared to the mean. Statisticians display the uncertainty with an interval of $\pm 2$ times the reliability around the mean, in other words, $3.530 \pm 0.007$. Note that the values have been somewhat rounded. As a rule, there's very little meaning to the second (non-zero) digit of the standard error. And there's no point in reporting the mean itself to a precision that goes beyond that of the standard error.
+
+We could reasonably call this interval the "uncertainty interval." But the standard term for it in statistics is the "confidence interval"
+
+Why should we care about the uncertainty of the mean? The typical situation where this is an issue is when we are comparing two means to see whether they are different. For instance, let's see if women and men have different mean movie ratings. To start, we need to identify each rating with the sex of the rater.
+```{r message = FALSE}
+Ratings_with_sex <-
+  Ratings %>%
+  select(rating, user_id) %>%
+  left_join(Users %>% select(user_id, sex))
+```
+
+Now we're in a position to compute the mean for each sex, together with the uncertainty in those means.
+
+```{r message = FALSE}
+Means_by_sex <-
+  Ratings_with_sex %>%
+  group_by(sex) %>%
+  summarise(mean_rating = mean(rating), 
+            typical_dist = sd(rating),
+            uncertainty = sd(rating) / sqrt(n()))
+Means_by_sex
+```
+The means for men and women are a bit different --- women give higher ratings by 0.0023. But look at the reliabilities. They are larger than the difference in means. This suggests that although the precise numerical value of the means is different, the difference is itself not reliable. It might as well be zero! 
+
+**Plotting out the means along with their uncertainties.**
+
+There is a standard format for graphing the means and their uncertainties that involve a glyph called an "error bar."
+```{r}
+Means_by_sex %>%
+  ggplot(aes(x = sex, y = mean_rating)) +
+  geom_point() + 
+  geom_errorbar(aes(ymin = mean_rating - 2 * uncertainty,
+                    ymax = mean_rating + 2 * uncertainty))
+```
+
+As always when reading a graph, note the scales.
+
+Many people mistakenly interpret a plot like this as indicating the range of ratings themselves, rather than the uncertainty in the mean rating. So it can be helpful to display the distribution of the ratings themselves on the same graph.
+
+```{r}
+Means_by_sex %>%
+  ggplot(aes(x = sex, y = mean_rating)) +
+  geom_point() + 
+  geom_errorbar(aes(ymin = mean_rating - 2 * uncertainty,
+                    ymax = mean_rating + 2 * uncertainty)) +
+  geom_violin(data = Ratings_with_sex, aes(y = rating))
+```
+
+Again, note the scales. You can see that the uncertainty in the mean is much, much smaller than the distribution of ratings.
+
+*Activity*
+
+Find the means broken down by sex and movie genre. Do the sexes rate individual genres differently?
+
+Think carefully about how you are going to combine the genre information with the ratings. Movies often fall into more than one genre. In calculating the means, you might want to create a new case of the values in `Ratings` for each of the genres of a movie.
+
+Read each of the following chunks and say what it is doing.
+```{r}
+With_genres <-
+  Movies %>% 
+  tidyr::gather(key = "genre", value = "tmp", 5:23) %>%
+  filter(tmp) %>%
+  select(-tmp) 
+```
+
+```{r}
+All <- 
+  Ratings %>% 
+  left_join(With_genres) %>%
+  left_join(Users)
+```
+
+```{r}
+Tmp <- 
+  All %>%
+  group_by(genre) %>%
+  filter(n() > 1000) %>%
+  group_by(genre, sex) %>%
+  summarise(mean = mean(rating), 
+            uncertainty = sd(rating) / sqrt(n())) %>% 
+  ungroup()
+```
+
+```{r}
+Tmp2 <- 
+  Tmp %>% select(-uncertainty) %>%
+  tidyr::spread(key = sex, mean) %>%
+  mutate(diff = F - M) 
+```
+
+```{r}
+Tmp %>%
+  left_join(Tmp2) %>%
+  mutate(genre = reorder(genre, desc(abs(diff)))) %>%
+  ggplot(aes(x = genre, y = mean, color = sex)) + 
+    geom_errorbar(aes(ymin = mean - 2 * uncertainty, 
+                      ymax = mean + 2 * uncertainty), 
+                  position = position_dodge(width = 0.2)) + 
+    geom_point(position = position_dodge(width = 0.2)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+## Continuous explanatory variables
+
+In the previous, we broke down the ratings by sex and genre. But maybe age is an important determinant of opinion.
+
+In these chunks, we simply add age as another grouping variable when computing the mean and the uncertainty in the mean.
+
+```{r}
+Tmp <- 
+  All %>%
+  group_by(genre) %>%
+  filter(n() > 1000) %>%
+  group_by(genre, sex, age) %>%
+  summarise(mean = mean(rating), 
+            uncertainty = sd(rating) / sqrt(n())) %>% 
+  ungroup()
+head(Tmp)
+```
+
+In plotting this, what roles would you assign to each of the variables?
+
+```{r}
+Tmp %>%
+  ggplot(aes(x = age, y = mean, color = sex)) + 
+    geom_errorbar(aes(ymin = mean - 2 * uncertainty, 
+                      ymax = mean + 2 * uncertainty), 
+                  position = position_dodge(width = 0.2)) + 
+    geom_point(position = position_dodge(width = 0.2)) +
+  facet_wrap( ~ genre) + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+How could you simplify this plot?
+
+Let's focus on just a few genres, the ones that showed large differences between the sexes.
+
+
+```{r}
+Tmp %>%
+  filter(genre %in% c("Film-Noir", "Musical", "Western", "Children's")) %>%
+  ggplot(aes(x = age, y = mean, color = sex)) + 
+    geom_errorbar(aes(ymin = mean - 2 * uncertainty, 
+                      ymax = mean + 2 * uncertainty), 
+                  position = position_dodge(width = 0.2)) + 
+    geom_point(position = position_dodge(width = 0.2)) +
+  facet_wrap( ~ genre) + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+One of the problems with this plot is that the error bars are much larger than they were in some of the previous plots. This makes it hard to see differences between the sexes.  Why this growth in the error bars? Because we've divided the data up into about 50 different ages. Roughly, this means that each error bar is based on about 1/50th as much data. Since the uncertainty goes as $1/\sqrt(n)$, this means that the error bars will be about $\sqrt{50} \approx 7$ times bigger than before. You could fix this by, say, dividing up into just a few age groups.
+
+A statistical method called "regression" enables the mean rating to be assessed by age without having to break up age into any groups at all. In the next plot, we'll use a regression method called "smoothing" to do this, transforming the error bars into error bands.
+
+```{r}
+All %>%
+  filter(genre %in% c("Film-Noir", "Musical", "Western", "Children's")) %>%
+  ggplot(aes(x = age, y = rating, color = sex)) + 
+  geom_smooth() +
+  facet_wrap(~ genre)
+```
+
+Look at the film-noir genre. Men's mean ratings are high and go up over the years. For women, the pattern is different. They don't like film-noir as much as men, except around age 40. (Note: These data are not tracing individual people as they age. Instead, these are different people who were born at different years.)
+
+**Project idea**: How do ratings compare by month or time of day? Is it possible to tell whether the times of day are keyed to the local clock time, or the time at which the database server received the information.
+
+## Correlations
+
+Another very important technique in introductory statistics involves "correlation."
+
+Consider three situations about how two different variables might relate to one another:
+
+1. When one variable is up, the other one tends to be up as well. This is called a "positive correlation."
+2. When one variable is up, the other could equally well be up or down. This is called "uncorrelated."
+3. When one variable is up, the other one tends to be down. This is called a "negative correlation."
+
+Now "tends to" can be a matter of degree. The *correlation coefficient* indicates how strong the tendency is on a scale of zero to 1. Zero means uncorrelated. One means "exactly in line with one another." The sign on the correlation coefficient indicates whether the correlation is positive or negative. If the variables are uncorrelated, the correlation coefficient is near zero.
+
+To illustrate, let's look at the correlation between musical and war genres, and also the correlation between crime and film-noir genres. We'll base the correlation on whether the genres are aligned from movie to movie.
+
+```{r}
+Movies %>%
+  summarise(war_music = cor(Musical, War), crime_noir = cor(Crime, `Film-Noir`))
+```
+It looks like being a war movie tells you nothing about whether it is a musical, while being a crime movie tells a bit about whether it is also a film-noir.
+
+It's also possible to calculate an uncertainty in the correlation coefficients. This can help in deciding whether to treat the correlation as different from zero.
+
+```{r}
+Movies %>%
+  summarise(war_music = cor(Musical, War), 
+            crime_noir = cor(Crime, `Film-Noir`),
+            uncertainty1 = sqrt((1 - war_music^2) / (n() - 2)),
+            uncertainty2 = sqrt((1 - crime_noir^2) / (n() - 2))
+  )
+```
+
+There's no reason in these data to believe that the correlation between war and musical genres is anything but zero. In contrast, crime and film-noir have a positive correlation, but nowhere near perfect correlation.
+
+## A primitive display of genre correlations
+
+
+```{r}
+Genres <- Movies[,6:23]
+tmp <- cor(Genres) %>% as.data.frame(stringsAsFactors = FALSE)
+tmp$genre <- row.names(tmp)
+Genre_pairs <-
+  tmp %>% 
+  gather(key = genre2, value = correlation, -genre) %>%
+  filter(genre != genre2) %>%
+#  filter(genre > genre2) %>%
+  group_by(genre) %>%
+  filter(abs(correlation) > 0.05)
+Genre_pairs %>%
+  ggplot(aes(x = genre2, y = correlation)) + 
+  geom_point(aes(color = genre2)) + 
+  facet_wrap( ~ genre) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+
+## A network display
+
+As a network
+```{r}
+library(igraph)
+Vertices <- 
+  Genre_pairs %>%
+  edgesToVertices(from = genre, to = genre2)
+Edges <- 
+  Vertices %>%
+  edgesForPlotting(ID = ID, x, y, Edges = Genre_pairs, from = genre, to = genre2)
+Vertices %>%
+  ggplot(aes(x = x, y = y)) + geom_point()+
+  geom_segment(data = Edges, 
+               aes(x = x, y = y, xend = xend, yend = yend, 
+                   color = correlation), size = 2) + 
+  theme_map() + 
+    geom_label(aes(label = ID), fill = "white") 
+```
+
+<!--chapter:end:632-Basic-Stats.Rmd-->
+
+# Regular expressions
+
+## Visualizing matches
+
+See the `str_view()` and `str_view_all()` widgets in [version 1.1 of stringr](https://blog.rstudio.org/2016/08/24/stringr-1-1-0/).
+
+
+## Example
+
+Pull out 100,000 names from `BabyNames`, adding up the totals over the years by sex.  Call this `NameList`.
+
+```{r}
+NameList <-
+  BabyNames %>%
+  group_by(name, sex) %>%
+  summarise(total = sum(count))
+```
+
+
+* Names ending with "a".
+* Names ending with a vowel.
+* Names ending with a vowel or "y".
+* Names with 3 consonants in a row.
+* Names with 3 vowels in a row.
+
+Interactive site for testing expressions: <http://regexone.com/>
+
+## Extraction
+
+With just one pattern to match, use `stringr::str_extract()`.
+
+What are the most common vowels, by sex
+```{r}
+NameList %>%
+  mutate(vowel = stringr::str_extract(name, "([aeiou]+)$")) %>%
+  group_by(sex, vowel) %>%
+  summarise( total = sum(total) ) %>%
+  arrange(sex, desc(total)) %>%
+  spread(key=sex, total)
+```
+
+With multiple patterns, use `tidyr::extract()`.
+
+<!--chapter:end:722-regex.Rmd-->
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+# Calling 311
+
+In New York City, dialing 311 connects you to a complaint/request service.^[In the US, 911 is the phone number for emergency services.  311 is for non-emergency services.]  New York provides information about individual calls to 311 on a [web site](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9?).
+
+I want to see how the number of 311 calls for different reasons varies over time of day and day of the week.  I'm also interested in finding out whether there are hot spots for 311 calls, and how this depends on factors such as income.
+
+![311 data web site](Images/311-Calls.png)
+
+That site provides an "Export" feature.  You can download the data in several formats: CSV is appropriate. Using a web browser, I downloaded it to my `Downloads` directory.
+
+As of October 12, 2016, the data file is more than 9GB in size and encompasses almost 14 million complaints. It has 53 variables, but most of these are not relevant to most of the complaints or requests. For example, `"Bridge Highway Segment"` is relevant only to 311 calls that have to do with bridges, and `"Park Facility Name"` only to calls involving parks.
+
+Whenever the size of a data set is larger than the amount of random-access memory in your computer, it's likely that you will need special techniques to analyze it. This applies also to data that is about the same size as the random-access memory. On the computer on which this is being written, a 2013 MacBook Pro, I've got 16GB of random-access memory. So, rather than just reading in the data file to R, all in one go, I'm going to be a little careful and try to figure out what will be easy and what won't.
+
+Many file-reading functions in R will let you read just a few rows from a data set. Here, I'll read just the first two thousand rows, to get an idea of which variables are important.
+
+```{r message = FALSE, warning=FALSE}
+CallsFile <- "~/Downloads/311_Service_Requests_from_2010_to_Present.csv"
+JustAPeek <- 
+  CallsFile %>% 
+  data.table::fread( nrows=2000 ) 
+
+names( JustAPeek )
+```
+
+To illustrate, `"Taxi Pick Up Location"` is blank in the vast majority of the first two thousand cases, so presumably this is relevent to just a small fraction of complaints.
+```{r}
+JustAPeek %>%
+  group_by(`Taxi Pick Up Location`) %>%
+  tally()
+```
+
+To get started, `CreatedDate`, and `Complaint Type`, seem like good variables to explore. These are columns 2 and 6. I can tell `fread()` just to read those columns.
+
+I'll read in a few rows just to make sure things are working:
+```{r}
+SmallData <- 
+   CallsFile %>%
+   data.table::fread( nrows=5, select=c(2,6))
+SmallData
+```
+
+Can I use this method to read in a large number of cases? Rather than just trying to read the whole data set, I'll try it for different numbers of rows and measure how long it takes. I built up slowly, first testing 10 rows, then 100, then 1000. I found I could get to one-million rows while still just taking a few seconds. So it seem plausible that I can read in the whole thing with just the regular kinds of commands.
+```{r}
+system.time(SmallData <- 
+              CallsFile %>% 
+              data.table::fread(nrows = 1000000, select = c(2,6)))
+```
+
+Now I'll check whether I can convert the `"Created Date"` variable to a time object. Rather than use all 13 million cases, I'll start small again and work up with the number of rows to read.
+
+```{r}
+system.time(SmallData <- 
+              CallsFile %>% 
+              data.table::fread(nrows = 1000000, select = c(2,6)) %>% 
+              mutate(time = lubridate::mdy_hms(`Created Date`)) %>%
+              select(time, complaint = `Complaint Type`)
+)
+```
+Again, no problem reading in a million rows.
+
+It's also helpful to see how large is the object being created.
+```{r}
+object.size(SmallData)
+```
+
+Sixteen million bytes is only about 0.1% of the fast memory on my computer. The whole data set, with 13 million cases will take up only about 1-2% of the memory. No problem!
+
+Having established this, the question is whether the analysis of all 13 million cases can be done in a reasonable amount of time.  Let's try tabulating the complaint types in the 1-million case data table:
+
+```{r}
+system.time(Results <- 
+              SmallData %>% 
+              group_by(complaint) %>% 
+              tally() %>%
+              arrange(desc(n)))
+Results
+```
+
+Or, to see when the complaints occur:
+```{r}
+system.time(Complaints_by_time <- 
+              SmallData %>% 
+              mutate(hour_of_day = lubridate::hour(time),
+                     minute_of_hour = lubridate::minute(time),
+                     day_of_week = lubridate::wday(time),
+                     day_time = (day_of_week) + hour_of_day / 24 + minute_of_hour / (24*60))
+            )
+
+object.size(Complaints_by_time)
+
+system.time(Results <- 
+              Complaints_by_time %>%
+              group_by(hour_of_day) %>%
+              tally()
+)
+Results
+```
+
+Or, graphing out when the events occur:
+```{r}
+Complaints_by_time %>%
+  ggplot(aes(x = day_time)) +
+  geom_density() + xlab("Day")
+```
+
+There's a peak near the start of each day.  Let's filter out the events that are recorded just at midnight:
+
+```{r}
+Complaints_by_time %>%
+  mutate(at_midnight = hour_of_day == 0 & minute_of_hour == 0,
+         year = lubridate::year(time)) %>%
+  group_by(at_midnight, year) %>%
+  tally()
+```
+
+```{r}
+Time_stamped_complaints <-
+  Complaints_by_time %>%
+  mutate(at_midnight = hour_of_day == 0 & minute_of_hour == 0) %>%
+  filter( ! at_midnight)
+nrow(Time_stamped_complaints)
+```
+
+About 60% of the complaints have time stamps other than midnight.
+
+```{r}
+Time_stamped_complaints %>%
+  ggplot(aes(x = day_time)) +
+  geom_density() + xlab("Day")
+```
+
+Let's look at the categories with the largest number of complaints. What's a useful way of displaying how the patterns vary with time.
+
+```{r}
+Time_stamped_complaints %>%
+  group_by(complaint) %>%
+  filter(20000< n()) %>%
+  ggplot(aes(x = day_time)) +
+  geom_density(position = "dodge", fill = "gray", alpha = 0.2, bw = 1/24) + xlab("Day") + 
+  facet_wrap(~ complaint)
+```
+
+
+
+<!--chapter:end:732-Calling-311.Rmd-->
+
+# Regex examples.
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+Here are some examples of patterns in names and the use of a regular expression to detect them. We'll work with the baby names data, summarised to give the total count of each name for each sex.
+
+```{r}
+NameList <-
+  BabyNames %>%
+  mutate(name = tolower(name)) %>%
+  group_by(name, sex) %>%
+  summarise(total=sum(count)) %>%
+  arrange(desc(total))
+```
+
+
+
+The regular expression is the string in quotes.  `grepl()` is a function that compares a regular expression to a string, returning TRUE if there's a match, FALSE otherwise.
+
+1. The name contains "shine", as in "sunshine" or "moonshine"
+    ```{r}
+NameList %>%
+  filter(grepl("shine", name)) %>%
+  head()
+```
+2. The name contains three or more vowels in a row.
+```{r}
+NameList %>%
+  filter(grepl("[aeiou]{3,}", name)) %>%
+  head()
+```
+3. The name contains three or more consonants in a row.
+```{r}
+NameList %>%
+  filter(grepl("[^aeiou]{3,}", name)) %>%
+  head()
+```
+4. The name contains "mn"
+```{r}
+NameList %>%
+  filter(grepl( "mn", name)) %>%
+  head()
+```
+
+5. The first, third, and fifth letters are consonants.
+```{r}
+NameList %>%
+  filter(grepl("^[^aeiou].[^aeiou].[^aeiou]", name)) %>%
+  head()
+```
+6. How often do boys' and girls' names end in vowels?
+
+```{r}
+NameList %>%
+  filter( grepl( "[aeiou]$", name ) ) %>%
+  group_by( sex ) %>%
+  summarise( total=sum(total) )
+```
+
+Girls' names are almost five times as likely to end in vowels as boys' names.
+
+7. What are the most common end vowels for names?
+
+To answer this question, you have to extract the last vowel from the name.  The `extractMatches()` transformation function can do this.
+
+```{r}
+NameList %>%
+  extractMatches( "([aeiou])$", name, vowel=1 ) %>%
+  group_by( sex, vowel ) %>%
+  summarise( total=sum(total) ) %>%
+  arrange( sex, desc(total) )
+```
+
+Credit: Adam Lucas
+
+<!--chapter:end:734-regex-names.Rmd-->
+
+# Extracting matching parts of regular expressions
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+
+The `extractMatches()` data verb from the `DataComputing` package helps you to identify the specific characters that match in a regular expression.
+
+Details:
+
+1. Like all data verbs, `extractMatches()` takes a data table as input and produces a data table as output. That data table will have one or more additional columns with the extractions
+
+2. syntax is `Data_table %>% extractMatches(regex, var,...)`. The `var` is the variable to be used in matching with the regex. The `...` provides a way for you to name the extracted segments.
+
+3. To indicate that you want to extract the content that matches part of the regexp, wrap that part in parentheses.
+
+4. When there is no match `extractMatches()` returns `NA`.
+
+Example 1:  This regex looks for the letters "n" or "r" followed by a vowel. Both the specific letter and the specific vowel are extracted.
+
+```{r}
+BabyNames %>% 
+  head() %>%
+  extractMatches("([nr])([aeiouy])", name)
+```
+
+
+Example 2: What are the most common end vowels for Bible names?
+
+To answer this question, you have to extract the last vowel from the name.  The `extractMatches()` transformation function can do this.
+
+```{r}
+BibleNames %>%
+  extractMatches( "([aeiou])$", name, vowel=1) %>%
+  group_by(vowel ) %>%
+  summarise( total= n()) %>%
+  arrange( vowel, desc(total) )
+```
+
+Example 2: What Bible Names start and end with a vowel, and what are those vowels?  In this example, we'll arrange for the first match to be called `beg_vowel` and the second to be called `end_vowel`.
+
+```{r}
+BabyNames %>%
+  extractMatches( "^([AEIOU]).*([aeiou])$", name, beg_vowel=1, end_vowel=2) %>%
+  head()
+```
+
+
+#Tasks for you
+
+1. Which Bible names in `BibleNames` have the word "man" in the meaning (not first or last word)?
+
+```{r,include=show_answers}
+BibleNames %>%
+  filter(grepl("[[:blank:]]+man[[:blank:]]+",meaning))
+```
+
+2. Grab everything but the last letter of `names` in `BabyNames` that end with a vowel (example: Grab Ev from Eva)
+
+```{r,include=show_answers,warning=FALSE}
+BabyNames %>%
+  extractMatches(pattern="(.*)[aeiouy]$", name, root=1) %>%
+  head()
+```
+
+
+3. What will this regex extract?
+
+```{r, echo=FALSE, eval=FALSE}
+BabyNames %>% 
+  extractMatches("^[A-Z](.).(.*)[aeiou]$", name, early=1, late = 2) %>% 
+  head(10)
+```
+
+
+<!--chapter:end:735-regex-extract.Rmd-->
+
+# Example: Finding the PO number in an address
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+Suppose you wanted to extract the PO Box number from an address.
+
+Read the street address data and pull out a sample of a few dozen cases.
+```{r cache=TRUE}
+Addresses <- read.file("http://tiny.cc/dcf/street-addresses.csv")
+Sample <- Addresses %>%
+  sample_n(size = 50)
+```
+
+Following each of the steps listed above:
+
+1. The PO Box cases tend to have a substring "PO".
+2. The regular expression for "PO" is simply `"PO"`.^[Perhaps you want to insist that PO be preceeded and followed by a space or the start of the address, so that the regex doesn't match, say, `"49 EDGAR ALLEN POE TERRACE"` or `"POPCORN DRIVE"`. This regex would look like `"^|\\s+PO\\s+"`. But in the example, we'll keep it simple.]
+3. Find some cases that match:
+    ```{r}
+    Matches <-
+      Sample %>%
+      filter(grepl("PO ", address))
+    ```
+    ```{r}
+    Matches
+    ```
+4. Find cases that don't match:
+    ```{r}
+    Dont <-
+      Sample %>%
+      filter( ! grepl("PO ", address))
+    ```
+    ```{r}
+    Dont 
+    ```
+5. Find any cases in the `Matches` that shouldn't be there.  They all look good here.
+6. Find any cases in `Dont` that should have matched. (The `NCSU BOX` addresses should have matched our intension.)
+7. It looks like `"BOX"` would have been a better pattern. We expect `"BOX"` to be followed by a space and a number, so `"\\s+BOX\\s+\\d+"` 
+    ```{r}
+    pattern <- "\\s+BOX\\s+\\d+"
+    Matches <-
+      Sample %>%
+      filter(grepl(pattern, address))
+    Dont <-
+      Sample %>%
+      filter( ! grepl(pattern, address))
+    ```
+    ```{r echo=FALSE, in_margin=TRUE}
+    Dont
+    ```
+The result seems satisfactory.
+
+Now we want to extract the box number. First, mark the part of the pattern that you want to extract by surrounding it with parentheses. Then, you'll be in a position to use `tidyr::extract()` to pull out the part of the pattern identified by extraction parentheses.
+
+```{r}
+pattern <- "\\s+BOX\\s+(\\d+)"
+BoxNumbers <-
+  Sample %>%
+  filter(grepl(pattern, address)) %>%
+  tidyr::extract(address, into="boxnum", regex=pattern)
+```
+```{r in_margin=TRUE}
+BoxNumbers %>% head()
+```
+
+Note that `tidyr::extract()` should be given only those cases that match the regular expression, so `filter()` is applied before `tidyr::extract()`
+
+<!--chapter:end:756-PO-BOX.Rmd-->
+
+# Scraping data from web sites
+
+```{r include=FALSE}
+require(mosaic)
+require(rvest)
+require(knitr)
+require(NHANES)
+knitr::opts_chunk$set(message=FALSE)
+```
+
+* Example of an API: [FDA adverse drug events database](https://open.fda.gov/drug/event/)
+* Example of simple download/export about [schools in New York City](https://nycopendata.socrata.com/data?cat=education)
+    - NYC [School-level SAT data](https://data.cityofnewyork.us/Education/SAT-Results/f9bf-2cp4)
+    - NYC [high-school directory](https://data.cityofnewyork.us/Education/DOE-High-School-Directory-2014-2015/n3p6-zve2)
+    - [AP test scores](https://data.cityofnewyork.us/Education/AP-College-Board-2010-School-Level-Results/itfs-ms3e)
+* [Air quality in NYC](https://data.cityofnewyork.us/Environment/Air-Quality/c3uy-2p5r)
+
+Frozen at [IBDB](http://www.imdb.com/title/tt2294629/)
+
+```{r}
+frozen <- read_html("http://www.imdb.com/title/tt2294629/")
+itals <- html_nodes(frozen, "em")
+cast <- html_nodes(frozen, "span.itemprop")
+one <- html_nodes(frozen, "#titleCast :nth-child(2) .itemprop .itemprop")
+title <- html_nodes(frozen, "h1")
+rating <- html_nodes(frozen, "strong span")
+```
+
+[Instructions on getting the xpath](http://www.r-bloggers.com/using-rvest-to-scrape-an-html-table/) to an element on a web page (in Chrome).
+
+```{r}
+library("rvest")
+url <- "http://en.wikipedia.org/wiki/Mile_run_world_record_progression"
+Table1 <- url %>%
+  read_html() %>%
+  html_nodes(xpath='//*[@id="mw-content-text"]/table[1]') %>%
+  html_table()
+```
+```{r}
+Table1[[1]]
+```
+
+
+
+
+# Scraping
+
+Organized scraping: drawing on organized web resources.
+
+* [ngrams](../Activities/Word-use.Rmd)
+* CIA factbook
+* map tiles. See [this blog on mapping out Russian airstrikes in Syria](http://www.karambelkar.info/2015/11/re-plotting-russian-airstrikes-in-syria/)
+* shapefiles
+
+
+## Find some data of interest to you
+
+CNN vote results
+```{r}
+library(jsonlite)
+utahRJSON <- 
+  fromJSON("http://data.cnn.com/ELECTION/2016primary/UT/county/S.json",
+          flatten=TRUE)
+utahRJSON$candidates
+```
+
+[CMS Medicare Beneficiaries](https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DE_Syn_PUF.html)    
+    * Go to Prescription Drug Events
+    * Unzip
+    * [Codebook](https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/Downloads/SynPUF_Codebook.pdf)   
+    
+    
+```{r eval=FALSE}
+Drug_events <- "/Users/kaplan/Downloads/DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1.csv"
+Drug_events <- readr::read_csv(Drug_events, col_types="cccciiii")
+```
+
+`DESYNPUF_ID` is a patient ID?
+
+`PDE_ID` is a drug ID?
+
+```{r eval=FALSE}
+Drug_events %>% 
+  group_by(PDE_ID) %>%
+  summarize(total = sum(TOT_RX_CST_AMT)) %>%
+  arrange(desc(total)) -> foo
+```
+
+
+[CMS providers site](https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Outpatient.html)
+
+    * `"http://tiny.cc/dcf/CMS_ProvidersSimple.rds"`
+    * `"http://tiny.cc/dcf/CMS_Providers.rds"`
+    * `"http://tiny.cc/dcf/CMS_Claims.rds"`
+    * `"http://tiny.cc/dcf/CMS_HCPCS.rds"`
+    
+
+# Cleaning
+
+## Untidy data
+
+Walmart store closings
+
+## Parenthetical notes
+
+## Currency symbols
+
+## Funny symbols
+
+```{r}
+library("rvest")
+url <- "http://en.wikipedia.org/wiki/Mile_run_world_record_progression"
+Tables <- url %>%
+  html() %>%
+#  html_nodes(xpath='//*[@id="mw-content-text"]/table[1]') %>%
+  html_table(fill = TRUE)
+Table1 <- Tables[[1]]
+```
+
+Pull out the oddball entries
+```{r}
+Table1 <- 
+  Table1 %>%
+  mutate(funny = gsub("[0-9]:[0-9]{2}","", Time)) 
+Funny <- 
+  Table1 %>%
+  select(funny) %>% 
+  unique()
+```
+
+Add in the fixes:
+```{r}
+Funny <- 
+  Funny %>% mutate(fix = c("","25","75", "50", "20"))
+Table1 <- 
+  Table1 %>% 
+  tidyr::extract(Time, "good", "^([0-9]:[0-9]{2})") %>%
+  left_join(Funny, by=c("funny" = "funny")) %>%
+  mutate(good = paste(good, fix, sep=".")) %>%
+  tidyr::extract(good, c("minutes", "seconds"), "^([0-9]+):([0-9\\.]+)")
+```
+
+
+# Activity
+
+[Scraping Nuclear Reactors](../Activities/NuclearReactors.pdf)
+
+<!--chapter:end:821-Scraping.Rmd-->
+
+---
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
+# Mini-languages
+
+```{r include = FALSE}
+require(DataComputing)
+require(mosaic)
+```
+
+
+* Markdown
+
+```{markdown}
+A list in markdown
+
+1. First item
+#. Following item
+#. and following that!
+
+Link to [Macalester site](http://www.macalester.edu)
+```
+
+* YAML
+
+```{yaml}
+title: "The Street Where You Live"
+author: "Data Computing"
+date: "Computing project"
+output: 
+  rmarkdown::tufte_handout
+```
+
+* dplyr & friends
+
+```{r}
+CPS85 %>%
+  group_by(union, sex) %>%
+  summarise(mean(wage))
+```
+
+* mosaic package: formulas applied to basic stat functions
+```{r}
+mosaic::mean(wage ~ union + sex, data = CPS85)
+```
+
+* Latex math markup
+
+```latex
+$\int_0^\infty \frac{1}{x^2} dx$
+```
+giving $\int_0^\infty \frac{1}{x^2} dx$
+
+* regexes
+* CSS selectors
+
+<!--chapter:end:822-MiniLanguages.Rmd-->
+
+# Fun with regexes
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+```{r}
+Name_count <-
+  BabyNames %>%
+  group_by(name, sex) %>%
+  summarise(total = sum(count))
+```
+
+## Three Zs?
+
+```{r}
+pattern <- "(zoo|quo).*(z|q)"
+
+pattern <- "^[^aeiou]*[aeiouy][^aeiou]+([aeiouy])[^aeiou]+[aeiouy][^aeiou]+[aeiouy][^aeiou]+[aeiouy]$"   # Five vowels 
+# pattern <- "[ _\\-] "
+Name_count %>%
+  filter(grepl(pattern, tolower(name))) %>% 
+  mutate(second_vowel = stringr::str_extract(pattern, name))
+
+```
+
+
+
+
+
+<!--chapter:end:832-Fun-with-regexes.Rmd-->
+
+# Scraping the weather
+
+```{r include = FALSE}
+library(DataComputing)
+library(rvest)
+```
+
+
+We're interested in scraping the climate data for all cities in the US. <www.bestplaces.net> has this information
+
+
+```{r}
+states <- read_html("http://www.bestplaces.net/find/")
+state_links <- character(51)
+for (i in 0:5) {
+  this_state <- html_nodes(states, css = paste0("#mainContent_hlk", i))
+  state_links[i + 1] <- html_attr(this_state, name = "href")
+}
+```
+
+Get the towns within a state:
+```{r}
+scrape_the_town_links <- function(state_url = "http://www.bestplaces.net/find/state.aspx?state=ut") {
+
+contents <- read_html(state_url)
+cities <- html_nodes(contents, "a")
+cities1 <- cities[grepl("\\.\\./city/", cities)]
+data_frame(
+  name = html_text(cities1),
+  url = html_attr(cities1, "href")
+) %>%
+  mutate(url = gsub("\\.\\./", "http://www.bestplaces.net/", url))
+}
+```
+
+```{r}
+city_url <- "http://www.bestplaces.net/city/utah/alta"
+contents <- read_html(city_url)
+climate_contents <- read_html(gsub("/city/", "/climate/city/", city_url))
+tab <- html_nodes(climate_contents, "table")
+# Get rid of the third column
+# fix commas in numbers
+# Translate the content labels into something shorter
+# Add in columns to give the city and state. 
+
+# turn this into a function
+```
+
+
+Get the data for all cities in Utah.
+
+
+Credit: Garrett Grolemund
+
+<!--chapter:end:832-Scraping-weather.Rmd-->
+
+# Machine Learning
+
+```{r include=FALSE}
+require(mosaic)
+require(DataComputing)
+require(statisticalModeling)
+require(rpart)
+require(ggdendro)
+require(rpart.plot)
+require(randomForest)
+require(rvest)
+require(knitr)
+require(NHANES)
+knitr::opts_chunk$set(message=FALSE)
+```
+
+We have spent most of our time on two subjects:
+
+1. Data visualization
+2. Data wrangling: getting from the data you are given to the "glyph-ready" data that you need to make a graphic or some other mode to guide interpretation of the data.
+
+Visualization works well with 1-3 variables, and in some situations can work with more variables.
+
+## A multivariable graphic
+
+![](Images/minard_lg.png) Glyph: `geom_path()` or "Sankey", Annotations: rivers and towns
+
+[source](http://www.edwardtufte.com/tufte/graphics/minard_lg.gif)
+
+What variables are being graphed here? Which variable is mapped to which aesthetic?
+
+```{r}
+library(HistData)
+data(Minard.troops)
+data(Minard.cities)
+```
+ 
+```{r}
+library(ggmap)
+background <- get_map(location = "Minsk", zoom = 5) #c(20, 45, 40, 65))
+ggmap(background) +   
+  geom_path(data = Minard.troops, alpha = 0.5, 
+            aes(x = long, y = lat -.8, size = survivors, colour = direction, group = group),
+            linejoin = "bevel", linemitre = 20, lineend = "round") +
+  xlim(24, 38) + ylim(53,57) + coord_fixed(ratio = 2) +
+  geom_text(aes(x = long, y = lat-.8, label = city), size = 3, data = Minard.cities)
+```
+
+
+
+
+## With more variables?
+
+If we need to relate more variables, a visualization may not suffice.
+
+## Various goals for machine learning
+
+1. Make predictions
+2. Anticipate the effect of an intervention
+3. Explore masses of data
+
+## Supervised vs unsupervised learning
+
+* Supervised: There is an outcome that you have recorded in your data.
+* Unsupervised: No outcome variable.
+    - in-class activity on gene expresion
+    - example about Scottish Parliament in book 
+    
+## Supervised learning
+
+We construct a mathematical model of the situation.
+
+- Configure the model with adjustment knobs. These are called "parameters." 
+- Twiddle with the knobs until the model makes a good match to the data.  
+
+```{r cache = TRUE}
+knitr::include_graphics("https://seamlessblog.files.wordpress.com/2013/06/mannequin-collage1.jpg")
+```
+
+In the dressmaker's dummy, adjustment knobs for matching the model to measurements of waist, hips, height, etc.
+
+In machine learning, we adopt a mathematical form with parameters.
+
+* Example 1: Straight-line models
+    $f(x) = m x + b$. The input is $x$, the parameters are $m$ and $b$.
+    ```{r}
+    ggplot(SaratogaHouses, 
+           aes(y = price, x = livingArea)) + 
+      geom_point(alpha = 0.3) +
+      stat_smooth(method = "lm", se = FALSE)
+    coef(lm(price ~ livingArea, data = SaratogaHouses))
+    ```
+* Example 2: Trees with branches
+    At each branch point, the level of the variable to split on.
+    ```{r}
+    model <- rpart(time ~ year, data = SwimRecords)
+    prp(model)
+    ```
+
+These simple functions with just one input variable can be made more elaborate, e.g.
+
+* Trees
+    - Can choose which variable to split on at each break
+    - Can randomize choice, make lots of trees, and average
+    ```{r}
+    swim_model <- randomForest(time ~ year + sex, data = SwimRecords)
+    fmodel(swim_model)
+    ```
+
+* Straight-lines become low-order polynomials: $f(w, x, y, z) = a + bw + cx + dy + ez$
+    ```{r}
+    house_price_model <- 
+      lm(log(price) ~ log(livingArea) * bathrooms * newConstruction + pctCollege, 
+         data = SaratogaHouses)
+    fmodel(house_price_model, post_transform = c(price = exp) )
+    ```
+    - Statistical question: Should we take these detected patterns seriously?
+    ```{r}
+    fmodel(house_price_model, post_transform = c(price = exp), intervals = "confidence")
+    ```
+    - So why are the results so uncertain for new construction?
+        - not much data
+        - new houses are not built with one bathroom
+    ```{r}
+    SaratogaHouses %>% 
+      ggplot(aes(x = bathrooms, fill = newConstruction)) + geom_bar(position = "dodge")
+    ```
+
+## Application Examples
+
+### Home electricity use
+
+How to visualize the relationship between `thermsPerDay`, `temp` and `kwh`
+
+```{r cache = TRUE, message = FALSE}
+Utilities <- read.csv("http://tiny.cc/dcf/utilities-up-to-date.csv", 
+                      stringsAsFactors = FALSE)
+
+library(splines)
+model <- lm(thermsPerDay ~ ns(temp, 5) + ns(temp,3) : kwh, data = Utilities)
+fmodel(model, intervals = "confidence")
+```
+
+Interpreting this model: In colder temperatures, higher electricity use leads to lower natural gas usage.
+
+### Wages and education
+
+How does wage depend on sex? Take into account education and age and sector
+
+```{r}
+forest_mod <- randomForest(wage ~ educ + sex + age, data = CPS85)
+fmodel(forest_mod, age = c(25, 40))
+```
+
+
+## Statistical learning
+
+* honest assessment of differences
+* honest comparison of models
+    - measure "complexity" or "flexibility" of models
+* bias/variance trade-off
+* covariates and causal reasoning
+
+
+## Example: Child carseat sales
+
+Purpose: Figure out how to raise sales of a brand of carseats.
+
+```{r}
+head(ISLR::Carseats %>% rename(CompP=CompPrice,Ads=Advertising, Pop=Population, Shelf=ShelveLoc, Edu=Education))
+```
+
+## Hypothesis generated model
+
+1. Price relative to competitor's price is relevant.
+2. Larger population gives larger sales
+3. Education level?
+4. Advertising?
+
+```{r}
+Carseats <-
+  ISLR::Carseats %>%
+  mutate(rel_price = Price / CompPrice)
+mod1 <- 
+  Carseats %>% 
+  lm(Sales ~ rel_price + Population + Education + Advertising,
+     data = .)
+coef(mod1)
+```
+
+## Interpreting the model?
+
+```{r}
+summary(mod1)
+```
+
+## Another formalism: Regression trees
+
+```{r}
+library(rpart)
+mod2 <- 
+  Carseats %>%
+  rpart(Sales ~ rel_price + Price + CompPrice + Advertising + Population + Education + Income, data=.)
+prp(mod2)
+```
+
+
+## No prior model at all?
+
+```{r}
+mod3 <- Carseats %>% rpart(Sales ~ ., data=.)
+prp(mod3)
+```
+
+## Shelf location?
+
+```{r}
+mod4 <- Carseats %>%
+  rpart(Sales ~ rel_price + Advertising + ShelveLoc + Population, data=.)
+prp(mod4)
+```
+
+## Building a classifier
+
+> 62 variables are derived from a confocal laser scanning image of the optic nerve head, describing its morphology. Observations are from normal and glaucomatous eyes, respectively.
+
+```{r}
+data("GlaucomaM", package = "TH.data")
+```
+```{r echo=FALSE}
+GlaucomaM %>% 
+  arrange(Class) %>% 
+  select(-Class) %>% as.matrix() -> foo
+```
+
+### With glaucoma
+
+```{r echo=FALSE}
+image(foo[1:98,], ylab="Variable", xlab="Person",xaxt='n',yaxt="n'")
+```
+
+### Normal eyes
+
+```{r echo=FALSE}
+image(foo[99:196,], ylab="Variable", xlab="Person",xaxt='n',yaxt="n'")
+```
+
+## Build a classifier ...
+
+```{r}
+glaucoma_rpart <- rpart(Class ~ ., data = GlaucomaM, 
+                        control = rpart.control(xval = 100))
+prp(glaucoma_rpart, type=4, extra=2)
+```
+
+## Unsupervised learning
+
+```{r}
+Dists <- dist(mtcars)
+Dendrogram <- hclust(Dists)
+ggdendrogram(Dendrogram)
+```
+
+
+
+
+<!--chapter:end:860-Machine-Learning.Rmd-->
+
+# Some resources
+
+* Data scraping: <https://github.com/ropensci/user2016-tutorial>
+* Text analysis of tweets: <http://varianceexplained.org/r/trump-tweets/>
+
+<!--chapter:end:950-resources.Rmd-->
+

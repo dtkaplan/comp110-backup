@@ -1,7 +1,3 @@
----
-output: html_notebook
----
-
 # More transformation verbs
 
 ```{r include = FALSE}
@@ -176,9 +172,17 @@ With the `lubridate` package:
     - `month()` 
     - `year()`
     
-```{r cache = TRUE}
+```{r eval = FALSE}
 Holidays <- read.csv("http://tiny.cc/dcf/US-Holidays.csv",
                      stringsAsFactors = FALSE)
+```
+
+```{r echo = FALSE}
+Holidays <- read.csv("Data/US-Holidays.csv",
+                     stringsAsFactors = FALSE)
+```
+
+```{r}
 with(Holidays, class(date))
 Holidays <- 
   Holidays %>%

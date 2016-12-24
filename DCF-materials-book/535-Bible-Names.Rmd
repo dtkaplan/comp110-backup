@@ -1,7 +1,3 @@
----
-output: html_notebook
----
-
 # Biblical Names
 
 A list of Bible-related names is available this way:

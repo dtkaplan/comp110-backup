@@ -1,7 +1,3 @@
----
-output: html_notebook
----
-
 # Case study in basic data verbs: Moby Dick
 
 ```{r include=FALSE}

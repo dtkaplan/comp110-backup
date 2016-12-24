@@ -6,11 +6,12 @@ output:
 
 # COMP 110 Data Computing
 
-Macalester College, Fall 2016
+Macalester College, Spring 2017
 
-[**Notes for the course**](./DCF-materials-book/_book/datainfrastructure.html). The material introduced in class discussions and lectures, as well as some supplemental material.
 
-* Genetics in-class activity [PDF](DCF-materials-book/Handouts/863-UnsupervisedGenetics.pdf)
+
+
+
 
 
 ## Syllabus
@@ -30,13 +31,14 @@ Macalester College, Fall 2016
 ### Resources
 
 * [Macalester's RStudio Server](rstudio.macalester.edu)
-* Alternative: Install RStudio on your own computer. [Use the "preview" edition](https://www.rstudio.com/products/rstudio/download/preview/). You'll also need to [install `git`](https://desktop.github.com/) 
-* The GitHub for the class: [clone address](https://github.com/dtkaplan/Comp-110-Assignments.git) 
+    - Alternative: Install RStudio on your own computer. [Use the "preview" edition](https://www.rstudio.com/products/rstudio/download/preview/). You'll also need to [install `git`](https://desktop.github.com/) 
+* [Instructions for](https://github.com/dtkaplan/Comp-110-Assignments-Spring-2017) setting up your own repository for "handing in " projects and assignments. 
+* [**Notes for the course**](./DCF-materials-book/_book/datainfrastructure.html). The material introduced in class discussions and lectures, as well as some supplemental material.
 * In-class Group spreadsheets: [Group-1](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHNpejZtd3dQTXlPM245R0ZQbG0yYkE&usp=sharing); [Group-2](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHk1enZoVnhrV09ad2x4dXR1MlpWNFE&usp=sharing); [Group-3](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dElIQkh0SWtyaW9aRkdMZVBERHdJNXc#gid=0); [Group-4](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dEYxdEhWZUI1S3NxN2ZaaThXSEtMVWc&usp=sharing); [Group-5](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dDVsLWJaUHV5emFVQlVfSjFrdmFkYXc&usp=sharing); [Group-6](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dFdvNGpFZkNuUHZqd2g2UEVDc0VEZEE&usp=sharing)
 
 -----------
 
-## Week 1: Getting Organized (Aug 31)
+## Week 1: Getting Organized (Jan 25)
 
 You already have an account on the Macalester RStudio server <rstudio.macalester.edu>. Login with your Macalester email credentials.
 
@@ -55,7 +57,7 @@ Relevant links:
 
 --------------
 
-## Week 2: Data Infrastructure (Sept 7)
+## Week 2: Data Infrastructure (Feb 1)
 
 * Readings: Data Computing Chapters 1 through 4
 * Short-answer questions from book: file `Week-2-short-answer.Rmd`
@@ -73,11 +75,11 @@ Relevant links:
 
 ----------
 
-> Note. We will not be meeting on Sept. 14
+> Note. We will not be meeting on Feb. 8
 
 ----------
 
-## Week 3: Data summaries and graphics (Sept 21)
+## Week 3: Data summaries and graphics (Feb 15)
 
 * Readings: Data Computing chapters 5, 6, & 7
 * Short-answer questions from book: File `Week-3-short-answer.Rmd`
@@ -93,7 +95,7 @@ Relevant links:
 
 ----------
 
-## Week 4: Data Verbs (Sept 28)
+## Week 4: Data Verbs (Feb 22)
 
 * Readings: *Data Computing* chapters 8 & 9
 * Short-answer questions: from book. File `Week-4-short-answer.Rmd`
@@ -108,7 +110,7 @@ NB. We will be scoring papers toward the end of Sept. So feel free to update you
 
 ------------
 
-## Week 5: Combining data (Oct 5)
+## Week 5: Combining data (March 1)
 
 * Readings: Data Computing chapters 10 & 11
 * Short-answer questions from book: File `Week-5-short-answer.Rmd`
@@ -130,7 +132,7 @@ load("Colleges-excerpt.rda")
 
 --------------
 
-## Week 6: Collective properties of data: Stats (Oct. 12)
+## Week 6: Collective properties of data: Stats (March 8)
 
 * Readings: from Data Computing Chapters 12, 13 and 14
 * Short-answer questions from the book: File `Week-6-short-answer.Rmd`
@@ -142,11 +144,11 @@ load("Colleges-excerpt.rda")
     
 ---------
     
-> Note: we will *not* be having a session on Oct 19. That's too close to fall break.
+> Spring break
 
 ------------
 
-## Week 7: Scraping and cleaning data (Oct 26)
+## Week 7: Scraping and cleaning data (March 22)
 
 * Readings: Data Computing chapters 15 & 16
 * Short-answer questions from the book: File `Week-7-short-answer.Rmd`
@@ -172,10 +174,12 @@ load("Colleges-excerpt.rda")
     - 17.2
 * [Introduction to modeling online course](https://www.datacamp.com/courses/introduction-to-statistical-modeling-part-1). This is the first chapter of an online course being developed as I update the Math 155 (Intro to Statistical Modeling) materials. The course differs from the current Math 155 in that it is based on machine-learning concepts rather than the traditional regression concepts. 
 * In-class activity:
+    - [Handout in PDF](DCF-materials-book/Handouts/863-UnsupervisedGenetics.pdf)
+)
     - File `Week-8-Project.Rmd`
 
 --------------
 
-## Final Exam
+## Final Exam 
 
 This is a short course, so the exam is similarly short. Do it in the 10 days following the last class session.
