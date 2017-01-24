@@ -8,12 +8,6 @@ output:
 
 Macalester College, Spring 2017
 
-
-
-
-
-
-
 ## Syllabus
 
 * Instructor: Daniel Kaplan, OLRI 231, <kaplan@macalester.edu>
@@ -46,9 +40,9 @@ In this brief session, we will:
 
 1. Get everyone started with using the software for the course. 
 2. Install many of the R packages that will be needed for the course.
-3. Create GitHub and RStudio accounts.
-4. Set up an RStudio "project"" to hold your work in the course.
-5. Hand in a practice assignment so that we can confirm that everything is working. File: `Week-1-project.Rmd`.
+3. Create a GitHub account and "clone" the repository at <http://github.com/dtkaplan/Comp110-Assignments> to give you the files you will be modifying as you work in the course.
+4. Clone (again) the repository you created in (3) into RStudio as a "project"" to hold your work in the course.
+5. Open the `Week-1-project.Rmd` file in the RStudio editor. You'll put some "markdown" content about a historical event or person into that document, then compile it to HTML, and update your GitHub repository with the new file.
 
 Relevant links:
 
@@ -68,6 +62,9 @@ Relevant links:
 * In-class activity: Markdown and data graphics
     - file: `Week-2-project.Rmd`
 * Notes from class: [tidy data](DCF-materials-book/_book/tidy-data.html) : [R parts of speech](DCF-materials-book/_book/r-programming-parts-of-speech.html) : [highway fatality data](DCF-materials-book/_book/case-study-highway-fatalities.html)
+* In-class activity: 
+    - [Library book use](DCF-materials-book/Handouts/251-Library-Books-github.html). 
+    - Use file `Week-2-project.Rmd`
 * In-class links:
     - Group spreadsheets: [Group-1](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHNpejZtd3dQTXlPM245R0ZQbG0yYkE&usp=sharing); [Group-2](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHk1enZoVnhrV09ad2x4dXR1MlpWNFE&usp=sharing); [Group-3](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dElIQkh0SWtyaW9aRkdMZVBERHdJNXc#gid=0); [Group-4](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dEYxdEhWZUI1S3NxN2ZaaThXSEtMVWc&usp=sharing); [Group-5](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dDVsLWJaUHV5emFVQlVfSjFrdmFkYXc&usp=sharing); [Group-6](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dFdvNGpFZkNuUHZqd2g2UEVDc0VEZEE&usp=sharing)
     - [Table about marital status in the US armed forces](https://docs.google.com/spreadsheets/d/1Ow6Cm4z-Z1Yybk3i352msulYCEDOUaOghmo9ALajyHo/edit#gid=1811988794)
