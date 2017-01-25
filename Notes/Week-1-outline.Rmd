@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 # Outline of Class Session: Week 1
 
@@ -17,12 +17,12 @@ output:
     - Short final exam
     - Expectations for achievement: Reading proficiency
         - There's a lot of tacit knowledge behind reading, so in order to read you have to know a lot.
-        - Example: [Robinson Crusoe](http://www.gutenberg.org/files/521/521-h/521-h.htm) [excerpt](Notes/RobinsonCrusoe.txt)
+        - Example: [Robinson Crusoe](http://www.gutenberg.org/files/521/521-h/521-h.htm) [excerpt](RobinsonCrusoe.txt)
     - Time budget: 3 hours per week outside of class. Includes reading, short answers, finishing weekly project, etc.
 3. Meet and greet. Introduce yourself [in this shared document](https://docs.google.com/document/d/19_1y2YitiRFcj5mGFZTMkjpdXnf6uvwY3uPW7RD4UvI/edit?usp=sharing)
 4. GitHub tour. 
     - Go to <github.com/dtkaplan/comp110>
-    - Make an account now if you don't have one and fill in [this form](https://goo.gl/forms/u3CgJZULUJVDtgjQ2)
+    - Make an account now if you don't have one and fill in [this form](https://docs.google.com/forms/d/e/1FAIpQLSdEMEn_uHkv4Wm3BDYZ4TU_XxrrSVfXlQ5S7NK0vZvTTm5u-Q/viewform)
 5. RStudio server <rstudio.macalester.edu> login with Mac email credentials.
     - Tour and names
     - Set default for "notebooks"
@@ -56,7 +56,7 @@ output:
         - A picture from the web
         - A bullet list
         - An enumerated list
-        - A chunk that calculates $\sin(\sqrt{pi})$ and assigns the resulting object to the name `my_number`. 
+        - A chunk that calculates $\sin(\sqrt{\pi})$ and assigns the resulting object to the name `my_number`. 
         - A second chunk that takes the square of the arcsin of `my_number`
         - Try different ways to execute any or all chunks.
         - Compile the document.

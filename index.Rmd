@@ -26,6 +26,7 @@ Macalester College, Spring 2017
 
 * [Macalester's RStudio Server](rstudio.macalester.edu)
     - Alternative: Install RStudio on your own computer. [Use the "preview" edition](https://www.rstudio.com/products/rstudio/download/preview/). You'll also need to [install `git`](https://desktop.github.com/) 
+* Clone [this repository](https://github.com/dtkaplan/Comp-110-Assignments-Spring-2017) (using SSH^[I'll show you what this means.]) to create your own, personal repository for the assignments and projects you hand in during the course. See the directions at the bottom of the repository page.
 * [Instructions for](https://github.com/dtkaplan/Comp-110-Assignments-Spring-2017) setting up your own repository for "handing in " projects and assignments. 
 * [**Notes for the course**](./DCF-materials-book/_book/datainfrastructure.html). The material introduced in class discussions and lectures, as well as some supplemental material.
 * In-class Group spreadsheets: [Group-1](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHNpejZtd3dQTXlPM245R0ZQbG0yYkE&usp=sharing); [Group-2](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHk1enZoVnhrV09ad2x4dXR1MlpWNFE&usp=sharing); [Group-3](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dElIQkh0SWtyaW9aRkdMZVBERHdJNXc#gid=0); [Group-4](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dEYxdEhWZUI1S3NxN2ZaaThXSEtMVWc&usp=sharing); [Group-5](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dDVsLWJaUHV5emFVQlVfSjFrdmFkYXc&usp=sharing); [Group-6](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dFdvNGpFZkNuUHZqd2g2UEVDc0VEZEE&usp=sharing)
@@ -40,7 +41,7 @@ In this brief session, we will:
 
 1. Get everyone started with using the software for the course. 
 2. Install many of the R packages that will be needed for the course.
-3. Create a GitHub account and "clone" the repository at <http://github.com/dtkaplan/Comp110-Assignments> to give you the files you will be modifying as you work in the course.
+3. Create a GitHub account and "clone" (using SSH^[I'll show you what this means.]) the repository at <https://github.com/dtkaplan/Comp-110-Assignments-Spring-2017> to give you the files you will be modifying as you work in the course. Once you have done so, please [fill in this form](https://docs.google.com/forms/d/e/1FAIpQLSdEMEn_uHkv4Wm3BDYZ4TU_XxrrSVfXlQ5S7NK0vZvTTm5u-Q/viewform) so that I will know your account name.
 4. Clone (again) the repository you created in (3) into RStudio as a "project"" to hold your work in the course.
 5. Open the `Week-1-project.Rmd` file in the RStudio editor. You'll put some "markdown" content about a historical event or person into that document, then compile it to HTML, and update your GitHub repository with the new file.
 
