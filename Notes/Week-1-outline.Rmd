@@ -13,7 +13,7 @@ output:
 2. How the course is organized
     - Weekly in-class projects
     - Weekly short-answer questions
-    - Experiment for this semester: DataCamp exercises
+    - Experiment for this semester: interactive tutorials. [Week 1](https://dtkaplan.shinyapps.io/Chapter-01-collection/)
     - Short final exam
     - Expectations for achievement: Reading proficiency
         - There's a lot of tacit knowledge behind reading, so in order to read you have to know a lot.
@@ -21,7 +21,7 @@ output:
     - Time budget: 3 hours per week outside of class. Includes reading, short answers, finishing weekly project, etc.
 3. Meet and greet. Introduce yourself [in this shared document](https://docs.google.com/document/d/19_1y2YitiRFcj5mGFZTMkjpdXnf6uvwY3uPW7RD4UvI/edit?usp=sharing)
 4. GitHub tour. 
-    - Go to <github.com/dtkaplan/comp110>
+    - Go to <http://github.com/dtkaplan>
     - Make an account now if you don't have one and fill in [this form](https://docs.google.com/forms/d/e/1FAIpQLSdEMEn_uHkv4Wm3BDYZ4TU_XxrrSVfXlQ5S7NK0vZvTTm5u-Q/viewform)
 5. RStudio server <rstudio.macalester.edu> login with Mac email credentials.
     - Tour and names
