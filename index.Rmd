@@ -16,7 +16,7 @@ Macalester College, Spring 2017
         - Wed: 2:00pm-3:30pm
         - Anytime by appointment. And if my office door is open, just drop in.
 * Preceptor: Ayoub Belemlih <abelemli@macalester.edu>
-    - Tuesday 8:00-10:00pm, MSCS Reading Room
+    - Sunday 7:00-9:00pm, MSCS Reading Room
 * Text: *Data Computing* ISBN 978-0-9839658-4-8 
 * [Course policies](policies.html): Work, grades, etc.
 
