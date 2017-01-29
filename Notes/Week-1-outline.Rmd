@@ -1,0 +1,72 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+# Outline of Class Session: Week 1
+
+## Data Computing
+
+1. An example of data and visualization: Chris Wells and what ships can tell us about environmental history.
+    - [Origins of American shipping](http://sappingattention.blogspot.com/2012/10/data-narratives-and-structural.html)
+    - What's a bark? [PDF](Resources/Whats_a_bark.pdf) & [Rmd](Resources/Whats_a_bark.Rmd)
+2. How the course is organized
+    - Weekly in-class projects
+    - Weekly short-answer questions
+    - Experiment for this semester: interactive tutorials. [Week 1](https://dtkaplan.shinyapps.io/Chapter-01-collection/)
+    - Short final exam
+    - Expectations for achievement: Reading proficiency
+        - There's a lot of tacit knowledge behind reading, so in order to read you have to know a lot.
+        - Example: [Robinson Crusoe](http://www.gutenberg.org/files/521/521-h/521-h.htm) [excerpt](RobinsonCrusoe.txt)
+    - Time budget: 3 hours per week outside of class. Includes reading, short answers, finishing weekly project, etc.
+3. Meet and greet. Introduce yourself [in this shared document](https://docs.google.com/document/d/19_1y2YitiRFcj5mGFZTMkjpdXnf6uvwY3uPW7RD4UvI/edit?usp=sharing)
+4. GitHub tour. 
+    - Go to <http://github.com/dtkaplan>
+    - Make an account now if you don't have one and fill in [this form](https://docs.google.com/forms/d/e/1FAIpQLSdEMEn_uHkv4Wm3BDYZ4TU_XxrrSVfXlQ5S7NK0vZvTTm5u-Q/viewform)
+5. RStudio server <rstudio.macalester.edu> login with Mac email credentials.
+    - Tour and names
+    - Set default for "notebooks"
+    - Two commands: 
+        ```r
+        system('git config --global user.name "Your name"') 
+        system('git config --global user.email "Your github email"') 
+```
+    - Go to Tools/Global Options/GIT / SVN 
+        - create a key
+        - "View public key". Copy and paste.
+6. Back to your GitHub account: `github.com/your_user_ID`
+    - Go to "Edit profile" then  "SSH and GPG keys".
+    - Add a new key. Give it a description like "Mac rstudio server" and past in the public key you copied from step (5).
+7. Back again to `rstudio.macalester.edu`
+    - Copy this address: `git@github.com:dtkaplan/Comp-110-Assignments.git` to your clipboard
+    - Go to FILE/NEW PROJECT/VERSION CONTROL/GIT
+    - Paste in the address you just copied.
+    - Press "Create Project"
+8. Create your own branch of the project. Still on `rstudio.macalester.edu` do this:
+    - Go to the Git tab. Observe that the branch name is "master".
+    - Give this command: `system("git checkout -b <your_mac_email_address>")`
+    - Observe that the branch name (in the Git tab) is <your_mac_email_address>.
+    - Give this command: `system("git push -u origin <your_mac_email_address>")`
+9. Open `Week-1-project.Rmd`. 
+    - Although we have been giving some commands in the "console", we're not going to do much of that. Instead, you'll put commands into `.Rmd` files and execute them in the file.
+        - On the server, the results will unfortunately appear in the console.
+        - On the Preview Desktop version, they will appear in-line. This is nicer, but maybe just for the instructor.
+    - Verify that you can compile it. Then, write a brief essay about a historical figure or event. Include
+        - Two sections
+        - A picture from the web
+        - A bullet list
+        - An enumerated list
+        - A chunk that calculates $\sin(\sqrt{\pi})$ and assigns the resulting object to the name `my_number`. 
+        - A second chunk that takes the square of the arcsin of `my_number`
+        - Try different ways to execute any or all chunks.
+        - Compile the document.
+10. Hand in your document:
+    - stage the Rmd and html files
+    - commit. Give a meaningful message.
+    - pull.
+    - push.
+
+
+-------------------
+
+Danny Kaplan. Compiled at `r date()`.

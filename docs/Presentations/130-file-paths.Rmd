@@ -1,0 +1,103 @@
+---
+title: "Locating Files"
+author: "Data Computing"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Where do files live? In trees.
+
+
+```{r echo = FALSE}
+knitr::include_graphics("Images/File-tree-upside-down.png")
+```
+
+* The base of the tree is called the **root** and denoted `/`.
+* Each branch is called a **directory** or **folder**.
+* Other branches can split off a branch. We say that the "directory can contain other directories."
+    - These are sometimes called "sub-directories" but there's no real distinction; they're all directories.
+* In addition to branches splitting off, there can be leaves. A directory can contain files (as well as directories). 
+
+Every file is contained within a directory. Every directory (except root) is contained with another directory.
+
+The **path** to a file is the sequence of directories between the root and the file.
+
+----------------------
+
+The **path** to a file is the sequence of directories between the root and the file.
+
+```{r echo = FALSE, out.width = "50%", fig.align='center'}
+knitr::include_graphics("Images/File-tree.png")
+```
+
+In this directory tree ...
+
+* there is a file `file1` that is contained within the `Jane` directory.
+* In turn, `Jane` is contained within `Home` which is contained within root (`/`).
+
+The file path is `/Home/Jane/file1`
+
+* There is another, completely distinct file names `file1`. It's path is `/Home/Pablo/file1`.
+* There are two directories named `/Tmp`. One is `/Home/Tmp`. The other is `/Home/Jane/Tmp`.
+
+-----------------
+
+Every file on the computer has a unique identifier consisting of the path and the file name.
+
+A similar idea applies to the files available through the Internet.
+
+* Instead of `/` as root, there is a protocol as root, typically `http://` or `https://`.
+* There is a **domain name** that describes which computer(s) contain the file, e.g. `http://github.com`.
+* Following the domain name is the path to the file, e.g. `http://github.com/dtkaplan/comp110/`.
+* The file itself is at the end of the path, e.g. `http://github.com/dtkaplan/comp110/index.html`.
+
+
+
+## The "Working Directory"
+
+Every Rmd file is contained within a directory. This is called the **working directory**.
+
+* When you refer to another file, you are allowed to give just the part of the path that stems from the working directory.
+
+Example:
+
+- Your Rmd file is in `/Home`. Within your Rmd file, you can refer to `/Home/Jane/file1` as simply `Jane/file1`. This is called a **relative path**.
+- Paths beginning with root (`/`) are called **absolute** paths.
+
+Relative paths are useful because often you will move an entire directory (and it's contents) to another computer. The absolute path name will probably change. But the relative path remains the same.
+
+## Filetype extensions
+
+All computer files are sequences of bits. The software that reads a file interprets the bits according to a specified format. There are different standard formats for different purposes.
+
+Some common filename extensions for the sort of web resources you will be using:
+
+* `.png` for pictures
+* `.jpg` or `.jpeg` for photographs
+* `.csv` or `.Rdata` for data files
+* `.Rmd` for the human editable text of a document (called R Markdown)
+* `.html` for web pages themselves
+
+## Finding a file path
+
+Most people are used to locating a file by using a **file browser**. 
+
+You click on a directory and then can examine the files and sub-directories contained within that directory.
+
+`file.choose()`: A handy R function for finding the *file path* of a file using a file browser:
+
+A typical dialog works like this:
+
+1. You give the command `file.choose()` in the R *console*. (Don't use `file.choose()` in an Rmd file.)
+2. You navigate in the familiar way up and down the directories.
+3. You select the file you were looking for.
+4. The file name and (absolute) path of the file are displayed, e.g. `/Home/Jane/mydata.csv`.
+5. You copy that name into your Rmd file, e.g.
+    ```{r eval = FALSE, echo = TRUE}
+Cases <- read.csv("/Home/Jane/mydata.csv")
+```
+
+Author: Daniel T. Kaplan

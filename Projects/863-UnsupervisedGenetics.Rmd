@@ -1,0 +1,181 @@
+---
+title: "Unsupervised Genetics"
+author: "Data Computing"
+date: "Computing project"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    citation_package: natbib
+    latex_engine: xelatex
+---
+
+```{r include=FALSE}
+require(DataComputing)
+require(tidyr)
+require(mosaic)
+require(ggdendro)
+require(tint)
+require(dtkbook)
+require(xtable)
+require(knitr)
+options(xtable.comment = FALSE)
+options(xtable.booktabs = TRUE)
+options(xtable.floating = FALSE)
+options(xtable.include.rownames = FALSE )
+options(xtable.type="latex")
+options(xtable.NA.string="NA")
+params <- list(show_answers = TRUE)
+```
+<!-- \begin{small} -->
+
+There are many different kinds of cancer, often given the name of the tissue in which they originate: lung cancer, ovarian cancer, prostate cancer, and so on.
+
+In this exercise, you are going to look for possible relationships among different cancer types.  The basis for this will be the data in `NCI60`, which records the level of gene expression indicated by each of 41,078 probes against each of 60 different cell lines collected from different people with different kinds of cancer.
+
+
+Looking at so many probes is a kind of shotgun approach enabled by 
+*microarray chips*.  It's assumed that only a few genes might be involved in any given type of cancer; by looking at the expression of many genes, it's hoped to be able to identify those few.
+
+<!-- \end{small} -->
+
+# Clustering the cancer types
+
+<!-- \begin{small} -->
+The point of clustering is to identify pairs or sets of cases that are similar.  In *hierarchical clustering*, the pairs or sets are themselves grouped together in terms of similarity.  The result is a kind of tree, a *dendrogram*, that shows which cases and sets of cases are similar.
+
+```{r echo = FALSE, fig.margin=TRUE, fig.height = 6, fig.width=6}
+Dists <- dist(mtcars)
+Dendrogram <- hclust(Dists)
+ddata <- dendro_data(Dendrogram)
+ggdendrogram(Dendrogram, rotate = TRUE) +
+  geom_text(data = ddata$labels, aes(x=x, y=y, label = label), hjust = 0, vjust = 1) +
+  theme_void()
+```
+
+As an example, here is a dendrogram constructed for the different cars in `mtcars`.  There are two major groups of cars.  From the base of the tree, two branches identify two major groups of cars.  Each of those groups is subdivided, with the process repeating until reaching a *leaf*: an individual case.  The level of the horizontal line connecting two sub-branches indicates the distance between those sub-branches.  For example, the Honda Civic, Toyota Corolla, and Fiat 128 are quite similar.
+
+Glyph-ready data for constructing a dendrogram is in the usual tidy form, with the cases being the objects to cluster and the variables being the means to judge similarity between cases. The `mtcars` data table is already in glyph-ready form; take a look! Note that the identifiers for the object, e.g. "Datsun 710," are not stored in a variable but in the *row names* of the data table.
+
+<!-- \end{small} -->
+
+```{r eval = FALSE, echo=FALSE, in_margin=TRUE, caption="Table 1. `mtcars`"}
+mtcars[1:6, 1:5] 
+```
+
+`r margin_table(mtcars[ , 1:4], caption = "Table 1. Part of the <code>mtcars</code> data table", move = 0, row.names = TRUE)`
+
+The process is as follows:
+
+\enlargethispage{1.5in}
+
+1. Find the distances from each case to every other case.  The `dist()` function accomplishes this.
+    ```{r}
+Dists <- dist(mtcars)
+```
+\vspace*{-.2in}
+2. Apply the clustering algorithm to make the dendrogram.
+    ```{r}
+Dendrogram <- hclust(Dists)
+ddata <- dendro_data(Dendrogram)
+```
+\vspace*{-.2in}
+3. Visualize the dendrogram
+    ```{r fig.keep="none"}
+ggdendrogram(Dendrogram, rotate = TRUE) +
+  geom_text(data = ddata$labels, aes(x=x, y=y, label = label), vjust = 0) 
+```
+
+# Wrangling the genetics data
+
+The `NCI60` are not yet in a form suitable for clustering.  There are several shortcomings.
+
+```{r results='hide', echo = FALSE}
+Print_Narrow <- 
+  head(NCI60, 50) %>%
+  gather(value=expression, key=cellLine, -Probe) %>%
+  group_by(Probe, cellLine) %>%
+  summarise(expression = mean(expression)) %>% 
+  ungroup() %>%
+  mutate(cellLine = abbreviate(cellLine))
+```
+`r margin_table(as.data.frame(Print_Narrow), declare_rows = 1940640, caption = "Table 2. NCI60 gathered into a narrow form. There is a row for each probe at each of the 60 cell lines.", row.names = FALSE)`
+
+
+1. The objects to be clustered --- cell lines --- are represented as variables instead of cases.
+2. There are far too many probes to be able to identify "similarity" in a meaningful way.  Recall that most of the probes are irrelevant.
+3. The identifiers are not stored as the row names.
+
+
+
+To start, put the data in a narrow form, like Table 2.
+```{r echo=params$show_answers,cache=TRUE}
+Narrow <- 
+  NCI60 %>%
+  gather(value=expression, key=cellLine, -Probe) %>%
+  group_by(Probe, cellLine) %>%
+  summarise(expression = mean(expression)) %>% 
+  ungroup()
+```
+
+
+It happens that the same probe can appear multiple times on the gene chip.  Combine all such repeats by grouping by `Probe` and `cellLine` and summarizing each group with `expression = mean(expression)`. Then use `ungroup()` on the result.^[When you group on more than one variable, `summarise()` leaves the result partially grouped.  This can interfere with later operations.]
+
+In the narrow form, there's a simple way to pull out probes that might be of relevance to distinguishing among the different kinds of cancer.  Presumably, for a relevant probe the expression will vary a lot among the cancer types.  A very simple indicator of this is the *standard deviation* of each probe's expression. You can calculate this by grouping over `Probe` and summarising with `spread = sd(expression)`.
+
+```{r echo=params$show_answers, fig.margin=TRUE, fig.cap="The spread of expression of probes across cell lines ordered from biggest to smallest for the leading 500 probes. For comparison, the red line shows the spread under the Null Hypothesis assumption that there is no relationship between probe and cell line.", cache=TRUE}
+keep <- 500
+Best <-
+  Narrow %>%
+  group_by(Probe) %>%
+  summarise(spread = sd(expression)) %>%
+  arrange(desc(spread)) %>%
+  mutate(i = row_number()) %>%
+  head(keep)
+Randomized <-
+  Narrow %>%
+  mutate(Probe = shuffle(Probe)) %>%
+  group_by(Probe) %>%
+  summarise(spread = sd(expression)) %>%
+  arrange(desc(spread)) %>%
+  mutate(i = row_number()) %>%
+  head(keep)
+Best %>% 
+  ggplot(aes(x=i, y=spread)) + 
+  geom_line() +
+  geom_line(data=Randomized, color="red", size=1, alpha=.5)
+```
+
+Identify a threshold for `spread` that identifies potential candidates for differential expression across cell lines and filter to keep only the probes above that threshold.
+
+```{r echo = params$show_answers}
+Keepers <-
+  Narrow %>% group_by(Probe) %>%
+  filter(sd(expression) > 4.5)
+```
+
+Wrangle the result into a wide format with the variables being the probes and the cases being the cell lines. 
+
+```{r echo=params$show_answers}
+Keepers <-
+  Keepers %>%
+  spread(key=Probe, value=expression)
+scale_colour_discrete <- function(...) scale_colour_hue(...)
+```
+
+\enlargethispage{1.5in}
+
+Cluster those cases and display your result. (You'll have to select out the `cellLine` variable in the data table you hand to `dist()`. The `dist()` function doesn't work with names like those in `cellLine`.)
+
+
+```{r echo = FALSE, fig.margin=FALSE, fig.height = 9, fig.width=10,out.width="5in"}
+Dists <- dist(Keepers %>% select(-cellLine))
+Dendrogram <- hclust(Dists)
+ddata <- dendro_data(Dendrogram)
+Dots <- dendro_data(Dendrogram)$labels %>%
+  mutate(label = as.character(label)) %>%
+  extract(label, "cancer", "([[:alnum:]]+)")
+ggdendrogram(Dendrogram, rotate = TRUE) + 
+  geom_point(data = Dots, size=4, aes(x = x, y = y, color = cancer)) +
+  geom_text(data = ddata$labels, aes(x = x, y = y, label = label), size = 3, vjust = 1) + theme_void()
+
+```

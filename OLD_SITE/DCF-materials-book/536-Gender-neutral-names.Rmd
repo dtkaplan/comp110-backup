@@ -1,0 +1,71 @@
+# Example: Gender-neutral names: when wide is easier
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+Some operations are easy in wide format, but hard in narrow and *vice versa*
+
+## Excerpt from `BabyNames`
+
+```{r echo=FALSE}
+data(BabyNames, package="DataComputing")
+ShortBabyNames <- BabyNames %>%
+  filter( name %in% c("Alice", "Lesley", "Yu"),
+          year %in% 1998:1999 ) %>%
+  arrange(name, year)
+```
+
+```{r echo=FALSE}
+ShortBabyNames
+```
+
+Questions:
+
+1. How many babies of each name and sex?
+2. For each name, is it primarily given to girls or boys?  Which names are gender neutral?
+
+
+## In narrow format
+
+```{r echo=FALSE}
+data(BabyNames, package="DataComputing")
+BabyNames <- BabyNames %>%
+  filter( name %in% c("Alice", "Lesley", "Yu"))
+```
+
+1. How many babies of each name and sex?
+
+```{r}
+BabyTotals <-
+  BabyNames %>%
+  group_by(name, sex) %>%
+  summarise(total = sum(count))
+```
+```{r echo=FALSE}
+BabyTotals
+```
+
+Easy!
+
+## In Wide format
+
+2. For each name, is it primarily given to girls or boys?  Which names are gender neutral?
+
+- `sex` is the key variable
+- `total` is the value variable
+
+
+```{r echo=1:2}
+BabyTotalsWide <- BabyTotals %>%
+  spread(sex, total)
+BabyTotalsWide
+```
+
+## With sexes side by side ...
+
+
+```{r}
+BabyTotalsWide %>%
+  mutate(gender_specificity = pmax(F/(M+F), M/(M+F)))
+```

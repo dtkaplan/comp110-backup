@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+
+.section h2 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h3 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h4 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h5 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h6 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Comp 110: Data Computing</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Info
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Contact.html">Contact</a>
+    </li>
+    <li>
+      <a href="Policies.html">Course policies</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Activities
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">In-class Programming</li>
+    <li class="divider"></li>
+    <li>
+      <a href="01-Monday.html">Monday</a>
+    </li>
+    <li>
+      <a href="02-Tuesday.html">Tuesday</a>
+    </li>
+    <li>
+      <a href="03-Wednesday.html">Wednesday</a>
+    </li>
+    <li>
+      <a href="04-Thursday.html">Thursday</a>
+    </li>
+    <li>
+      <a href="05-Friday.html">Friday</a>
+    </li>
+    <li class="dropdown-header">========</li>
+    <li class="dropdown-header">Week 2</li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Monday</li>
+    <li class="dropdown-header">Tuesday</li>
+    <li class="dropdown-header">Wednesday</li>
+    <li class="dropdown-header">Thursday</li>
+    <li class="dropdown-header">Friday</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Notes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="251-Library-Books.pdf">Library books</a>
+    </li>
+    <li>
+      <a href="https://dtkaplan.github.io/comp110/DCF-materials-book/Handouts/351-Intro-Graphics-Wrangling.pdf">Intro to graphics and wrangling</a>
+    </li>
+    <li>
+      <a href="https://dtkaplan.github.io/comp110/DCF-materials-book/Handouts/453-Births-and-holidays.pdf">Births and holidays</a>
+    </li>
+    <li>
+      <a href="https://dtkaplan.github.io/comp110/DCF-materials-book/Handouts/552-Economist-graph.pdf">A graph for the Economist</a>
+    </li>
+    <li>
+      <a href="https://dtkaplan.github.io/comp110/DCF-materials-book/Handouts/551-Stocks-and-dividends.pdf">Stocks and dividends</a>
+    </li>
+    <li>
+      <a href="https://dtkaplan.github.io/comp110/DCF-materials-book/Handouts/452-Bicycle-Rentals.pdf">Bicycle rentals</a>
+    </li>
+    <li>
+      <a href="Examples/Migration/Migration.html">Migration between countries</a>
+    </li>
+    <li>
+      <a href="Examples/MovieLens/Movie-Genres.html">Movie ratings</a>
+    </li>
+    <li class="dropdown-header">more to be posted ...</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Internals
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://docs.google.com/document/d/1Xlpzt5tN6wUnlIpDgspOIdq0WJBVv28VDcC6CkXuZIM/edit?usp=sharing">Contact information</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<ul>
+<li>This is a 1-credit course. That is, it counts for only one-quarter the credit usually given for a course at Macalester.<br />
+</li>
+<li>The workload, meeting times, etc. are adjusted appropriately to be roughly one-quarter of that expected in a typical 4-credit course. We will meet for only 8 sessions. The first is an hour-long organizational meeting at the start of the semester. The other 7 are nominally 90-minutes long. Many students stay after the 90-minute period to finish up the work started in the class session. This is entirely optional. You can get the equivalent help at the instructor’s or preceptor’s office hours.</li>
+<li>The course will finish well before the end of the semester so that it won’t contribute to the end-of-semester craziness.</li>
+</ul>
+<div id="objectives-for-the-course" class="section level2">
+<h2>Objectives for the course</h2>
+<p>This course is designed to introduce you to central concepts in Data Science, and to get you technically to the point where you can <em>read</em> code for R and related systems with a good understanding of how commands relate to those concepts. Some students will become quite proficient in <em>writing</em> such commands, but that is beyond the expectation for your achievement. Being able to <em>read</em> will suffice: If you can read, then you can copy and modify, which the the primary technique used by programmers of all sorts.</p>
+<p>The best way to achieve proficiency in writing is to work on your own projects. Achieving such proficiency takes more time than we have available in this course. But at the end of this course you will be at a good starting point for commencing any future work that you need.</p>
+</div>
+<div id="time-and-grades" class="section level2">
+<h2>Time and grades</h2>
+<p>Since this is a 1-credit course and often taken as an overload in students’ schedules, I need to be careful to keep the workload appropriate. To accomplish this, there is a time budget for the class.</p>
+<p>10 hours of class meeting time. (Seven sessions of 90 minutes) You are expected to come to all the classes. If a conflict arises, simply let me know ahead of time. Much of the class time will be given over to working on an in-class activity, which you will hand in. 30 hours of out-of-class time, spread more or less evenly across the seven weeks that we meet. This amounts to a little more than 4 hours each of the seven weeks. This includes the time you spend reading, the time you spend answering the textbook questions, and any time you choose to spend after class on the in-class activity.</p>
+<p>STOP WORKING after those 4 hours. But, you ask, “What happens if I don’t get the work done in those 4 hours?” Answer: The work is done after those 4 hours. Do what you can do. For some students this will mean that you finish only, say, half of the short-answer questions and hand in the in-class activity at the end of the class session. Doing that will result in a reasonable grade. (I define “reasonable” in terms of the overall grade distribution at Macalester.) Other students will be able to complete almost all of the short-answer questions. They will also get an appropriate grade.</p>
+<p>There will be no competition for grades. Your grade will not depend on the work that other students do, just on your own work. I hope that some students will find the topic of the course exciting and will want to do extra work. The reward for such work is your increased skill (including, potentially, being a teaching assistant in future semesters) and greater bragging rights in a job interview. The extra work will not improve your grade (presumably, such students will often already be getting a high grade with just the regular work in the course).</p>
+<p>The class grade is based on three components:</p>
+<ol style="list-style-type: decimal">
+<li>Short-answer questions based on the readings.</li>
+<li>Handing in the in-class activity, which you will do shortly after class. (I encourage you to work in small groups — 2 or 3 people — on the activity.)</li>
+<li>A short final exam using only paper and pencil. It will be given the week after the last class session and lasts 30 minutes (that is, one-quarter the time of exams in 4-credit courses).</li>
+</ol>
+</div>
+<div id="future-plans-for-this-course" class="section level2">
+<h2>Future plans for this course</h2>
+<p>The course you are taking is a 1-credit course, which does not give us enough time for you to become proficient at carrying out your own data wrangling and visualization projects on your own. The course was originally proposed 7 years ago. The consensus at the time is that there was too much risk to commit to a regular 4-credit course.</p>
+<p>Lots has happened over those seven years, and the role of the course in the Macalester curriculum has been re-evaluated. Starting in 2017-18, <em>Data Computing</em> will become a 4-credit course. In addition to allowing us to follow a pace better suited to becoming proficient at writing data wrangling and visualization commands, the expanded course will be able to cover in more detail areas of the course that the faculty have deemed particularly worthwhile.</p>
+<p>It is <strong>not known at this time</strong> whether a student will be able to get credit both for the 1-credit version offered this year and for the 4-credit version to be offered in the future.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

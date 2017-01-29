@@ -1,0 +1,123 @@
+# Case Study: Highway Fatalities
+
+On August 29, 2016, the White House issued a [data-science "call to action."](https://www.whitehouse.gov/blog/2016/08/29/2015-traffic-fatalities-data-has-just-been-released-call-action-download-and-analyze)^[The call was cross-posted by the US Department of Transportation here](https://www.transportation.gov/fastlane/2015-traffic-fatalities-data-has-just-been-released-call-action-download-and-analyze).
+
+> Today, the U.S. Department of Transportation is releasing an open data set that contains detailed, anonymized information about each of these tragic incidents. As the new data being released show, and as DOT reported earlier this summer, 2015 showed a marked increase in traffic fatalities nationwide.
+
+> To be precise, 7.2% more people died in traffic-related accidents in 2015 than in 2014. This unfortunate data point breaks a recent historical trend of fewer deaths occurring per year.
+
+> Under the leadership of Transportation Secretary Anthony Foxx, we’re doing two things differently this year.
+
+> One: We’re publishing the data through NHTSA’s Fatality Analysis Reporting System (FARS) three months earlier than last year.
+
+> Two: We’re directly soliciting your help to better understand what these data are telling us. Whether you’re a non-profit, a tech company, or just a curious citizen wanting to contribute to the conversation in your local community, we want you to jump in and help us understand what the data are telling us.
+
+> Some key questions worth exploring:
+
+> How might improving economic conditions around the country change how Americans are getting around? What models can we develop to identify communities that might be at a higher risk for fatal crashes?
+How might climate change increase the risk of fatal crashes in a community?
+How might we use studies of attitudes toward speeding, distracted driving, and seat belt use to better target marketing and behavioral change campaigns?
+How might we monitor public health indicators and behavior risk indicators to target communities that might have a high prevalence of behaviors linked with fatal crashes (drinking, drug use/addiction, etc.)? 
+
+> DOT is aggressively seeking ways to improve safety on the roads. From our work with the auto industry to improve vehicle safety, to new solutions to behavioral challenges like drunk, drugged, distracted and drowsy driving, we know we need to find novel solutions to old challenges.
+
+> We’re also looking to accelerate technologies that may make driving safer, including connected and highly automated vehicles.
+
+> But we need your help, too! Data Science is a team sport.
+
+> We are calling on data scientists, public health experts, students and researchers—even if you have never thought about road safety before—to dive in to these data and help answer these important questions, especially on tough issues like pedestrian and bicyclist fatalities.
+
+> Start by downloading and playing with the data. Then share your insights and let us know what you find by sending us a note at opendata@dot.gov.
+
+## The accident data
+
+The link to the data in the call to action is <ftp://ftp.nhtsa.dot.gov/fars/2015/>.^[Such an address is called a URL.]
+
+1. Go to that site. Is it immediately clear what's going on? 
+2. What can you figure out by browsing the site.
+    - look in "parent" directories
+    - try substituting 2015 for other similar sorts of values in the URL.
+
+A [blog by Lucas Puente](http://lucaspuente.github.io/notes/2016/09/01/Mapping_Traffic_Fatalities) conveniently gives simple instructions for downloading the data. He writes:
+
+> Simply visit <ftp://ftp.nhtsa.dot.gov/fars/2015/National/> and download the `FARS2015NationalDBF.zip` file, unzip it, and load into R.
+
+After unzipping, there is a directory `FARS2015NationalDBF` taking up 874.9 MB of disk for 27 items. I put it in my `Downloads` directory.
+
+Lucas provides commands to read the data into R.
+```{r eval = FALSE}
+library(foreign)
+accidents <- read.dbf("FARS2015NationalDBF/accident.dbf")
+```
+
+To make sense of these instructions, it helps to know some things:
+
+* What is `library(foreign)` doing?
+    - What does the `library()` part of the command tell you?
+    - What is `foreign`. How would get get some instructions or documentation for `foreign` to help you understand why this is appropriate.
+* What is `read.dbf()`?
+* What does `"FARS2015NationalDBF/accident.dbf"` tell you about the data file and where it's located.
+
+-------
+
+Aside: I would rather you wrote:
+```{r eval = FALSE}
+filename <- "~/Downloads/FARS2015NationalDBF/accident.dbf"
+Accidents <- foreign::read.dbf(filename)
+```
+
+What's different about the file name I'm using? Why?
+
+-------
+
+Lucas's blog leads you through the steps of making a map of accident locations:
+
+![Lucas's map](images/Traffic_Fatalities_in_2015.png)
+
+What does this map tell you?
+
+
+With the `Accidents` data table read into R, it's easy to look at it and perhaps construct summaries.
+```{r echo = FALSE}
+load("Data/FARS2015-snippet.Rda")
+Accidents[1:4, 1:8]
+# View(Accidents)
+```
+
+Some simple things:
+```{r}
+nrow(Accidents)
+names(Accidents)
+```
+
+How to figure out what each variable means?  Browse around the FARS server to see if you can find something that might help.
+
+I found a codebook [here](ftp://ftp.nhtsa.dot.gov/fars/FARS-DOC/Coding%20and%20Validation%20Manual/2015%20FARS%20NASS%20GES%20C&V%20Manual.pdf). (Just in case the FARS website changes, [here's a copy](Data/2015-FARS-NASS-GES-C-V-Manual.pdf) downloaded on 9/7/2016.)
+
+Let's figure out what `CF1` means.  How about `WEATHER2` and `REL_LOAD`?  
+
+
+## Other tables
+
+But there are other data files in the database.
+
+```{r cache = TRUE}
+dir("~/Downloads/FARS2015NationalDBF/")
+```
+
+```{r echo = FALSE, echo = FALSE}
+Vision <- foreign::read.dbf("~/Downloads/FARS2015NationalDBF/Vision.dbf")
+Distract <- foreign::read.dbf("~/Downloads/FARS2015NationalDBF/Distract.dbf")
+DrImpair <- foreign::read.dbf("~/Downloads/FARS2015NationalDBF/DrImpair.dbf")
+save(Vision, Accidents, Distract, DrImpair, file = "data/FARS2015-snippet.Rda")
+```
+
+Let's look at some of them:
+
+```{r}
+head(Vision)
+head(Distract)
+head(DrImpair)
+```
+
+What's the connection between these tables and the `Accidents` table? Say, how would we be able to see which weather conditions distracted driving accidents tend to occur in?

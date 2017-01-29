@@ -1,0 +1,91 @@
+```{r include = FALSE}
+library(DataComputing)
+show_answers <- TRUE
+```
+
+
+Load the following tables, `Table_A` and `Table_B`, into your R session. By running the code at the bottom of this problem.
+
+```{r data_129, echo = FALSE}
+Table_A <- 
+  data.frame(
+    year = c(2000, 2001),
+    Algeria = c(7 ,9),
+    Brazil = c(12, 14),
+    Columbia = c(16, 18),
+    stringsAsFactors = FALSE
+  )
+Table_B <- 
+  data.frame(
+    Country = c("Algeria", "Brazil", "Columbia"),
+    Abbreviation = c("DZ", "BR", "CO"),
+    stringsAsFactors = FALSE
+  )
+```
+
+```{r}
+Table_A
+Table_B
+```
+
+Write wrangling statements to produce the following table. Note that the `Avg` is the average of the numbers listed under each country.
+
+```{r, echo = FALSE, warning = FALSE}
+Table_C <- 
+  Table_A %>%
+  gather(key = Country, value = Value, -year) %>%
+  group_by(Country) %>%
+  summarize(Avg = mean(Value)) %>%
+  left_join(Table_B, by = c("Country"= "Country")) %>%
+  select(Abbreviation, Avg)
+```
+
+```{r echo = FALSE}
+print.data.frame(Table_C)
+```
+
+```{block echo = show_answers}
+**Solution**
+```
+
+```{r eval = show_answers, echo = show_answers}
+# Step 1.
+Table_A %>%
+  gather(key = Country, value = Value, -year)
+```
+
+
+```{r eval = show_answers, echo = show_answers}
+# Step 2
+Table_A %>%
+  gather(key = Country, value = Value, -year) %>%
+  group_by(Country) %>%
+  summarize(Avg = mean(Value))
+```
+
+```{r, eval = show_answers, echo = show_answers, warning = FALSE}
+# Step 3 
+Table_A %>%
+  gather(key = Country, value = Value, -year) %>%
+  group_by(Country) %>%
+  summarize(Avg = mean(Value)) %>%
+  left_join(Table_B, by = c("Country"= "Country"))
+```
+
+
+```{r eval = show_answers, echo = show_answers}
+# Step 4
+Table_A %>%
+  gather(key = Country, value = Value, -year) %>%
+  group_by(Country) %>%
+  summarize(Avg = mean(Value)) %>%
+  left_join(Table_B, by = c("Country"= "Country")) %>%
+  select(Abbreviation, Avg)
+```
+
+For making the data:
+
+```{r ref.label="data_129"}
+```
+
+Credit: Adam Lucas

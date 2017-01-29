@@ -1,0 +1,137 @@
+---
+title: "The Street Where You Live"
+author: "Data Computing"
+date: "Computing project"
+output: 
+  rmarkdown::tufte_handout
+---
+
+```{r include=FALSE}
+library(DataComputing)
+library(mosaicData)
+show_answers <- FALSE
+knitr::opts_chunk$set(tidy=FALSE, message=FALSE)
+```
+
+
+```{r cache=TRUE, message=FALSE, warning=FALSE, echo=FALSE, results="hide"}
+Wake_county <- mosaic::read.file("http://tiny.cc/dcf/street-addresses.csv")
+set.seed(10101)
+street_pattern <- "(RD|ST|CIR|CIRCLE|STREET|ROAD|TRAIL|DRIVE|CT|PL|BLVD|BLV|PLACE|LANE|TERRACE|BOX)"
+Display_sample <- 
+  Wake_county %>%head(10000) %>%
+  filter(grepl(street_pattern, address)) %>%
+  tidyr::extract(address, into = "street_word", 
+                 regex = street_pattern,
+                 remove = FALSE) %>%
+  group_by(street_word) %>%
+  sample_n(size = 2) %>%
+  ungroup() %>% 
+  select( - street_word) %>%
+  sample_n(size = 10)
+Sample <- Wake_county %>%
+  sample_n(size = 15)
+```
+
+
+
+People's addresses involve streets, lanes, courts, avenues, and so on.  How many such road-related words are in common use?
+```{r echo = FALSE}
+options("xtable.floating" = FALSE)
+table_text <- xtable::xtable(Display_sample %>% sample_n(size = 10), 
+                             format = "latex")
+```
+
+\marginnote{
+`r table_text`
+
+
+
+Addresses from Wake County, North Carolina}
+
+<!-- some other styles
+\marginnote{`r paste("\\noindent ", Display_sample$address[1:10],  collapse = "\\newline\n")` }
+
+\marginnote{`r table_text`}
+
+\marginnote{`r paste("\\noindent ", LETTERS[1:5],  collapse = "\\newline\n")`}
+
+-->
+
+In answering this question, you would presumably want to look at lots of addresses and extract the road-related term. You could do this by eye, reading down a list of a few hundred or thousand addresses.  But if you want to do it on a really large scale, a city or state or country, you would want some automated help, for instance, a computer program that discards the sorts of entries you have already identified to give a greater concentration of unidentified terms.  In this activity, you're going to build such a program.
+
+Some resources:
+
+1. The file `http://tiny.cc/dcf/street-addresses.csv` contains about 15000 street addresses of registered voters in Wake County, North Carolina.
+```{r}
+Wake_county <- read.csv("http://tiny.cc/dcf/street-addresses.csv", stringsAsFactors = FALSE)
+```
+2. The file "http://tiny.cc/dcf/CMS_ProvidersSimple.rds" has street address of about 900,000 medicare service providers. Download the file to save it on your own system, then read it in under a convenient name.
+```{r eval = FALSE}
+download.file(url="http://tiny.cc/dcf/CMS_ProvidersSimple.rds",
+              destfile = "YourNameForTheFile.rds")
+Medicare <- readRDS("YourNameForTheFile.rds")
+```
+Street words (e.g. "ST", "LANE") are easy for a human reader to recognize. Look through a few dozen of the addresses to identify some common ones. You can put these into a regex, separated by the *or* symbol so that the match will occur when any of the patterns are detected, e.g. `"ST|RD|ROAD"`. 
+
+This will be very easy for the most common street words. The hard part is to find the rarely used street words. To help identify such addresses, filter out the ones that match your existing pattern. Then look through the ones that make it through the filter to see other words that you would like to add to your pattern.
+
+This is an iterative process. Every time you extend your street-word regex pattern, you may encounter cases you didn't notice previously in the addresses that don't match the pattern.
+
+
+
+To get you started, read the following R statements. Next to each line, give a short explanation of what the line contributes to the task. For each of the regexes, explain in simple everyday language what pattern is being matched.
+
+```{r}
+pattern <- "ST|RD|ROAD"
+LeftOvers <-
+  Wake_county %>% 
+  filter( ! grepl(pattern, address),
+          ! grepl(" BOX ", address)
+  )
+```
+```{r echo = FALSE}
+options("xtable.floating" = FALSE)
+table_text <- xtable::xtable(head(LeftOvers), format = "latex")
+```
+
+\marginnote[-3cm]{`r table_text`
+
+\texttt{LeftOvers}}
+
+When you have this working on the small sample, use a larger sample and, eventually, the whole data set.  It's practically impossible to find a method that will work perfectly on all new data, but do the best you can.
+
+For carrying out our survey of address street types, it's not sufficient to know that an address matches any one of a number of possibilities. You need to know *which* particular possibility it matches. To set this up, first modify your pattern mark the part you want to extract. Surround that part by parentheses. In the very simple pattern, this would look like
+```{r}
+pattern <- "(ST|RD|ROAD)" # Note the parentheses!
+```
+This pattern will match exactly the same cases as the original: the parentheses are not part of the pattern. Instead, the parentheses are used by data verbs such as `tidyr::extract()` which will pull the matching component into a new variable. For example:
+```{r}
+Wake_county %>%
+  tidyr::extract(address, into = "street_word", 
+                 regex = pattern,
+                 remove = FALSE) 
+
+```
+You can see at a glance that the simple pattern is not capturing the circles and ways.
+
+
+**Your turn**: In your report, implement your method and explain how it works, line by line.  Present your result: how many addresses there are of each kind of road word?
+
+
+
+```{r eval=show_answers, echo=show_answers}
+street_pattern <- " (RD|ST|CIR|CIRCLE|STREET|ROAD|LOOP|RUN|WAY|TRAIL|DRIVE|CT|PL|BLVD|BLV|PLACE|LANE|LN|DR|COURT|PATH|PKWY|PARKWAY|AVE|TER|TERRACE|BOX) "
+StreetEndings <- 
+  Wake_county %>%
+#  filter(grepl(street_pattern, address)) %>%
+  tidyr::extract(address, into="type", regex=street_pattern)
+Results <- 
+  StreetEndings %>% 
+  group_by(type) %>% 
+  tally() %>%
+  arrange(desc(n))
+Results %>% head()
+Results
+```
+

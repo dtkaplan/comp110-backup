@@ -1,0 +1,42 @@
+# Regular expressions
+
+## Visualizing matches
+
+See the `str_view()` and `str_view_all()` widgets in [version 1.1 of stringr](https://blog.rstudio.org/2016/08/24/stringr-1-1-0/).
+
+
+## Example
+
+Pull out 100,000 names from `BabyNames`, adding up the totals over the years by sex.  Call this `NameList`.
+
+```{r}
+NameList <-
+  BabyNames %>%
+  group_by(name, sex) %>%
+  summarise(total = sum(count))
+```
+
+
+* Names ending with "a".
+* Names ending with a vowel.
+* Names ending with a vowel or "y".
+* Names with 3 consonants in a row.
+* Names with 3 vowels in a row.
+
+Interactive site for testing expressions: <http://regexone.com/>
+
+## Extraction
+
+With just one pattern to match, use `stringr::str_extract()`.
+
+What are the most common vowels, by sex
+```{r}
+NameList %>%
+  mutate(vowel = stringr::str_extract(name, "([aeiou]+)$")) %>%
+  group_by(sex, vowel) %>%
+  summarise( total = sum(total) ) %>%
+  arrange(sex, desc(total)) %>%
+  spread(key=sex, total)
+```
+
+With multiple patterns, use `tidyr::extract()`.

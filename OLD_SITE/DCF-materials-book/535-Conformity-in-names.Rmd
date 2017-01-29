@@ -1,0 +1,36 @@
+```{r include = FALSE}
+library(DataComputing)
+```
+
+# Conformity and Names
+
+Calculate the total number of babies given the 10 most popular names each year as a fraction of the total number of babies born that year.
+
+```{r}
+Popular <- 
+  BabyNames %>%
+  group_by(year) %>%
+  filter(row_number(desc(count)) <= 10) %>%
+  summarise(total_popular = sum(count)) 
+AllNames <-
+  BabyNames %>% 
+  group_by(year) %>%
+  summarise(total = sum(count))
+```
+ 
+```{r}
+head(Popular)
+head(AllNames)
+```
+
+Question: What would have happened if `group_by()` came after `filter()`?
+
+We'll need an operation to combine two tables to find the proportion each year. Here's a teaser:
+```{r}
+AllNames %>%
+  left_join(Popular) %>%
+  mutate(pop_prop = total_popular / total) %>%
+  ggplot(aes(x = year, y = pop_prop)) + 
+  geom_line() + 
+  ylab("Conformity Index")
+```

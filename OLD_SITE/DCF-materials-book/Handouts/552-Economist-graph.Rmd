@@ -1,0 +1,87 @@
+---
+title: "A Graph for the Economist"
+author: "Data Computing"
+date: "Computing project"
+output: rmarkdown::tufte_handout
+---
+
+```{r include=FALSE}
+library(DataComputing)
+library(mosaicData)
+library(ggthemes)
+knitr::opts_chunk$set(tidy=FALSE, message=FALSE)
+params <- list(show_answers = FALSE)
+```
+
+The *Economist* is a well-regarded weekly news magazine.  The following graphic accompanied their article about the release of the "College Scorecard" data in Sept. 2015.
+
+\medskip
+
+```{r echo = FALSE, fig.cap = "Yearly cost of attending college versus college selectivity.  Each dot is one college or university.", out.width = "100%"}
+fname <- "Images/20160919_woc701.png"
+knitr::include_graphics(fname)
+```  
+
+Your task is to reproduce this graph from the College Scorecard data, and perhaps enhance it.
+
+## The data
+
+The Scorecard data is too voluminous to work with conveniently in class; it takes too long to download.  You'll be working with a subset available at `tiny.cc/dcf/ScorecardSmall.Rda` which contains a single object, the data table `ScorecardSmall`.
+```{r eval=FALSE}
+download.file("http://tiny.cc/dcf/ScorecardSmall.Rda", destfile = "ScorecardSmall.Rda")
+load("ScorecardSmall.Rda")
+```
+```{r echo=FALSE}
+load("../Data/ScorecardSmall.Rda")
+```
+
+The subset includes all 7804 institutions in the original 2013 Scorecard file, but just 54 variables.  Some that you may be interested in are:
+
+1. `CONTROL`: public (1) or private (2) institution. (You can discard cases with `CONTROL == 3`. They are not in the Economist's graphic.)
+#. `INSTNM`: name of the institution
+#. `ADM_RATE`: admissions rate in percent
+#. `CCSIZSET`: Carnegie size classification of the institution.  Values 1, 6, 7, 8 correspond to schools with fewer than 1000 students.
+#. `AVGFACSAL`: Average faculty salary per month
+#. `TUITFTE`: Tuition revenue received by the institution per student full-time-equivalent.
+#. `NPT4_PUB`: average net cost for students in public institutions
+#. `NPT4_PRIV`: average net cost for students in private institutions
+#. `NPT41_PUB` : average net cost for students at public institutions whose families are in the lowest of five income groups. Similarly, `NPT42_PUB` is for students whose family income is in the 2nd group, and so on up to the 5th group. The groups are defined as $0 to $30K per year, $30-48K, $48-75K, $75-110K, $110K or more.   There is also `NPT41_PRIV`, and so on, for private institutions. 
+
+All of the `NPT4` variables are for students receiving aid from the federal government under Title IV.
+
+## What's the case?
+
+The case in the Scorecard data is an institution.  In the *Economist* graphic, however, the case is a level of family income (as in `NPT4`) at an institution.  That is, from the perspective of the graphic, the Scorecard data is in wide form.  You'll have to convert it to narrow form to make the graph.
+
+1. Select just the variables you need from the Scorecard data.
+2. Use `gather()` to convert from wide to narrow format.
+3. After (2) you will have a variable with levels like `NPT43_PUB`, `NPT45_PRIV`, etc. You will want to translate these to `Q3`, `Q5`, etc.  For your convenience, the file `http://tiny.cc/dcf/NPT4-names.csv` contains a table with the appropriate translations.  You can use a join of the narrow-format Scorecard data with this table to perform the translations.
+
+
+```{r echo=params$show_answers, eval=params$show_answers, message=FALSE}
+Translate <- read.file("http://tiny.cc/dcf/NPT4-names.csv")
+Narrow <- 
+  ScorecardSmall %>%
+  filter( ! CCSIZSET %in% c(1,6,7,8), 
+          ADM_RATE < 1,
+          CONTROL != 3) %>%
+  select(ADM_RATE, CONTROL, 
+         NPT41_PUB, NPT43_PUB, NPT45_PUB,
+         NPT41_PRIV, NPT43_PRIV, NPT45_PRIV) %>%
+  gather(value = net_cost, key=income_group, 
+         NPT41_PUB, NPT43_PUB, NPT45_PUB, 
+         NPT41_PRIV, NPT43_PRIV, NPT45_PRIV) %>%
+  left_join(Translate, by=c("income_group" = "long_name")) %>%
+  mutate(CONTROL = ifelse(CONTROL==1, "Public", "Private"))
+```
+
+```{r echo= params$show_answers, eval=params$show_answers, message=FALSE, fig.width=10, fig.height=8}
+Narrow %>% na.omit() %>%
+  ggplot(aes(x=ADM_RATE, y=net_cost)) + 
+  geom_point(alpha = 0.3, color="blue") + 
+  facet_grid(CONTROL ~ short_name) +
+  geom_smooth(color="red") + 
+  ylim(0, 50000) +
+  xlab("Admissions rate, %") +
+  ylab("Net cost per year, $'000") 
+```

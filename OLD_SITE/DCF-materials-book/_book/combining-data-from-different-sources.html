@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes and Materials for Data Computing</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110">
+  <meta name="generator" content="bookdown 0.1.15 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes and Materials for Data Computing" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110" />
+  <meta name="github-repo" content="dtkaplan/comp110" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes and Materials for Data Computing" />
+  
+  <meta name="twitter:description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110" />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+  
+<meta name="date" content="2016-11-02">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="part-joins-and-reshaping.html">
+<link rel="next" href="wide-vs-narrow-data-tables.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notes and materials for Data Computing</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="gettingorganized.html"><a href="gettingorganized.html"><i class="fa fa-check"></i><b>1</b> (PART) Getting Organized</a></li>
+<li class="chapter" data-level="2" data-path="files-and-documents.html"><a href="files-and-documents.html"><i class="fa fa-check"></i><b>2</b> Files and Documents</a><ul>
+<li class="chapter" data-level="2.1" data-path="files-and-documents.html"><a href="files-and-documents.html#the-file-path"><i class="fa fa-check"></i><b>2.1</b> The “file path”</a></li>
+<li class="chapter" data-level="2.2" data-path="files-and-documents.html"><a href="files-and-documents.html#using-a-file-browser-to-find-the-path"><i class="fa fa-check"></i><b>2.2</b> Using a file browser to find the path</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="embeding-files-within-rmd-html-files.html"><a href="embeding-files-within-rmd-html-files.html"><i class="fa fa-check"></i><b>3</b> Embeding Files within Rmd -&gt; HTML files</a></li>
+<li class="chapter" data-level="4" data-path="datainfrastructure.html"><a href="datainfrastructure.html"><i class="fa fa-check"></i><b>4</b> (PART) Data Infrastructure</a><ul>
+<li class="chapter" data-level="" data-path="datainfrastructure.html"><a href="datainfrastructure.html#topics"><i class="fa fa-check"></i>Topics</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="case-study-highway-fatalities.html"><a href="case-study-highway-fatalities.html"><i class="fa fa-check"></i><b>5</b> Case Study: Highway Fatalities</a><ul>
+<li class="chapter" data-level="5.1" data-path="case-study-highway-fatalities.html"><a href="case-study-highway-fatalities.html#the-accident-data"><i class="fa fa-check"></i><b>5.1</b> The accident data</a></li>
+<li class="chapter" data-level="5.2" data-path="case-study-highway-fatalities.html"><a href="case-study-highway-fatalities.html#other-tables"><i class="fa fa-check"></i><b>5.2</b> Other tables</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="case-study-taxicabs-and-the-sharing-economy.html"><a href="case-study-taxicabs-and-the-sharing-economy.html"><i class="fa fa-check"></i><b>6</b> Case Study: Taxicabs and the sharing economy</a></li>
+<li class="chapter" data-level="7" data-path="case-study-medicare-spending.html"><a href="case-study-medicare-spending.html"><i class="fa fa-check"></i><b>7</b> Case Study: Medicare spending</a></li>
+<li class="chapter" data-level="8" data-path="untidy-data-school-enrollments.html"><a href="untidy-data-school-enrollments.html"><i class="fa fa-check"></i><b>8</b> Untidy data: School enrollments</a></li>
+<li class="chapter" data-level="9" data-path="untidy-data-galtons-measurements-of-height.html"><a href="untidy-data-galtons-measurements-of-height.html"><i class="fa fa-check"></i><b>9</b> Untidy data: Galton’s measurements of height</a></li>
+<li class="chapter" data-level="10" data-path="untidy-data-family-structure-of-military-personnel.html"><a href="untidy-data-family-structure-of-military-personnel.html"><i class="fa fa-check"></i><b>10</b> Untidy data: Family structure of military personnel</a></li>
+<li class="chapter" data-level="11" data-path="untidy-data-minneapolis-voting.html"><a href="untidy-data-minneapolis-voting.html"><i class="fa fa-check"></i><b>11</b> Untidy data: Minneapolis Voting</a></li>
+<li class="chapter" data-level="12" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>12</b> Tidy Data</a><ul>
+<li class="chapter" data-level="12.1" data-path="tidy-data.html"><a href="tidy-data.html#data-has-all-sorts-of-forms"><i class="fa fa-check"></i><b>12.1</b> Data has all sorts of forms</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="tidy-data.html"><a href="tidy-data.html#signals"><i class="fa fa-check"></i><b>12.1.1</b> Signals</a></li>
+<li class="chapter" data-level="12.1.2" data-path="tidy-data.html"><a href="tidy-data.html#photographs"><i class="fa fa-check"></i><b>12.1.2</b> Photographs</a></li>
+<li class="chapter" data-level="12.1.3" data-path="tidy-data.html"><a href="tidy-data.html#video"><i class="fa fa-check"></i><b>12.1.3</b> Video</a></li>
+<li class="chapter" data-level="12.1.4" data-path="tidy-data.html"><a href="tidy-data.html#text-e.g.what-am-i-doing-on-okcupid"><i class="fa fa-check"></i><b>12.1.4</b> Text, e.g. What am I doing? on OKCupid</a></li>
+<li class="chapter" data-level="12.1.5" data-path="tidy-data.html"><a href="tidy-data.html#sequences"><i class="fa fa-check"></i><b>12.1.5</b> Sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="tidy-data.html"><a href="tidy-data.html#data-tables"><i class="fa fa-check"></i><b>12.2</b> Data Tables</a></li>
+<li class="chapter" data-level="12.3" data-path="tidy-data.html"><a href="tidy-data.html#conversion-from-images-videos-etc.-to-data-table"><i class="fa fa-check"></i><b>12.3</b> Conversion from images, videos, etc. to data table</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="tidy-data.html"><a href="tidy-data.html#ok-cupid"><i class="fa fa-check"></i><b>12.3.1</b> OK Cupid</a></li>
+<li class="chapter" data-level="12.3.2" data-path="tidy-data.html"><a href="tidy-data.html#tipi-rings-in-montana"><i class="fa fa-check"></i><b>12.3.2</b> Tipi rings in Montana</a></li>
+<li class="chapter" data-level="12.3.3" data-path="tidy-data.html"><a href="tidy-data.html#animal-tracking"><i class="fa fa-check"></i><b>12.3.3</b> Animal tracking</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="tidy-data.html"><a href="tidy-data.html#cases-and-variables"><i class="fa fa-check"></i><b>12.4</b> Cases and Variables</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="tidy-data.html"><a href="tidy-data.html#anatomy-of-a-data-table"><i class="fa fa-check"></i><b>12.4.1</b> Anatomy of a data table</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="tidy-data.html"><a href="tidy-data.html#whats-a-variable"><i class="fa fa-check"></i><b>12.5</b> What’s a variable?</a></li>
+<li class="chapter" data-level="12.6" data-path="tidy-data.html"><a href="tidy-data.html#not-in-tidy-data"><i class="fa fa-check"></i><b>12.6</b> Not in Tidy Data</a></li>
+<li class="chapter" data-level="12.7" data-path="tidy-data.html"><a href="tidy-data.html#cases"><i class="fa fa-check"></i><b>12.7</b> Cases</a></li>
+<li class="chapter" data-level="12.8" data-path="tidy-data.html"><a href="tidy-data.html#basic-knowledge"><i class="fa fa-check"></i><b>12.8</b> Basic Knowledge</a></li>
+<li class="chapter" data-level="12.9" data-path="tidy-data.html"><a href="tidy-data.html#tidy-data-1"><i class="fa fa-check"></i><b>12.9</b> Tidy Data</a></li>
+<li class="chapter" data-level="12.10" data-path="tidy-data.html"><a href="tidy-data.html#workflow-creating-a-chain-of-evidence"><i class="fa fa-check"></i><b>12.10</b> Workflow: Creating a chain of evidence</a></li>
+<li class="chapter" data-level="12.11" data-path="tidy-data.html"><a href="tidy-data.html#summary"><i class="fa fa-check"></i><b>12.11</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html"><i class="fa fa-check"></i><b>13</b> R Programming: Parts of Speech</a><ul>
+<li class="chapter" data-level="13.1" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html#command-chains"><i class="fa fa-check"></i><b>13.1</b> Command chains</a></li>
+<li class="chapter" data-level="13.2" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html#an-example-command-chain"><i class="fa fa-check"></i><b>13.2</b> An example command chain</a></li>
+<li class="chapter" data-level="13.3" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html#syntax-and-semantics"><i class="fa fa-check"></i><b>13.3</b> Syntax and semantics</a></li>
+<li class="chapter" data-level="13.4" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html#part-of-speech"><i class="fa fa-check"></i><b>13.4</b> Part of Speech</a></li>
+<li class="chapter" data-level="13.5" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html#parts-of-speech-in-r"><i class="fa fa-check"></i><b>13.5</b> Parts of Speech in R</a></li>
+<li class="chapter" data-level="13.6" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html#data-frames"><i class="fa fa-check"></i><b>13.6</b> Data frames</a></li>
+<li class="chapter" data-level="13.7" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html#functions"><i class="fa fa-check"></i><b>13.7</b> Functions</a></li>
+<li class="chapter" data-level="13.8" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html#arguments"><i class="fa fa-check"></i><b>13.8</b> Arguments</a></li>
+<li class="chapter" data-level="13.9" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html#variables"><i class="fa fa-check"></i><b>13.9</b> Variables</a></li>
+<li class="chapter" data-level="13.10" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html#constants"><i class="fa fa-check"></i><b>13.10</b> Constants</a></li>
+<li class="chapter" data-level="13.11" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html#discussion-problem"><i class="fa fa-check"></i><b>13.11</b> Discussion Problem</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="part-data-summaries-and-graphics.html"><a href="part-data-summaries-and-graphics.html"><i class="fa fa-check"></i><b>14</b> (PART) Data Summaries and Graphics</a></li>
+<li class="chapter" data-level="15" data-path="data-vs-information.html"><a href="data-vs-information.html"><i class="fa fa-check"></i><b>15</b> Data vs Information</a><ul>
+<li class="chapter" data-level="15.1" data-path="data-vs-information.html"><a href="data-vs-information.html#the-word-data"><i class="fa fa-check"></i><b>15.1</b> The word “data”:</a></li>
+<li class="chapter" data-level="15.2" data-path="data-vs-information.html"><a href="data-vs-information.html#section"><i class="fa fa-check"></i><b>15.2</b> </a></li>
+<li class="chapter" data-level="15.3" data-path="data-vs-information.html"><a href="data-vs-information.html#the-word-information"><i class="fa fa-check"></i><b>15.3</b> The word “information”</a></li>
+<li class="chapter" data-level="15.4" data-path="data-vs-information.html"><a href="data-vs-information.html#in-this-course"><i class="fa fa-check"></i><b>15.4</b> In this course</a><ul>
+<li class="chapter" data-level="15.4.1" data-path="data-vs-information.html"><a href="data-vs-information.html#our-task"><i class="fa fa-check"></i><b>15.4.1</b> Our Task</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="data-vs-information.html"><a href="data-vs-information.html#data-reports"><i class="fa fa-check"></i><b>15.5</b> Data Reports</a></li>
+<li class="chapter" data-level="15.6" data-path="data-vs-information.html"><a href="data-vs-information.html#glyph-ready-data"><i class="fa fa-check"></i><b>15.6</b> Glyph-ready Data</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html"><i class="fa fa-check"></i><b>16</b> Glyphs, Frames, and Scales</a><ul>
+<li class="chapter" data-level="16.1" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#glyphs-and-data"><i class="fa fa-check"></i><b>16.1</b> Glyphs and Data</a></li>
+<li class="chapter" data-level="16.2" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#data-glyph"><i class="fa fa-check"></i><b>16.2</b> Data Glyph</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#a-data-glyph-is-also-a-mark-e.g."><i class="fa fa-check"></i><b>16.2.1</b> A data glyph is also a mark, e.g.</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#data-glyph-properties-aesthetics"><i class="fa fa-check"></i><b>16.3</b> Data Glyph Properties: Aesthetics</a></li>
+<li class="chapter" data-level="16.4" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#why-aesthetic"><i class="fa fa-check"></i><b>16.4</b> Why “Aesthetic”?</a></li>
+<li class="chapter" data-level="16.5" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#some-graphics-components"><i class="fa fa-check"></i><b>16.5</b> Some Graphics Components</a></li>
+<li class="chapter" data-level="16.6" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#scales"><i class="fa fa-check"></i><b>16.6</b> Scales</a></li>
+<li class="chapter" data-level="16.7" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#guides"><i class="fa fa-check"></i><b>16.7</b> Guides</a></li>
+<li class="chapter" data-level="16.8" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#facets-using-x-and-y-twice"><i class="fa fa-check"></i><b>16.8</b> Facets – using x and y twice</a></li>
+<li class="chapter" data-level="16.9" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#designing-graphics"><i class="fa fa-check"></i><b>16.9</b> Designing Graphics</a></li>
+<li class="chapter" data-level="16.10" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#good-and-bad-graphics"><i class="fa fa-check"></i><b>16.10</b> Good and Bad Graphics</a></li>
+<li class="chapter" data-level="16.11" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#perception-and-comparison"><i class="fa fa-check"></i><b>16.11</b> Perception and Comparison</a></li>
+<li class="chapter" data-level="16.12" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#count-the-ways-this-graphic-is-bad"><i class="fa fa-check"></i><b>16.12</b> Count the ways this graphic is bad</a></li>
+<li class="chapter" data-level="16.13" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#glyph-ready-data-1"><i class="fa fa-check"></i><b>16.13</b> Glyph-Ready Data</a></li>
+<li class="chapter" data-level="16.14" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#layers-building-up-complex-plots"><i class="fa fa-check"></i><b>16.14</b> Layers – building up complex plots</a></li>
+<li class="chapter" data-level="16.15" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#stats-data-transformations"><i class="fa fa-check"></i><b>16.15</b> Stats: Data Transformations</a></li>
+<li class="chapter" data-level="16.16" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html#whats-next"><i class="fa fa-check"></i><b>16.16</b> What’s Next</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="activity-mapping-the-stars.html"><a href="activity-mapping-the-stars.html"><i class="fa fa-check"></i><b>17</b> Activity: Mapping the stars</a></li>
+<li class="chapter" data-level="18" data-path="introduction-to-graphics-and-wrangling.html"><a href="introduction-to-graphics-and-wrangling.html"><i class="fa fa-check"></i><b>18</b> Introduction to Graphics and Wrangling</a><ul>
+<li class="chapter" data-level="18.1" data-path="introduction-to-graphics-and-wrangling.html"><a href="introduction-to-graphics-and-wrangling.html#deconstructing-graphics"><i class="fa fa-check"></i><b>18.1</b> Deconstructing graphics</a></li>
+<li class="chapter" data-level="18.2" data-path="introduction-to-graphics-and-wrangling.html"><a href="introduction-to-graphics-and-wrangling.html#wrangling"><i class="fa fa-check"></i><b>18.2</b> Wrangling</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="part-data-verbs.html"><a href="part-data-verbs.html"><i class="fa fa-check"></i><b>19</b> (PART) Data Verbs</a></li>
+<li class="chapter" data-level="20" data-path="basicdataverbs.html"><a href="basicdataverbs.html"><i class="fa fa-check"></i><b>20</b> Basic Data Verbs</a><ul>
+<li class="chapter" data-level="20.1" data-path="basicdataverbs.html"><a href="basicdataverbs.html#three-kinds-of-verbs-for-data-wrangling"><i class="fa fa-check"></i><b>20.1</b> Three kinds of verbs for data wrangling</a><ul>
+<li class="chapter" data-level="20.1.1" data-path="basicdataverbs.html"><a href="basicdataverbs.html#non-wrangling-verbs"><i class="fa fa-check"></i><b>20.1.1</b> Non-wrangling verbs</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="basicdataverbs.html"><a href="basicdataverbs.html#data-verbs"><i class="fa fa-check"></i><b>20.2</b> Data Verbs</a><ul>
+<li class="chapter" data-level="20.2.1" data-path="basicdataverbs.html"><a href="basicdataverbs.html#some-commonly-used-data-verbs."><i class="fa fa-check"></i><b>20.2.1</b> Some commonly used data verbs.</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="basicdataverbs.html"><a href="basicdataverbs.html#reduction-verbs"><i class="fa fa-check"></i><b>20.3</b> Reduction verbs</a></li>
+<li class="chapter" data-level="20.4" data-path="basicdataverbs.html"><a href="basicdataverbs.html#transformation-verbs"><i class="fa fa-check"></i><b>20.4</b> Transformation verbs</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html"><i class="fa fa-check"></i><b>21</b> More transformation verbs</a><ul>
+<li class="chapter" data-level="21.1" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#rank-transforms"><i class="fa fa-check"></i><b>21.1</b> Rank transforms</a><ul>
+<li class="chapter" data-level="21.1.1" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#tied-ranks"><i class="fa fa-check"></i><b>21.1.1</b> Tied ranks</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#leads-and-lags"><i class="fa fa-check"></i><b>21.2</b> Leads and lags</a></li>
+<li class="chapter" data-level="21.3" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#times-and-dates"><i class="fa fa-check"></i><b>21.3</b> Times and Dates</a></li>
+<li class="chapter" data-level="21.4" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#middle"><i class="fa fa-check"></i><b>21.4</b> middle</a></li>
+<li class="chapter" data-level="21.5" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#conditional-transforms"><i class="fa fa-check"></i><b>21.5</b> Conditional transforms</a></li>
+<li class="chapter" data-level="21.6" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#text"><i class="fa fa-check"></i><b>21.6</b> Text</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="trends-in-popularity-of-names.html"><a href="trends-in-popularity-of-names.html"><i class="fa fa-check"></i><b>22</b> Trends in Popularity of Names</a><ul>
+<li class="chapter" data-level="22.1" data-path="trends-in-popularity-of-names.html"><a href="trends-in-popularity-of-names.html#objective"><i class="fa fa-check"></i><b>22.1</b> Objective</a><ul>
+<li class="chapter" data-level="22.1.1" data-path="trends-in-popularity-of-names.html"><a href="trends-in-popularity-of-names.html#first-individually"><i class="fa fa-check"></i><b>22.1.1</b> First, Individually …</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="case-study-in-basic-data-verbs-moby-dick.html"><a href="case-study-in-basic-data-verbs-moby-dick.html"><i class="fa fa-check"></i><b>23</b> Case study in basic data verbs: Moby Dick</a><ul>
+<li class="chapter" data-level="23.1" data-path="case-study-in-basic-data-verbs-moby-dick.html"><a href="case-study-in-basic-data-verbs-moby-dick.html#prolog-scraping-and-arranging-the-data"><i class="fa fa-check"></i><b>23.1</b> Prolog: Scraping and arranging the data</a></li>
+<li class="chapter" data-level="23.2" data-path="case-study-in-basic-data-verbs-moby-dick.html"><a href="case-study-in-basic-data-verbs-moby-dick.html#most-common-words"><i class="fa fa-check"></i><b>23.2</b> Most common words</a></li>
+<li class="chapter" data-level="23.3" data-path="case-study-in-basic-data-verbs-moby-dick.html"><a href="case-study-in-basic-data-verbs-moby-dick.html#most-common-sequences"><i class="fa fa-check"></i><b>23.3</b> Most common sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="cities-of-the-world.html"><a href="cities-of-the-world.html"><i class="fa fa-check"></i><b>24</b> Cities of the World</a></li>
+<li class="chapter" data-level="25" data-path="additional-exercises-on-data-verbs.html"><a href="additional-exercises-on-data-verbs.html"><i class="fa fa-check"></i><b>25</b> Additional Exercises on Data Verbs</a><ul>
+<li class="chapter" data-level="25.1" data-path="additional-exercises-on-data-verbs.html"><a href="additional-exercises-on-data-verbs.html#how-many-births"><i class="fa fa-check"></i><b>25.1</b> How many births</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="bicycle-use-patterns.html"><a href="bicycle-use-patterns.html"><i class="fa fa-check"></i><b>26</b> Bicycle use patterns</a><ul>
+<li class="chapter" data-level="26.1" data-path="bicycle-use-patterns.html"><a href="bicycle-use-patterns.html#time-of-day"><i class="fa fa-check"></i><b>26.1</b> Time of day</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="births-and-holidays.html"><a href="births-and-holidays.html"><i class="fa fa-check"></i><b>27</b> Births and Holidays</a><ul>
+<li class="chapter" data-level="27.1" data-path="births-and-holidays.html"><a href="births-and-holidays.html#births-and-holidays-1"><i class="fa fa-check"></i><b>27.1</b> Births and holidays</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="part-joins-and-reshaping.html"><a href="part-joins-and-reshaping.html"><i class="fa fa-check"></i><b>28</b> (PART) Joins and Reshaping</a></li>
+<li class="chapter" data-level="29" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html"><i class="fa fa-check"></i><b>29</b> Combining data from different sources</a><ul>
+<li class="chapter" data-level="29.1" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html#relational-databases"><i class="fa fa-check"></i><b>29.1</b> Relational databases</a></li>
+<li class="chapter" data-level="29.2" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html#joins"><i class="fa fa-check"></i><b>29.2</b> Joins</a></li>
+<li class="chapter" data-level="29.3" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html#example-average-class-size"><i class="fa fa-check"></i><b>29.3</b> Example: Average class size</a></li>
+<li class="chapter" data-level="29.4" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html#establishing-a-match-between-cases"><i class="fa fa-check"></i><b>29.4</b> Establishing a match between cases</a></li>
+<li class="chapter" data-level="29.5" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html#kinds-of-join"><i class="fa fa-check"></i><b>29.5</b> Kinds of join</a></li>
+<li class="chapter" data-level="29.6" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html#example-grade-point-averages"><i class="fa fa-check"></i><b>29.6</b> Example: Grade-point averages</a></li>
+<li class="chapter" data-level="29.7" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html#activity-which-to-join"><i class="fa fa-check"></i><b>29.7</b> Activity: Which to Join?</a></li>
+<li class="chapter" data-level="29.8" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html#example-joining-for-cleaning"><i class="fa fa-check"></i><b>29.8</b> Example: Joining for cleaning</a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html"><i class="fa fa-check"></i><b>30</b> Wide vs Narrow Data Tables</a><ul>
+<li class="chapter" data-level="30.1" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html#cases-variables-and-values"><i class="fa fa-check"></i><b>30.1</b> Cases, Variables, and Values</a></li>
+<li class="chapter" data-level="30.2" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html#two-formats"><i class="fa fa-check"></i><b>30.2</b> Two formats</a></li>
+<li class="chapter" data-level="30.3" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html#narrow-and-wide"><i class="fa fa-check"></i><b>30.3</b> Narrow and Wide</a></li>
+<li class="chapter" data-level="30.4" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html#narrow-is-relative"><i class="fa fa-check"></i><b>30.4</b> Narrow is relative</a></li>
+<li class="chapter" data-level="30.5" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html#too-narrow"><i class="fa fa-check"></i><b>30.5</b> Too narrow</a></li>
+<li class="chapter" data-level="30.6" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html#gather-from-wide-to-narrow"><i class="fa fa-check"></i><b>30.6</b> Gather — from Wide to Narrow</a></li>
+<li class="chapter" data-level="30.7" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html#cases-in-narrow-data"><i class="fa fa-check"></i><b>30.7</b> Cases in Narrow data</a></li>
+<li class="chapter" data-level="30.8" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html#spread-from-narrow-to-wide"><i class="fa fa-check"></i><b>30.8</b> Spread — from Narrow to Wide</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="biblical-names.html"><a href="biblical-names.html"><i class="fa fa-check"></i><b>31</b> Biblical Names</a></li>
+<li class="chapter" data-level="32" data-path="conformity-and-names.html"><a href="conformity-and-names.html"><i class="fa fa-check"></i><b>32</b> Conformity and Names</a></li>
+<li class="chapter" data-level="33" data-path="example-gender-neutral-names-when-wide-is-easier.html"><a href="example-gender-neutral-names-when-wide-is-easier.html"><i class="fa fa-check"></i><b>33</b> Example: Gender-neutral names: when wide is easier</a><ul>
+<li class="chapter" data-level="33.1" data-path="example-gender-neutral-names-when-wide-is-easier.html"><a href="example-gender-neutral-names-when-wide-is-easier.html#excerpt-from-babynames"><i class="fa fa-check"></i><b>33.1</b> Excerpt from <code>BabyNames</code></a></li>
+<li class="chapter" data-level="33.2" data-path="example-gender-neutral-names-when-wide-is-easier.html"><a href="example-gender-neutral-names-when-wide-is-easier.html#in-narrow-format"><i class="fa fa-check"></i><b>33.2</b> In narrow format</a></li>
+<li class="chapter" data-level="33.3" data-path="example-gender-neutral-names-when-wide-is-easier.html"><a href="example-gender-neutral-names-when-wide-is-easier.html#in-wide-format"><i class="fa fa-check"></i><b>33.3</b> In Wide format</a></li>
+<li class="chapter" data-level="33.4" data-path="example-gender-neutral-names-when-wide-is-easier.html"><a href="example-gender-neutral-names-when-wide-is-easier.html#with-sexes-side-by-side"><i class="fa fa-check"></i><b>33.4</b> With sexes side by side …</a></li>
+</ul></li>
+<li class="chapter" data-level="34" data-path="example-a-penny-collection.html"><a href="example-a-penny-collection.html"><i class="fa fa-check"></i><b>34</b> Example: A Penny Collection</a><ul>
+<li class="chapter" data-level="34.1" data-path="example-a-penny-collection.html"><a href="example-a-penny-collection.html#three-formats-for-the-penny-data-table"><i class="fa fa-check"></i><b>34.1</b> Three formats for the penny data table</a></li>
+<li class="chapter" data-level="34.2" data-path="example-a-penny-collection.html"><a href="example-a-penny-collection.html#more-tasks"><i class="fa fa-check"></i><b>34.2</b> More tasks</a></li>
+<li class="chapter" data-level="34.3" data-path="example-a-penny-collection.html"><a href="example-a-penny-collection.html#extending-the-data"><i class="fa fa-check"></i><b>34.3</b> Extending the data</a></li>
+</ul></li>
+<li class="chapter" data-level="35" data-path="stocks-and-dividends.html"><a href="stocks-and-dividends.html"><i class="fa fa-check"></i><b>35</b> Stocks and dividends</a></li>
+<li class="chapter" data-level="36" data-path="a-graph-for-the-economist.html"><a href="a-graph-for-the-economist.html"><i class="fa fa-check"></i><b>36</b> A Graph for the Economist</a><ul>
+<li class="chapter" data-level="36.1" data-path="a-graph-for-the-economist.html"><a href="a-graph-for-the-economist.html#the-data"><i class="fa fa-check"></i><b>36.1</b> The data</a></li>
+<li class="chapter" data-level="36.2" data-path="a-graph-for-the-economist.html"><a href="a-graph-for-the-economist.html#whats-the-case"><i class="fa fa-check"></i><b>36.2</b> What’s the case?</a></li>
+</ul></li>
+<li class="chapter" data-level="37" data-path="distributions.html"><a href="distributions.html"><i class="fa fa-check"></i><b>37</b> Distributions</a><ul>
+<li class="chapter" data-level="37.1" data-path="distributions.html"><a href="distributions.html#one-variable"><i class="fa fa-check"></i><b>37.1</b> One variable</a><ul>
+<li class="chapter" data-level="37.1.1" data-path="distributions.html"><a href="distributions.html#categorical-how-many-cases-at-each-level"><i class="fa fa-check"></i><b>37.1.1</b> Categorical: how many cases at each level?</a></li>
+<li class="chapter" data-level="37.1.2" data-path="distributions.html"><a href="distributions.html#quantitative"><i class="fa fa-check"></i><b>37.1.2</b> Quantitative</a></li>
+</ul></li>
+<li class="chapter" data-level="37.2" data-path="distributions.html"><a href="distributions.html#two-or-more-variables-displaying-relationships"><i class="fa fa-check"></i><b>37.2</b> Two or more variables: Displaying relationships</a></li>
+<li class="chapter" data-level="37.3" data-path="distributions.html"><a href="distributions.html#a-distribution-template"><i class="fa fa-check"></i><b>37.3</b> A distribution template</a><ul>
+<li class="chapter" data-level="37.3.1" data-path="distributions.html"><a href="distributions.html#aesthetics-1-2-or-three-variables"><i class="fa fa-check"></i><b>37.3.1</b> Aesthetics: 1, 2, or three variables</a></li>
+<li class="chapter" data-level="37.3.2" data-path="distributions.html"><a href="distributions.html#positions"><i class="fa fa-check"></i><b>37.3.2</b> Positions</a></li>
+<li class="chapter" data-level="37.3.3" data-path="distributions.html"><a href="distributions.html#facets"><i class="fa fa-check"></i><b>37.3.3</b> Facets</a></li>
+</ul></li>
+<li class="chapter" data-level="37.4" data-path="distributions.html"><a href="distributions.html#variable-types"><i class="fa fa-check"></i><b>37.4</b> Variable types</a></li>
+<li class="chapter" data-level="37.5" data-path="distributions.html"><a href="distributions.html#order"><i class="fa fa-check"></i><b>37.5</b> Order</a></li>
+<li class="chapter" data-level="37.6" data-path="distributions.html"><a href="distributions.html#interval"><i class="fa fa-check"></i><b>37.6</b> Interval</a></li>
+<li class="chapter" data-level="37.7" data-path="distributions.html"><a href="distributions.html#nhanes"><i class="fa fa-check"></i><b>37.7</b> NHANES</a><ul>
+<li class="chapter" data-level="37.7.1" data-path="distributions.html"><a href="distributions.html#categorical-variables"><i class="fa fa-check"></i><b>37.7.1</b> Categorical variables:</a></li>
+<li class="chapter" data-level="37.7.2" data-path="distributions.html"><a href="distributions.html#quantitative-variables"><i class="fa fa-check"></i><b>37.7.2</b> Quantitative variables</a></li>
+</ul></li>
+<li class="chapter" data-level="37.8" data-path="distributions.html"><a href="distributions.html#single-variables"><i class="fa fa-check"></i><b>37.8</b> Single variables</a><ul>
+<li class="chapter" data-level="37.8.1" data-path="distributions.html"><a href="distributions.html#interval-hence-ordered-use-density"><i class="fa fa-check"></i><b>37.8.1</b> Interval (hence ordered) — use density</a></li>
+<li class="chapter" data-level="37.8.2" data-path="distributions.html"><a href="distributions.html#not-interval-use-counts"><i class="fa fa-check"></i><b>37.8.2</b> Not interval — use counts</a></li>
+<li class="chapter" data-level="37.8.3" data-path="distributions.html"><a href="distributions.html#two-variables"><i class="fa fa-check"></i><b>37.8.3</b> Two variables</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="38" data-path="statistics-collective-properties-of-data.html"><a href="statistics-collective-properties-of-data.html"><i class="fa fa-check"></i><b>38</b> Statistics: Collective properties of data</a><ul>
+<li class="chapter" data-level="38.1" data-path="statistics-collective-properties-of-data.html"><a href="statistics-collective-properties-of-data.html#the-mean-as-a-summary"><i class="fa fa-check"></i><b>38.1</b> The mean as a summary</a></li>
+<li class="chapter" data-level="38.2" data-path="statistics-collective-properties-of-data.html"><a href="statistics-collective-properties-of-data.html#continuous-explanatory-variables"><i class="fa fa-check"></i><b>38.2</b> Continuous explanatory variables</a></li>
+<li class="chapter" data-level="38.3" data-path="statistics-collective-properties-of-data.html"><a href="statistics-collective-properties-of-data.html#correlations"><i class="fa fa-check"></i><b>38.3</b> Correlations</a></li>
+<li class="chapter" data-level="38.4" data-path="statistics-collective-properties-of-data.html"><a href="statistics-collective-properties-of-data.html#a-primitive-display-of-genre-correlations"><i class="fa fa-check"></i><b>38.4</b> A primitive display of genre correlations</a></li>
+<li class="chapter" data-level="38.5" data-path="statistics-collective-properties-of-data.html"><a href="statistics-collective-properties-of-data.html#a-network-display"><i class="fa fa-check"></i><b>38.5</b> A network display</a></li>
+</ul></li>
+<li class="chapter" data-level="39" data-path="regular-expressions.html"><a href="regular-expressions.html"><i class="fa fa-check"></i><b>39</b> Regular expressions</a><ul>
+<li class="chapter" data-level="39.1" data-path="regular-expressions.html"><a href="regular-expressions.html#visualizing-matches"><i class="fa fa-check"></i><b>39.1</b> Visualizing matches</a></li>
+<li class="chapter" data-level="39.2" data-path="regular-expressions.html"><a href="regular-expressions.html#example"><i class="fa fa-check"></i><b>39.2</b> Example</a></li>
+<li class="chapter" data-level="39.3" data-path="regular-expressions.html"><a href="regular-expressions.html#extraction"><i class="fa fa-check"></i><b>39.3</b> Extraction</a></li>
+</ul></li>
+<li class="chapter" data-level="40" data-path="calling-311.html"><a href="calling-311.html"><i class="fa fa-check"></i><b>40</b> Calling 311</a></li>
+<li class="chapter" data-level="41" data-path="regex-examples-.html"><a href="regex-examples-.html"><i class="fa fa-check"></i><b>41</b> Regex examples.</a></li>
+<li class="chapter" data-level="42" data-path="extracting-matching-parts-of-regular-expressions.html"><a href="extracting-matching-parts-of-regular-expressions.html"><i class="fa fa-check"></i><b>42</b> Extracting matching parts of regular expressions</a></li>
+<li class="chapter" data-level="43" data-path="tasks-for-you.html"><a href="tasks-for-you.html"><i class="fa fa-check"></i><b>43</b> Tasks for you</a></li>
+<li class="chapter" data-level="44" data-path="example-finding-the-po-number-in-an-address.html"><a href="example-finding-the-po-number-in-an-address.html"><i class="fa fa-check"></i><b>44</b> Example: Finding the PO number in an address</a></li>
+<li class="chapter" data-level="45" data-path="scraping-data-from-web-sites.html"><a href="scraping-data-from-web-sites.html"><i class="fa fa-check"></i><b>45</b> Scraping data from web sites</a></li>
+<li class="chapter" data-level="46" data-path="scraping.html"><a href="scraping.html"><i class="fa fa-check"></i><b>46</b> Scraping</a><ul>
+<li class="chapter" data-level="46.1" data-path="scraping.html"><a href="scraping.html#find-some-data-of-interest-to-you"><i class="fa fa-check"></i><b>46.1</b> Find some data of interest to you</a></li>
+</ul></li>
+<li class="chapter" data-level="47" data-path="cleaning.html"><a href="cleaning.html"><i class="fa fa-check"></i><b>47</b> Cleaning</a><ul>
+<li class="chapter" data-level="47.1" data-path="cleaning.html"><a href="cleaning.html#untidy-data"><i class="fa fa-check"></i><b>47.1</b> Untidy data</a></li>
+<li class="chapter" data-level="47.2" data-path="cleaning.html"><a href="cleaning.html#parenthetical-notes"><i class="fa fa-check"></i><b>47.2</b> Parenthetical notes</a></li>
+<li class="chapter" data-level="47.3" data-path="cleaning.html"><a href="cleaning.html#currency-symbols"><i class="fa fa-check"></i><b>47.3</b> Currency symbols</a></li>
+<li class="chapter" data-level="47.4" data-path="cleaning.html"><a href="cleaning.html#funny-symbols"><i class="fa fa-check"></i><b>47.4</b> Funny symbols</a></li>
+</ul></li>
+<li class="chapter" data-level="48" data-path="activity.html"><a href="activity.html"><i class="fa fa-check"></i><b>48</b> Activity</a></li>
+<li class="chapter" data-level="49" data-path="mini-languages.html"><a href="mini-languages.html"><i class="fa fa-check"></i><b>49</b> Mini-languages</a></li>
+<li class="chapter" data-level="50" data-path="fun-with-regexes.html"><a href="fun-with-regexes.html"><i class="fa fa-check"></i><b>50</b> Fun with regexes</a><ul>
+<li class="chapter" data-level="50.1" data-path="fun-with-regexes.html"><a href="fun-with-regexes.html#three-zs"><i class="fa fa-check"></i><b>50.1</b> Three Zs?</a></li>
+</ul></li>
+<li class="chapter" data-level="51" data-path="scraping-the-weather.html"><a href="scraping-the-weather.html"><i class="fa fa-check"></i><b>51</b> Scraping the weather</a></li>
+<li class="chapter" data-level="52" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>52</b> Machine Learning</a><ul>
+<li class="chapter" data-level="52.1" data-path="machine-learning.html"><a href="machine-learning.html#a-multivariable-graphic"><i class="fa fa-check"></i><b>52.1</b> A multivariable graphic</a></li>
+<li class="chapter" data-level="52.2" data-path="machine-learning.html"><a href="machine-learning.html#with-more-variables"><i class="fa fa-check"></i><b>52.2</b> With more variables?</a></li>
+<li class="chapter" data-level="52.3" data-path="machine-learning.html"><a href="machine-learning.html#various-goals-for-machine-learning"><i class="fa fa-check"></i><b>52.3</b> Various goals for machine learning</a></li>
+<li class="chapter" data-level="52.4" data-path="machine-learning.html"><a href="machine-learning.html#supervised-vs-unsupervised-learning"><i class="fa fa-check"></i><b>52.4</b> Supervised vs unsupervised learning</a></li>
+<li class="chapter" data-level="52.5" data-path="machine-learning.html"><a href="machine-learning.html#supervised-learning"><i class="fa fa-check"></i><b>52.5</b> Supervised learning</a></li>
+<li class="chapter" data-level="52.6" data-path="machine-learning.html"><a href="machine-learning.html#application-examples"><i class="fa fa-check"></i><b>52.6</b> Application Examples</a><ul>
+<li class="chapter" data-level="52.6.1" data-path="machine-learning.html"><a href="machine-learning.html#home-electricity-use"><i class="fa fa-check"></i><b>52.6.1</b> Home electricity use</a></li>
+<li class="chapter" data-level="52.6.2" data-path="machine-learning.html"><a href="machine-learning.html#wages-and-education"><i class="fa fa-check"></i><b>52.6.2</b> Wages and education</a></li>
+</ul></li>
+<li class="chapter" data-level="52.7" data-path="machine-learning.html"><a href="machine-learning.html#statistical-learning"><i class="fa fa-check"></i><b>52.7</b> Statistical learning</a></li>
+<li class="chapter" data-level="52.8" data-path="machine-learning.html"><a href="machine-learning.html#example-child-carseat-sales"><i class="fa fa-check"></i><b>52.8</b> Example: Child carseat sales</a></li>
+<li class="chapter" data-level="52.9" data-path="machine-learning.html"><a href="machine-learning.html#hypothesis-generated-model"><i class="fa fa-check"></i><b>52.9</b> Hypothesis generated model</a></li>
+<li class="chapter" data-level="52.10" data-path="machine-learning.html"><a href="machine-learning.html#interpreting-the-model"><i class="fa fa-check"></i><b>52.10</b> Interpreting the model?</a></li>
+<li class="chapter" data-level="52.11" data-path="machine-learning.html"><a href="machine-learning.html#another-formalism-regression-trees"><i class="fa fa-check"></i><b>52.11</b> Another formalism: Regression trees</a></li>
+<li class="chapter" data-level="52.12" data-path="machine-learning.html"><a href="machine-learning.html#no-prior-model-at-all"><i class="fa fa-check"></i><b>52.12</b> No prior model at all?</a></li>
+<li class="chapter" data-level="52.13" data-path="machine-learning.html"><a href="machine-learning.html#shelf-location"><i class="fa fa-check"></i><b>52.13</b> Shelf location?</a></li>
+<li class="chapter" data-level="52.14" data-path="machine-learning.html"><a href="machine-learning.html#building-a-classifier"><i class="fa fa-check"></i><b>52.14</b> Building a classifier</a><ul>
+<li class="chapter" data-level="52.14.1" data-path="machine-learning.html"><a href="machine-learning.html#with-glaucoma"><i class="fa fa-check"></i><b>52.14.1</b> With glaucoma</a></li>
+<li class="chapter" data-level="52.14.2" data-path="machine-learning.html"><a href="machine-learning.html#normal-eyes"><i class="fa fa-check"></i><b>52.14.2</b> Normal eyes</a></li>
+</ul></li>
+<li class="chapter" data-level="52.15" data-path="machine-learning.html"><a href="machine-learning.html#build-a-classifier"><i class="fa fa-check"></i><b>52.15</b> Build a classifier …</a></li>
+<li class="chapter" data-level="52.16" data-path="machine-learning.html"><a href="machine-learning.html#unsupervised-learning"><i class="fa fa-check"></i><b>52.16</b> Unsupervised learning</a></li>
+</ul></li>
+<li class="chapter" data-level="53" data-path="some-resources.html"><a href="some-resources.html"><i class="fa fa-check"></i><b>53</b> Some resources</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes and Materials for Data Computing</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="combining-data-from-different-sources" class="section level1">
+<h1><span class="header-section-number">§ 29</span> Combining data from different sources</h1>
+<p>Glyph-ready data often combines data from different sources.</p>
+<ul>
+<li>Perhaps they come from different experiments or institutions.</li>
+<li>Often, they were collected with different objectives than yours.</li>
+<li>Perhaps they are completely different types of data,</li>
+</ul>
+<p><em>Example: Medicare data</em></p>
+<ul>
+<li><code>MedicareProviders</code>: Name and location</li>
+<li><code>DirectRecoveryGroups</code>: Descriptions of standardized medical procedures</li>
+<li><code>MedicareCharges</code>: Charges and payments for different DRGs by different providers</li>
+<li><code>ZipDemographics</code>: Population and age structure in each ZIP code.</li>
+</ul>
+<p><strong>Example: Holiday births</strong></p>
+<p><strong>Goal</strong>: Compare the number of births on holidays to those on non-holiday weekdays.</p>
+<ul>
+<li>The <code>mosaicData::Birthdays</code> table gives the daily number of births in US states from 1969 to 1988.</li>
+<li><code>Birthdays</code> doesn’t <em>directly</em> tell us which days are holidays, but …</li>
+</ul>
+<p>We can use the <code>date</code> variable to look up each case in a list of holidays, e.g.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Holidays &lt;-<span class="st"> </span><span class="kw">read.file</span>(<span class="st">&quot;http://tiny.cc/dcf/US-Holidays.csv&quot;</span>)</code></pre></div>
+<div id="relational-databases" class="section level2">
+<h2><span class="header-section-number">29.1</span> Relational databases</h2>
+<p>Storing data in separate tables can be beneficial even when the data are coming from the same source:</p>
+<ul>
+<li>There is no “one size fits all” glyph-ready format. Often the kinds of analysis that will be done are not specifically anticipated when data are collected.</li>
+<li>Glyph-ready data often contains <strong>redundancies</strong>. This makes it hard to update or correct data.</li>
+</ul>
+<p><strong>Strategy</strong>: Don’t even try to smash all data into one big table. Instead, join related tables as needed.</p>
+<p><strong>Example: Grades and Enrollment</strong></p>
+</div>
+<div id="joins" class="section level2">
+<h2><span class="header-section-number">29.2</span> Joins</h2>
+<p>A <em>join</em> is a data verb that combines two tables.</p>
+<ul>
+<li>These care called the <em>left</em> and the <em>right</em> tables.</li>
+</ul>
+<p>There are several kinds of join.</p>
+<ul>
+<li>All involve establishing a correspondance — a match — between each case in the left table and zero or more cases in the right table.</li>
+<li>The various joins differ in how they handle multiple matches or missing matches.</li>
+</ul>
+</div>
+<div id="example-average-class-size" class="section level2">
+<h2><span class="header-section-number">29.3</span> Example: Average class size</h2>
+<p><strong>Goal</strong>: Figure out the average class size seen by each student.</p>
+<ul>
+<li><code>enroll</code> comes from <code>Courses</code> table.</li>
+<li>Student (<code>sid</code>) comes from <code>Grades</code>.</li>
+<li><code>sessionID</code> is in both tables.</li>
+</ul>
+<p>Once <code>Courses</code> and <code>Grades</code> are joined, it’s straightforward to find the average enrollment seen by each student.</p>
+<ul>
+<li></li>
+</ul>
+<p><strong>Statistical Digression</strong></p>
+<p>Why are these numbers different?</p>
+</div>
+<div id="establishing-a-match-between-cases" class="section level2">
+<h2><span class="header-section-number">29.4</span> Establishing a match between cases</h2>
+<p>A match between a case in the <em>left</em> table and a case in the <em>right</em> table is made based on the values in pairs of corresponding variables.</p>
+<ul>
+<li><strong>You</strong> specify which pairs to use.</li>
+<li>A pair is a variable from the left table and a variable from the right table.</li>
+<li>Cases must have <em>exactly equal</em> values in the left variable and right variable for a match to be made.</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Grades %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(Courses, <span class="dt">by =</span> <span class="kw">c</span>(<span class="dt">sessionID =</span> <span class="st">&quot;sessionID&quot;</span>)) %&gt;%
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">4</span>)</code></pre></div>
+<p>The default value of <code>by=</code> is all variables with the same names in both tables.<br />
+- This is <strong>not reliable</strong> unless you’ve checked.</p>
+</div>
+<div id="kinds-of-join" class="section level2">
+<h2><span class="header-section-number">29.5</span> Kinds of join</h2>
+<p>Different kinds of join have different answers to these questions.</p>
+<ul>
+<li>What to do when there is <strong>no match</strong> between a left case and any right case?</li>
+<li>What to do when there are <strong>multiple matching cases</strong> in the right table for a case in the left table?</li>
+</ul>
+<p>Most popular joins: <code>left_join()</code> and <code>inner_join()</code></p>
+<ol style="list-style-type: decimal">
+<li>No match of a left case to a right case
+<ul>
+<li><code>left_join()</code> Keep the left case and fill in the new variables with NA</li>
+<li><code>inner_join()</code> Discard the left case. Less popular joins:</li>
+<li><code>full_join()</code> Keep left case as well as unmatched right cases.</li>
+<li><code>semi_join()</code> Discard the left case.</li>
+<li><code>anti_join()</code> Keep the left case but discard any left case with a match in the right table</li>
+</ul></li>
+<li>Multiple matches of right cases to a left case
+<ul>
+<li><code>left_join()</code> and <code>inner_join()</code> do the same thing: Keep <strong>all combinations</strong>. Less popular joins:</li>
+<li><code>full_join()</code> Keep all combinations.</li>
+<li><code>semi_join()</code> Keep just one copy of the left case.</li>
+<li><code>anti_join()</code> Discard the left case.</li>
+</ul></li>
+</ol>
+</div>
+<div id="example-grade-point-averages" class="section level2">
+<h2><span class="header-section-number">29.6</span> Example: Grade-point averages</h2>
+<p>Here are three data tables relating student grades in courses at Macalester in 2005</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Grades &lt;-<span class="st"> </span><span class="kw">read.file</span>(<span class="st">&quot;http://tiny.cc/mosaic/grades.csv&quot;</span>)
+Courses &lt;-<span class="st"> </span><span class="kw">read.file</span>(<span class="st">&quot;http://tiny.cc/mosaic/courses.csv&quot;</span>)
+GradePoint &lt;-<span class="st"> </span><span class="kw">read.file</span>(<span class="st">&quot;http://tiny.cc/mosaic/grade-to-number.csv&quot;</span>)</code></pre></div>
+</div>
+<div id="activity-which-to-join" class="section level2">
+<h2><span class="header-section-number">29.7</span> Activity: Which to Join?</h2>
+<p>For each of these, say what tables you would need to join and what the corresponding variables will be.</p>
+<ol style="list-style-type: decimal">
+<li>How many students in each department?</li>
+<li>What fraction of grades are below B+ in each department?</li>
+<li>What’s the grade-point average (GPA) for each student?</li>
+<li>Grade-point average for each department or instructor</li>
+<li>What’s the 95% confidence interval on the GPA for each student?</li>
+<li>(Statistically more sophisticated) To what extent does the grade reflect the student or the department or instructor?</li>
+</ol>
+</div>
+<div id="example-joining-for-cleaning" class="section level2">
+<h2><span class="header-section-number">29.8</span> Example: Joining for cleaning</h2>
+<p>Birds at the Ordway Nature Preserve</p>
+<p>As a group, let’s correct the species names using <a href="https://docs.google.com/spreadsheets/d/1GDKeulVSRXL7Q_5Q0a7Offc_IPX2T4sZ80VN5VLASew/edit#gid=0">this data table</a>.</p>
+<ul>
+<li>Count how many birds there are of each species in <code>OrdwayBirds</code> using the corrected species names.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="part-joins-and-reshaping.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="wide-vs-narrow-data-tables.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": "link:https://github.com/dtkaplan/comp110/DCF-materials-book/edit/master/%s",
+"download": null,
+"toc": {
+"collapse": "section",
+"unnumbered": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

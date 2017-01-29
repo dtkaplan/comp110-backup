@@ -1,0 +1,63 @@
+# Data vs Information
+
+
+What's the difference. Although they are often used synonomously, in this course ...
+
+> Data is given; information is taken.
+
+## The word "data":
+
+**Dictionary etymology**: 1640s, plural of datum, from Latin *datum* "(thing) given," neuter past participle of *dare* "to give".  
+
+**Historically**: Data (Greek: Δεδομένα, Dedomena) is a work by Euclid. It deals with the nature and implications of "given" information in geometrical problems. The subject matter is closely related to the first four books of Euclid's Elements. [source](https://en.wikipedia.org/wiki/Data_(Euclid))
+
+## 
+
+[1838 English edition of Euclid](https://books.google.com/books?id=5lN1sy51SwYC&pg=PA294#v=onepage&q&f=false)
+
+```{r echo = FALSE}
+knitr::include_graphics("Images/Euclid-data-titlepage-English.png")
+```
+
+## The word "information"
+
+The English word was apparently derived from the Latin stem (information-) of the nominative (informatio): this noun is derived from the verb informare (to inform) in the sense of "to give form to the mind", "to discipline", "instruct", "teach". [Source:](https://en.wikipedia.org/wiki/Information)
+
+**A Dictionary Definition**: knowledge acquired through experience or study [source](http://dictionary.reference.com/browse/information)
+
+## In this course
+
+**Data** are measurements, observations, records, etc. of the sort that appear in a data table.
+
+**Information** is the knowledge or belief that guides decisions or provides explanations.
+
+### Our Task
+
+Turn data into information.
+
+## Data Reports
+
+Knowledge and belief are attributes of the human mind.  
+
+* Knowledge is belief that there is consensus about.
+
+We derive knowledge and belief from our experiences including the statements of those we deem to have authority.
+
+A **data report** is a presentation of data from which we are inclined to draw conclusions.  Some forms:
+
+* A data table itself.  It must be small to be assimilated by us.
+* A data graphic. Good data graphics are those that display patterns (or the lack thereof) in a form that is readily assimulated and faithful to the data being reported.
+* A data model, such as a statistical model written in a mathematical formalism.
+
+Data graphics can be interpreted without (much) specialized training.  Models typically require some specialized skills interpretation.
+
+## Glyph-ready Data
+
+Making data graphics can be straightforward so long as the data underlying the graphic are in the appropriate form.
+
+* We'll call such a form **glyph-ready**.
+
+**Data Wrangling** is the process of transforming or reshaping the data tables that arrive at our door into a glyph-ready form.
+
+* The glyph-ready form depends on the kind of graphic you wish to make.
+* Data reports in general also use data in glyph-ready form, so wrangling techniques useful for graphics are also useful for data modeling or the construction of short, human-interpretable tables.

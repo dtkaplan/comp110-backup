@@ -1,0 +1,172 @@
+```{r include=FALSE}
+require(mosaic)
+require(knitr)
+require(NHANES)
+knitr::opts_chunk$set(echo = FALSE, message=FALSE)
+```
+
+# Distributions
+
+Often there is information to be found in the way cases differ one from the other.
+
+A **distribution** is a representation of the patterns of spread of the cases.
+
+## One variable
+
+### Categorical: how many cases at each level?
+
+Order: help the eye
+
+### Quantitative
+
+No discrete levels.  The fundamental display is **density**
+
+Show some densities.
+
+## Two or more variables: Displaying relationships
+
+## A distribution template
+
+### Aesthetics: 1, 2, or three variables
+
+* `x = `  The first variable: *always!*
+* `y = `  The *count* or *density* or another variable
+* `group = ` or `fill = ` or `color = ` Still another variable
+
+### Positions
+
+* Dodged (the default)
+* Stacked
+* Proportion
+
+### Facets 
+
+One or two more categorical variables    
+
+- `facet_wrap( ~ var)` 
+- `facet_grid(var1 ~ var2)`
+
+## Variable types
+
+interval  ---- ordered  ----- categorical
+
+1. Quantitative: a natural order and interval
+2. Ordinal: a natural order but not an interval
+3. Categorical: no natural order
+
+## Order
+
+The different levels of the variable have a natural order; it's natural to say that one level is higher than another or that a level is in-between two other levels.    
+
+* Temperature
+* Age
+* Likert scale (strongly disagree, disagree, neutral, ...)
+* Income bracket, e.g. 0-25K, 25K-40K, 40K-75K, 75K-150K
+* Numerical scale, e.g. pain level of 1 to 10
+* but not, e.g. Language, Nationality, ...
+
+## Interval
+
+For variables with a natural order, does the interval between levels have a specific meaning?   
+
+* Temperature: Yes
+* Age: Yes
+* Likert scale: not really, but sometimes assumed
+* Income bracket: No
+* Language: No! (It's not even ordered!)
+
+## NHANES
+
+`NHANES` package has the `NHANES` data table
+
+
+### Categorical variables:
+
+* `Gender`: no order (therefore not interval)
+* `Education`: ordered but not interval
+* `SexOrientation`: not really ordered (therefore not interval)
+* `Work`: not really ordered (therefore not interval)
+* `MaritalStatus`: no order (therefore not interval)
+* `HHIncome`: ordered but not interval
+
+### Quantitative variables
+
+* `UrineVol1` ordered and interval
+* `Age`: ordered and interval
+
+## Single variables
+
+### Interval (hence ordered) --- use density
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = UrineVol1)) + 
+  geom_density()
+```
+
+### Not interval --- use counts
+
+But respect the order if there is one.
+
+1. Quantitative: a natural order and interval
+2. Ordinal: a natural order but not an interval
+3. Categorical: no natural order
+
+### Two variables
+
+```{r}
+NHANES %>% 
+  ggplot(aes(x = Age)) +
+  geom_density(aes(fill = MaritalStatus))
+```
+
+How could you make this better?
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = UrineVol1)) +
+  geom_density(aes(group = MaritalStatus), 
+               position = position_stack())
+```
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = Age)) +
+  geom_density(aes(fill = MaritalStatus), 
+               position = position_stack())
+```
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = Age)) +
+  geom_density(aes(fill = MaritalStatus), 
+               position = position_fill())
+```
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = UrineVol1)) +
+  geom_density(aes(fill = MaritalStatus, color = Gender), 
+               position = position_stack())
+```
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = UrineVol1)) +
+  geom_density(aes(fill = MaritalStatus), 
+               position = position_dodge())
+```
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = Age, y = UrineVol1)) +
+  geom_density2d()
+```
+
+```{r}
+NHANES %>%
+  ggplot(aes(x = Age, y = UrineVol1)) +
+  geom_hex() +
+  geom_smooth()
+
+```

@@ -1,0 +1,35 @@
+```{r include = FALSE}
+library(DataComputing)
+show_answers <- FALSE
+```
+
+
+Here's a small set of cases from the data table `airquality`.
+
+```{r}
+# built-in dataset in R
+head(airquality)
+```
+
+Wrangle `airquality` from wide to narrow format using `gather()` so that the result looks like this:
+```{r echo = FALSE}
+set.seed(101)
+narrow_airquality <- 
+  airquality %>% 
+  gather(type, value, Ozone:Temp)
+sample_n(narrow_airquality, size = 5) -> foo
+row.names(foo) <- NULL
+foo
+```
+
+
+```{block echo = show_answers}
+**Solution**
+```
+
+```{r 132-answer, echo = show_answers, eval = show_answers, results="hide"}
+airquality %>% 
+  gather(type, value, Ozone:Temp)
+```
+
+Credit: Adam Lucas

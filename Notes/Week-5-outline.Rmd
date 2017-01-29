@@ -1,0 +1,31 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+# Outline of Class Session: Week 5
+
+Pennies, wide and narrow.
+
+Registrar's database
+* Distribution of class sizes.
+* Distribution of grades.
+* Break the grade distribution down by department.
+* Average GPA 
+* Average GPA by student
+* Average GPA by department
+* Adjusted average by student, taking department into account.
+
+Together: Join-Urban-Pop.pdf activity. `WorldCities` and `CountryData`
+
+Together: Bible-related `"tiny.cc/dcf/BibleNames.csv"` names from last year's Week-3-handout.pdf. Reconfigure this to emphasize joins. Or file Week-3-babynames.Rnw
+
+Together: Bird species variant spellings. Link to spreadsheet is on the front page, `index.html`. See Week-3-handout-2.pdf. or Week-4-Birds.pdf
+
+Together: Stocks and dividends, holiday birthdays, ModelsOfRegistration.Rmd
+
+Finally get this put together: 311-Calls
+
+-------------------
+
+Danny Kaplan. Compiled at `r date()`.

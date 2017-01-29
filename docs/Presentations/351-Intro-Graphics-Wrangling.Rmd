@@ -1,0 +1,6 @@
+# Introduction to Graphics and Wrangling
+
+[PDF handout](Handouts/351-Intro-Graphics-Wrangling.pdf)
+
+  ```{r child = "Handouts/351-Intro-Graphics-Wrangling.Rmd"}
+  ```

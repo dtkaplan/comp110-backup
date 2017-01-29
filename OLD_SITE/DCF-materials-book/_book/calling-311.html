@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes and Materials for Data Computing</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110">
+  <meta name="generator" content="bookdown 0.1.15 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes and Materials for Data Computing" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110" />
+  <meta name="github-repo" content="dtkaplan/comp110" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes and Materials for Data Computing" />
+  
+  <meta name="twitter:description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110" />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+  
+<meta name="date" content="2016-12-27">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="regular-expressions.html">
+<link rel="next" href="regex-examples-.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notes and materials for Data Computing</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Placeholder</a></li>
+<li class="chapter" data-level="2" data-path="gettingorganized.html"><a href="gettingorganized.html"><i class="fa fa-check"></i><b>2</b> (PART) Getting Organized</a></li>
+<li class="chapter" data-level="3" data-path="files-and-documents.html"><a href="files-and-documents.html"><i class="fa fa-check"></i><b>3</b> Files and Documents</a></li>
+<li class="chapter" data-level="4" data-path="embeding-files-within-rmd-html-files.html"><a href="embeding-files-within-rmd-html-files.html"><i class="fa fa-check"></i><b>4</b> Embeding Files within Rmd -&gt; HTML files</a></li>
+<li class="chapter" data-level="5" data-path="datainfrastructure.html"><a href="datainfrastructure.html"><i class="fa fa-check"></i><b>5</b> (PART) Data Infrastructure</a></li>
+<li class="chapter" data-level="6" data-path="case-study-highway-fatalities.html"><a href="case-study-highway-fatalities.html"><i class="fa fa-check"></i><b>6</b> Case Study: Highway Fatalities</a></li>
+<li class="chapter" data-level="7" data-path="case-study-taxicabs-and-the-sharing-economy.html"><a href="case-study-taxicabs-and-the-sharing-economy.html"><i class="fa fa-check"></i><b>7</b> Case Study: Taxicabs and the sharing economy</a></li>
+<li class="chapter" data-level="8" data-path="case-study-medicare-spending.html"><a href="case-study-medicare-spending.html"><i class="fa fa-check"></i><b>8</b> Case Study: Medicare spending</a></li>
+<li class="chapter" data-level="9" data-path="untidy-data-school-enrollments.html"><a href="untidy-data-school-enrollments.html"><i class="fa fa-check"></i><b>9</b> Untidy data: School enrollments</a></li>
+<li class="chapter" data-level="10" data-path="untidy-data-galtons-measurements-of-height.html"><a href="untidy-data-galtons-measurements-of-height.html"><i class="fa fa-check"></i><b>10</b> Untidy data: Galton’s measurements of height</a></li>
+<li class="chapter" data-level="11" data-path="untidy-data-family-structure-of-military-personnel.html"><a href="untidy-data-family-structure-of-military-personnel.html"><i class="fa fa-check"></i><b>11</b> Untidy data: Family structure of military personnel</a></li>
+<li class="chapter" data-level="12" data-path="untidy-data-minneapolis-voting.html"><a href="untidy-data-minneapolis-voting.html"><i class="fa fa-check"></i><b>12</b> Untidy data: Minneapolis Voting</a></li>
+<li class="chapter" data-level="13" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>13</b> Tidy Data</a></li>
+<li class="chapter" data-level="14" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html"><i class="fa fa-check"></i><b>14</b> R Programming: Parts of Speech</a></li>
+<li class="chapter" data-level="15" data-path="part-data-summaries-and-graphics.html"><a href="part-data-summaries-and-graphics.html"><i class="fa fa-check"></i><b>15</b> (PART) Data Summaries and Graphics</a></li>
+<li class="chapter" data-level="16" data-path="data-vs-information.html"><a href="data-vs-information.html"><i class="fa fa-check"></i><b>16</b> Data vs Information</a></li>
+<li class="chapter" data-level="17" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html"><i class="fa fa-check"></i><b>17</b> Glyphs, Frames, and Scales</a></li>
+<li class="chapter" data-level="18" data-path="activity-mapping-the-stars.html"><a href="activity-mapping-the-stars.html"><i class="fa fa-check"></i><b>18</b> Activity: Mapping the stars</a></li>
+<li class="chapter" data-level="19" data-path="introduction-to-graphics-and-wrangling.html"><a href="introduction-to-graphics-and-wrangling.html"><i class="fa fa-check"></i><b>19</b> Introduction to Graphics and Wrangling</a></li>
+<li class="chapter" data-level="20" data-path="part-data-verbs.html"><a href="part-data-verbs.html"><i class="fa fa-check"></i><b>20</b> (PART) Data Verbs</a></li>
+<li class="chapter" data-level="21" data-path="basicdataverbs.html"><a href="basicdataverbs.html"><i class="fa fa-check"></i><b>21</b> Basic Data Verbs</a></li>
+<li class="chapter" data-level="22" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html"><i class="fa fa-check"></i><b>22</b> More transformation verbs</a></li>
+<li class="chapter" data-level="23" data-path="trends-in-popularity-of-names.html"><a href="trends-in-popularity-of-names.html"><i class="fa fa-check"></i><b>23</b> Trends in Popularity of Names</a></li>
+<li class="chapter" data-level="24" data-path="case-study-in-basic-data-verbs-moby-dick.html"><a href="case-study-in-basic-data-verbs-moby-dick.html"><i class="fa fa-check"></i><b>24</b> Case study in basic data verbs: Moby Dick</a></li>
+<li class="chapter" data-level="25" data-path="cities-of-the-world.html"><a href="cities-of-the-world.html"><i class="fa fa-check"></i><b>25</b> Cities of the World</a></li>
+<li class="chapter" data-level="26" data-path="additional-exercises-on-data-verbs.html"><a href="additional-exercises-on-data-verbs.html"><i class="fa fa-check"></i><b>26</b> Additional Exercises on Data Verbs</a></li>
+<li class="chapter" data-level="27" data-path="bicycle-use-patterns.html"><a href="bicycle-use-patterns.html"><i class="fa fa-check"></i><b>27</b> Bicycle use patterns</a></li>
+<li class="chapter" data-level="28" data-path="births-and-holidays.html"><a href="births-and-holidays.html"><i class="fa fa-check"></i><b>28</b> Births and Holidays</a></li>
+<li class="chapter" data-level="29" data-path="part-joins-and-reshaping.html"><a href="part-joins-and-reshaping.html"><i class="fa fa-check"></i><b>29</b> (PART) Joins and Reshaping</a></li>
+<li class="chapter" data-level="30" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html"><i class="fa fa-check"></i><b>30</b> Combining data from different sources</a></li>
+<li class="chapter" data-level="31" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html"><i class="fa fa-check"></i><b>31</b> Wide vs Narrow Data Tables</a></li>
+<li class="chapter" data-level="32" data-path="biblical-names.html"><a href="biblical-names.html"><i class="fa fa-check"></i><b>32</b> Biblical Names</a></li>
+<li class="chapter" data-level="33" data-path="conformity-and-names.html"><a href="conformity-and-names.html"><i class="fa fa-check"></i><b>33</b> Conformity and Names</a></li>
+<li class="chapter" data-level="34" data-path="example-gender-neutral-names-when-wide-is-easier.html"><a href="example-gender-neutral-names-when-wide-is-easier.html"><i class="fa fa-check"></i><b>34</b> Example: Gender-neutral names: when wide is easier</a></li>
+<li class="chapter" data-level="35" data-path="example-a-penny-collection.html"><a href="example-a-penny-collection.html"><i class="fa fa-check"></i><b>35</b> Example: A Penny Collection</a></li>
+<li class="chapter" data-level="36" data-path="stocks-and-dividends.html"><a href="stocks-and-dividends.html"><i class="fa fa-check"></i><b>36</b> Stocks and dividends</a></li>
+<li class="chapter" data-level="37" data-path="a-graph-for-the-economist.html"><a href="a-graph-for-the-economist.html"><i class="fa fa-check"></i><b>37</b> A Graph for the Economist</a></li>
+<li class="chapter" data-level="38" data-path="distributions.html"><a href="distributions.html"><i class="fa fa-check"></i><b>38</b> Distributions</a></li>
+<li class="chapter" data-level="39" data-path="statistics-collective-properties-of-data.html"><a href="statistics-collective-properties-of-data.html"><i class="fa fa-check"></i><b>39</b> Statistics: Collective properties of data</a></li>
+<li class="chapter" data-level="40" data-path="regular-expressions.html"><a href="regular-expressions.html"><i class="fa fa-check"></i><b>40</b> Regular expressions</a></li>
+<li class="chapter" data-level="41" data-path="calling-311.html"><a href="calling-311.html"><i class="fa fa-check"></i><b>41</b> Calling 311</a></li>
+<li class="chapter" data-level="42" data-path="regex-examples-.html"><a href="regex-examples-.html"><i class="fa fa-check"></i><b>42</b> Regex examples.</a></li>
+<li class="chapter" data-level="43" data-path="extracting-matching-parts-of-regular-expressions.html"><a href="extracting-matching-parts-of-regular-expressions.html"><i class="fa fa-check"></i><b>43</b> Extracting matching parts of regular expressions</a></li>
+<li class="chapter" data-level="44" data-path="example-finding-the-po-number-in-an-address.html"><a href="example-finding-the-po-number-in-an-address.html"><i class="fa fa-check"></i><b>44</b> Example: Finding the PO number in an address</a></li>
+<li class="chapter" data-level="45" data-path="scraping-data-from-web-sites.html"><a href="scraping-data-from-web-sites.html"><i class="fa fa-check"></i><b>45</b> Scraping data from web sites</a></li>
+<li class="chapter" data-level="46" data-path="mini-languages.html"><a href="mini-languages.html"><i class="fa fa-check"></i><b>46</b> Mini-languages</a></li>
+<li class="chapter" data-level="47" data-path="fun-with-regexes.html"><a href="fun-with-regexes.html"><i class="fa fa-check"></i><b>47</b> Fun with regexes</a></li>
+<li class="chapter" data-level="48" data-path="scraping-the-weather.html"><a href="scraping-the-weather.html"><i class="fa fa-check"></i><b>48</b> Scraping the weather</a></li>
+<li class="chapter" data-level="49" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>49</b> Machine Learning</a></li>
+<li class="chapter" data-level="50" data-path="some-resources.html"><a href="some-resources.html"><i class="fa fa-check"></i><b>50</b> Some resources</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes and Materials for Data Computing</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="calling-311" class="section level1">
+<h1><span class="header-section-number">§ 41</span> Calling 311</h1>
+<p>In New York City, dialing 311 connects you to a complaint/request service.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> New York provides information about individual calls to 311 on a <a href="https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9?">web site</a>.</p>
+<p>I want to see how the number of 311 calls for different reasons varies over time of day and day of the week. I’m also interested in finding out whether there are hot spots for 311 calls, and how this depends on factors such as income.</p>
+<div class="figure">
+<img src="Images/311-Calls.png" alt="311 data web site" />
+<p class="caption">311 data web site</p>
+</div>
+<p>That site provides an “Export” feature. You can download the data in several formats: CSV is appropriate. Using a web browser, I downloaded it to my <code>Downloads</code> directory.</p>
+<p>As of October 12, 2016, the data file is more than 9GB in size and encompasses almost 14 million complaints. It has 53 variables, but most of these are not relevant to most of the complaints or requests. For example, <code>&quot;Bridge Highway Segment&quot;</code> is relevant only to 311 calls that have to do with bridges, and <code>&quot;Park Facility Name&quot;</code> only to calls involving parks.</p>
+<p>Whenever the size of a data set is larger than the amount of random-access memory in your computer, it’s likely that you will need special techniques to analyze it. This applies also to data that is about the same size as the random-access memory. On the computer on which this is being written, a 2013 MacBook Pro, I’ve got 16GB of random-access memory. So, rather than just reading in the data file to R, all in one go, I’m going to be a little careful and try to figure out what will be easy and what won’t.</p>
+<p>Many file-reading functions in R will let you read just a few rows from a data set. Here, I’ll read just the first two thousand rows, to get an idea of which variables are important.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CallsFile &lt;-<span class="st"> &quot;~/Downloads/311_Service_Requests_from_2010_to_Present.csv&quot;</span>
+JustAPeek &lt;-<span class="st"> </span>
+<span class="st">  </span>CallsFile %&gt;%<span class="st"> </span>
+<span class="st">  </span>data.table::<span class="kw">fread</span>( <span class="dt">nrows=</span><span class="dv">2000</span> ) 
+
+<span class="kw">names</span>( JustAPeek )</code></pre></div>
+<pre><code>##  [1] &quot;Unique Key&quot;                     &quot;Created Date&quot;                  
+##  [3] &quot;Closed Date&quot;                    &quot;Agency&quot;                        
+##  [5] &quot;Agency Name&quot;                    &quot;Complaint Type&quot;                
+##  [7] &quot;Descriptor&quot;                     &quot;Location Type&quot;                 
+##  [9] &quot;Incident Zip&quot;                   &quot;Incident Address&quot;              
+## [11] &quot;Street Name&quot;                    &quot;Cross Street 1&quot;                
+## [13] &quot;Cross Street 2&quot;                 &quot;Intersection Street 1&quot;         
+## [15] &quot;Intersection Street 2&quot;          &quot;Address Type&quot;                  
+## [17] &quot;City&quot;                           &quot;Landmark&quot;                      
+## [19] &quot;Facility Type&quot;                  &quot;Status&quot;                        
+## [21] &quot;Due Date&quot;                       &quot;Resolution Description&quot;        
+## [23] &quot;Resolution Action Updated Date&quot; &quot;Community Board&quot;               
+## [25] &quot;Borough&quot;                        &quot;X Coordinate (State Plane)&quot;    
+## [27] &quot;Y Coordinate (State Plane)&quot;     &quot;Park Facility Name&quot;            
+## [29] &quot;Park Borough&quot;                   &quot;School Name&quot;                   
+## [31] &quot;School Number&quot;                  &quot;School Region&quot;                 
+## [33] &quot;School Code&quot;                    &quot;School Phone Number&quot;           
+## [35] &quot;School Address&quot;                 &quot;School City&quot;                   
+## [37] &quot;School State&quot;                   &quot;School Zip&quot;                    
+## [39] &quot;School Not Found&quot;               &quot;School or Citywide Complaint&quot;  
+## [41] &quot;Vehicle Type&quot;                   &quot;Taxi Company Borough&quot;          
+## [43] &quot;Taxi Pick Up Location&quot;          &quot;Bridge Highway Name&quot;           
+## [45] &quot;Bridge Highway Direction&quot;       &quot;Road Ramp&quot;                     
+## [47] &quot;Bridge Highway Segment&quot;         &quot;Garage Lot Name&quot;               
+## [49] &quot;Ferry Direction&quot;                &quot;Ferry Terminal Name&quot;           
+## [51] &quot;Latitude&quot;                       &quot;Longitude&quot;                     
+## [53] &quot;Location&quot;</code></pre>
+<p>To illustrate, <code>&quot;Taxi Pick Up Location&quot;</code> is blank in the vast majority of the first two thousand cases, so presumably this is relevent to just a small fraction of complaints.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">JustAPeek %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Taxi Pick Up Location</span><span class="st">`</span>) %&gt;%
+<span class="st">  </span><span class="kw">tally</span>()</code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+##   `Taxi Pick Up Location`     n
+##                     &lt;chr&gt; &lt;int&gt;
+## 1                          1988
+## 2            Intersection     1
+## 3             JFK Airport     3
+## 4                   Other     8</code></pre>
+<p>To get started, <code>CreatedDate</code>, and <code>Complaint Type</code>, seem like good variables to explore. These are columns 2 and 6. I can tell <code>fread()</code> just to read those columns.</p>
+<p>I’ll read in a few rows just to make sure things are working:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SmallData &lt;-<span class="st"> </span>
+<span class="st">   </span>CallsFile %&gt;%
+<span class="st">   </span>data.table::<span class="kw">fread</span>( <span class="dt">nrows=</span><span class="dv">5</span>, <span class="dt">select=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">6</span>))
+SmallData</code></pre></div>
+<pre><code>##              Created Date  Complaint Type
+## 1: 10/08/2013 12:00:00 AM        NONCONST
+## 2: 10/08/2013 12:00:00 AM PAINT - PLASTER
+## 3: 10/08/2013 12:00:00 AM        PLUMBING
+## 4: 10/08/2013 12:00:00 AM        NONCONST
+## 5: 10/08/2013 12:00:00 AM        PLUMBING</code></pre>
+<p>Can I use this method to read in a large number of cases? Rather than just trying to read the whole data set, I’ll try it for different numbers of rows and measure how long it takes. I built up slowly, first testing 10 rows, then 100, then 1000. I found I could get to one-million rows while still just taking a few seconds. So it seem plausible that I can read in the whole thing with just the regular kinds of commands.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(SmallData &lt;-<span class="st"> </span>
+<span class="st">              </span>CallsFile %&gt;%<span class="st"> </span>
+<span class="st">              </span>data.table::<span class="kw">fread</span>(<span class="dt">nrows =</span> <span class="dv">1000000</span>, <span class="dt">select =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">6</span>)))</code></pre></div>
+<pre><code>## 
+Read 66.0% of 1000000 rows
+Read 94.0% of 1000000 rows
+Read 1000000 rows and 2 (of 53) columns from 8.563 GB file in 00:00:04</code></pre>
+<pre><code>##    user  system elapsed 
+##   2.569   0.590   5.250</code></pre>
+<p>Now I’ll check whether I can convert the <code>&quot;Created Date&quot;</code> variable to a time object. Rather than use all 13 million cases, I’ll start small again and work up with the number of rows to read.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(SmallData &lt;-<span class="st"> </span>
+<span class="st">              </span>CallsFile %&gt;%<span class="st"> </span>
+<span class="st">              </span>data.table::<span class="kw">fread</span>(<span class="dt">nrows =</span> <span class="dv">1000000</span>, <span class="dt">select =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">6</span>)) %&gt;%<span class="st"> </span>
+<span class="st">              </span><span class="kw">mutate</span>(<span class="dt">time =</span> lubridate::<span class="kw">mdy_hms</span>(<span class="st">`</span><span class="dt">Created Date</span><span class="st">`</span>)) %&gt;%
+<span class="st">              </span><span class="kw">select</span>(time, <span class="dt">complaint =</span> <span class="st">`</span><span class="dt">Complaint Type</span><span class="st">`</span>)
+)</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   2.705   0.176   2.915</code></pre>
+<p>Again, no problem reading in a million rows.</p>
+<p>It’s also helpful to see how large is the object being created.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">object.size</span>(SmallData)</code></pre></div>
+<pre><code>## 16015448 bytes</code></pre>
+<p>Sixteen million bytes is only about 0.1% of the fast memory on my computer. The whole data set, with 13 million cases will take up only about 1-2% of the memory. No problem!</p>
+<p>Having established this, the question is whether the analysis of all 13 million cases can be done in a reasonable amount of time. Let’s try tabulating the complaint types in the 1-million case data table:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(Results &lt;-<span class="st"> </span>
+<span class="st">              </span>SmallData %&gt;%<span class="st"> </span>
+<span class="st">              </span><span class="kw">group_by</span>(complaint) %&gt;%<span class="st"> </span>
+<span class="st">              </span><span class="kw">tally</span>() %&gt;%
+<span class="st">              </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n)))</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   0.051   0.005   0.057</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Results</code></pre></div>
+<pre><code>## # A tibble: 215 × 2
+##                   complaint      n
+##                       &lt;chr&gt;  &lt;int&gt;
+## 1                   HEATING 179549
+## 2       Noise - Residential  77834
+## 3          Street Condition  56494
+## 4                  PLUMBING  47044
+## 5    Street Light Condition  46724
+## 6      GENERAL CONSTRUCTION  39670
+## 7          Blocked Driveway  38569
+## 8           PAINT - PLASTER  28717
+## 9    DOF Literature Request  27410
+## 10 Traffic Signal Condition  27322
+## # ... with 205 more rows</code></pre>
+<p>Or, to see when the complaints occur:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(Complaints_by_time &lt;-<span class="st"> </span>
+<span class="st">              </span>SmallData %&gt;%<span class="st"> </span>
+<span class="st">              </span><span class="kw">mutate</span>(<span class="dt">hour_of_day =</span> lubridate::<span class="kw">hour</span>(time),
+                     <span class="dt">minute_of_hour =</span> lubridate::<span class="kw">minute</span>(time),
+                     <span class="dt">day_of_week =</span> lubridate::<span class="kw">wday</span>(time),
+                     <span class="dt">day_time =</span> (day_of_week) +<span class="st"> </span>hour_of_day /<span class="st"> </span><span class="dv">24</span> +<span class="st"> </span>minute_of_hour /<span class="st"> </span>(<span class="dv">24</span>*<span class="dv">60</span>))
+            )</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   0.848   0.048   0.913</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">object.size</span>(Complaints_by_time)</code></pre></div>
+<pre><code>## 40015896 bytes</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(Results &lt;-<span class="st"> </span>
+<span class="st">              </span>Complaints_by_time %&gt;%
+<span class="st">              </span><span class="kw">group_by</span>(hour_of_day) %&gt;%
+<span class="st">              </span><span class="kw">tally</span>()
+)</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   0.030   0.006   0.036</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Results</code></pre></div>
+<pre><code>## # A tibble: 24 × 2
+##    hour_of_day      n
+##          &lt;int&gt;  &lt;int&gt;
+## 1            0 425165
+## 2            1  13180
+## 3            2   9141
+## 4            3   5970
+## 5            4   4765
+## 6            5   4783
+## 7            6   7425
+## 8            7  15779
+## 9            8  26840
+## 10           9  37776
+## # ... with 14 more rows</code></pre>
+<p>Or, graphing out when the events occur:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Complaints_by_time %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> day_time)) +
+<span class="st">  </span><span class="kw">geom_density</span>() +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Day&quot;</span>)</code></pre></div>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>There’s a peak near the start of each day. Let’s filter out the events that are recorded just at midnight:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Complaints_by_time %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">at_midnight =</span> hour_of_day ==<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>minute_of_hour ==<span class="st"> </span><span class="dv">0</span>,
+         <span class="dt">year =</span> lubridate::<span class="kw">year</span>(time)) %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(at_midnight, year) %&gt;%
+<span class="st">  </span><span class="kw">tally</span>()</code></pre></div>
+<pre><code>## Source: local data frame [9 x 3]
+## Groups: at_midnight [?]
+## 
+##   at_midnight  year      n
+##         &lt;lgl&gt; &lt;dbl&gt;  &lt;int&gt;
+## 1       FALSE  2010      1
+## 2       FALSE  2011    876
+## 3       FALSE  2012   1535
+## 4       FALSE  2013 242068
+## 5       FALSE  2014 346752
+## 6        TRUE  2010      1
+## 7        TRUE  2013 170128
+## 8        TRUE  2014 238634
+## 9        TRUE  2015      5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Time_stamped_complaints &lt;-
+<span class="st">  </span>Complaints_by_time %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">at_midnight =</span> hour_of_day ==<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>minute_of_hour ==<span class="st"> </span><span class="dv">0</span>) %&gt;%
+<span class="st">  </span><span class="kw">filter</span>( !<span class="st"> </span>at_midnight)
+<span class="kw">nrow</span>(Time_stamped_complaints)</code></pre></div>
+<pre><code>## [1] 591232</code></pre>
+<p>About 60% of the complaints have time stamps other than midnight.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Time_stamped_complaints %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> day_time)) +
+<span class="st">  </span><span class="kw">geom_density</span>() +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Day&quot;</span>)</code></pre></div>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Let’s look at the categories with the largest number of complaints. What’s a useful way of displaying how the patterns vary with time.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Time_stamped_complaints %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(complaint) %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(<span class="dv">20000</span>&lt;<span class="st"> </span><span class="kw">n</span>()) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> day_time)) +
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>, <span class="dt">bw =</span> <span class="dv">1</span>/<span class="dv">24</span>) +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Day&quot;</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>complaint)</code></pre></div>
+<pre><code>## Warning: Width not defined. Set with `position_dodge(width = ?)`</code></pre>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>In the US, 911 is the phone number for emergency services. 311 is for non-emergency services.<a href="calling-311.html#fnref1">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regular-expressions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regex-examples-.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": "link:https://github.com/dtkaplan/comp110/DCF-materials-book/edit/master/%s",
+"download": null,
+"toc": {
+"collapse": "section",
+"unnumbered": true
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+```{r include = FALSE}
+require(DataComputing)
+show_answers <- TRUE
+```
+
+Wrangle `Minneapolis2013` into a table ranking the candidates by how many precincts they are in first place. The result will look like this:
+
+
+```{r 123-candidates, echo = FALSE}
+FirstPlaceTally <- 
+  Minneapolis2013 %>%
+  rename(candidate = First) %>%      # 1
+  group_by(Precinct, candidate) %>%  # 2
+  summarise(total=n()) %>%           # 3
+  filter(total == max(total)) %>%    # 4
+  group_by(candidate) %>%            # 5
+  summarise(n_precincts = n()) %>%   # 6
+  arrange( desc(n_precincts))        # 7
+```
+
+```{r echo = FALSE}
+FirstPlaceTally
+```
+
+```{block echo = show_answers}
+**Solution**
+
+One way to do this is shown below, with each step numbered.
+
+1. This optional step gives a more meaningful name to the variable containing the names of candidates.
+2. Prepare to find the number of votes of each candidate in each precinct. This is how we'll determine which candidate won in each precinct. 
+3. Calculate the number of votes of each candidate in each precinct. (Note: after step 3, the data table will still be grouped by `Precinct`, but not by `candidate`.)
+4. Precinct by precinct, allow only the winner (that is, the candidate with the highest number of votes) to pass through the filter. (Remember, the input table to `filter()` was still grouped by `Precinct`, so the `max()` really means "max in whichever precinct the case refers to.") 
+5. Prepare to figure out, for each candidate, how many precincts the candidate won.
+6. For each candidate, count the number of precincts that candidate won.
+7. Present the results in the order of how many precincts each candidate won.
+```
+
+```{r ref.label = "123-candidates", echo = show_answers, eval = FALSE}
+```

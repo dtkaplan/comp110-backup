@@ -1,0 +1,49 @@
+```{r include = FALSE}
+require(DataComputing)
+show_answers = FALSE
+```
+
+```{r include = FALSE, cache = TRUE}
+library(nycflights13)
+Delays <-
+  flights %>%
+  head(10) %>%
+  select( carrier, distance, dep_delay, origin)
+```
+
+```{r echo = FALSE}
+Delays
+```
+
+Here is a small data table, called `Delays`. Taking this table as input, figure out the wrangling steps to produce each of the following outputs. (Hint: counting the cases can help you determine if a `filter()` or `summarise()` was used.)
+
+* Output A. 
+    ```{r echo = show_answers}
+    Delays %>% 
+      arrange(distance)
+    ```
+* Output B. 
+    ```{r echo = show_answers}
+    Delays %>% 
+      filter(carrier == "UA")
+    ```
+* Output C. 
+    ```{r echo = show_answers}
+    Delays %>%
+      filter(carrier == "UA", dep_delay > 0)
+    # or, you could have used distance > 1000 
+    # instead of dep_delay > 0
+    ```
+* Output D. 
+    ```{r echo = show_answers}
+    Delays %>%
+      summarise(total = sum(dep_delay))
+    ```
+* Output E. 
+    ```{r echo = show_answers}
+    Delays %>%
+      select(carrier, distance)
+    ```
+
+
+Credit: Adam Lucas

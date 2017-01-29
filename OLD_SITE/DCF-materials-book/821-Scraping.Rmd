@@ -1,0 +1,146 @@
+# Scraping data from web sites
+
+```{r include=FALSE}
+require(mosaic)
+require(rvest)
+require(knitr)
+require(NHANES)
+knitr::opts_chunk$set(message=FALSE)
+```
+
+* Example of an API: [FDA adverse drug events database](https://open.fda.gov/drug/event/)
+* Example of simple download/export about [schools in New York City](https://nycopendata.socrata.com/data?cat=education)
+    - NYC [School-level SAT data](https://data.cityofnewyork.us/Education/SAT-Results/f9bf-2cp4)
+    - NYC [high-school directory](https://data.cityofnewyork.us/Education/DOE-High-School-Directory-2014-2015/n3p6-zve2)
+    - [AP test scores](https://data.cityofnewyork.us/Education/AP-College-Board-2010-School-Level-Results/itfs-ms3e)
+* [Air quality in NYC](https://data.cityofnewyork.us/Environment/Air-Quality/c3uy-2p5r)
+
+Frozen at [IBDB](http://www.imdb.com/title/tt2294629/)
+
+```{r}
+frozen <- read_html("http://www.imdb.com/title/tt2294629/")
+itals <- html_nodes(frozen, "em")
+cast <- html_nodes(frozen, "span.itemprop")
+one <- html_nodes(frozen, "#titleCast :nth-child(2) .itemprop .itemprop")
+title <- html_nodes(frozen, "h1")
+rating <- html_nodes(frozen, "strong span")
+```
+
+[Instructions on getting the xpath](http://www.r-bloggers.com/using-rvest-to-scrape-an-html-table/) to an element on a web page (in Chrome).
+
+```{r}
+library("rvest")
+url <- "http://en.wikipedia.org/wiki/Mile_run_world_record_progression"
+Table1 <- url %>%
+  read_html() %>%
+  html_nodes(xpath='//*[@id="mw-content-text"]/table[1]') %>%
+  html_table()
+```
+```{r}
+Table1[[1]]
+```
+
+
+
+
+# Scraping
+
+Organized scraping: drawing on organized web resources.
+
+* [ngrams](../Activities/Word-use.Rmd)
+* CIA factbook
+* map tiles. See [this blog on mapping out Russian airstrikes in Syria](http://www.karambelkar.info/2015/11/re-plotting-russian-airstrikes-in-syria/)
+* shapefiles
+
+
+## Find some data of interest to you
+
+CNN vote results
+```{r}
+library(jsonlite)
+utahRJSON <- 
+  fromJSON("http://data.cnn.com/ELECTION/2016primary/UT/county/S.json",
+          flatten=TRUE)
+utahRJSON$candidates
+```
+
+[CMS Medicare Beneficiaries](https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DE_Syn_PUF.html)    
+    * Go to Prescription Drug Events
+    * Unzip
+    * [Codebook](https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/Downloads/SynPUF_Codebook.pdf)   
+    
+    
+```{r eval=FALSE}
+Drug_events <- "/Users/kaplan/Downloads/DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1.csv"
+Drug_events <- readr::read_csv(Drug_events, col_types="cccciiii")
+```
+
+`DESYNPUF_ID` is a patient ID?
+
+`PDE_ID` is a drug ID?
+
+```{r eval=FALSE}
+Drug_events %>% 
+  group_by(PDE_ID) %>%
+  summarize(total = sum(TOT_RX_CST_AMT)) %>%
+  arrange(desc(total)) -> foo
+```
+
+
+[CMS providers site](https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/Outpatient.html)
+
+    * `"http://tiny.cc/dcf/CMS_ProvidersSimple.rds"`
+    * `"http://tiny.cc/dcf/CMS_Providers.rds"`
+    * `"http://tiny.cc/dcf/CMS_Claims.rds"`
+    * `"http://tiny.cc/dcf/CMS_HCPCS.rds"`
+    
+
+# Cleaning
+
+## Untidy data
+
+Walmart store closings
+
+## Parenthetical notes
+
+## Currency symbols
+
+## Funny symbols
+
+```{r}
+library("rvest")
+url <- "http://en.wikipedia.org/wiki/Mile_run_world_record_progression"
+Tables <- url %>%
+  html() %>%
+#  html_nodes(xpath='//*[@id="mw-content-text"]/table[1]') %>%
+  html_table(fill = TRUE)
+Table1 <- Tables[[1]]
+```
+
+Pull out the oddball entries
+```{r}
+Table1 <- 
+  Table1 %>%
+  mutate(funny = gsub("[0-9]:[0-9]{2}","", Time)) 
+Funny <- 
+  Table1 %>%
+  select(funny) %>% 
+  unique()
+```
+
+Add in the fixes:
+```{r}
+Funny <- 
+  Funny %>% mutate(fix = c("","25","75", "50", "20"))
+Table1 <- 
+  Table1 %>% 
+  tidyr::extract(Time, "good", "^([0-9]:[0-9]{2})") %>%
+  left_join(Funny, by=c("funny" = "funny")) %>%
+  mutate(good = paste(good, fix, sep=".")) %>%
+  tidyr::extract(good, c("minutes", "seconds"), "^([0-9]+):([0-9\\.]+)")
+```
+
+
+# Activity
+
+[Scraping Nuclear Reactors](../Activities/NuclearReactors.pdf)

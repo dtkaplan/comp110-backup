@@ -1,0 +1,7 @@
+.Rproj.user
+.Rhistory
+.RData
+_publish.R
+rsconnect
+*.nb.html
+*.nb

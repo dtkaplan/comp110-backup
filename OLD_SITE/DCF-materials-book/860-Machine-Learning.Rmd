@@ -1,0 +1,265 @@
+# Machine Learning
+
+```{r include=FALSE}
+require(mosaic)
+require(DataComputing)
+require(statisticalModeling)
+require(rpart)
+require(ggdendro)
+require(rpart.plot)
+require(randomForest)
+require(rvest)
+require(knitr)
+require(NHANES)
+knitr::opts_chunk$set(message=FALSE)
+```
+
+We have spent most of our time on two subjects:
+
+1. Data visualization
+2. Data wrangling: getting from the data you are given to the "glyph-ready" data that you need to make a graphic or some other mode to guide interpretation of the data.
+
+Visualization works well with 1-3 variables, and in some situations can work with more variables.
+
+## A multivariable graphic
+
+![](Images/minard_lg.png) Glyph: `geom_path()` or "Sankey", Annotations: rivers and towns
+
+[source](http://www.edwardtufte.com/tufte/graphics/minard_lg.gif)
+
+What variables are being graphed here? Which variable is mapped to which aesthetic?
+
+```{r}
+library(HistData)
+data(Minard.troops)
+data(Minard.cities)
+```
+ 
+```{r}
+library(ggmap)
+background <- get_map(location = "Minsk", zoom = 5) #c(20, 45, 40, 65))
+ggmap(background) +   
+  geom_path(data = Minard.troops, alpha = 0.5, 
+            aes(x = long, y = lat -.8, size = survivors, colour = direction, group = group),
+            linejoin = "bevel", linemitre = 20, lineend = "round") +
+  xlim(24, 38) + ylim(53,57) + coord_fixed(ratio = 2) +
+  geom_text(aes(x = long, y = lat-.8, label = city), size = 3, data = Minard.cities)
+```
+
+
+
+
+## With more variables?
+
+If we need to relate more variables, a visualization may not suffice.
+
+## Various goals for machine learning
+
+1. Make predictions
+2. Anticipate the effect of an intervention
+3. Explore masses of data
+
+## Supervised vs unsupervised learning
+
+* Supervised: There is an outcome that you have recorded in your data.
+* Unsupervised: No outcome variable.
+    - in-class activity on gene expresion
+    - example about Scottish Parliament in book 
+    
+## Supervised learning
+
+We construct a mathematical model of the situation.
+
+- Configure the model with adjustment knobs. These are called "parameters." 
+- Twiddle with the knobs until the model makes a good match to the data.  
+
+```{r cache = TRUE}
+knitr::include_graphics("https://seamlessblog.files.wordpress.com/2013/06/mannequin-collage1.jpg")
+```
+
+In the dressmaker's dummy, adjustment knobs for matching the model to measurements of waist, hips, height, etc.
+
+In machine learning, we adopt a mathematical form with parameters.
+
+* Example 1: Straight-line models
+    $f(x) = m x + b$. The input is $x$, the parameters are $m$ and $b$.
+    ```{r}
+    ggplot(SaratogaHouses, 
+           aes(y = price, x = livingArea)) + 
+      geom_point(alpha = 0.3) +
+      stat_smooth(method = "lm", se = FALSE)
+    coef(lm(price ~ livingArea, data = SaratogaHouses))
+    ```
+* Example 2: Trees with branches
+    At each branch point, the level of the variable to split on.
+    ```{r}
+    model <- rpart(time ~ year, data = SwimRecords)
+    prp(model)
+    ```
+
+These simple functions with just one input variable can be made more elaborate, e.g.
+
+* Trees
+    - Can choose which variable to split on at each break
+    - Can randomize choice, make lots of trees, and average
+    ```{r}
+    swim_model <- randomForest(time ~ year + sex, data = SwimRecords)
+    fmodel(swim_model)
+    ```
+
+* Straight-lines become low-order polynomials: $f(w, x, y, z) = a + bw + cx + dy + ez$
+    ```{r}
+    house_price_model <- 
+      lm(log(price) ~ log(livingArea) * bathrooms * newConstruction + pctCollege, 
+         data = SaratogaHouses)
+    fmodel(house_price_model, post_transform = c(price = exp) )
+    ```
+    - Statistical question: Should we take these detected patterns seriously?
+    ```{r}
+    fmodel(house_price_model, post_transform = c(price = exp), intervals = "confidence")
+    ```
+    - So why are the results so uncertain for new construction?
+        - not much data
+        - new houses are not built with one bathroom
+    ```{r}
+    SaratogaHouses %>% 
+      ggplot(aes(x = bathrooms, fill = newConstruction)) + geom_bar(position = "dodge")
+    ```
+
+## Application Examples
+
+### Home electricity use
+
+How to visualize the relationship between `thermsPerDay`, `temp` and `kwh`
+
+```{r cache = TRUE, message = FALSE}
+Utilities <- read.csv("http://tiny.cc/dcf/utilities-up-to-date.csv", 
+                      stringsAsFactors = FALSE)
+
+library(splines)
+model <- lm(thermsPerDay ~ ns(temp, 5) + ns(temp,3) : kwh, data = Utilities)
+fmodel(model, intervals = "confidence")
+```
+
+Interpreting this model: In colder temperatures, higher electricity use leads to lower natural gas usage.
+
+### Wages and education
+
+How does wage depend on sex? Take into account education and age and sector
+
+```{r}
+forest_mod <- randomForest(wage ~ educ + sex + age, data = CPS85)
+fmodel(forest_mod, age = c(25, 40))
+```
+
+
+## Statistical learning
+
+* honest assessment of differences
+* honest comparison of models
+    - measure "complexity" or "flexibility" of models
+* bias/variance trade-off
+* covariates and causal reasoning
+
+
+## Example: Child carseat sales
+
+Purpose: Figure out how to raise sales of a brand of carseats.
+
+```{r}
+head(ISLR::Carseats %>% rename(CompP=CompPrice,Ads=Advertising, Pop=Population, Shelf=ShelveLoc, Edu=Education))
+```
+
+## Hypothesis generated model
+
+1. Price relative to competitor's price is relevant.
+2. Larger population gives larger sales
+3. Education level?
+4. Advertising?
+
+```{r}
+Carseats <-
+  ISLR::Carseats %>%
+  mutate(rel_price = Price / CompPrice)
+mod1 <- 
+  Carseats %>% 
+  lm(Sales ~ rel_price + Population + Education + Advertising,
+     data = .)
+coef(mod1)
+```
+
+## Interpreting the model?
+
+```{r}
+summary(mod1)
+```
+
+## Another formalism: Regression trees
+
+```{r}
+library(rpart)
+mod2 <- 
+  Carseats %>%
+  rpart(Sales ~ rel_price + Price + CompPrice + Advertising + Population + Education + Income, data=.)
+prp(mod2)
+```
+
+
+## No prior model at all?
+
+```{r}
+mod3 <- Carseats %>% rpart(Sales ~ ., data=.)
+prp(mod3)
+```
+
+## Shelf location?
+
+```{r}
+mod4 <- Carseats %>%
+  rpart(Sales ~ rel_price + Advertising + ShelveLoc + Population, data=.)
+prp(mod4)
+```
+
+## Building a classifier
+
+> 62 variables are derived from a confocal laser scanning image of the optic nerve head, describing its morphology. Observations are from normal and glaucomatous eyes, respectively.
+
+```{r}
+data("GlaucomaM", package = "TH.data")
+```
+```{r echo=FALSE}
+GlaucomaM %>% 
+  arrange(Class) %>% 
+  select(-Class) %>% as.matrix() -> foo
+```
+
+### With glaucoma
+
+```{r echo=FALSE}
+image(foo[1:98,], ylab="Variable", xlab="Person",xaxt='n',yaxt="n'")
+```
+
+### Normal eyes
+
+```{r echo=FALSE}
+image(foo[99:196,], ylab="Variable", xlab="Person",xaxt='n',yaxt="n'")
+```
+
+## Build a classifier ...
+
+```{r}
+glaucoma_rpart <- rpart(Class ~ ., data = GlaucomaM, 
+                        control = rpart.control(xval = 100))
+prp(glaucoma_rpart, type=4, extra=2)
+```
+
+## Unsupervised learning
+
+```{r}
+Dists <- dist(mtcars)
+Dendrogram <- hclust(Dists)
+ggdendrogram(Dendrogram)
+```
+
+
+

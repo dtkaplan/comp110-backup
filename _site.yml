@@ -1,0 +1,84 @@
+name: "Comp 110"
+output_dir: "docs"
+output:
+  html_document:
+    theme: readable
+include: ["Notes", "Activities", "Projects", "Presentations"]
+navbar:
+  title: "Comp 110: Data Computing"
+  left:
+    - text: "Info"
+      menu:
+          - text: "Contact"
+            href: "Contact.html"
+          - text: "Course policies"
+            href: "Policies.html"
+          - text: "----------"
+          - text: "Schedule"
+          - text: "Week 1 (Jan 25)"
+            href: "index.html#week-1"
+          - text: "Week 2 (Feb 1)"
+            href: "index.html#week-2"
+          - text: "no meeting on Feb 8"
+          - text: "Week 3 (Feb 15)"
+            href: "index.html#week-3"
+          - text: "Week 4 (Feb 22)"
+            href: "index.html#week-4"
+          - text: "Week 5 (Mar 1)"
+            href: "index.html#week-5"
+          - text: "Week 6 (Mar 8)"
+            href: "index.html#week-6"
+          - text: "no meeting Mar 15"
+          - text: "Week 7 (Mar 22)"
+            href: "index.html#week-7"
+          - text: "Week 8 (Mar 29)"
+            href: "index.html#week-8"
+          - text: "Final Exam"
+            href: "index.html#final-exam"
+    - text: "Activities"
+      menu:
+          - text: "Short Projects"
+          - text: "--------"
+          - text: "The library collection"
+            href: "Projects/251-Library-Books-github.html"
+          - text: "Intro to graphics and wrangling"
+            href: "Projects/351-Intro-Graphics/Wrangling.html"
+          - text: "Births and holidays"
+            href: "Projects/453-Births-and-holidays.html"
+          - text: "Stocks and dividends"
+            href: "Projects/551-Stocks-and-dividends.html"
+          - text: "Bicycle rentals"
+            href: "Projects/452-Bicycle-Rentals.html"
+          - text: "A graph for the 'Economist'"
+            href: "Projects/552-Economist-graph.html"
+          - text: "Street words"
+            href: "Projects/751-StreetEndings.html"
+          - text: "Scraping nuclear reactors"
+            href: "Projects/832-NuclearReactors.html"
+          - text: "Unsupervised genetics"
+            href: "Projects/863-UnsupervisedGenetics.html"
+          - text: "--------"
+          - text: "Longer projects"
+          - text: "--------"
+          - text: "Library book usage"
+            href: "Projects/Library_book_use.html"
+    - text: Examples
+      menu:
+          - text: "Movie ratings"
+            href: "Examples/MovieLens/Movie-Genres.html"
+          - text: "Migration between countries"
+            href: "Examples/Migration/Migration.html"
+    - text: Notes
+      menu:
+          - text: "File names and paths"
+            href: "Presentations/130-file-paths.html"
+          - text: "Submitting your work"
+            href: "Presentations/135-Submitting-files.html"
+    - text: Internals
+      menu:
+          - text: "Contact information"
+            href: https://docs.google.com/document/d/1Xlpzt5tN6wUnlIpDgspOIdq0WJBVv28VDcC6CkXuZIM/edit?usp=sharing
+            
+            
+            
+            
