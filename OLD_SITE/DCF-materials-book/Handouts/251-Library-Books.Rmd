@@ -21,11 +21,11 @@ The `.Rmd` file is called the *source* document.  In general, you write, revise,
 
 ## Getting Started
 
-\marginnote{{\bf Setting up an RStudio Project.} We are all working on a mixture of tasks; different courses, different research projects, etc. RStudio provides a facility for organizing work across many different projects. Using this facility is easy and will save you trouble later on.
+**Setting up an RStudio Project**. We are all working on a mixture of tasks; different courses, different research projects, etc. RStudio provides a facility for organizing work across many different projects. Using this facility is easy and will save you trouble later on.
 
 Using the FILE/NEW PROJECT menu item, create a new project for this course.  Call it "Data Computing" or whatever seems sensible to you.  Whenever you are working on this course, make sure that you have your project open. (Typically, it will stay open until you create and switch to another project.)
 
-DO THIS NOW, before downloading the data file or opening your Rmd template.}
+DO THIS NOW, before downloading the data file or opening your Rmd template.
 
 You will need to get access to the library-book data.  The full collection of books is too large to download in a short time, so you will be using a small sample of books.
 
