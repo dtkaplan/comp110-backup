@@ -1,39 +1,4 @@
----
-output: 
-  html_document: 
-    theme: readable
----
-
-# COMP 110 Data Computing
-
-Macalester College, Spring 2017
-
-## Syllabus
-
-* Instructor: Daniel Kaplan, OLRI 231, <kaplan@macalester.edu>
-    - Office Hours: 
-        - Tues and Thurs: 3:00pm-4:30pm and 
-        - Wed: 2:00pm-3:30pm
-        - Anytime by appointment. And if my office door is open, just drop in.
-* Preceptor: Ayoub Belemlih <abelemli@macalester.edu>
-    - Sunday 7:00-9:00pm, MSCS Reading Room
-* Text: *Data Computing* ISBN 978-0-9839658-4-8 
-* [Course policies](policies.html): Work, grades, etc.
-
-
-
-### Resources
-
-* [Macalester's RStudio Server](rstudio.macalester.edu)
-    - Alternative: Install RStudio on your own computer. [Use the "preview" edition](https://www.rstudio.com/products/rstudio/download/preview/). You'll also need to [install `git`](https://desktop.github.com/) 
-* Clone [this repository](https://github.com/dtkaplan/Comp-110-Assignments-Spring-2017) (using SSH^[I'll show you what this means.]) to create your own, personal repository for the assignments and projects you hand in during the course. See the directions at the bottom of the repository page.
-* [Instructions for](https://github.com/dtkaplan/Comp-110-Assignments-Spring-2017) setting up your own repository for "handing in " projects and assignments. 
-* [**Notes for the course**](./DCF-materials-book/_book/datainfrastructure.html). The material introduced in class discussions and lectures, as well as some supplemental material.
-* In-class Group spreadsheets: [Group-1](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHNpejZtd3dQTXlPM245R0ZQbG0yYkE&usp=sharing); [Group-2](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHk1enZoVnhrV09ad2x4dXR1MlpWNFE&usp=sharing); [Group-3](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dElIQkh0SWtyaW9aRkdMZVBERHdJNXc#gid=0); [Group-4](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dEYxdEhWZUI1S3NxN2ZaaThXSEtMVWc&usp=sharing); [Group-5](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dDVsLWJaUHV5emFVQlVfSjFrdmFkYXc&usp=sharing); [Group-6](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dFdvNGpFZkNuUHZqd2g2UEVDc0VEZEE&usp=sharing)
-
------------
-
-## Week 1: Getting Organized (Jan 25)
+## Week 1: Getting Organized
 
 You already have an account on the Macalester RStudio server <rstudio.macalester.edu>. Login with your Macalester email credentials.
 
@@ -50,9 +15,9 @@ Relevant links:
 - [Week 1 outline](Notes/Week-1-outline.html)
 - Don't do this in class! Do it afterwards. [Week 1 tutorial](https://dtkaplan.shinyapps.io/Chapter-01-collection/)
 
---------------
+--------------<span id="week-2"></span>
 
-## Week 2: Data Infrastructure (Feb 1)
+## Week 2: Data Infrastructure 
 
 * Readings: Data Computing Chapters 1 through 4
 * Short-answer questions from book: file `Week-2-short-answer.Rmd`
@@ -60,7 +25,8 @@ Relevant links:
     - 2.2, 2.3, 2.4, 2.6, 2.7, 2.8, 2.8, 2.9, 2.10
     - 3.1, 3.2, 3.3, 3.4, 3.5, 3.6
     - 4.1, 4.2, 4.3, 4.4, 4.5
-* In-class activity: Markdown and data graphics
+* In-class activity: 
+    - [The library collection](Projects/251-Library-Books-github.html)
     - file: `Week-2-project.Rmd`
 * Notes from class: [tidy data](DCF-materials-book/_book/tidy-data.html) : [R parts of speech](DCF-materials-book/_book/r-programming-parts-of-speech.html) : [highway fatality data](DCF-materials-book/_book/case-study-highway-fatalities.html)
 * In-class activity: 
@@ -71,13 +37,10 @@ Relevant links:
     - [Table about marital status in the US armed forces](https://docs.google.com/spreadsheets/d/1Ow6Cm4z-Z1Yybk3i352msulYCEDOUaOghmo9ALajyHo/edit#gid=1811988794)
     - Taxicab example:  [news story](http://www.nytimes.com/2014/09/02/science/sharing-taxis-nyc-mathematics.html) & an [interactive site with the data]( http://www.hubcab.org/).
 
-----------
 
-> Note. We will not be meeting on Feb. 8
+----------<span id="week-3"></span>
 
-----------
-
-## Week 3: Data summaries and graphics (Feb 15)
+## Week 3: Data summaries and graphics 
 
 * Readings: Data Computing chapters 5, 6, & 7
 * Short-answer questions from book: File `Week-3-short-answer.Rmd`
@@ -85,38 +48,39 @@ Relevant links:
     - 6.5, 6.6, 6.7, 6.8
     - 7.1, 7.4, 7.5, 7.7, 7.11, 7.12
 * In-class activity
-    - [Handout: Diamonds and votes](DCF-materials-book/Handouts/Intro-Graphics-Wrangling.pdf). 
+    - [Intro to graphics and wrangling](Projects/Intro-Graphics-Wrangling.html). 
     - Use file `Week-3-project.Rmd`
 * Notes from class: [data vs information](DCF-materials-book/_book/data-vs-information.html) : [glyphs, frames, and scale](DCF-materials-book/_book/glyphs-frames-and-scales.html) : [basic verbs](DCF-materials-book/_book/basicdataverbs.html) : [a map of the stars](DCF-materials-book/_book/mapping-the-stars.html) : [words in Moby Dick](DCF-materials-book/_book/case-study-in-basic-data-verbs-moby-dick.html)
 
 
 
-----------
+----------<span id="week-4"></span>
 
-## Week 4: Data Verbs (Feb 22)
+## Week 4: Data Verbs
 
 * Readings: *Data Computing* chapters 8 & 9
 * Short-answer questions: from book. File `Week-4-short-answer.Rmd`
     - 8.1, 8.2, 8.3
     - 9.1, 9.3
 * In-class activity
-    - [Handout: Births and holidays](DCF-materials-book/Handouts/453-Births-and-holidays.pdf)
+    - [Handout: Births and holidays](Projects/453-Births-and-holidays.html)
     - Use file `Week-4-project.Rmd`
 * Notes from class: [More transformation verbs](DCF-materials-book/_book/more-transformation-verbs.html) : [world cities](DCF-materials-book/_book/cities-of-the-world.html) 
 
 NB. We will be scoring papers toward the end of Sept. So feel free to update your earlier work if you wish. (But remember the time budget!)
 
-------------
+------------<span id="week-5"></span>
 
-## Week 5: Combining data (March 1)
+## Week 5: Combining data
 
 * Readings: Data Computing chapters 10 & 11
 * Short-answer questions from book: File `Week-5-short-answer.Rmd`
     - 10.1, 10.2, 10.3
     - 11.1, 11.3, 11.4, 11.5
 * In-class activity:
-    - [Handout: Stocks and Dividends](DCF-materials-book/Handouts/551-Stocks-and-dividends.pdf) or
-    [A graph from the economist](DCF-materials-book/Handouts/552-Economist-graph.pdf)
+    - [Handout: Stocks and Dividends](Projects/551-Stocks-and-dividends.html) or
+    - [A graph from the economist](Projects/552-Economist-graph.html)
+    - Use file `Week-5-Project.Rmd`
 * Week 5 links:
     - Bird species [variant spellings](https://docs.google.com/spreadsheets/d/1GDKeulVSRXL7Q_5Q0a7Offc_IPX2T4sZ80VN5VLASew/edit#gid=0).  We'll use these to clean the OrdwayBirds data.
     - State-by-state population estimates from the US Census. [Link to CSV file](http://www.census.gov/popest/data/state/asrh/2015/files/SCPRC-EST2015-18+POP-RES.csv)
@@ -128,32 +92,33 @@ download.file("http://tiny.cc/dcf/Colleges-excerpt.rda",
 load("Colleges-excerpt.rda")
 ```
 
---------------
+--------------<span id="week-6"></span>
 
-## Week 6: Collective properties of data: Stats (March 8)
+## Week 6: Collective properties of data: Stats
 
 * Readings: from Data Computing Chapters 12, 13 and 14
 * Short-answer questions from the book: File `Week-6-short-answer.Rmd`
     - 12.1, 12.2, 12.3
     - 13.1, 13.2, 13.3, 13.4
     - 14.1, 14.3, 14.7, 14.10
-* In-class activity:
-    - [Handout: Bicycle rentals](DCF-materials-book/Handouts/452-Bicycle-Rentals.pdf)
-    
+* In-class activity: 
+    - [Bicycle rentals](Projects/452-Bicycle-Rentals.html)
+    - Use file `Week-6-Project.Rmd`    
 ---------
     
 > Spring break
 
-------------
+------------<span id="week-7"></span>
 
-## Week 7: Scraping and cleaning data (March 22)
+## Week 7: Scraping and cleaning data
 
 * Readings: Data Computing chapters 15 & 16
 * Short-answer questions from the book: File `Week-7-short-answer.Rmd`
     - 15.1, 15.2
     - 16.1, 16.2, 16.3
-* In-class activity:
-    - File `Week-7-Project.Rmd`
+* In-class activity: 
+    - Scraping Nuclear ReactorsTTTTTTTTT
+    - Use file `Week-7-Project.Rmd`
 * Additional Resources:
     - A regex ["cheat sheet"](http://krijnhoetmer.nl/stuff/regex/cheat-sheet/)
     - [Johns Hopkins data-cleaning course](https://www.coursera.org/course/getdata)
@@ -162,21 +127,20 @@ load("Colleges-excerpt.rda")
     - [Walmart store-closure data](http://news.walmart.com/news-archive/2016/01/15/walmart-continues-sharpened-focus-on-portfolio-management)
     - [Google doc](https://docs.google.com/spreadsheets/d/1Ow6Cm4z-Z1Yybk3i352msulYCEDOUaOghmo9ALajyHo/edit#gid=1811988794) for posting your link to an online source.
     
--------------
+-------------<span id="week-8"></span>
 
-## Week 8: Machine learning (Nov 2)
+## Week 8: Machine learning
 
 
 * Readings: Data Computing chapter 17
 * Short-answer questions from the book: File `Week-7-short-answer.Rmd`
     - 17.2
 * [Introduction to modeling online course](https://www.datacamp.com/courses/introduction-to-statistical-modeling-part-1). This is the first chapter of an online course being developed as I update the Math 155 (Intro to Statistical Modeling) materials. The course differs from the current Math 155 in that it is based on machine-learning concepts rather than the traditional regression concepts. 
-* In-class activity:
-    - [Handout in PDF](DCF-materials-book/Handouts/863-UnsupervisedGenetics.pdf)
-)
-    - File `Week-8-Project.Rmd`
+* In-class activity: 
+    - [Unsupervised genetics](Projects/863-UnsupervisedGenetics.html)
+    - Use file `Week-8-Project.Rmd`
 
---------------
+--------------<span id="final-exam"></span>
 
 ## Final Exam 
 
