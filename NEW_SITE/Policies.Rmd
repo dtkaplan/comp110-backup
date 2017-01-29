@@ -1,0 +1,39 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+* This is a 1-credit course.  That is, it counts for only one-quarter the credit usually given for a course at Macalester.  
+* The workload, meeting times, etc. are adjusted appropriately to be roughly one-quarter of that expected in a typical 4-credit course.
+We will meet for only 8 sessions. The first is an hour-long organizational meeting at the start of the semester.  The other 7 are nominally 90-minutes long. Many students stay after the 90-minute period to finish up the work started in the class session. This is entirely optional. You can get the equivalent help at the instructor's or preceptor's office hours.
+* The course will finish well before the end of the semester so that it won't contribute to the end-of-semester craziness.
+
+## Objectives for the course
+
+This course is designed to introduce you to central concepts in Data Science, and to get you technically to the point where you can *read* code for R and related systems with a good understanding of how commands relate to those concepts. Some students will become quite proficient in *writing* such commands, but that is beyond the expectation for your achievement. Being able to *read* will suffice: If you can read, then you can copy and modify, which the the primary technique used by programmers of all sorts.
+
+The best way to achieve proficiency in writing is to work on your own projects. Achieving such proficiency takes more time than we have available in this course. But at the end of this course you will be at a good starting point for commencing any future work that you need.
+
+## Time and grades
+
+Since this is a 1-credit course and often taken as an overload in students' schedules, I need to be careful to keep the workload appropriate. To accomplish this, there is a time budget for the class.
+
+10 hours of class meeting time. (Seven sessions of 90 minutes) You are expected to come to all the classes. If a conflict arises, simply let me know ahead of time. Much of the class time will be given over to working on an in-class activity, which you will hand in.
+30 hours of out-of-class time, spread more or less evenly across the seven weeks that we meet. This amounts to a little more than 4 hours each of the seven weeks. This includes the time you spend reading, the time you spend answering the textbook questions, and any time you choose to spend after class on the in-class activity.
+
+STOP WORKING after those 4 hours. But, you ask, "What happens if I don't get the work done in those 4 hours?" Answer: The work is done after those 4 hours. Do what you can do. For some students this will mean that you finish only, say, half of the short-answer questions and hand in the in-class activity at the end of the class session. Doing that will result in a reasonable grade. (I define "reasonable" in terms of the overall grade distribution at Macalester.) Other students will be able to complete almost all of the short-answer questions. They will also get an appropriate grade.
+
+There will be no competition for grades. Your grade will not depend on the work that other students do, just on your own work. I hope that some students will find the topic of the course exciting and will want to do extra work. The reward for such work is your increased skill (including, potentially, being a teaching assistant in future semesters) and greater bragging rights in a job interview. The extra work will not improve your grade (presumably, such students will often already be getting a high grade with just the regular work in the course).
+
+The class grade is based on three components:
+
+1. Short-answer questions based on the readings.
+2. Handing in the in-class activity, which you will do shortly after class. (I encourage you to work in small groups --- 2 or 3 people --- on the activity.)
+3. A short final exam using only paper and pencil. It will be given the week after the last class session and lasts 30 minutes (that is, one-quarter the time of exams in 4-credit courses).
+
+## Future plans for this course
+
+The course you are taking is a 1-credit course, which does not give us enough time for you to become proficient at carrying out your own data wrangling and visualization projects on your own. The course was originally proposed 7 years ago. The consensus at the time is that there was too much risk to commit to a regular 4-credit course.
+
+Lots has happened over those seven years, and the role of the course in the Macalester curriculum has been re-evaluated. Starting in 2017-18, *Data Computing* will become a 4-credit course. In addition to allowing us to follow a pace better suited to becoming proficient at writing data wrangling and visualization commands, the expanded course will be able to cover in more detail areas of the course that the faculty have deemed particularly worthwhile.
+
+It is **not known at this time** whether a student will be able to get credit both for the 1-credit version offered this year and for the 4-credit version to be offered in the future.

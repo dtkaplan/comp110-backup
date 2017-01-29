@@ -1,0 +1,21 @@
+# Movie Genres
+
+A set of 100,000 ratings of movies by individuals was collected in the late 1990s by the *grouplens* research team at the University of Minnesota. They provide the data directly at <http://grouplens.org/datasets/movielens/100k/>.  These data were reformatted by DTK and can be downloaded to your own computer with this statement:
+```{r eval = FALSE}
+download.file("http://tiny.cc/dcf/MovieLens.rda", destfile = "MovieLens.rda")
+```
+
+Use `load()` to read in the data to your R session. 
+
+`MovieLens.rda` contains three data tables:
+
+* `Ratings` has the individual movie ratings and the time at which they were entered. It also includes an ID variable for both the user and the movie.
+* `Movies` provides the name of the movie and information about genres.
+* `Users` gives basic information about the person who made the rating.
+
+Your task: Construct each of these graphics.
+
+1. Show the appeal of different genres to the different sexes.
+2. Show which genres are connected.
+3. A summary that addresses, "Who are the reviewers?"
+4. Do ratings depend on age? (Note: this is a cross-sectional and not a longitudinal data set.)

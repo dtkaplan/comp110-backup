@@ -1,0 +1,84 @@
+---
+title: "Submitting your work"
+author: "Data Computing"
+output: slidy_presentation
+---
+
+# Rmd and HTML 
+
+Much of your work for this class will be accomplished by editing `.Rmd` files.
+
+When you *knit* an Rmd file, you are translating it into another format: typically HTML or PDF or Word.
+
+Once you have done this, you will have two files relating to your work, for instance:
+
+1. `Assignment-1.Rmd` --- the Rmd file you edited
+2. `Assignment-1.html` --- a file suitable for display over the web
+
+#### Which one do you hand in?  
+
+**Both**
+
+- The Rmd is easier to handle and can be revised or have comments or corrections added.
+- The HTML is easier to read and shows the *results* of your computations, such as graphics.
+
+
+# Systems for submitting files
+
+There are many different kinds of systems for submitting files for grading. Three examples are:
+
+1. Uploading files to course support systems like Moodle.
+2. Publishing your files to a web service, e.g. RPubs.
+3. Using a file management system like git/GitHub.
+
+Your instructor will select the system you are to use.
+
+# git/GitHub
+
+Once you've learned the basic operation of this system --- cloning repositories, pulling, pushing, etc. --- then submitting an assignment is easy.
+
+For **both** the Rmd and HTML versions of your assignment (and any related files such as data):
+
+1. "Stage" both the Rmd and HTML files (and any others, if needed).
+2. "Commit" the staged files. Use a message like "Assignment 1".
+3. "Pull" from the remote repository (just to make sure that you've captured any changes made there).
+4. "Push" to the remote repository.
+
+# Moodle or RPubs
+
+It's difficult to upload *two* files with these systems, so the strategy is to submit the HTML file, but **embed** the Rmd file within the HTML file.
+
+The `DataComputing` package provides a way to do this easily. Include the following chunk in your document:
+
+
+     ```{r results = "asis"}
+     DataComputing::includeSourceDocuments()
+     ```
+
+You can follow the link to see the Rmd file that generated these slides.
+When the file is compiled to HTML, the above command will embed the Rmd file *within* the HTML and provide a link to it, like this.
+
+
+```{r results = "asis", echo = FALSE}
+DataComputing::includeSourceDocuments()
+```
+
+Clicking on the link will (in most browsers) extract the Rmd file and install it in your Downloads directory.
+
+# Embedding other files, too
+
+You can embed multiple files in a document, which you may find convenient for CSV files, etc. 
+
+When embedding a file other than the source Rmd file, give as an argument to `includeSourceDocuments()` the quoted character string containing the path and filename for your Rmd file. 
+
+You can construct the character string easily by using `file.choose()` in the console, and copying the result as the argument to the `includeSourceDocuments()` function. 
+
+
+
+
+
+
+
+
+Author: Daniel T. Kaplan
+

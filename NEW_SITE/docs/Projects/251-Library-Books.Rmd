@@ -1,0 +1,89 @@
+---
+title: "Library Book Use"
+author: "Data Computing"
+date: "A First Small Project"
+output: rmarkdown::tufte_handout
+---
+
+```{r include=FALSE}
+library(DataComputing)
+```
+
+In this small project, you will be exploring some of the records on books from the Macalester College library.  You will be creating an `.Rmd` file that summarises certain aspects of the data.  That file will contain three things:
+
+1. A narrative explaining (briefly) what you are looking at and your conclusions.
+2. The computer commands that allow you to look inside the data.
+3. The output of your computer commands.
+
+You only need to write (1) and (2).  The outputs (3) will be generated automatically when you *compile*\marginnote{"Translate" is a reasonable English equivalent to the technical jargon "compile."} the `.Rmd` to `.html`.
+
+The `.Rmd` file is called the *source* document.  In general, you write, revise, and update source documents.  Compilation of the source document to html (or other formats) is done automatically.  The point of compilation is to bring together your narrative and computer commands with the computer output into one easy-to-read document.  
+
+## Getting Started
+
+\marginnote{{\bf Setting up an RStudio Project.} We are all working on a mixture of tasks; different courses, different research projects, etc. RStudio provides a facility for organizing work across many different projects. Using this facility is easy and will save you trouble later on.
+
+Using the FILE/NEW PROJECT menu item, create a new project for this course.  Call it "Data Computing" or whatever seems sensible to you.  Whenever you are working on this course, make sure that you have your project open. (Typically, it will stay open until you create and switch to another project.)
+
+DO THIS NOW, before downloading the data file or opening your Rmd template.}
+
+You will need to get access to the library-book data.  The full collection of books is too large to download in a short time, so you will be using a small sample of books.
+
+* Step 1.  Download the library-book data to your computer.  To do this, give the following command in your RStudio console:
+```{r eval=FALSE}
+download.file(
+  "http://tiny.cc/dcf/Library-small.rda", 
+  dest="Library-small.rda")
+```
+You only need to do this once. You can confirm that the data file has been downloaded by going to the "Files" tab in RStudio.
+
+* Step 2. Open a blank `.Rmd` file.  Actually, the file will not be completely blank, it will already contain a few *chunks* that make it easier to get started.    
+    \enlargethispage{1in}
+    
+    * In RStudio, go to the File/New File/R Markdown menu.  Select "From Template" and, in the resulting dialog book, choose "Data Computing simple (HTML)" and click OK.  The template will open in the editor pane.
+    * Immediately, before you add anything to the template, save it to your files.  Give it the name `small-project-books`.  The suffix `.Rmd` will be automatically added to the file name.
+    * Look in the "Files" tab in RStudio and confirm that a new file named `small-project-books.Rmd` has been created.  (Look at the "modified" column to see when the file was created.  It should match the clock time.)
+
+* Step 3. Before you add anything to the `.Rmd` file, press the "Knit" button in the editor to compile the document from `.Rmd` to `.html`.  Depending on how your RStudio system is set up, the compiled document will be displayed in either a new window or in the "Viewer" tab.  On some computers, particularly Windows, the new window may be *behind* RStudio, so if you don't see the new window immediately, look back there.
+
+## Compile early and often
+
+Why compile the document before you have added anything to it?  So that you can confirm that you are starting with a working document.\marginnote{The idea of a document that works may be unfamiliar.  After all, in word processors or email, you type whatever you want, even if it makes no sense.  But the `.Rmd` document has to make sense to the computer because the computer is going to be carrying out the instructions in the document and translating it to `.html`.}  Then, after you add a little bit, compile the document again.  If the compilation works, then continue on.  If it doesn't, you have a huge hint about where the problem is: somewhere in the stuff you just added to the document. 
+
+Compilation doesn't cost anything.  And don't think of it as the *final step*.  Compilation is part of the work process and you will be doing it many, many times as you construct your document.
+
+# In your document ...
+
+\enlargethispage{1.5in}
+
+You can start writing at the bottom of the "blank" template. Remember to compile often, perhaps after each step.
+
+1. Add a sentence or two describing where you downloaded the data from, including the URL that you used to access the data file.
+2. Put in a section header: **Basics**
+3. Under that header, put in a *chunk* that will read the data into R.  The contents of the chunk will be:
+```{r eval=FALSE}
+load("Library-small.Rda")
+```
+```{r echo=FALSE}
+# The students will be downloading the `.rda` file into the main directory of 
+# their project.
+# I keep the data somewhere else.
+load("../Data/Library-small.rda")
+```
+This will create two data table objects, `Inv` and `Bks`.  The library's collection is in `Inv`.  The `Bks` data table is about individual books that might or might not be in the library's collection.    
+4. Create new chunks to calculate the number of cases in each file, the names of the variables, and whatever else might occur to you.  In addition, write a narrative with a short description of the contents of each file.    
+5. Create a chunk to look at the number of books with each different `Current.Status`.  Your command will look like this:
+```{r results='hide'}
+Inv %>%
+  group_by(Current.Status) %>%
+  tally()
+```
+6. Create a chunk to look at how many times books have been checked out.  Use this command:
+```{r results='hide'}
+Inv %>%
+  group_by(Issued.Count) %>%
+  tally()
+```
+Try to figure out what the results mean, and write your interpretation in a narrative following the chunk.
+
+Congratulations!  You've completed your data project.
