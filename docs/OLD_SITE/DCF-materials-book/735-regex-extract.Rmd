@@ -1,0 +1,75 @@
+# Extracting matching parts of regular expressions
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+
+The `extractMatches()` data verb from the `DataComputing` package helps you to identify the specific characters that match in a regular expression.
+
+Details:
+
+1. Like all data verbs, `extractMatches()` takes a data table as input and produces a data table as output. That data table will have one or more additional columns with the extractions
+
+2. syntax is `Data_table %>% extractMatches(regex, var,...)`. The `var` is the variable to be used in matching with the regex. The `...` provides a way for you to name the extracted segments.
+
+3. To indicate that you want to extract the content that matches part of the regexp, wrap that part in parentheses.
+
+4. When there is no match `extractMatches()` returns `NA`.
+
+Example 1:  This regex looks for the letters "n" or "r" followed by a vowel. Both the specific letter and the specific vowel are extracted.
+
+```{r}
+BabyNames %>% 
+  head() %>%
+  extractMatches("([nr])([aeiouy])", name)
+```
+
+
+Example 2: What are the most common end vowels for Bible names?
+
+To answer this question, you have to extract the last vowel from the name.  The `extractMatches()` transformation function can do this.
+
+```{r}
+BibleNames %>%
+  extractMatches( "([aeiou])$", name, vowel=1) %>%
+  group_by(vowel ) %>%
+  summarise( total= n()) %>%
+  arrange( vowel, desc(total) )
+```
+
+Example 2: What Bible Names start and end with a vowel, and what are those vowels?  In this example, we'll arrange for the first match to be called `beg_vowel` and the second to be called `end_vowel`.
+
+```{r}
+BabyNames %>%
+  extractMatches( "^([AEIOU]).*([aeiou])$", name, beg_vowel=1, end_vowel=2) %>%
+  head()
+```
+
+
+#Tasks for you
+
+1. Which Bible names in `BibleNames` have the word "man" in the meaning (not first or last word)?
+
+```{r,include=show_answers}
+BibleNames %>%
+  filter(grepl("[[:blank:]]+man[[:blank:]]+",meaning))
+```
+
+2. Grab everything but the last letter of `names` in `BabyNames` that end with a vowel (example: Grab Ev from Eva)
+
+```{r,include=show_answers,warning=FALSE}
+BabyNames %>%
+  extractMatches(pattern="(.*)[aeiouy]$", name, root=1) %>%
+  head()
+```
+
+
+3. What will this regex extract?
+
+```{r, echo=FALSE, eval=FALSE}
+BabyNames %>% 
+  extractMatches("^[A-Z](.).(.*)[aeiou]$", name, early=1, late = 2) %>% 
+  head(10)
+```
+

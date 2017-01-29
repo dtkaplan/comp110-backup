@@ -1,0 +1,27 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+# Outline of Class Session: Week 3
+
+Wrangling:
+
+* Moby Dick
+* verbs slides
+
+
+Example: A [catalog of a billion stars](http://www.bbc.com/news/science-environment-37355154)
+
+Graphics: 
+* eye training
+* grammar of graphics
+* making graphics with Statistical Modeling 
+    `scatterGraphHelper()`
+    `distributionGraphiHelper()`
+    `barGraphHelper()`
+* Project on simple wrangling
+
+-------------------
+
+Danny Kaplan. Compiled at `r date()`.

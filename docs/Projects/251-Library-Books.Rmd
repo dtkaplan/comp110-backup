@@ -2,7 +2,11 @@
 title: "Library Book Use"
 author: "Data Computing"
 date: "A First Small Project"
-output: rmarkdown::tufte_handout
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    citation_package: natbib
+    latex_engine: xelatex
 ---
 
 ```{r include=FALSE}
@@ -15,17 +19,17 @@ In this small project, you will be exploring some of the records on books from t
 2. The computer commands that allow you to look inside the data.
 3. The output of your computer commands.
 
-You only need to write (1) and (2).  The outputs (3) will be generated automatically when you *compile*\marginnote{"Translate" is a reasonable English equivalent to the technical jargon "compile."} the `.Rmd` to `.html`.
+You only need to write (1) and (2).  The outputs (3) will be generated automatically when you *compile*^["Translate" is a reasonable English equivalent to the technical jargon "compile."] the `.Rmd` to `.html`.
 
 The `.Rmd` file is called the *source* document.  In general, you write, revise, and update source documents.  Compilation of the source document to html (or other formats) is done automatically.  The point of compilation is to bring together your narrative and computer commands with the computer output into one easy-to-read document.  
 
 ## Getting Started
 
-\marginnote{{\bf Setting up an RStudio Project.} We are all working on a mixture of tasks; different courses, different research projects, etc. RStudio provides a facility for organizing work across many different projects. Using this facility is easy and will save you trouble later on.
+**Setting up an RStudio Project.** We are all working on a mixture of tasks; different courses, different research projects, etc. RStudio provides a facility for organizing work across many different projects. Using this facility is easy and will save you trouble later on.
 
 Using the FILE/NEW PROJECT menu item, create a new project for this course.  Call it "Data Computing" or whatever seems sensible to you.  Whenever you are working on this course, make sure that you have your project open. (Typically, it will stay open until you create and switch to another project.)
 
-DO THIS NOW, before downloading the data file or opening your Rmd template.}
+DO THIS NOW, before downloading the data file or opening your Rmd template.
 
 You will need to get access to the library-book data.  The full collection of books is too large to download in a short time, so you will be using a small sample of books.
 
@@ -48,7 +52,7 @@ You only need to do this once. You can confirm that the data file has been downl
 
 ## Compile early and often
 
-Why compile the document before you have added anything to it?  So that you can confirm that you are starting with a working document.\marginnote{The idea of a document that works may be unfamiliar.  After all, in word processors or email, you type whatever you want, even if it makes no sense.  But the `.Rmd` document has to make sense to the computer because the computer is going to be carrying out the instructions in the document and translating it to `.html`.}  Then, after you add a little bit, compile the document again.  If the compilation works, then continue on.  If it doesn't, you have a huge hint about where the problem is: somewhere in the stuff you just added to the document. 
+Why compile the document before you have added anything to it?  So that you can confirm that you are starting with a working document.^[The idea of a document that works may be unfamiliar.  After all, in word processors or email, you type whatever you want, even if it makes no sense.  But the `.Rmd` document has to make sense to the computer because the computer is going to be carrying out the instructions in the document and translating it to `.html`.]  Then, after you add a little bit, compile the document again.  If the compilation works, then continue on.  If it doesn't, you have a huge hint about where the problem is: somewhere in the stuff you just added to the document. 
 
 Compilation doesn't cost anything.  And don't think of it as the *final step*.  Compilation is part of the work process and you will be doing it many, many times as you construct your document.
 
@@ -68,7 +72,7 @@ load("Library-small.Rda")
 # The students will be downloading the `.rda` file into the main directory of 
 # their project.
 # I keep the data somewhere else.
-load("../Data/Library-small.rda")
+load("Data/Library-small.rda")
 ```
 This will create two data table objects, `Inv` and `Bks`.  The library's collection is in `Inv`.  The `Bks` data table is about individual books that might or might not be in the library's collection.    
 4. Create new chunks to calculate the number of cases in each file, the names of the variables, and whatever else might occur to you.  In addition, write a narrative with a short description of the contents of each file.    

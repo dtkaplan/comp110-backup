@@ -1,0 +1,137 @@
+```{r include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(printr)
+library(mosaic)
+library(tidyr)
+knitr::opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE)
+options(width = 80)
+```
+
+# Wide vs Narrow Data Tables
+
+A data table is comprises *cases* and *variables*.
+
+Each *variable* comprises *values* (or levels).
+
+There is no hard distinction between a variable and a value.  What's a variable in one situation may be a value in another, and vice versa.
+
+```{r echo=FALSE}
+Students <-
+  data.frame(who = c("Alice", "Lesley", "Yu"),
+             x = c(7, 19, 23), 
+             y = c("English", "Mandarin", "French"),
+             dorm = c("Doty", "Doty", "Kirk"))
+```
+
+A data table
+
+```{r}
+Students
+```
+
+## Cases, Variables, and Values
+
+* Variables: Who, X, and Y
+    - Values: 
+        - Who is a person's name
+        - X is numeric
+        - Y is a language name
+        - dorm is a building name
+* Cases: Alice, Lesley, Yu
+
+```{r echo=FALSE}
+Students
+```
+
+## Two formats
+
+* Narrow
+
+```{r echo=FALSE, warning=FALSE}
+Students %>% 
+  gather(key, value, x, y)
+```
+
+* Wide
+
+```{r echo=FALSE, warning=FALSE}
+Students
+```
+
+## Narrow and Wide
+
+Data in Key/Value format are **narrow**
+
+The corresponding **wide** format has 
+
+* separate variables for each level in Key
+* sets the values for those variables from the info in Value
+
+Narrow:
+```{r echo=FALSE, warning=FALSE}
+head(Students,2)
+```
+
+Wide:
+```{r echo=FALSE, warning=FALSE}
+Students %>% 
+  gather(key, value, x, y) %>% filter(who %in% c("Alice", "Lesley"))
+```
+
+## Narrow is relative
+
+```{r echo=FALSE, warning=FALSE}
+Students %>% 
+  gather(key, value, x, y, dorm)
+```
+
+## Too narrow
+
+
+```{r echo=FALSE, warning=FALSE}
+Students %>% 
+  gather(key, value, x, y, dorm, who)
+```
+
+There's nothing to identify a case!
+
+## Gather --- from Wide to Narrow
+
+Syntax:
+```
+WideInput %>% 
+  gather(key_name, value_name, ...)
+```
+The `...` are the variables to be gathered together, e.g.
+```{r warning=FALSE, echo=1}
+StudentsNarrow <- Students %>% gather(key, value, x, y)
+StudentsNarrow
+```
+
+## Cases in Narrow data
+
+Aside from Key and Value, all the other variables identify the case.
+
+The gathering makes multiple rows for each row in the wide form.  The variables **not** used for narrowing are copied into the new multiple cases.
+
+
+## Spread --- from Narrow to Wide
+
+Syntax:
+```r
+NarrowInput %>% spread(key, value)
+```
+
+Process:    
+
+1. Group by **all** variables other than Key and Value
+    These groups become the cases
+2. Create new variables for each level in Key
+3. Within each group, spread out the Values into the new variables.
+
+```{r}
+StudentsNarrow %>% spread(key, value)
+```
+
+

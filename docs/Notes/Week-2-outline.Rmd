@@ -1,0 +1,20 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+# Outline of Class Session: Week 2
+
+## Data Computing
+
+### Administrivia
+
+* We'll start grading at the end of September, so feel free to update any work you like. But remember the time budget for the course --- do not feel obliged to update things and definitely don't be a perfectionist for the sake of the grades.
+* We'll score things 0 to 10. 
+    - 8, 9, 10 means that you're getting the job done in a remarkably effective way.
+    - 6, 7 means that you're demonstrating a reasonable understanding.
+    - below 6 means that something isn't quite right. Let's get that straightened out.
+
+-------------------
+
+Danny Kaplan. Compiled at `r date()`.

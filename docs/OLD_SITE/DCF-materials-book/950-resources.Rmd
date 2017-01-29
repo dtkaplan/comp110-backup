@@ -1,0 +1,4 @@
+# Some resources
+
+* Data scraping: <https://github.com/ropensci/user2016-tutorial>
+* Text analysis of tweets: <http://varianceexplained.org/r/trump-tweets/>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes and Materials for Data Computing</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110">
+  <meta name="generator" content="bookdown 0.1.15 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes and Materials for Data Computing" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110" />
+  <meta name="github-repo" content="dtkaplan/comp110" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes and Materials for Data Computing" />
+  
+  <meta name="twitter:description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110" />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+  
+<meta name="date" content="2016-11-03">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="scraping-the-weather.html">
+<link rel="next" href="some-resources.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notes and materials for Data Computing</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Placeholder</a></li>
+<li class="chapter" data-level="2" data-path="gettingorganized.html"><a href="gettingorganized.html"><i class="fa fa-check"></i><b>2</b> (PART) Getting Organized</a></li>
+<li class="chapter" data-level="3" data-path="files-and-documents.html"><a href="files-and-documents.html"><i class="fa fa-check"></i><b>3</b> Files and Documents</a></li>
+<li class="chapter" data-level="4" data-path="embeding-files-within-rmd-html-files.html"><a href="embeding-files-within-rmd-html-files.html"><i class="fa fa-check"></i><b>4</b> Embeding Files within Rmd -&gt; HTML files</a></li>
+<li class="chapter" data-level="5" data-path="datainfrastructure.html"><a href="datainfrastructure.html"><i class="fa fa-check"></i><b>5</b> (PART) Data Infrastructure</a></li>
+<li class="chapter" data-level="6" data-path="case-study-highway-fatalities.html"><a href="case-study-highway-fatalities.html"><i class="fa fa-check"></i><b>6</b> Case Study: Highway Fatalities</a></li>
+<li class="chapter" data-level="7" data-path="case-study-taxicabs-and-the-sharing-economy.html"><a href="case-study-taxicabs-and-the-sharing-economy.html"><i class="fa fa-check"></i><b>7</b> Case Study: Taxicabs and the sharing economy</a></li>
+<li class="chapter" data-level="8" data-path="case-study-medicare-spending.html"><a href="case-study-medicare-spending.html"><i class="fa fa-check"></i><b>8</b> Case Study: Medicare spending</a></li>
+<li class="chapter" data-level="9" data-path="untidy-data-school-enrollments.html"><a href="untidy-data-school-enrollments.html"><i class="fa fa-check"></i><b>9</b> Untidy data: School enrollments</a></li>
+<li class="chapter" data-level="10" data-path="untidy-data-galtons-measurements-of-height.html"><a href="untidy-data-galtons-measurements-of-height.html"><i class="fa fa-check"></i><b>10</b> Untidy data: Galton’s measurements of height</a></li>
+<li class="chapter" data-level="11" data-path="untidy-data-family-structure-of-military-personnel.html"><a href="untidy-data-family-structure-of-military-personnel.html"><i class="fa fa-check"></i><b>11</b> Untidy data: Family structure of military personnel</a></li>
+<li class="chapter" data-level="12" data-path="untidy-data-minneapolis-voting.html"><a href="untidy-data-minneapolis-voting.html"><i class="fa fa-check"></i><b>12</b> Untidy data: Minneapolis Voting</a></li>
+<li class="chapter" data-level="13" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>13</b> Tidy Data</a></li>
+<li class="chapter" data-level="14" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html"><i class="fa fa-check"></i><b>14</b> R Programming: Parts of Speech</a></li>
+<li class="chapter" data-level="15" data-path="part-data-summaries-and-graphics.html"><a href="part-data-summaries-and-graphics.html"><i class="fa fa-check"></i><b>15</b> (PART) Data Summaries and Graphics</a></li>
+<li class="chapter" data-level="16" data-path="data-vs-information.html"><a href="data-vs-information.html"><i class="fa fa-check"></i><b>16</b> Data vs Information</a></li>
+<li class="chapter" data-level="17" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html"><i class="fa fa-check"></i><b>17</b> Glyphs, Frames, and Scales</a></li>
+<li class="chapter" data-level="18" data-path="activity-mapping-the-stars.html"><a href="activity-mapping-the-stars.html"><i class="fa fa-check"></i><b>18</b> Activity: Mapping the stars</a></li>
+<li class="chapter" data-level="19" data-path="introduction-to-graphics-and-wrangling.html"><a href="introduction-to-graphics-and-wrangling.html"><i class="fa fa-check"></i><b>19</b> Introduction to Graphics and Wrangling</a></li>
+<li class="chapter" data-level="20" data-path="part-data-verbs.html"><a href="part-data-verbs.html"><i class="fa fa-check"></i><b>20</b> (PART) Data Verbs</a></li>
+<li class="chapter" data-level="21" data-path="basicdataverbs.html"><a href="basicdataverbs.html"><i class="fa fa-check"></i><b>21</b> Basic Data Verbs</a></li>
+<li class="chapter" data-level="22" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html"><i class="fa fa-check"></i><b>22</b> More transformation verbs</a></li>
+<li class="chapter" data-level="23" data-path="trends-in-popularity-of-names.html"><a href="trends-in-popularity-of-names.html"><i class="fa fa-check"></i><b>23</b> Trends in Popularity of Names</a></li>
+<li class="chapter" data-level="24" data-path="case-study-in-basic-data-verbs-moby-dick.html"><a href="case-study-in-basic-data-verbs-moby-dick.html"><i class="fa fa-check"></i><b>24</b> Case study in basic data verbs: Moby Dick</a></li>
+<li class="chapter" data-level="25" data-path="cities-of-the-world.html"><a href="cities-of-the-world.html"><i class="fa fa-check"></i><b>25</b> Cities of the World</a></li>
+<li class="chapter" data-level="26" data-path="additional-exercises-on-data-verbs.html"><a href="additional-exercises-on-data-verbs.html"><i class="fa fa-check"></i><b>26</b> Additional Exercises on Data Verbs</a></li>
+<li class="chapter" data-level="27" data-path="bicycle-use-patterns.html"><a href="bicycle-use-patterns.html"><i class="fa fa-check"></i><b>27</b> Bicycle use patterns</a></li>
+<li class="chapter" data-level="28" data-path="births-and-holidays.html"><a href="births-and-holidays.html"><i class="fa fa-check"></i><b>28</b> Births and Holidays</a></li>
+<li class="chapter" data-level="29" data-path="part-joins-and-reshaping.html"><a href="part-joins-and-reshaping.html"><i class="fa fa-check"></i><b>29</b> (PART) Joins and Reshaping</a></li>
+<li class="chapter" data-level="30" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html"><i class="fa fa-check"></i><b>30</b> Combining data from different sources</a></li>
+<li class="chapter" data-level="31" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html"><i class="fa fa-check"></i><b>31</b> Wide vs Narrow Data Tables</a></li>
+<li class="chapter" data-level="32" data-path="biblical-names.html"><a href="biblical-names.html"><i class="fa fa-check"></i><b>32</b> Biblical Names</a></li>
+<li class="chapter" data-level="33" data-path="conformity-and-names.html"><a href="conformity-and-names.html"><i class="fa fa-check"></i><b>33</b> Conformity and Names</a></li>
+<li class="chapter" data-level="34" data-path="example-gender-neutral-names-when-wide-is-easier.html"><a href="example-gender-neutral-names-when-wide-is-easier.html"><i class="fa fa-check"></i><b>34</b> Example: Gender-neutral names: when wide is easier</a></li>
+<li class="chapter" data-level="35" data-path="example-a-penny-collection.html"><a href="example-a-penny-collection.html"><i class="fa fa-check"></i><b>35</b> Example: A Penny Collection</a></li>
+<li class="chapter" data-level="36" data-path="stocks-and-dividends.html"><a href="stocks-and-dividends.html"><i class="fa fa-check"></i><b>36</b> Stocks and dividends</a></li>
+<li class="chapter" data-level="37" data-path="a-graph-for-the-economist.html"><a href="a-graph-for-the-economist.html"><i class="fa fa-check"></i><b>37</b> A Graph for the Economist</a></li>
+<li class="chapter" data-level="38" data-path="distributions.html"><a href="distributions.html"><i class="fa fa-check"></i><b>38</b> Distributions</a></li>
+<li class="chapter" data-level="39" data-path="statistics-collective-properties-of-data.html"><a href="statistics-collective-properties-of-data.html"><i class="fa fa-check"></i><b>39</b> Statistics: Collective properties of data</a></li>
+<li class="chapter" data-level="40" data-path="regular-expressions.html"><a href="regular-expressions.html"><i class="fa fa-check"></i><b>40</b> Regular expressions</a></li>
+<li class="chapter" data-level="41" data-path="calling-311.html"><a href="calling-311.html"><i class="fa fa-check"></i><b>41</b> Calling 311</a></li>
+<li class="chapter" data-level="42" data-path="regex-examples-.html"><a href="regex-examples-.html"><i class="fa fa-check"></i><b>42</b> Regex examples.</a></li>
+<li class="chapter" data-level="43" data-path="extracting-matching-parts-of-regular-expressions.html"><a href="extracting-matching-parts-of-regular-expressions.html"><i class="fa fa-check"></i><b>43</b> Extracting matching parts of regular expressions</a></li>
+<li class="chapter" data-level="44" data-path="example-finding-the-po-number-in-an-address.html"><a href="example-finding-the-po-number-in-an-address.html"><i class="fa fa-check"></i><b>44</b> Example: Finding the PO number in an address</a></li>
+<li class="chapter" data-level="45" data-path="scraping-data-from-web-sites.html"><a href="scraping-data-from-web-sites.html"><i class="fa fa-check"></i><b>45</b> Scraping data from web sites</a></li>
+<li class="chapter" data-level="46" data-path="mini-languages.html"><a href="mini-languages.html"><i class="fa fa-check"></i><b>46</b> Mini-languages</a></li>
+<li class="chapter" data-level="47" data-path="fun-with-regexes.html"><a href="fun-with-regexes.html"><i class="fa fa-check"></i><b>47</b> Fun with regexes</a></li>
+<li class="chapter" data-level="48" data-path="scraping-the-weather.html"><a href="scraping-the-weather.html"><i class="fa fa-check"></i><b>48</b> Scraping the weather</a></li>
+<li class="chapter" data-level="49" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>49</b> Machine Learning</a><ul>
+<li class="chapter" data-level="49.1" data-path="machine-learning.html"><a href="machine-learning.html#a-multivariable-graphic"><i class="fa fa-check"></i><b>49.1</b> A multivariable graphic</a></li>
+<li class="chapter" data-level="49.2" data-path="machine-learning.html"><a href="machine-learning.html#with-more-variables"><i class="fa fa-check"></i><b>49.2</b> With more variables?</a></li>
+<li class="chapter" data-level="49.3" data-path="machine-learning.html"><a href="machine-learning.html#various-goals-for-machine-learning"><i class="fa fa-check"></i><b>49.3</b> Various goals for machine learning</a></li>
+<li class="chapter" data-level="49.4" data-path="machine-learning.html"><a href="machine-learning.html#supervised-vs-unsupervised-learning"><i class="fa fa-check"></i><b>49.4</b> Supervised vs unsupervised learning</a></li>
+<li class="chapter" data-level="49.5" data-path="machine-learning.html"><a href="machine-learning.html#supervised-learning"><i class="fa fa-check"></i><b>49.5</b> Supervised learning</a></li>
+<li class="chapter" data-level="49.6" data-path="machine-learning.html"><a href="machine-learning.html#application-examples"><i class="fa fa-check"></i><b>49.6</b> Application Examples</a><ul>
+<li class="chapter" data-level="49.6.1" data-path="machine-learning.html"><a href="machine-learning.html#home-electricity-use"><i class="fa fa-check"></i><b>49.6.1</b> Home electricity use</a></li>
+<li class="chapter" data-level="49.6.2" data-path="machine-learning.html"><a href="machine-learning.html#wages-and-education"><i class="fa fa-check"></i><b>49.6.2</b> Wages and education</a></li>
+</ul></li>
+<li class="chapter" data-level="49.7" data-path="machine-learning.html"><a href="machine-learning.html#statistical-learning"><i class="fa fa-check"></i><b>49.7</b> Statistical learning</a></li>
+<li class="chapter" data-level="49.8" data-path="machine-learning.html"><a href="machine-learning.html#example-child-carseat-sales"><i class="fa fa-check"></i><b>49.8</b> Example: Child carseat sales</a></li>
+<li class="chapter" data-level="49.9" data-path="machine-learning.html"><a href="machine-learning.html#hypothesis-generated-model"><i class="fa fa-check"></i><b>49.9</b> Hypothesis generated model</a></li>
+<li class="chapter" data-level="49.10" data-path="machine-learning.html"><a href="machine-learning.html#interpreting-the-model"><i class="fa fa-check"></i><b>49.10</b> Interpreting the model?</a></li>
+<li class="chapter" data-level="49.11" data-path="machine-learning.html"><a href="machine-learning.html#another-formalism-regression-trees"><i class="fa fa-check"></i><b>49.11</b> Another formalism: Regression trees</a></li>
+<li class="chapter" data-level="49.12" data-path="machine-learning.html"><a href="machine-learning.html#no-prior-model-at-all"><i class="fa fa-check"></i><b>49.12</b> No prior model at all?</a></li>
+<li class="chapter" data-level="49.13" data-path="machine-learning.html"><a href="machine-learning.html#shelf-location"><i class="fa fa-check"></i><b>49.13</b> Shelf location?</a></li>
+<li class="chapter" data-level="49.14" data-path="machine-learning.html"><a href="machine-learning.html#building-a-classifier"><i class="fa fa-check"></i><b>49.14</b> Building a classifier</a><ul>
+<li class="chapter" data-level="49.14.1" data-path="machine-learning.html"><a href="machine-learning.html#with-glaucoma"><i class="fa fa-check"></i><b>49.14.1</b> With glaucoma</a></li>
+<li class="chapter" data-level="49.14.2" data-path="machine-learning.html"><a href="machine-learning.html#normal-eyes"><i class="fa fa-check"></i><b>49.14.2</b> Normal eyes</a></li>
+</ul></li>
+<li class="chapter" data-level="49.15" data-path="machine-learning.html"><a href="machine-learning.html#build-a-classifier"><i class="fa fa-check"></i><b>49.15</b> Build a classifier …</a></li>
+<li class="chapter" data-level="49.16" data-path="machine-learning.html"><a href="machine-learning.html#unsupervised-learning"><i class="fa fa-check"></i><b>49.16</b> Unsupervised learning</a></li>
+</ul></li>
+<li class="chapter" data-level="50" data-path="some-resources.html"><a href="some-resources.html"><i class="fa fa-check"></i><b>50</b> Some resources</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes and Materials for Data Computing</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="machine-learning" class="section level1">
+<h1><span class="header-section-number">§ 49</span> Machine Learning</h1>
+<p>We have spent most of our time on two subjects:</p>
+<ol style="list-style-type: decimal">
+<li>Data visualization</li>
+<li>Data wrangling: getting from the data you are given to the “glyph-ready” data that you need to make a graphic or some other mode to guide interpretation of the data.</li>
+</ol>
+<p>Visualization works well with 1-3 variables, and in some situations can work with more variables.</p>
+<div id="a-multivariable-graphic" class="section level2">
+<h2><span class="header-section-number">49.1</span> A multivariable graphic</h2>
+<p><img src="Images/minard_lg.png" /> Glyph: <code>geom_path()</code> or “Sankey”, Annotations: rivers and towns</p>
+<p><a href="http://www.edwardtufte.com/tufte/graphics/minard_lg.gif">source</a></p>
+<p>What variables are being graphed here? Which variable is mapped to which aesthetic?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(HistData)
+<span class="kw">data</span>(Minard.troops)
+<span class="kw">data</span>(Minard.cities)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggmap)
+background &lt;-<span class="st"> </span><span class="kw">get_map</span>(<span class="dt">location =</span> <span class="st">&quot;Minsk&quot;</span>, <span class="dt">zoom =</span> <span class="dv">5</span>) <span class="co">#c(20, 45, 40, 65))</span>
+<span class="kw">ggmap</span>(background) +<span class="st">   </span>
+<span class="st">  </span><span class="kw">geom_path</span>(<span class="dt">data =</span> Minard.troops, <span class="dt">alpha =</span> <span class="fl">0.5</span>, 
+            <span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat -.<span class="dv">8</span>, <span class="dt">size =</span> survivors, <span class="dt">colour =</span> direction, <span class="dt">group =</span> group),
+            <span class="dt">linejoin =</span> <span class="st">&quot;bevel&quot;</span>, <span class="dt">linemitre =</span> <span class="dv">20</span>, <span class="dt">lineend =</span> <span class="st">&quot;round&quot;</span>) +
+<span class="st">  </span><span class="kw">xlim</span>(<span class="dv">24</span>, <span class="dv">38</span>) +<span class="st"> </span><span class="kw">ylim</span>(<span class="dv">53</span>,<span class="dv">57</span>) +<span class="st"> </span><span class="kw">coord_fixed</span>(<span class="dt">ratio =</span> <span class="dv">2</span>) +
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat<span class="fl">-.8</span>, <span class="dt">label =</span> city), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">data =</span> Minard.cities)</code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_rect).</code></pre>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="with-more-variables" class="section level2">
+<h2><span class="header-section-number">49.2</span> With more variables?</h2>
+<p>If we need to relate more variables, a visualization may not suffice.</p>
+</div>
+<div id="various-goals-for-machine-learning" class="section level2">
+<h2><span class="header-section-number">49.3</span> Various goals for machine learning</h2>
+<ol style="list-style-type: decimal">
+<li>Make predictions</li>
+<li>Anticipate the effect of an intervention</li>
+<li>Explore masses of data</li>
+</ol>
+</div>
+<div id="supervised-vs-unsupervised-learning" class="section level2">
+<h2><span class="header-section-number">49.4</span> Supervised vs unsupervised learning</h2>
+<ul>
+<li>Supervised: There is an outcome that you have recorded in your data.</li>
+<li>Unsupervised: No outcome variable.
+<ul>
+<li>in-class activity on gene expresion</li>
+<li>example about Scottish Parliament in book</li>
+</ul></li>
+</ul>
+</div>
+<div id="supervised-learning" class="section level2">
+<h2><span class="header-section-number">49.5</span> Supervised learning</h2>
+<p>We construct a mathematical model of the situation.</p>
+<ul>
+<li>Configure the model with adjustment knobs. These are called “parameters.”</li>
+<li>Twiddle with the knobs until the model makes a good match to the data.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">include_graphics</span>(<span class="st">&quot;https://seamlessblog.files.wordpress.com/2013/06/mannequin-collage1.jpg&quot;</span>)</code></pre></div>
+<p><img src="https://seamlessblog.files.wordpress.com/2013/06/mannequin-collage1.jpg" /><!-- --></p>
+<p>In the dressmaker’s dummy, adjustment knobs for matching the model to measurements of waist, hips, height, etc.</p>
+<p>In machine learning, we adopt a mathematical form with parameters.</p>
+<ul>
+<li><p>Example 1: Straight-line models <span class="math inline">\(f(x) = m x + b\)</span>. The input is <span class="math inline">\(x\)</span>, the parameters are <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(SaratogaHouses, 
+       <span class="kw">aes</span>(<span class="dt">y =</span> price, <span class="dt">x =</span> livingArea)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) +
+<span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(<span class="kw">lm</span>(price ~<span class="st"> </span>livingArea, <span class="dt">data =</span> SaratogaHouses))</code></pre></div>
+<pre><code>## (Intercept)  livingArea 
+##  13439.3940    113.1225</code></pre></li>
+<li><p>Example 2: Trees with branches At each branch point, the level of the variable to split on.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">rpart</span>(time ~<span class="st"> </span>year, <span class="dt">data =</span> SwimRecords)
+<span class="kw">prp</span>(model)</code></pre></div>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p></li>
+</ul>
+<p>These simple functions with just one input variable can be made more elaborate, e.g.</p>
+<ul>
+<li>Trees
+<ul>
+<li>Can choose which variable to split on at each break</li>
+<li>Can randomize choice, make lots of trees, and average</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swim_model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(time ~<span class="st"> </span>year +<span class="st"> </span>sex, <span class="dt">data =</span> SwimRecords)
+<span class="kw">fmodel</span>(swim_model)</code></pre></div>
+<pre><code>## Warning in fmodel(swim_model): No intervals available for model
+## typerandomForest.formularandomForest</code></pre>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p></li>
+<li><p>Straight-lines become low-order polynomials: <span class="math inline">\(f(w, x, y, z) = a + bw + cx + dy + ez\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">house_price_model &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">lm</span>(<span class="kw">log</span>(price) ~<span class="st"> </span><span class="kw">log</span>(livingArea) *<span class="st"> </span>bathrooms *<span class="st"> </span>newConstruction +<span class="st"> </span>pctCollege, 
+     <span class="dt">data =</span> SaratogaHouses)
+<span class="kw">fmodel</span>(house_price_model, <span class="dt">post_transform =</span> <span class="kw">c</span>(<span class="dt">price =</span> exp) )</code></pre></div>
+<img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<ul>
+<li>Statistical question: Should we take these detected patterns seriously?</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fmodel</span>(house_price_model, <span class="dt">post_transform =</span> <span class="kw">c</span>(<span class="dt">price =</span> exp), <span class="dt">intervals =</span> <span class="st">&quot;confidence&quot;</span>)</code></pre></div>
+<img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<ul>
+<li>So why are the results so uncertain for new construction?
+<ul>
+<li>not much data</li>
+<li>new houses are not built with one bathroom</li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SaratogaHouses %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bathrooms, <span class="dt">fill =</span> newConstruction)) +<span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p></li>
+</ul>
+</div>
+<div id="application-examples" class="section level2">
+<h2><span class="header-section-number">49.6</span> Application Examples</h2>
+<div id="home-electricity-use" class="section level3">
+<h3><span class="header-section-number">49.6.1</span> Home electricity use</h3>
+<p>How to visualize the relationship between <code>thermsPerDay</code>, <code>temp</code> and <code>kwh</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Utilities &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://tiny.cc/dcf/utilities-up-to-date.csv&quot;</span>, 
+                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+
+<span class="kw">library</span>(splines)
+model &lt;-<span class="st"> </span><span class="kw">lm</span>(thermsPerDay ~<span class="st"> </span><span class="kw">ns</span>(temp, <span class="dv">5</span>) +<span class="st"> </span><span class="kw">ns</span>(temp,<span class="dv">3</span>) :<span class="st"> </span>kwh, <span class="dt">data =</span> Utilities)
+<span class="kw">fmodel</span>(model, <span class="dt">intervals =</span> <span class="st">&quot;confidence&quot;</span>)</code></pre></div>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Interpreting this model: In colder temperatures, higher electricity use leads to lower natural gas usage.</p>
+</div>
+<div id="wages-and-education" class="section level3">
+<h3><span class="header-section-number">49.6.2</span> Wages and education</h3>
+<p>How does wage depend on sex? Take into account education and age and sector</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">forest_mod &lt;-<span class="st"> </span><span class="kw">randomForest</span>(wage ~<span class="st"> </span>educ +<span class="st"> </span>sex +<span class="st"> </span>age, <span class="dt">data =</span> CPS85)
+<span class="kw">fmodel</span>(forest_mod, <span class="dt">age =</span> <span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">40</span>))</code></pre></div>
+<pre><code>## Warning in fmodel(forest_mod, age = c(25, 40)): No intervals available for
+## model typerandomForest.formularandomForest</code></pre>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+</div>
+<div id="statistical-learning" class="section level2">
+<h2><span class="header-section-number">49.7</span> Statistical learning</h2>
+<ul>
+<li>honest assessment of differences</li>
+<li>honest comparison of models
+<ul>
+<li>measure “complexity” or “flexibility” of models</li>
+</ul></li>
+<li>bias/variance trade-off</li>
+<li>covariates and causal reasoning</li>
+</ul>
+</div>
+<div id="example-child-carseat-sales" class="section level2">
+<h2><span class="header-section-number">49.8</span> Example: Child carseat sales</h2>
+<p>Purpose: Figure out how to raise sales of a brand of carseats.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(ISLR::Carseats %&gt;%<span class="st"> </span><span class="kw">rename</span>(<span class="dt">CompP=</span>CompPrice,<span class="dt">Ads=</span>Advertising, <span class="dt">Pop=</span>Population, <span class="dt">Shelf=</span>ShelveLoc, <span class="dt">Edu=</span>Education))</code></pre></div>
+<pre><code>##   Sales CompP Income Ads Pop Price  Shelf Age Edu Urban  US
+## 1  9.50   138     73  11 276   120    Bad  42  17   Yes Yes
+## 2 11.22   111     48  16 260    83   Good  65  10   Yes Yes
+## 3 10.06   113     35  10 269    80 Medium  59  12   Yes Yes
+## 4  7.40   117    100   4 466    97 Medium  55  14   Yes Yes
+## 5  4.15   141     64   3 340   128    Bad  38  13   Yes  No
+## 6 10.81   124    113  13 501    72    Bad  78  16    No Yes</code></pre>
+</div>
+<div id="hypothesis-generated-model" class="section level2">
+<h2><span class="header-section-number">49.9</span> Hypothesis generated model</h2>
+<ol style="list-style-type: decimal">
+<li>Price relative to competitor’s price is relevant.</li>
+<li>Larger population gives larger sales</li>
+<li>Education level?</li>
+<li>Advertising?</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Carseats &lt;-
+<span class="st">  </span>ISLR::Carseats %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rel_price =</span> Price /<span class="st"> </span>CompPrice)
+mod1 &lt;-<span class="st"> </span>
+<span class="st">  </span>Carseats %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">lm</span>(Sales ~<span class="st"> </span>rel_price +<span class="st"> </span>Population +<span class="st"> </span>Education +<span class="st"> </span>Advertising,
+     <span class="dt">data =</span> .)
+<span class="kw">coef</span>(mod1)</code></pre></div>
+<pre><code>##   (Intercept)     rel_price    Population     Education   Advertising 
+##  17.497352098 -10.907759402  -0.000139262  -0.055051345   0.136911760</code></pre>
+</div>
+<div id="interpreting-the-model" class="section level2">
+<h2><span class="header-section-number">49.10</span> Interpreting the model?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(mod1)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sales ~ rel_price + Population + Education + Advertising, 
+##     data = .)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -6.005 -1.470 -0.118  1.310  5.280 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  1.750e+01  8.728e-01  20.048  &lt; 2e-16 ***
+## rel_price   -1.091e+01  6.673e-01 -16.345  &lt; 2e-16 ***
+## Population  -1.393e-04  7.470e-04  -0.186    0.852    
+## Education   -5.505e-02  4.051e-02  -1.359    0.175    
+## Advertising  1.369e-01  1.651e-02   8.294 1.74e-15 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.108 on 395 degrees of freedom
+## Multiple R-squared:  0.4483, Adjusted R-squared:  0.4427 
+## F-statistic: 80.25 on 4 and 395 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="another-formalism-regression-trees" class="section level2">
+<h2><span class="header-section-number">49.11</span> Another formalism: Regression trees</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart)
+mod2 &lt;-<span class="st"> </span>
+<span class="st">  </span>Carseats %&gt;%
+<span class="st">  </span><span class="kw">rpart</span>(Sales ~<span class="st"> </span>rel_price +<span class="st"> </span>Price +<span class="st"> </span>CompPrice +<span class="st"> </span>Advertising +<span class="st"> </span>Population +<span class="st"> </span>Education +<span class="st"> </span>Income, <span class="dt">data=</span>.)
+<span class="kw">prp</span>(mod2)</code></pre></div>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="no-prior-model-at-all" class="section level2">
+<h2><span class="header-section-number">49.12</span> No prior model at all?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod3 &lt;-<span class="st"> </span>Carseats %&gt;%<span class="st"> </span><span class="kw">rpart</span>(Sales ~<span class="st"> </span>., <span class="dt">data=</span>.)
+<span class="kw">prp</span>(mod3)</code></pre></div>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="shelf-location" class="section level2">
+<h2><span class="header-section-number">49.13</span> Shelf location?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod4 &lt;-<span class="st"> </span>Carseats %&gt;%
+<span class="st">  </span><span class="kw">rpart</span>(Sales ~<span class="st"> </span>rel_price +<span class="st"> </span>Advertising +<span class="st"> </span>ShelveLoc +<span class="st"> </span>Population, <span class="dt">data=</span>.)
+<span class="kw">prp</span>(mod4)</code></pre></div>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div id="building-a-classifier" class="section level2">
+<h2><span class="header-section-number">49.14</span> Building a classifier</h2>
+<blockquote>
+<p>62 variables are derived from a confocal laser scanning image of the optic nerve head, describing its morphology. Observations are from normal and glaucomatous eyes, respectively.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;GlaucomaM&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;TH.data&quot;</span>)</code></pre></div>
+<div id="with-glaucoma" class="section level3">
+<h3><span class="header-section-number">49.14.1</span> With glaucoma</h3>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+</div>
+<div id="normal-eyes" class="section level3">
+<h3><span class="header-section-number">49.14.2</span> Normal eyes</h3>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+</div>
+<div id="build-a-classifier" class="section level2">
+<h2><span class="header-section-number">49.15</span> Build a classifier …</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glaucoma_rpart &lt;-<span class="st"> </span><span class="kw">rpart</span>(Class ~<span class="st"> </span>., <span class="dt">data =</span> GlaucomaM, 
+                        <span class="dt">control =</span> <span class="kw">rpart.control</span>(<span class="dt">xval =</span> <span class="dv">100</span>))
+<span class="kw">prp</span>(glaucoma_rpart, <span class="dt">type=</span><span class="dv">4</span>, <span class="dt">extra=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+<div id="unsupervised-learning" class="section level2">
+<h2><span class="header-section-number">49.16</span> Unsupervised learning</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Dists &lt;-<span class="st"> </span><span class="kw">dist</span>(mtcars)
+Dendrogram &lt;-<span class="st"> </span><span class="kw">hclust</span>(Dists)
+<span class="kw">ggdendrogram</span>(Dendrogram)</code></pre></div>
+<p><img src="Notes_and_Other_Materials_for_Data_Computing_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="scraping-the-weather.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="some-resources.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": "link:https://github.com/dtkaplan/comp110/DCF-materials-book/edit/master/%s",
+"download": null,
+"toc": {
+"collapse": "section",
+"unnumbered": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

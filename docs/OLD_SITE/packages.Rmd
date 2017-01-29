@@ -1,0 +1,15 @@
+---
+title: "R Packages for Comp 110"
+author: "Data Computing"
+date: "August 29, 2016"
+output: html_document
+---
+
+We will be doing our work using R. There are several layers of sofware involved. It's helpful to have a bit of a map.
+
+1. R is a language and system for doing scientific computing.
+2. RStudio is a user interface (called an IDE --- Integrated Development Environment) that provides an editor and many other services for using R.
+3. GitHub is a cloud-based system for collaborating on software and other kinds of projects. It's based on software called "git."  RStudio knows about git and GitHub.
+4. Markdown
+5. R/Markdown 
+6. Packages

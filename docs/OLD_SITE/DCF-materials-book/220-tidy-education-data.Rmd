@@ -1,0 +1,18 @@
+# Untidy data: School enrollments
+
+The US Census Bureau collects data on many aspects of the population. Data on school enrollments is available [here](http://www.census.gov/hhes/school/). We're going to look at one of the data tables they make available: 
+
+> Table 2: Single Grade of Enrollment and High School Graduation Status for People 3 Years Old and Over, by Sex, Age (Single Years for 3 to 24 Years), Race, and Hispanic Origin: October 2014   [XLS](http://www.census.gov/hhes/school/data/cps/2014/Tab02-01.xls) or [CSV](http://www.census.gov/hhes/school/data/cps/2014/Tab02-01.csv) format.
+
+Download one of these files and open it in appropriate software. Or you can view the data on Google Drive [here](https://docs.google.com/spreadsheets/d/1kuHylpUiQ7TMbNr1AuApciSra3VnvP9E4V83hCQ3Yho/edit?usp=sharing).
+
+1. How many people are represented in this data table?
+#. The table is in some ways a graphical visualization of features of school enrollment and age. (Unfocus your eyes and you will see a visual pattern.) What patterns do you see?
+#. The table indicates that 74.4% of the people in the table are "not enrolled" in school. Figure out how to calculate this from the numbers in the table. (Hint: You need only look at line 9.)
+#. These data are "untidy" in a technical sense. Identify the ways that they are untidy.
+#. Some columns contain information that can be calculated from other columns.  Look at the data for 4-year olds and identify those that are calculated from other columns. Figure out the minimal set of columns from which the others could be calculated.
+#. Imagine that this table was created from a much bigger table in which each case is an individual person in the US. 
+    - How many cases would there be in that table?
+    - What variables would you need so that you could calculate any entry in the "Table 2" provided by the Census Bureau?
+
+

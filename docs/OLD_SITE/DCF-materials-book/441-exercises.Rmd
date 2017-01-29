@@ -1,0 +1,32 @@
+# Additional Exercises on Data Verbs
+
+
+## How many births
+
+You might think that you can find the number of babies born each year in the US by using the Social Security `BabyNames` data. Just group by year and add up the counts:
+
+```{r}
+BabyNames %>%
+  group_by(year) %>%
+  summarise(total = sum(count)) %>%
+  arrange(desc(year)) %>%
+  head()
+```
+
+But some babies are missing from this tally. In particular, the `BabyNames` data only reports names, years, and sex for which there were five or more births. Presumably there were some babies whose names were so unusual that they are unique, or shared by only two, three, or four babies. 
+
+Your job, make an estimate of how many such babies there are. For simplicity, make that estimate for a single year, say 2010.
+
+Here's an approach. Count the total number of -names with 5, 6, ... 19, 20 births. That is, consider all the names of each sex with only 5 babies reported and find the total number of babies that fall into that class. The same for names-and-sex with 6 births, and so on. See if you can spot a pattern with how the number of babies changes depends on each count.Then extrapolate out to 1, 2, 3, 4 and use that to estimate the total population.
+
+
+```{r}
+BabyNames %>%
+  filter(count <= 20, year == 2010) %>%
+  group_by(count) %>%
+  tally() %>%
+  mutate(births = count * n) %>%
+  mutate(log10(births))
+```
+
+The pattern is very consistent across the different levels of "numbers of names". It looks like we're missing about 100,000 babies in 2010.

@@ -1,0 +1,7 @@
+# Case Study: Medicare spending
+
+Newspaper article [here](http://www.nytimes.com/2013/05/08/business/hospital-billing-varies-wildly-us-data-shows.html)
+
+Data available [here](http://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Medicare-Provider-Charge-Data/index.html).
+
+[DTK notes](file:///Users/kaplan/KaplanFiles/MOSAIC/CVC/Summer2014/Notes/MedicareSpending/PriceOfHealth.html)

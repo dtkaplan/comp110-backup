@@ -1,0 +1,6 @@
+# Bicycle use patterns
+
+[PDF handout](Handouts/452-Bicycle-Rentals.pdf)
+
+  ```{r child = "Handouts/452-Bicycle-Rentals.Rmd"}
+```

@@ -39,8 +39,10 @@ navbar:
       menu:
           - text: "Short Projects"
           - text: "--------"
-          - text: "The library collection"
+          - text: "The library collection (GitHub version)"
             href: "Projects/251-Library-Books-github.html"
+          - text: "The library collection (file upload version)"
+            href: "Projects/251-Library-Books.html"
           - text: "Intro to graphics and wrangling"
             href: "Projects/351-Intro-Graphics/Wrangling.html"
           - text: "Births and holidays"

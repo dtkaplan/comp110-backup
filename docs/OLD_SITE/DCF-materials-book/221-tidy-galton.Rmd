@@ -1,0 +1,18 @@
+# Untidy data: Galton's measurements of height
+
+In the 1880s, Francis Galton started to make a mathematical theory of evolution. But the basic biology of heritability was not known: nothing about "genes" or DNA, etc. 
+
+In order to create a theory, Galton needed a way to measure how traits are inherited from parents. To this end, he visited families in London and measured the heights of the parents and their (adult) children.
+
+Here's part of a page from his lab notebook.
+
+![A page from Francis Galton's notebook.](images/galton-notebook.jpg)
+
+Divide into groups of 2 or 3 and translate the notebook data into a tidy form.
+
+- Think about what would be an appropriate "case" for storing this data.
+- What variables should there be?
+- Open a spreadsheet and fill in a couple of rows of the tidy table that you envision.
+
+Here are a few that have already been made:[Group-1](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHNpejZtd3dQTXlPM245R0ZQbG0yYkE&usp=sharing), [Group-2](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dHk1enZoVnhrV09ad2x4dXR1MlpWNFE&usp=sharing), [Group-3](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dElIQkh0SWtyaW9aRkdMZVBERHdJNXc#gid=0), [Group-4](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dEYxdEhWZUI1S3NxN2ZaaThXSEtMVWc&usp=sharing), [Group-5](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dDVsLWJaUHV5emFVQlVfSjFrdmFkYXc&usp=sharing), [Group-6](https://docs.google.com/spreadsheet/ccc?key=0Am13enSalO74dFdvNGpFZkNuUHZqd2g2UEVDc0VEZEE&usp=sharing)
+

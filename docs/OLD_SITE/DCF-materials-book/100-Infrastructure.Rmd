@@ -1,0 +1,11 @@
+# (PART) Getting Organized {#gettingorganized}
+
+
+The materials from Week 1 will go here.
+
+1. Getting to RStudio
+2. Connecting to GitHub
+3. RMarkdown
+    - Writing a simple RMarkdown document
+    
+[One-page cheat sheet](Handouts/EnoughDCF.pdf).

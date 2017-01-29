@@ -1,0 +1,8 @@
+# Stocks and dividends
+
+[PDF handout](Handouts/551-Stocks-and-dividends.pdf)
+
+Only the PDF handout is available, not the HTML format document.
+
+```{r eval = FALSE, child = "Handouts/453-Births-and-holidays.Rmd"}
+```

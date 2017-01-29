@@ -1,0 +1,23 @@
+# Embeding Files within Rmd -> HTML files
+
+When you produce an HTML document with R/Markdown, the commands can only be run by cutting-and-pasting them from the HTML into R. Often, you'd prefer to provide your reader with a copy of the original Rmd file itself. 
+
+The `DataComputing` package provides a way to do this easily. Include the following chunk in your document:
+
+
+     `r ''````{r results = "asis"}
+     DataComputing::includeSourceDocuments()
+     ```
+
+
+```{r results = "asis", echo = FALSE}
+DataComputing::includeSourceDocuments()
+```
+
+This will produce a link to the Rmd document itself, like this.
+
+
+
+Clicking on the link will (in most browsers) extract the Rmd file and install it in your Downloads directory.
+
+You can embed multiple files in a document, which you may find convenient for CSV files, etc. When embedding a file other than the source Rmd file, give as an argument to `includeSourceDocuments()` the quoted character string containing the path and filename for your Rmd file. You can construct this easily by using `file.choose()` in the console, and copying the result as the argument of `includeSourceDocuments()` function. This will embed the named file into your HTML, so that the file will be available directly through the HTML file. You need to view the HTML in your browser to be able to download the included file.

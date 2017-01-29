@@ -1,0 +1,58 @@
+---
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
+# Mini-languages
+
+```{r include = FALSE}
+require(DataComputing)
+require(mosaic)
+```
+
+
+* Markdown
+
+```{markdown}
+A list in markdown
+
+1. First item
+#. Following item
+#. and following that!
+
+Link to [Macalester site](http://www.macalester.edu)
+```
+
+* YAML
+
+```{yaml}
+title: "The Street Where You Live"
+author: "Data Computing"
+date: "Computing project"
+output: 
+  rmarkdown::tufte_handout
+```
+
+* dplyr & friends
+
+```{r}
+CPS85 %>%
+  group_by(union, sex) %>%
+  summarise(mean(wage))
+```
+
+* mosaic package: formulas applied to basic stat functions
+```{r}
+mosaic::mean(wage ~ union + sex, data = CPS85)
+```
+
+* Latex math markup
+
+```latex
+$\int_0^\infty \frac{1}{x^2} dx$
+```
+giving $\int_0^\infty \frac{1}{x^2} dx$
+
+* regexes
+* CSS selectors

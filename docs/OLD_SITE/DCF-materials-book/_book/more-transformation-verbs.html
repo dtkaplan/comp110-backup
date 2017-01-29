@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Notes and Materials for Data Computing</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Notes and Materials for Data Computing" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110" />
+  <meta name="github-repo" content="dtkaplan/comp110" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Notes and Materials for Data Computing" />
+  
+  <meta name="twitter:description" content="Notes and other materials for the Data Computing course at Macalester College: COMP 110" />
+  
+
+<meta name="author" content="Daniel Kaplan">
+
+
+<meta name="date" content="2017-01-24">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="basicdataverbs.html">
+<link rel="next" href="trends-in-popularity-of-names.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Notes and materials for Data Computing</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Placeholder</a></li>
+<li class="chapter" data-level="2" data-path="gettingorganized.html"><a href="gettingorganized.html"><i class="fa fa-check"></i><b>2</b> (PART) Getting Organized</a></li>
+<li class="chapter" data-level="3" data-path="files-and-documents.html"><a href="files-and-documents.html"><i class="fa fa-check"></i><b>3</b> Files and Documents</a></li>
+<li class="chapter" data-level="4" data-path="embeding-files-within-rmd-html-files.html"><a href="embeding-files-within-rmd-html-files.html"><i class="fa fa-check"></i><b>4</b> Embeding Files within Rmd -&gt; HTML files</a></li>
+<li class="chapter" data-level="5" data-path="datainfrastructure.html"><a href="datainfrastructure.html"><i class="fa fa-check"></i><b>5</b> (PART) Data Infrastructure</a></li>
+<li class="chapter" data-level="6" data-path="case-study-highway-fatalities.html"><a href="case-study-highway-fatalities.html"><i class="fa fa-check"></i><b>6</b> Case Study: Highway Fatalities</a></li>
+<li class="chapter" data-level="7" data-path="case-study-taxicabs-and-the-sharing-economy.html"><a href="case-study-taxicabs-and-the-sharing-economy.html"><i class="fa fa-check"></i><b>7</b> Case Study: Taxicabs and the sharing economy</a></li>
+<li class="chapter" data-level="8" data-path="case-study-medicare-spending.html"><a href="case-study-medicare-spending.html"><i class="fa fa-check"></i><b>8</b> Case Study: Medicare spending</a></li>
+<li class="chapter" data-level="9" data-path="untidy-data-school-enrollments.html"><a href="untidy-data-school-enrollments.html"><i class="fa fa-check"></i><b>9</b> Untidy data: School enrollments</a></li>
+<li class="chapter" data-level="10" data-path="untidy-data-galtons-measurements-of-height.html"><a href="untidy-data-galtons-measurements-of-height.html"><i class="fa fa-check"></i><b>10</b> Untidy data: Galton’s measurements of height</a></li>
+<li class="chapter" data-level="11" data-path="untidy-data-family-structure-of-military-personnel.html"><a href="untidy-data-family-structure-of-military-personnel.html"><i class="fa fa-check"></i><b>11</b> Untidy data: Family structure of military personnel</a></li>
+<li class="chapter" data-level="12" data-path="untidy-data-minneapolis-voting.html"><a href="untidy-data-minneapolis-voting.html"><i class="fa fa-check"></i><b>12</b> Untidy data: Minneapolis Voting</a></li>
+<li class="chapter" data-level="13" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>13</b> Tidy Data</a></li>
+<li class="chapter" data-level="14" data-path="r-programming-parts-of-speech.html"><a href="r-programming-parts-of-speech.html"><i class="fa fa-check"></i><b>14</b> R Programming: Parts of Speech</a></li>
+<li class="chapter" data-level="15" data-path="part-data-summaries-and-graphics.html"><a href="part-data-summaries-and-graphics.html"><i class="fa fa-check"></i><b>15</b> (PART) Data Summaries and Graphics</a></li>
+<li class="chapter" data-level="16" data-path="data-vs-information.html"><a href="data-vs-information.html"><i class="fa fa-check"></i><b>16</b> Data vs Information</a></li>
+<li class="chapter" data-level="17" data-path="glyphs-frames-and-scales.html"><a href="glyphs-frames-and-scales.html"><i class="fa fa-check"></i><b>17</b> Glyphs, Frames, and Scales</a></li>
+<li class="chapter" data-level="18" data-path="activity-mapping-the-stars.html"><a href="activity-mapping-the-stars.html"><i class="fa fa-check"></i><b>18</b> Activity: Mapping the stars</a></li>
+<li class="chapter" data-level="19" data-path="introduction-to-graphics-and-wrangling.html"><a href="introduction-to-graphics-and-wrangling.html"><i class="fa fa-check"></i><b>19</b> Introduction to Graphics and Wrangling</a></li>
+<li class="chapter" data-level="20" data-path="part-data-verbs.html"><a href="part-data-verbs.html"><i class="fa fa-check"></i><b>20</b> (PART) Data Verbs</a></li>
+<li class="chapter" data-level="21" data-path="basicdataverbs.html"><a href="basicdataverbs.html"><i class="fa fa-check"></i><b>21</b> Basic Data Verbs</a></li>
+<li class="chapter" data-level="22" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html"><i class="fa fa-check"></i><b>22</b> More transformation verbs</a><ul>
+<li class="chapter" data-level="22.1" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#rank-transforms"><i class="fa fa-check"></i><b>22.1</b> Rank transforms</a><ul>
+<li class="chapter" data-level="22.1.1" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#tied-ranks"><i class="fa fa-check"></i><b>22.1.1</b> Tied ranks</a></li>
+</ul></li>
+<li class="chapter" data-level="22.2" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#leads-and-lags"><i class="fa fa-check"></i><b>22.2</b> Leads and lags</a></li>
+<li class="chapter" data-level="22.3" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#times-and-dates"><i class="fa fa-check"></i><b>22.3</b> Times and Dates</a></li>
+<li class="chapter" data-level="22.4" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#conditional-transforms"><i class="fa fa-check"></i><b>22.4</b> Conditional transforms</a></li>
+<li class="chapter" data-level="22.5" data-path="more-transformation-verbs.html"><a href="more-transformation-verbs.html#text"><i class="fa fa-check"></i><b>22.5</b> Text</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="trends-in-popularity-of-names.html"><a href="trends-in-popularity-of-names.html"><i class="fa fa-check"></i><b>23</b> Trends in Popularity of Names</a></li>
+<li class="chapter" data-level="24" data-path="case-study-in-basic-data-verbs-moby-dick.html"><a href="case-study-in-basic-data-verbs-moby-dick.html"><i class="fa fa-check"></i><b>24</b> Case study in basic data verbs: Moby Dick</a></li>
+<li class="chapter" data-level="25" data-path="cities-of-the-world.html"><a href="cities-of-the-world.html"><i class="fa fa-check"></i><b>25</b> Cities of the World</a></li>
+<li class="chapter" data-level="26" data-path="additional-exercises-on-data-verbs.html"><a href="additional-exercises-on-data-verbs.html"><i class="fa fa-check"></i><b>26</b> Additional Exercises on Data Verbs</a></li>
+<li class="chapter" data-level="27" data-path="bicycle-use-patterns.html"><a href="bicycle-use-patterns.html"><i class="fa fa-check"></i><b>27</b> Bicycle use patterns</a></li>
+<li class="chapter" data-level="28" data-path="births-and-holidays.html"><a href="births-and-holidays.html"><i class="fa fa-check"></i><b>28</b> Births and Holidays</a></li>
+<li class="chapter" data-level="29" data-path="part-joins-and-reshaping.html"><a href="part-joins-and-reshaping.html"><i class="fa fa-check"></i><b>29</b> (PART) Joins and Reshaping</a></li>
+<li class="chapter" data-level="30" data-path="combining-data-from-different-sources.html"><a href="combining-data-from-different-sources.html"><i class="fa fa-check"></i><b>30</b> Combining data from different sources</a></li>
+<li class="chapter" data-level="31" data-path="wide-vs-narrow-data-tables.html"><a href="wide-vs-narrow-data-tables.html"><i class="fa fa-check"></i><b>31</b> Wide vs Narrow Data Tables</a></li>
+<li class="chapter" data-level="32" data-path="biblical-names.html"><a href="biblical-names.html"><i class="fa fa-check"></i><b>32</b> Biblical Names</a></li>
+<li class="chapter" data-level="33" data-path="conformity-and-names.html"><a href="conformity-and-names.html"><i class="fa fa-check"></i><b>33</b> Conformity and Names</a></li>
+<li class="chapter" data-level="34" data-path="example-gender-neutral-names-when-wide-is-easier.html"><a href="example-gender-neutral-names-when-wide-is-easier.html"><i class="fa fa-check"></i><b>34</b> Example: Gender-neutral names: when wide is easier</a></li>
+<li class="chapter" data-level="35" data-path="example-a-penny-collection.html"><a href="example-a-penny-collection.html"><i class="fa fa-check"></i><b>35</b> Example: A Penny Collection</a></li>
+<li class="chapter" data-level="36" data-path="stocks-and-dividends.html"><a href="stocks-and-dividends.html"><i class="fa fa-check"></i><b>36</b> Stocks and dividends</a></li>
+<li class="chapter" data-level="37" data-path="a-graph-for-the-economist.html"><a href="a-graph-for-the-economist.html"><i class="fa fa-check"></i><b>37</b> A Graph for the Economist</a></li>
+<li class="chapter" data-level="38" data-path="distributions.html"><a href="distributions.html"><i class="fa fa-check"></i><b>38</b> Distributions</a></li>
+<li class="chapter" data-level="39" data-path="statistics-collective-properties-of-data.html"><a href="statistics-collective-properties-of-data.html"><i class="fa fa-check"></i><b>39</b> Statistics: Collective properties of data</a></li>
+<li class="chapter" data-level="40" data-path="regular-expressions.html"><a href="regular-expressions.html"><i class="fa fa-check"></i><b>40</b> Regular expressions</a></li>
+<li class="chapter" data-level="41" data-path="calling-311.html"><a href="calling-311.html"><i class="fa fa-check"></i><b>41</b> Calling 311</a></li>
+<li class="chapter" data-level="42" data-path="regex-examples-.html"><a href="regex-examples-.html"><i class="fa fa-check"></i><b>42</b> Regex examples.</a></li>
+<li class="chapter" data-level="43" data-path="extracting-matching-parts-of-regular-expressions.html"><a href="extracting-matching-parts-of-regular-expressions.html"><i class="fa fa-check"></i><b>43</b> Extracting matching parts of regular expressions</a></li>
+<li class="chapter" data-level="44" data-path="example-finding-the-po-number-in-an-address.html"><a href="example-finding-the-po-number-in-an-address.html"><i class="fa fa-check"></i><b>44</b> Example: Finding the PO number in an address</a></li>
+<li class="chapter" data-level="45" data-path="scraping-data-from-web-sites.html"><a href="scraping-data-from-web-sites.html"><i class="fa fa-check"></i><b>45</b> Scraping data from web sites</a></li>
+<li class="chapter" data-level="46" data-path="mini-languages.html"><a href="mini-languages.html"><i class="fa fa-check"></i><b>46</b> Mini-languages</a></li>
+<li class="chapter" data-level="47" data-path="fun-with-regexes.html"><a href="fun-with-regexes.html"><i class="fa fa-check"></i><b>47</b> Fun with regexes</a></li>
+<li class="chapter" data-level="48" data-path="scraping-the-weather.html"><a href="scraping-the-weather.html"><i class="fa fa-check"></i><b>48</b> Scraping the weather</a></li>
+<li class="chapter" data-level="49" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>49</b> Machine Learning</a></li>
+<li class="chapter" data-level="50" data-path="some-resources.html"><a href="some-resources.html"><i class="fa fa-check"></i><b>50</b> Some resources</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notes and Materials for Data Computing</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="more-transformation-verbs" class="section level1">
+<h1><span class="header-section-number">§ 22</span> More transformation verbs</h1>
+<p>Recall that a <em>transformation verb</em> takes a variable as an input and produces a variable of the same length as the output.</p>
+<p>Some familiar transformation verbs from primary and secondary school:</p>
+<ul>
+<li>arithmetic operations (<code>+</code>, <code>-</code>, <code>/</code>, <code>*</code>)</li>
+<li>mathematical functions such as logs and exponentiation</li>
+</ul>
+<p>There are additional transformations which will be unfamiliar, simply because they did not fit into the algebra- and trigonometry-based high-school curriculum</p>
+<ol style="list-style-type: decimal">
+<li>Rank transforms</li>
+<li>Lead and lag transforms</li>
+<li>Date transforms</li>
+<li>Conditional transforms</li>
+<li>Character transforms</li>
+</ol>
+<div id="rank-transforms" class="section level2">
+<h2><span class="header-section-number">22.1</span> Rank transforms</h2>
+<p>Many questions take forms such as these:</p>
+<ul>
+<li>“Find the largest …”</li>
+<li>“Find the three largest …”</li>
+<li>“Find the smallest within each group …”</li>
+</ul>
+<p>The functions <code>min()</code> and <code>max()</code> are <strong>reduction</strong> verbs. They tell you the single lowest or highest value in a set. Because they are reduction verbs, they are often used in <code>summarise()</code>, which reduces a set of cases to a single case.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BabyNames %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(sex) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">most_popular =</span> <span class="kw">max</span>(count))</code></pre></div>
+<pre><code>## # A tibble: 2 × 2
+##     sex most_popular
+##   &lt;chr&gt;        &lt;int&gt;
+## 1     F        99674
+## 2     M        94758</code></pre>
+<p>Notice that <code>name</code> was not carried along. When you <code>summarise()</code>, the only variables that appear in the output are the grouping variables, and the variables you create through the arguments to <code>summarise()</code>.</p>
+<p>If you wanted to know the <em>names</em> that are most popular, you will need to rely on <code>filter()</code>. Get rid of the cases that are not the most popular.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BabyNames %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(sex) %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(count ==<span class="st"> </span><span class="kw">max</span>(count))</code></pre></div>
+<pre><code>## Source: local data frame [2 x 4]
+## Groups: sex [2]
+## 
+##    name   sex count  year
+##   &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+## 1 Linda     F 99674  1947
+## 2 James     M 94758  1947</code></pre>
+<p><code>Filter()</code> needs a criterion. The criterion <code>count == max( count )</code> (with the double equals sign <code>==</code>) passes through the case where the value of <code>count</code> matches the largest value of <code>count</code>. That will be the biggest case.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BabyNames %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(sex) %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(count &gt;<span class="st"> </span><span class="fl">0.90</span> *<span class="st"> </span><span class="kw">max</span>(count))</code></pre></div>
+<pre><code>## Source: local data frame [28 x 4]
+## Groups: sex [2]
+## 
+##      name   sex count  year
+##     &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+## 1   James     M 87428  1946
+## 2   Linda     F 99674  1947
+## 3   James     M 94758  1947
+## 4  Robert     M 91652  1947
+## 5    John     M 88318  1947
+## 6   Linda     F 96210  1948
+## 7   James     M 88610  1948
+## 8  Robert     M 85492  1948
+## 9   Linda     F 90994  1949
+## 10  James     M 86779  1949
+## # ... with 18 more rows</code></pre>
+<p>Note: Almost all of these are from the late 1940s and early 1950s. In part, this reflects the baby boom. Perhaps it also reflects the conformity that people associate with that era.</p>
+<p>QUESTION: How would you estimate “conformity” for each year?</p>
+<p>Possibility: Take the 10 most popular names each year. Find out what fraction of the total number of births that was.</p>
+<p>The <code>rank()</code> operation is helpful here.</p>
+<p>The <code>rank()</code> function does something simple but powerful: it replaces each number in a set with where that number stands with respect to the others. For instance, look at the tiny data table <code>Set</code> shown in Table . What’s the rank of the number 5 in the <code>numbers</code> variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Set &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">numbers =</span> <span class="kw">as.integer</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">8</span>)))
+Set %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">the_rank =</span> <span class="kw">rank</span>(numbers))</code></pre></div>
+<pre><code>##   numbers the_rank
+## 1       2      1.5
+## 2       5      4.0
+## 3       4      3.0
+## 4       7      5.0
+## 5       2      1.5
+## 6       9      7.5
+## 7       9      7.5
+## 8       8      6.0</code></pre>
+<p>Or, seen another way</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Set %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">the_rank =</span> <span class="kw">rank</span>(numbers)) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(numbers)</code></pre></div>
+<pre><code>##   numbers the_rank
+## 1       2      1.5
+## 2       2      1.5
+## 3       4      3.0
+## 4       5      4.0
+## 5       7      5.0
+## 6       8      6.0
+## 7       9      7.5
+## 8       9      7.5</code></pre>
+<p>Notice how ties are broken. Also note that the biggest numbers have the <em>highest</em> ranks. This is different than the convention in everyday language, where the “Number 1 ranked team” is the best team. To follow this convention, use <code>rank(desc(numbers))</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Set %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">the_rank =</span> <span class="kw">rank</span>(<span class="kw">desc</span>(numbers))) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(numbers)</code></pre></div>
+<pre><code>##   numbers the_rank
+## 1       2      7.5
+## 2       2      7.5
+## 3       4      6.0
+## 4       5      5.0
+## 5       7      4.0
+## 6       8      3.0
+## 7       9      1.5
+## 8       9      1.5</code></pre>
+<p>Suppose you want to find the 3rd most popular name of all time. Use <code>rank()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BabyNames %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(name) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total =</span> <span class="kw">sum</span>(count)) %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">rank</span>(<span class="kw">desc</span>(total)) ==<span class="st"> </span><span class="dv">3</span>) </code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##     name   total
+##    &lt;chr&gt;   &lt;int&gt;
+## 1 Robert 4809858</code></pre>
+<p>Or, to find the top three most popular names, replace <code>==</code> in the above by <code>&lt;=</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BabyNames %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(name) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total=</span><span class="kw">sum</span>(count)) %&gt;%
+<span class="st">  </span><span class="kw">filter</span>( <span class="kw">rank</span>( <span class="kw">desc</span>(total) ) &lt;=<span class="st"> </span><span class="dv">3</span>) </code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##     name   total
+##    &lt;chr&gt;   &lt;int&gt;
+## 1  James 5114325
+## 2   John 5095590
+## 3 Robert 4809858</code></pre>
+<p>When applied to grouped data, <code>rank()</code> will be calculated separately within each group. That is, the rank of a value will be with respect to the other cases in that group. For instance, here’s the third most popular name for each sex.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BabyNames %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(sex) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">rank</span>(<span class="kw">desc</span>(count)) &lt;=<span class="st"> </span><span class="dv">3</span>) </code></pre></div>
+<pre><code>## Source: local data frame [6 x 4]
+## Groups: sex [2]
+## 
+##      name   sex count  year
+##     &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+## 1   Linda     F 99674  1947
+## 2   James     M 94758  1947
+## 3  Robert     M 91652  1947
+## 4   Linda     F 96210  1948
+## 5   Linda     F 90994  1949
+## 6 Michael     M 92711  1957</code></pre>
+<div id="tied-ranks" class="section level3">
+<h3><span class="header-section-number">22.1.1</span> Tied ranks</h3>
+<p>Sometimes, two or more numbers are tied in rank. The <code>rank()</code> function deals with these by assigning all the tied values the same rank, which is the mean of the ranks those values would have had if they were even slightly different. There are other rank-like transformation verbs that handle ties differently. For instance, <code>row_number()</code> breaks ties in favor of the first case encountered.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Set %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">the_rank =</span> <span class="kw">rank</span>(numbers), 
+         <span class="dt">ties_broken =</span> <span class="kw">row_number</span>(numbers)) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(numbers)</code></pre></div>
+<pre><code>##   numbers the_rank ties_broken
+## 1       2      1.5           1
+## 2       2      1.5           2
+## 3       4      3.0           3
+## 4       5      4.0           4
+## 5       7      5.0           5
+## 6       8      6.0           6
+## 7       9      7.5           7
+## 8       9      7.5           8</code></pre>
+</div>
+</div>
+<div id="leads-and-lags" class="section level2">
+<h2><span class="header-section-number">22.2</span> Leads and lags</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Set %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">next_one =</span> <span class="kw">lag</span>(numbers, <span class="dv">1</span>))</code></pre></div>
+<pre><code>##   numbers next_one
+## 1       2       NA
+## 2       5        2
+## 3       4        5
+## 4       7        4
+## 5       2        7
+## 6       9        2
+## 7       9        9
+## 8       8        9</code></pre>
+<p>Find the names that increase the most from one year to the next. Let’s take “increase the most” to mean “the biggest proportional increase”, but consider only names that have more than 100 kids in the earlier year.</p>
+<p>Find proportional increase for each name for each year, but push this to zero if the base year had less than 100 kids.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Sharp_increases &lt;-
+<span class="st">  </span>BabyNames %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(name, year) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">births =</span> <span class="kw">sum</span>(count)) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(year) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">change =</span> (births &gt;<span class="st"> </span><span class="dv">100</span>) *<span class="st"> </span><span class="kw">lead</span>(births, <span class="dv">1</span>) /<span class="st"> </span>births) %&gt;%
+<span class="st">  </span><span class="kw">ungroup</span>() %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">rank</span>(<span class="kw">desc</span>(change)) &lt;=<span class="st"> </span><span class="dv">100</span>) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(change)) </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BabyNames %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(name ==<span class="st"> &quot;Hillary&quot;</span>, sex ==<span class="st"> &quot;F&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(year)</code></pre></div>
+<pre><code>##       name sex count year
+## 1  Hillary   F     5 1922
+## 2  Hillary   F     7 1942
+## 3  Hillary   F    13 1943
+## 4  Hillary   F    19 1944
+## 5  Hillary   F    19 1945
+## 6  Hillary   F    29 1946
+## 7  Hillary   F    51 1947
+## 8  Hillary   F    43 1948
+## 9  Hillary   F    48 1949
+## 10 Hillary   F    54 1950
+## 11 Hillary   F    40 1951
+## 12 Hillary   F    43 1952
+## 13 Hillary   F    57 1953
+## 14 Hillary   F    78 1954
+## 15 Hillary   F    71 1955
+## 16 Hillary   F   100 1956
+## 17 Hillary   F    87 1957
+## 18 Hillary   F    94 1958
+## 19 Hillary   F    83 1959
+## 20 Hillary   F    75 1960
+## 21 Hillary   F   111 1961
+## 22 Hillary   F   112 1962
+## 23 Hillary   F   148 1963
+## 24 Hillary   F   132 1964
+## 25 Hillary   F   111 1965
+## 26 Hillary   F   123 1966
+## 27 Hillary   F   155 1967
+## 28 Hillary   F   178 1968
+## 29 Hillary   F   198 1969
+## 30 Hillary   F   258 1970
+## 31 Hillary   F   251 1971
+## 32 Hillary   F   242 1972
+## 33 Hillary   F   250 1973
+## 34 Hillary   F   313 1974
+## 35 Hillary   F   323 1975
+## 36 Hillary   F   331 1976
+## 37 Hillary   F   442 1977
+## 38 Hillary   F   718 1978
+## 39 Hillary   F   921 1979
+## 40 Hillary   F   835 1980
+## 41 Hillary   F   736 1981
+## 42 Hillary   F   752 1982
+## 43 Hillary   F   696 1983
+## 44 Hillary   F  1009 1984
+## 45 Hillary   F  1047 1985
+## 46 Hillary   F  1082 1986
+## 47 Hillary   F  1080 1987
+## 48 Hillary   F  1083 1988
+## 49 Hillary   F  1285 1989
+## 50 Hillary   F  1524 1990
+## 51 Hillary   F  1788 1991
+## 52 Hillary   F  2522 1992
+## 53 Hillary   F  1064 1993
+## 54 Hillary   F   409 1994
+## 55 Hillary   F   310 1995
+## 56 Hillary   F   312 1996
+## 57 Hillary   F   294 1997
+## 58 Hillary   F   243 1998
+## 59 Hillary   F   253 1999
+## 60 Hillary   F   252 2000
+## 61 Hillary   F   259 2001
+## 62 Hillary   F   197 2002
+## 63 Hillary   F   224 2003
+## 64 Hillary   F   310 2004
+## 65 Hillary   F   285 2005
+## 66 Hillary   F   265 2006
+## 67 Hillary   F   282 2007
+## 68 Hillary   F   412 2008
+## 69 Hillary   F   200 2009
+## 70 Hillary   F   167 2010
+## 71 Hillary   F   166 2011
+## 72 Hillary   F   157 2012
+## 73 Hillary   F   154 2013</code></pre>
+<p>Notice “Woodrow” and “Wilson” in 1911 to 1912. Why?</p>
+<p>Notice “Samantha” and “Darin” in 1964. Why? (Hint: “Bewitched”)</p>
+<p>FLAW: There might be years left out for some names. We’ll have to wait until we study joins to see how to fix this.</p>
+</div>
+<div id="times-and-dates" class="section level2">
+<h2><span class="header-section-number">22.3</span> Times and Dates</h2>
+<p>With the <code>lubridate</code> package:</p>
+<ul>
+<li>Transform text dates into an R type with numerical properties.
+<ul>
+<li><code>ymd()</code>, <code>dmy()</code>, and so on.</li>
+</ul></li>
+<li>Extract parts of the date:
+<ul>
+<li><code>day()</code></li>
+<li><code>jday()</code></li>
+<li><code>week()</code></li>
+<li><code>hour()</code></li>
+<li><code>wday()</code></li>
+<li><code>minute()</code></li>
+<li><code>month()</code></li>
+<li><code>year()</code></li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Holidays &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://tiny.cc/dcf/US-Holidays.csv&quot;</span>,
+                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(Holidays, <span class="kw">class</span>(date))</code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Holidays &lt;-<span class="st"> </span>
+<span class="st">  </span>Holidays %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> lubridate::<span class="kw">dmy</span>(date))
+<span class="kw">with</span>(Holidays, <span class="kw">class</span>(date))</code></pre></div>
+<pre><code>## [1] &quot;Date&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Holidays %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">middle =</span> <span class="kw">mean</span>(date))</code></pre></div>
+<pre><code>##       middle
+## 1 1999-11-26</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.time</span>()</code></pre></div>
+<pre><code>## [1] &quot;2017-01-24 17:53:44 CST&quot;</code></pre>
+</div>
+<div id="conditional-transforms" class="section level2">
+<h2><span class="header-section-number">22.4</span> Conditional transforms</h2>
+<p>For all transform verbs, the output depends on some way on the input. In <em>conditional transforms</em>, you use the input to choose one or more possible outputs.</p>
+<p>One such transform verb is <code>ifelse()</code>. This takes three arguments: 1. a test, written in the form of a “logical”&quot; such as <code>x &gt; 3</code> 2. the output if the test is <code>TRUE</code> 3. the output if the test is <code>FALSE</code></p>
+<p>For example, the table below shows measurements made on patients, including the date of the measurement and the date of treatment. A transformation is to be done to say whether the measurement was <em>before</em> or <em>after</em> the treatment.</p>
+<pre><code>## Joining, by = &quot;subject&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(Treatments)</code></pre></div>
+<pre><code>##   subject what value       date treatment_date
+## 1     BHO  sbp   160 2007-06-19     2012-08-05
+## 2     GWB  sbp   115 1998-04-21     2005-11-14
+## 3     BHO  sbp   155 2005-11-08     2012-08-05
+## 4     WJC  sbp   145 2002-11-15     1998-09-30
+## 5     WJC  sbp    NA 2010-03-26     1998-09-30
+## 6     WJC  sbp   130 2013-09-15     1998-09-30</code></pre>
+<p>The calculation of <em>before</em> or <em>after</em> is simple: <code>date &lt; treatment_date</code>.&quot; To render the result as the values <code>&quot;before&quot;</code> and <code>&quot;after&quot;</code>, use <code>ifelse()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Treatments %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">when =</span> <span class="kw">ifelse</span>(date &lt;<span class="st"> </span>treatment_date, <span class="st">&quot;before&quot;</span>, <span class="st">&quot;after&quot;</span>)) %&gt;%
+<span class="st">  </span><span class="kw">head</span>()</code></pre></div>
+<pre><code>##   subject what value       date treatment_date   when
+## 1     BHO  sbp   160 2007-06-19     2012-08-05 before
+## 2     GWB  sbp   115 1998-04-21     2005-11-14 before
+## 3     BHO  sbp   155 2005-11-08     2012-08-05 before
+## 4     WJC  sbp   145 2002-11-15     1998-09-30  after
+## 5     WJC  sbp    NA 2010-03-26     1998-09-30  after
+## 6     WJC  sbp   130 2013-09-15     1998-09-30  after</code></pre>
+</div>
+<div id="text" class="section level2">
+<h2><span class="header-section-number">22.5</span> Text</h2>
+<p>Simple operators:</p>
+<ul>
+<li><code>tolower()</code> - convert to lower case</li>
+<li><code>toupper()</code> - convert to upper case</li>
+<li><code>nchar()</code> - the number of characters in a string</li>
+<li><code>substr()</code> - extract a substring at a particular location.</li>
+</ul>
+<p>Example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BabyNames %&gt;%
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dt">size =</span> <span class="dv">5</span>) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">small =</span> <span class="kw">tolower</span>(name),
+         <span class="dt">large =</span> <span class="kw">toupper</span>(name),
+         <span class="dt">length =</span> <span class="kw">nchar</span>(name),
+         <span class="dt">middle =</span> <span class="kw">substr</span>(name, <span class="dv">2</span>, <span class="dv">3</span>))</code></pre></div>
+<pre><code>##        name sex count year     small     large length middle
+## 1 Christina   M    22 1967 christina CHRISTINA      9     hr
+## 2     Rotha   F     7 1907     rotha     ROTHA      5     ot
+## 3    Wayman   M     9 1997    wayman    WAYMAN      6     ay
+## 4      Song   F    11 1994      song      SONG      4     on
+## 5    Julian   M   535 1948    julian    JULIAN      6     ul</code></pre>
+<p>For later:</p>
+<ul>
+<li><code>gsub()</code></li>
+<li><code>grepl()</code></li>
+<li><code>DataComputing::extractMatches()</code></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="basicdataverbs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="trends-in-popularity-of-names.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "link:https://github.com/dtkaplan/comp110/DCF-materials-book/edit/master/433-More-Transformations.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"unnumbered": true
+}
+});
+});
+</script>
+
+</body>
+
+</html>

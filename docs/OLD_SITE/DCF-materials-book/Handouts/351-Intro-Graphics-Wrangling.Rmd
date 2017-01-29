@@ -1,0 +1,137 @@
+---
+title: "Starting with Graphics and Wrangling"
+author: "Data Computing"
+output: 
+  rmarkdown::tufte_handout:
+params:
+  show_answers: FALSE
+---
+
+```{r include=FALSE}
+library(DataComputing)
+knitr::opts_chunk$set(tidy=FALSE)
+params <- list(show_answers = FALSE)
+```
+
+In today's activity, you are going to deconstruct some graphics and carry out some data wrangling operations.^[Remember to load the `DataComputing` package: `library(DataComputing)`]
+
+## Deconstructing graphics
+
+```{r echo=FALSE, warning=FALSE, fig.cap="A representation of some of the variables from the CPS85 data table in the mosaicData package.", fig.width=8, fig.height=4, out.width=".8\\linewidth"}
+ggplot(data=CPS85,aes(x=exper,y=wage))+geom_point()+aes(colour=married)+scale_x_log10()+scale_y_log10()+facet_wrap(~sector,ncol=4)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Variables from the NCHS data table in the DataComputing package. The `yes' and `no' refers to whether the person is pregnant.", fig.pos="h",fig.width=8, fig.height=3.5}
+ggplot(data = NCHS, aes(x = bmi)) + geom_density(aes(fill = sex), alpha=.3, adjust=.4) +
+  aes(colour=sex) + facet_wrap(~pregnant, ncol=4) + labs(title="") + theme(legend.position="right") 
+```
+
+Considering each of the above graphics in turn, figure out:
+
+\enlargethispage{1in}
+
+* What mode of graphic is it? (e.g. density plot, scatter plot, bar plot, ...)
+* What variables from the respective data tables are involved?
+* What role each of those variables plays in the graphic?
+* In Figure 2, why is there no data variable being used for the $y$-axis?
+
+<!-- Then, generate each graphic using the interactive software from the `DataComputing` package.  You'll need to choose among `scatterGraphHelper()`, `distributionGraphHelper()` and `barGraphHelper()`. -->
+
+Here is the basic structure of the commands for making the graphics. You can try various combinations of the variables appearing in the graphics and see which graphic you think is the most informative. 
+
+\newpage
+```r
+ggplot(data = CPS85, aes(x = ????, y = ????, color = ????)) + geom_point() + facet_wrap( ~ ????)
+ggplot(data = NCHS, aes(x = ????)) + geom_density(aes(color = ????)) + facet_wrap(~ ???)
+```
+
+\enlargethispage{2.5in}
+
+Put the R statement that generates each graph into your report so that the graphs appear when you compile your `.Rmd` file.
+
+
+## Wrangling
+
+**Diamonds**
+
+Refer to the `diamonds` data table in the `ggplot2` package.  Take a look at the codebook (using `help()`) so that you'll understand the meaning of the tasks. (Motivated by Garrett Grolemund.)
+
+<!--
+[this problem set](http://www.public.iastate.edu/~hofmann/stat480/homework/dplyr%20drills.html) based on drills by Garrett Grolemund which are licensed under the [CC Attribution-Noncommercial-Share Alike 3.0 License](http://creativecommons.org/licenses/by-nc-sa/3.0/us/).]
+-->
+
+Each of the following tasks can be accomplished by a statement of the form
+```{r eval=FALSE}
+diamonds %>% 
+  verb1( args1 ) %>% 
+  verb2( args2 ) %>% 
+  arrange(desc( args3 )) %>% 
+  head( 1 )
+```
+
+For each task, give appropriate R functions or arguments to substitute in place of `verb1`, `verb2`, `args1`, `args2`,  and `args3`. 
+
+1. Which color diamonds seem to be largest on average (in terms of carats)?
+    ```{r echo=params$show_answers, results="hide"}
+diamonds %>% 
+  group_by(color) %>% 
+  summarise(size=mean(carat, na.rm = TRUE)) %>% 
+  arrange(desc(size)) %>% 
+  head(1)
+```
+#. Which clarity of diamonds has the largest average "table" per carat?
+    ```{r echo=params$show_answers, results="hide"}
+diamonds %>% 
+  group_by(clarity) %>% 
+  summarise(ave_table=mean(table, na.rm = TRUE)) %>% 
+  arrange(desc(ave_table)) %>% 
+  head(1)
+```
+
+----------------------
+
+**Voting**
+
+Using the `Minneapolis2013` data table, answer these questions. `summarise()`, `group_by()`, and `tally()` will be useful in answering the questions.
+
+1. How many cases are there?
+    ```{r echo=params$show_answers, results="hide"}
+Minneapolis2013 %>% 
+  tally()
+```
+#. Who were the top 5 candidates in the `Second` vote selections.
+    ```{r echo=params$show_answers, results="hide"}
+Minneapolis2013 %>%
+  group_by(Second) %>%
+  tally() %>%
+  arrange(desc(n)) %>%
+  head(5)
+```
+#. How many ballots are marked "undervote" in 
+    * `First` choice selections?
+    * `Second` choice selections?
+    * `Third` choice selections?
+    ```{r echo=params$show_answers, results="hide"}
+Minneapolis2013 %>%
+  group_by(First) %>%
+  tally() %>%
+  arrange(desc(First == "undervote")) %>%
+  head(1)
+# similarly for Second and Third
+```
+#. What are the top 3  `Second` vote selections among people who voted for Betsy Hodges as their first choice?  
+    ```{r echo=params$show_answers, results="hide"}
+Minneapolis2013 %>%
+  group_by(First, Second) %>%
+  tally() %>%
+  arrange(desc(n)) %>%
+  head(3)
+```
+#. Which `Precinct` had the highest fraction of `First` vote selections marked as "undervote"? (To calculate the fraction, use `mean(First == "undervote")` in the argument to `summarise()`.)
+    ```{r echo=params$show_answers, results="hide"}
+Minneapolis2013 %>%
+  group_by(Precinct) %>%
+  summarise(frac = base::mean(First == "undervote")) %>%
+  arrange(desc(frac)) %>%
+  head()
+```

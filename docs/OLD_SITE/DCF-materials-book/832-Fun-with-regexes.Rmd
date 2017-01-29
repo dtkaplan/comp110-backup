@@ -1,0 +1,29 @@
+# Fun with regexes
+
+```{r include = FALSE}
+library(DataComputing)
+```
+
+```{r}
+Name_count <-
+  BabyNames %>%
+  group_by(name, sex) %>%
+  summarise(total = sum(count))
+```
+
+## Three Zs?
+
+```{r}
+pattern <- "(zoo|quo).*(z|q)"
+
+pattern <- "^[^aeiou]*[aeiouy][^aeiou]+([aeiouy])[^aeiou]+[aeiouy][^aeiou]+[aeiouy][^aeiou]+[aeiouy]$"   # Five vowels 
+# pattern <- "[ _\\-] "
+Name_count %>%
+  filter(grepl(pattern, tolower(name))) %>% 
+  mutate(second_vowel = stringr::str_extract(pattern, name))
+
+```
+
+
+
+
